@@ -7,8 +7,6 @@ public class Script : MonoBehaviour
 {
 
     public float _iSpeed;
-    public float _iPowerJump;
-    public Player_Feet _feet;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,14 +19,15 @@ public class Script : MonoBehaviour
         Vector2 currVelocity = new Vector2(0, 0);
 
         float deltaTime = Time.deltaTime;
-        if (Input.GetKey(KeyCode.D))
-            currVelocity.x += _iSpeed*deltaTime;
-        if (Input.GetKey(KeyCode.Q))
-            currVelocity.x -= _iSpeed * deltaTime;
         if (Input.GetKey(KeyCode.Z))
-            currVelocity.y += _iSpeed*deltaTime;
+            currVelocity.y += _iSpeed;
         if (Input.GetKey(KeyCode.S))
-            currVelocity.y -= _iSpeed * deltaTime;
+            currVelocity.y -= _iSpeed;
+        if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.Z) == false && Input.GetKey(KeyCode.S) == false)
+            currVelocity.x += _iSpeed;
+        if (Input.GetKey(KeyCode.Q) && Input.GetKey(KeyCode.Z) == false && Input.GetKey(KeyCode.S) == false)
+            currVelocity.x -= _iSpeed;
+
 
         GetComponent<Rigidbody2D>().velocity = currVelocity;
 
