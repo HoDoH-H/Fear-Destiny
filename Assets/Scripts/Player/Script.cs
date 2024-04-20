@@ -18,19 +18,18 @@ public class Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 currVelocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
+        Vector2 currVelocity = new Vector2(0, 0);
 
         float deltaTime = Time.deltaTime;
         if (Input.GetKey(KeyCode.D))
             currVelocity.x += _iSpeed*deltaTime;
         if (Input.GetKey(KeyCode.Q))
             currVelocity.x -= _iSpeed * deltaTime;
-            
-        if (Input.GetKeyDown(KeyCode.Space) && _feet.JumpEnable)
-        {
-            currVelocity = new Vector2(currVelocity.x, 0);
-            GetComponent<Rigidbody2D>().AddForce(Vector2.up * _iPowerJump);
-        }
+        if (Input.GetKey(KeyCode.Z))
+            currVelocity.y += _iSpeed*deltaTime;
+        if (Input.GetKey(KeyCode.S))
+            currVelocity.y -= _iSpeed * deltaTime;
+
         GetComponent<Rigidbody2D>().velocity = currVelocity;
 
     }
