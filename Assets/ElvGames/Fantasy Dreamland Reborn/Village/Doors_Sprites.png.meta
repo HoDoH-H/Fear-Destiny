@@ -121,7 +121,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: test_0
+      name: Door-01-NoBorder-0
       rect:
         serializedVersion: 2
         x: 0
@@ -143,7 +143,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: test_1
+      name: Door-01-Border-0
       rect:
         serializedVersion: 2
         x: 48
@@ -165,15 +165,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: test_2
+      name: Door-01-NoBorder-1
       rect:
         serializedVersion: 2
         x: 0
         y: 64
         width: 48
         height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -187,7 +187,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: test_3
+      name: Door-01-Border-1
       rect:
         serializedVersion: 2
         x: 48
@@ -209,15 +209,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: test_4
+      name: Door-01-NoBorder-2
       rect:
         serializedVersion: 2
         x: 0
         y: 32
         width: 48
         height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -231,7 +231,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: test_5
+      name: Door-01-Border-2
       rect:
         serializedVersion: 2
         x: 48
@@ -253,7 +253,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: test_6
+      name: Door-01-NoBorder-3
       rect:
         serializedVersion: 2
         x: 0
@@ -275,7 +275,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: test_7
+      name: Door-01-Border-3
       rect:
         serializedVersion: 2
         x: 48
@@ -308,14 +308,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      test_0: -5623194428626525839
-      test_1: -2646800685242748869
-      test_2: -7811834608892705033
-      test_3: 8435826616607337010
-      test_4: 4403086585068172387
-      test_5: 1989914244804095440
-      test_6: -6302306078055872378
-      test_7: -442361578123611599
+      Door-01-Border-0: -2646800685242748869
+      Door-01-Border-1: 8435826616607337010
+      Door-01-Border-2: 1989914244804095440
+      Door-01-Border-3: -442361578123611599
+      Door-01-NoBorder-0: -5623194428626525839
+      Door-01-NoBorder-1: -7811834608892705033
+      Door-01-NoBorder-2: 4403086585068172387
+      Door-01-NoBorder-3: -6302306078055872378
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
