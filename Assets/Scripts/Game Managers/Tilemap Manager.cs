@@ -3,8 +3,12 @@ using UnityEngine;
 public class TilemapManager : MonoBehaviour
 {
     public Sprite newSprite;
-    void Start()
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        GetComponent<SpriteRenderer>().sprite = newSprite;
+        if (collision.CompareTag("Player"))
+        {
+            GetComponent<SpriteRenderer>().sprite = newSprite;
+        }
     }
 }
