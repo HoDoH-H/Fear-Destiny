@@ -5,11 +5,11 @@ public class GridBasedMovement : MonoBehaviour
 {
 
     public Transform movePoint;
-    public Rigidbody2D rb;
+    public LayerMask whatStopsMovement;
 
     public float moveSpeed;
+
     private Vector2 direction;
-    private Vector2 oldDirection = new Vector2(0, 0);
 
     public InputSystem_Actions playerControls;
     private InputAction move;
@@ -59,12 +59,18 @@ public class GridBasedMovement : MonoBehaviour
         {
             if (Mathf.Abs(direction.x) > 0)
             {
-                movePoint.position += new Vector3(direction.x, 0, 0);
+                if(!Physics2D.OverlapCircle(movePoint.position + new Vector3(direction.x, 0, 0), 0.45f, whatStopsMovement))
+                {
+                    movePoint.position += new Vector3(direction.x, 0, 0);
+                }
             }
 
             if (Mathf.Abs(direction.y) > 0)
             {
-                movePoint.position += new Vector3(0, direction.y, 0);
+                if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(0, direction.y, 0), 0.45f, whatStopsMovement))
+                {
+                    movePoint.position += new Vector3(0, direction.y, 0);
+                }
             }
         }
     }
