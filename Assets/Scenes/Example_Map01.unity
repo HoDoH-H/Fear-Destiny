@@ -2020,11 +2020,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6936023811122422849, guid: 648c2ab6f85958144ae5e79d18b60655, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.02
+      value: -1.54
       objectReference: {fileID: 0}
     - target: {fileID: 6936023811122422849, guid: 648c2ab6f85958144ae5e79d18b60655, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.23
+      value: 0.98
       objectReference: {fileID: 0}
     - target: {fileID: 6936023811122422849, guid: 648c2ab6f85958144ae5e79d18b60655, type: 3}
       propertyPath: m_LocalPosition.z
