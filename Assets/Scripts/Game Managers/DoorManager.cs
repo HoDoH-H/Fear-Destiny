@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DoorManager : MonoBehaviour
 {
@@ -9,6 +10,11 @@ public class DoorManager : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         canBeInteracted = collision.CompareTag("Player");
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        canBeInteracted = !collision.CompareTag("Player");
     }
 
     private void FixedUpdate()

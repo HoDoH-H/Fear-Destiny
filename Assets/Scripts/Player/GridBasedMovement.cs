@@ -6,6 +6,7 @@ public class GridBasedMovement : MonoBehaviour
 
     public Transform movePoint;
     public LayerMask whatStopsMovement;
+    public Animator anim;
 
     public float moveSpeed;
 
@@ -55,7 +56,7 @@ public class GridBasedMovement : MonoBehaviour
             direction.y = 0;
         }
 
-        if(Vector3.Distance(transform.position, movePoint.position) <= 0.05f)
+        if (Vector3.Distance(transform.position, movePoint.position) <= 0.05f)
         {
             if (Mathf.Abs(direction.x) > 0)
             {
@@ -72,6 +73,8 @@ public class GridBasedMovement : MonoBehaviour
                     movePoint.position += new Vector3(0, direction.y, 0);
                 }
             }
+            anim.SetFloat("DirectionX", direction.x);
+            anim.SetFloat("DirectionY", direction.y);
         }
     }
 }
