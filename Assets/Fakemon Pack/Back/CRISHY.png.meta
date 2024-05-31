@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      CRISHY_0: 359877676908230479
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

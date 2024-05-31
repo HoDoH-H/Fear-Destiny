@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      GEOCKO_0: 1459963507865974130
+      GEOCKO_1: 4735650134364912079
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

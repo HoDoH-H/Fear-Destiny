@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      GRANEBEE_0: 8544305192518921452
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

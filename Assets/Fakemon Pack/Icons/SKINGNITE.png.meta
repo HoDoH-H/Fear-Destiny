@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SKINGNITE_0: -4076900663676193272
+      SKINGNITE_1: 128246388291266832
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

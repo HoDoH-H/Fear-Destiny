@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      CROOBER_female_0: -6059416707333247467
+      CROOBER_female_1: -451485671284997208
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

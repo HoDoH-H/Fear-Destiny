@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      LAMBY_0: 2322764239974549327
+      LAMBY_1: 1612524067602034107
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

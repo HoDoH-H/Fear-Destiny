@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      HAUNTRAY_0: -6070167699329665862
+      HAUNTRAY_1: 2884381620369857309
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

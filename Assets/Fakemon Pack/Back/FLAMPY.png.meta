@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FLAMPY_0: 5718253574400945093
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

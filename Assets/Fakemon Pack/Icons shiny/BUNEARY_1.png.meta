@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BUNEARY_1_0: 3670857166176673610
+      BUNEARY_1_1: -6064219824637919002
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

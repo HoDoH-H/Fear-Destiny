@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      LEDIASTRA_0: 9159106494720229707
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FLORAMONA_0: -2277415596880515277
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

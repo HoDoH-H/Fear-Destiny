@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      GLOVET_0: -278300921724652405
+      GLOVET_1: -4868443809687879625
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

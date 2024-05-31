@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FLAMBAFEE_0: -1688906984080629847
+      FLAMBAFEE_1: -6533778726470907690
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

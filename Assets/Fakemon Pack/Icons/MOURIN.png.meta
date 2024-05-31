@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      MOURIN_0: 1322211759761090641
+      MOURIN_1: 2138907826217923455
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

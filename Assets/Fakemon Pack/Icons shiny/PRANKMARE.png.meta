@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PRANKMARE_0: -1598519675358632954
+      PRANKMARE_1: -4160246305638838669
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

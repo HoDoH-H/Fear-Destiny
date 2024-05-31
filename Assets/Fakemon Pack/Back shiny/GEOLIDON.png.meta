@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      GEOLIDON_0: 9024902313940514838
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

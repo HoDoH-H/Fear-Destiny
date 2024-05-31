@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      GASARNET_0: 7659699293404894655
+      GASARNET_1: 5869393329181213003
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

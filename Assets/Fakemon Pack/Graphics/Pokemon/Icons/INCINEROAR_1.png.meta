@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      INCINEROAR_1_0: 8751555096732919825
+      INCINEROAR_1_1: 701741009284883647
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PORYGONA_0: 9041675319530582806
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

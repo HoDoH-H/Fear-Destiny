@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      THUNPHONY_0: 95683052647239494
+      THUNPHONY_1: -5077885643778044008
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

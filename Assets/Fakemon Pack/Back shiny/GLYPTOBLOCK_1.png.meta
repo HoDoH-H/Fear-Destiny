@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      GLYPTOBLOCK_1_0: 4309312011352581108
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

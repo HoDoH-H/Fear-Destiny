@@ -332,7 +332,16 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      move_flags_0: 2509629818789326011
+      move_flags_1: -4421449825979846504
+      move_flags_2: -6535953144057333252
+      move_flags_3: 1740754117691036187
+      move_flags_4: -1722755626915824684
+      move_flags_5: 2466816875272147434
+      move_flags_6: 2649409230087404738
+      move_flags_7: 2327159500825810910
+      move_flags_8: 3438886938781214536
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

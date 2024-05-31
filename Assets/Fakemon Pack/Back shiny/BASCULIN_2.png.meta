@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BASCULIN_2_0: 130906133928754000
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

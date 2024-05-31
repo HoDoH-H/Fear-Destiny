@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      STORMANTA_0: 3384785567656682276
+      STORMANTA_1: -7340137170298633937
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

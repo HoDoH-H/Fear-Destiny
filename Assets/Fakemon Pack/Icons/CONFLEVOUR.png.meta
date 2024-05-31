@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      CONFLEVOUR_0: -7402435871835599062
+      CONFLEVOUR_1: 8550196211067928549
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

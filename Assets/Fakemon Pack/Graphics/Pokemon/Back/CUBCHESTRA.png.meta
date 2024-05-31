@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      CUBCHESTRA_0: -3889579869770022166
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

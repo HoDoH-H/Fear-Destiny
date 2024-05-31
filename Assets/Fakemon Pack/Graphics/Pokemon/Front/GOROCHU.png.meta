@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      GOROCHU_0: -6691260931861408626
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

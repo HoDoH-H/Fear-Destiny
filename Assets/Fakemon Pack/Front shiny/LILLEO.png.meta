@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      LILLEO_0: -5519030778429894372
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

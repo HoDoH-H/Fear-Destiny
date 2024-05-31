@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      MORTARINE_0: 4952326098998398927
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

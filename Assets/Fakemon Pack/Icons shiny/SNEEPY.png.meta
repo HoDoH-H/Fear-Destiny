@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SNEEPY_0: -447772436433274016
+      SNEEPY_1: 4738261209898769457
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

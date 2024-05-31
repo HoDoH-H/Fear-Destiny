@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      THIEFIRE_0: 2767660879727948776
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PLASMATINA_0: -1618871771574177315
+      PLASMATINA_1: 1821909993828849038
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

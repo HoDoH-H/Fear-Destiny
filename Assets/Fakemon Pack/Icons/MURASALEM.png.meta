@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      MURASALEM_0: -4741951724809450506
+      MURASALEM_1: 5933209320347657549
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

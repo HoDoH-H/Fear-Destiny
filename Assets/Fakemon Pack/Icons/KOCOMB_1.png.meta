@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      KOCOMB_1_0: -7100459621740145508
+      KOCOMB_1_1: 7798077563551438179
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

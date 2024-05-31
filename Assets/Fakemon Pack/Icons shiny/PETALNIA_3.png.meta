@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PETALNIA_3_0: 9032286615500016033
+      PETALNIA_3_1: 7309445561346369762
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FURNADON_1_0: -3013413282257222826
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

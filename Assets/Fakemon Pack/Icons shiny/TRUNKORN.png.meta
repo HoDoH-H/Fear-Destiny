@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      TRUNKORN_0: -7349110149113480487
+      TRUNKORN_1: -5043429730349157697
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

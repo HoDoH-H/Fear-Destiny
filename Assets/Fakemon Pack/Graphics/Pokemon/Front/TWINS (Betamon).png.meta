@@ -232,7 +232,12 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      TWINS (Betamon)_0: 7584769348932059893
+      TWINS (Betamon)_1: 35173922772629214
+      TWINS (Betamon)_2: -8261405024571794500
+      TWINS (Betamon)_3: -3382208869957786043
+      TWINS (Betamon)_4: 2968138408693805929
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

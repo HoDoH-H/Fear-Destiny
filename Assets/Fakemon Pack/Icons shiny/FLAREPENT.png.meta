@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FLAREPENT_0: -8747556357782973537
+      FLAREPENT_1: -2181383832898613155
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

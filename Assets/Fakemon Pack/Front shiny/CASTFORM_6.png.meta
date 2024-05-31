@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      CASTFORM_6_0: 3680632758435518887
+      CASTFORM_6_1: -3702589564762263952
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

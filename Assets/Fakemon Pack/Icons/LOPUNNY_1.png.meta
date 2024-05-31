@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      LOPUNNY_1_0: 1037660391910745587
+      LOPUNNY_1_1: 8893249800161828050
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

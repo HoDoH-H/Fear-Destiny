@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PECLAY_0: 2809771829845602351
+      PECLAY_1: -1885262801304848260
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

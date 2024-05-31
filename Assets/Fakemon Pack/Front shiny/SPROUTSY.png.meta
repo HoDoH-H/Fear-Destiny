@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SPROUTSY_0: 6610000093956039366
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

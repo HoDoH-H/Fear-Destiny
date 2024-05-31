@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SUNSHARD_0: 5506735277311434343
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

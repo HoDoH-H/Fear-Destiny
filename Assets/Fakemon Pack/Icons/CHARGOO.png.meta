@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      CHARGOO_0: -1532345093539526765
+      CHARGOO_1: 1554696762998044963
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

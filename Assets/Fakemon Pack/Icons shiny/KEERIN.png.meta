@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      KEERIN_0: -2015447380104229208
+      KEERIN_1: 7553464652148657822
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

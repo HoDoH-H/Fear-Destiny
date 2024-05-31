@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      KEENSTAR_0: 6488729313926932754
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

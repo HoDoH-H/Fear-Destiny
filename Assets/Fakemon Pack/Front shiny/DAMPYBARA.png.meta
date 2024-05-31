@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      DAMPYBARA_0: 6224150411487849964
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

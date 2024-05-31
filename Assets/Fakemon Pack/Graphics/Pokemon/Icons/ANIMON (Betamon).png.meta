@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ANIMON (Betamon)_0: 2708190954047708394
+      ANIMON (Betamon)_1: -5584296502827620774
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

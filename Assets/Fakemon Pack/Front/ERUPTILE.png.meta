@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ERUPTILE_0: 4739506033390550034
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      WROOMTOISE_0: -4494194742869787707
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

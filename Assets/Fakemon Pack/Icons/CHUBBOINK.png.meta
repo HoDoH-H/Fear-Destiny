@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      CHUBBOINK_0: 2070935775718640348
+      CHUBBOINK_1: -1967513106606290093
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

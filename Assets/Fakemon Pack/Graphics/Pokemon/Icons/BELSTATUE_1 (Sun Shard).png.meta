@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BELSTATUE_1 (Sun Shard)_0: 2171873630719371287
+      BELSTATUE_1 (Sun Shard)_1: -1206644646746349254
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

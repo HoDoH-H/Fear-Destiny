@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      VENONAT_1_0: 2054423303917425549
+      VENONAT_1_1: -408104892363574323
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

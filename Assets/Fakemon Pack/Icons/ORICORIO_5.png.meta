@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ORICORIO_5_0: -5559973433339217426
+      ORICORIO_5_1: 5420549418276613349
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

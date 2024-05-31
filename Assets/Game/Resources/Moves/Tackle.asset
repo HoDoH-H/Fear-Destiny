@@ -18,5 +18,13 @@ MonoBehaviour:
   power: 40
   accuracy: 100
   usePoints: 20
-  effect: 0
-  effectAccuracy: 0
+  statusSelf: 
+  statusSelfAccuracy: 
+  statusOpponent: 
+  statusOpponentAccuracy: 
+  effectSelf: 
+  EffectSelfAccuracy: 0
+  effectValuesSelf: 
+  effectOpponent: 
+  EffectOpponentAccuracy: 0
+  effectValuesOpponent: 

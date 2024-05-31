@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      UNNAMED (Betamon)_0: 6462946753571261279
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

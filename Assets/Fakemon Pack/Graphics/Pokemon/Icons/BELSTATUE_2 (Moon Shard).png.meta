@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BELSTATUE_2 (Moon Shard)_0: 7442490278677028792
+      BELSTATUE_2 (Moon Shard)_1: 530803541755603147
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

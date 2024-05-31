@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      NOCTOWL_100_0: -3320110479070811120
+      NOCTOWL_100_1: 3159258448204301627
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

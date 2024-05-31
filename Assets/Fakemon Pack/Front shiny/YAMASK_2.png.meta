@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      YAMASK_2_0: -8946498786949505156
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

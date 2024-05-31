@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      RAVENDLER_0: 9154101588339812076
+      RAVENDLER_1: -6453431212693147984
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      OCTOKINEPUS_0: 2585793433245473206
+      OCTOKINEPUS_1: 288959734223251197
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

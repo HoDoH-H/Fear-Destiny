@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PANGSHI (Betamon)_0: 1789317773362637382
+      PANGSHI (Betamon)_1: -4995657650872607705
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

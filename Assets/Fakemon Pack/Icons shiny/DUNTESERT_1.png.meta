@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      DUNTESERT_1_0: 3140547622860681671
+      DUNTESERT_1_1: -8574017817551887389
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

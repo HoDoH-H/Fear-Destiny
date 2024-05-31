@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PHANTABYS_0: -5311059093590947148
+      PHANTABYS_1: -6355309246619839593
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

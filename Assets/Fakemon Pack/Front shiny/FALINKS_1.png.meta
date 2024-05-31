@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FALINKS_1_0: 6709932554863247812
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

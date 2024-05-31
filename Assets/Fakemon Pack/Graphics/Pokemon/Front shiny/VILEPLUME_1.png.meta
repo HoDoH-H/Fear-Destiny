@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      VILEPLUME_1_0: 1493162340831458691
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

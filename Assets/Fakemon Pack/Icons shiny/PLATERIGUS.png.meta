@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PLATERIGUS_0: 4261277772918787427
+      PLATERIGUS_1: 7015575317257402816
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

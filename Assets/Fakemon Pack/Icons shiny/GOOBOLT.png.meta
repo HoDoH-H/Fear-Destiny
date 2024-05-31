@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      GOOBOLT_0: -756362407976743027
+      GOOBOLT_1: -1117881019305873674
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

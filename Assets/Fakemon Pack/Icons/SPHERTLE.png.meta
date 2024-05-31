@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SPHERTLE_0: -8225129518805643105
+      SPHERTLE_1: 2530928552535849597
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

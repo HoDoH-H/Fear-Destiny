@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      TEKTALON_0: -7655994239562880568
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

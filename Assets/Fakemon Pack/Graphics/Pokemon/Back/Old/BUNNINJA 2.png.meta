@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BUNNINJA 2_0: 4514199595619887888
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

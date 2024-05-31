@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      GREXCLUB_0: -237424757511915704
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

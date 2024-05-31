@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SPRITZEE_1_0: -6563025181149608236
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

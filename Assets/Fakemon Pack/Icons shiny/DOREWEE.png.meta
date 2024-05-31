@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      DOREWEE_0: -2384588900505892796
+      DOREWEE_1: 9080637680836187154
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

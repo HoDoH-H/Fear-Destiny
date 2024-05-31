@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      GLOOM_1_0: 4093991401507821209
+      GLOOM_1_1: -3301939980874861914
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SEEGEL_0: 7802599654490649742
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

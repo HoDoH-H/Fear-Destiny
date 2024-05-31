@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ODDISH_1_0: -7063285090536975615
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

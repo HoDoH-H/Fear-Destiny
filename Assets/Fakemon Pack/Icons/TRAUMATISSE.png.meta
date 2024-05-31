@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      TRAUMATISSE_0: 8510640148110259652
+      TRAUMATISSE_1: -7884427208446755553
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

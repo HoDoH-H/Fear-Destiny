@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      RAKNALEAP_0: -1340530734201038236
+      RAKNALEAP_1: -1275429826350060394
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
