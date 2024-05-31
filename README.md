@@ -1,2 +1,2 @@
 # Fear-Destiny
-A zinc
+Official Github for Fear Destiny
