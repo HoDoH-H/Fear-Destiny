@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Gravishoc_0: -5658170710670071770
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

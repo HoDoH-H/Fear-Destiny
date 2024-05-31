@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Zapoteur_0: -2602716957344674047
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

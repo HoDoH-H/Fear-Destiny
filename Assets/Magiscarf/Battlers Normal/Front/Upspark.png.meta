@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Upspark_0: 1469812858292406747
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

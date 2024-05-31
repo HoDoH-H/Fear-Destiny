@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Shijami_0: 1331141431895112815
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

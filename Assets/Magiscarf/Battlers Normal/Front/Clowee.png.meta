@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Clowee_0: -8841714470858086259
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Flarezael_0: 5461983350494187838
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

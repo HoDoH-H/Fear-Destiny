@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Lanya_0: 1726231316618476917
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

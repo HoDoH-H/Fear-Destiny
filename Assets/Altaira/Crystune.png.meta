@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Crystune_0: -8104552552442529602
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Navigale_0: -6357922260434526167
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

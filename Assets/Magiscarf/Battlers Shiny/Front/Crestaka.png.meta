@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Crestaka_0: -6044298447215000972
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

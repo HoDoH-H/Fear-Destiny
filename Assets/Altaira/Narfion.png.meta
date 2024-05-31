@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Narfion_0: -1508411696135476289
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

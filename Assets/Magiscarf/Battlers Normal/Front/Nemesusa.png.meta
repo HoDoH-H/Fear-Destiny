@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Nemesusa_0: -541674072277598047
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

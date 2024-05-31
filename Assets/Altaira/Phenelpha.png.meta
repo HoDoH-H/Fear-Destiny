@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Phenelpha_0: 9188931586829961345
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

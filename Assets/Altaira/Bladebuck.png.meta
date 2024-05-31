@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Bladebuck_0: 6743872709544722387
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

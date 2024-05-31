@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Spiralusk_0: -3533565947620348371
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

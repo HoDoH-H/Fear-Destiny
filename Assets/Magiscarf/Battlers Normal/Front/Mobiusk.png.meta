@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Mobiusk_0: -1121443134630440806
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Winkap_0: -4858839746182390256
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Tindursa_0: 4421095679453790086
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

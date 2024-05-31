@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Zerbbadon_0: 5583956221246546495
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

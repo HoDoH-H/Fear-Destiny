@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Timberry_0: 8026551795821903176
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

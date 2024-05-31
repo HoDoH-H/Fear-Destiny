@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Kraschauf_0: -3218452430578812059
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

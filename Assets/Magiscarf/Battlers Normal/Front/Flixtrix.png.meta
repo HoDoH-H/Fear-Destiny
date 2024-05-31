@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Flixtrix_0: -4865103061902437684
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

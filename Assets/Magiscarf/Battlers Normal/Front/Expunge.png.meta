@@ -232,7 +232,12 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Expunge_0: -44488910789525195
+      Expunge_1: 8828655038301162159
+      Expunge_2: -5748191597169057933
+      Expunge_3: 972604131212701274
+      Expunge_4: -8300186274503210010
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

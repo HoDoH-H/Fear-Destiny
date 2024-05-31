@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Marvog_0: 5446996427018682545
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

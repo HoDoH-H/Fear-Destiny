@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Phyllon_0: -8945337957734416007
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

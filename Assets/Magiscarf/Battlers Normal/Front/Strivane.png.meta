@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Strivane_0: 2250425611014611255
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Blyger_0: 2069172257139987511
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

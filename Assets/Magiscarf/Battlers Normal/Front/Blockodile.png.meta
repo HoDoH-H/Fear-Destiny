@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Blockodile_0: 3893923487577366813
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

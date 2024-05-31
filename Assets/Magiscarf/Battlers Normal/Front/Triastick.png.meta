@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Triastick_0: 7288146599370878353
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

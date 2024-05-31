@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Pyrain_0: 8715073624882148853
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

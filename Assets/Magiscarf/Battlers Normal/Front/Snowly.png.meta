@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Snowly_0: -2144650270171707874
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

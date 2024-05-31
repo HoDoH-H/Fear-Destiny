@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Lanternim_0: 4022493378765493546
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

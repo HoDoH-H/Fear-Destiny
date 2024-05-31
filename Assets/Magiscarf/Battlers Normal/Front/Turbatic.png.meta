@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Turbatic_0: -2814994208304526256
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

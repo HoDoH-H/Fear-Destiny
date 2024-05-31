@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Dalbex_0: 6610623948334346783
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Ellamp_0: 4203265258121294120
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

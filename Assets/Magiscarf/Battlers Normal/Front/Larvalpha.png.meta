@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Larvalpha_0: 3352172860431134691
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      RAINTHER_0: -2354718141639734026
+      RAINTHER_1: 4104268885456120745
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

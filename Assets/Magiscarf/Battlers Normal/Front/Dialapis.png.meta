@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Dialapis_0: -337464198566709522
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

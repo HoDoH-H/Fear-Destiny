@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Kankwart_0: 4751642664883404485
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

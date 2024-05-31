@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Rimpcrush_0: 7530382055922256202
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

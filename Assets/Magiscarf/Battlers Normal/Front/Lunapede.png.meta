@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Lunapede_0: 2235763494904797315
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

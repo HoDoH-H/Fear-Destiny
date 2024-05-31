@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Enderbirld_0: 6234658522952862746
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

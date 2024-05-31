@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Chihah_0: -8370588961943080720
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

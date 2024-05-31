@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Petalcher_0: -8013204464741260587
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

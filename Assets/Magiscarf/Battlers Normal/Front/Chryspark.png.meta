@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Chryspark_0: 3691808018023831787
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

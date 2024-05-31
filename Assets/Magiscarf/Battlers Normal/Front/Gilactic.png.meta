@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Gilactic_0: -1590426445393007078
+      Gilactic_1: 5811105893591561657
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Quignis_0: -2151607416211650648
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

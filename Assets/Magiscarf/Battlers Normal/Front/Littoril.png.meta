@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Littoril_0: 1929511413303084935
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Chickite_0: -5725699472907654051
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

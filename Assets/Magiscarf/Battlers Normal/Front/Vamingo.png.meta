@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Vamingo_0: 1879570226530586913
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

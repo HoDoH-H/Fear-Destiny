@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Spikonsia_0: -3201809927621021036
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

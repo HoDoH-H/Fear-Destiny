@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Miyak_0: 2770753697049214558
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

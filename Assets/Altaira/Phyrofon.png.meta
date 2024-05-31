@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Phyrofon_0: -5426103270964671792
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

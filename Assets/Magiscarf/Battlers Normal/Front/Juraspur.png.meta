@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Juraspur_0: -6309008303650530634
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

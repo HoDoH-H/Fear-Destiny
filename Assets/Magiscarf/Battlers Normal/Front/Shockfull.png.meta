@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Shockfull_0: 4069382991153836691
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Lollybog_0: -5617030649611617460
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

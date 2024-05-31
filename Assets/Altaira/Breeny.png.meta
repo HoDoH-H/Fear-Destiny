@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Breeny_0: 8509918946191824276
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

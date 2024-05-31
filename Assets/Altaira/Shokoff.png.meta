@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Shokoff_0: 3763337957564980054
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

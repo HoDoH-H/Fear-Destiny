@@ -182,7 +182,10 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Hivernor_0: 20549446054211338
+      Hivernor_1: 5990777821502597596
+      Hivernor_2: -558245029195014139
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

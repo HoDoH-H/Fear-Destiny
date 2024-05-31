@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Dansakoi_0: 2640447160190055251
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

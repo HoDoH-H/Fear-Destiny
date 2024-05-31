@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Defendio_0: 3202400181701590996
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

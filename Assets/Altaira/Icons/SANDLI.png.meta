@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SANDLI_0: -6671356278492369323
+      SANDLI_1: -5057590373371213465
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

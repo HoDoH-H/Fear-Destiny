@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Venorog_0: -192042631304476944
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

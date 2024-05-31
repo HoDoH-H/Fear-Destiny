@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Cretassom_0: 4128393995018214613
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

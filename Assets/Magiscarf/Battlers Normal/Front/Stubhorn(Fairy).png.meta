@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Stubhorn(Fairy)_0: 8273682720093357899
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

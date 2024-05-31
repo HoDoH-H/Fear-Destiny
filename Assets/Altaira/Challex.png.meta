@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Challex_0: 2890967288297346125
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Burrub_0: 7790863534470360791
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

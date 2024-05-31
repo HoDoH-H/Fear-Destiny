@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Imagamma_0: 4247500096378126775
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

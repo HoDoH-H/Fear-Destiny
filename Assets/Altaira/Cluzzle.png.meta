@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Cluzzle_0: 6311973740798730416
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

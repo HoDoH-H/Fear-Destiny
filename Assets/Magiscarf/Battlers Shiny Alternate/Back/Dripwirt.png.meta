@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Dripwirt_0: 1820588121153927955
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

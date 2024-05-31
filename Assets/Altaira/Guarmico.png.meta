@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Guarmico_0: -1984845596486298202
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

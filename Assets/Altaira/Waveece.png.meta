@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Waveece_0: 485071456123279517
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

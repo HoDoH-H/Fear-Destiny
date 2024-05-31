@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Umbreeze_0: -159596756957076261
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

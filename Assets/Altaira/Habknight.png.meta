@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Habknight_0: -6619203539255712638
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

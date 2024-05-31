@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Pakadu_0: 4867255124261562436
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

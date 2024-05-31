@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Rockid(Fairy)_0: -8374849846292251190
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

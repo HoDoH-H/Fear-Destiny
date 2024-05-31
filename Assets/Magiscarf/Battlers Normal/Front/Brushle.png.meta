@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Brushle_0: -6982640345246690867
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

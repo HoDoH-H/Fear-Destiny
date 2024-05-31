@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Scaropti_0: -3738840333813075370
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Winking_0: 8147053532618460215
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

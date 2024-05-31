@@ -232,7 +232,12 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Bombustoad_0: 4099075929266614873
+      Bombustoad_1: 3855398408081928980
+      Bombustoad_2: -2796435293091482204
+      Bombustoad_3: -3525163301965730045
+      Bombustoad_4: -4866268195362143023
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

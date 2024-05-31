@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Amazel_0: -2609687081170462088
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

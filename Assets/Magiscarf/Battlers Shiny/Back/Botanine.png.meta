@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Botanine_0: 5408829954128674528
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Kankryst_0: 8977565110467412694
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

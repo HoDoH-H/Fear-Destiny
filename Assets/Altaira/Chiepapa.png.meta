@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Chiepapa_0: -5388938391590165865
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

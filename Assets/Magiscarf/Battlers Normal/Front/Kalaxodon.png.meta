@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Kalaxodon_0: -6056927979806048635
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

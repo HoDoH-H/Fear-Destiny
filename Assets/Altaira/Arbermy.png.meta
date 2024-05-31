@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Arbermy_0: -6932654825925845501
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

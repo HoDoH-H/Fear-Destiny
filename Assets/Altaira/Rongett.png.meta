@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Rongett_0: -3133237608272488601
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

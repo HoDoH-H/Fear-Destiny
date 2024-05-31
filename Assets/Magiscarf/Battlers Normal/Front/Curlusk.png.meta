@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Curlusk_0: -3280508390715986423
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

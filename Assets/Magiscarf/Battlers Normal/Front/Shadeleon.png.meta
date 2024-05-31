@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Shadeleon_0: -2145538232267880222
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

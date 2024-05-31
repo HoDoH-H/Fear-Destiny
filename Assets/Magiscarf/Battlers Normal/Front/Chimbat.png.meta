@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Chimbat_0: 1750831482645005708
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

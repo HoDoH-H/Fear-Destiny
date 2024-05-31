@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Howliage_0: 258402107944874133
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

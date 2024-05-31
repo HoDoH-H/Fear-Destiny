@@ -157,7 +157,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Lumaxi_0: 6796970730641916789
+      Lumaxi_1: -5632908869586720099
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

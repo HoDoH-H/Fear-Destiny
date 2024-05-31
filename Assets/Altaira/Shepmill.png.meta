@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Shepmill_0: 2615592527608236842
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Bargaby_0: -5467461802267510954
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

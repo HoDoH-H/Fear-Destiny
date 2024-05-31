@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Elazel_0: 3622980374742143792
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

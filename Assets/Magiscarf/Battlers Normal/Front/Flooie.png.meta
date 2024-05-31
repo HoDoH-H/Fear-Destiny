@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Flooie_0: 7400458750449817568
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

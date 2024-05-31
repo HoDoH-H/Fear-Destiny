@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Griffy_0: 4705763968999722103
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

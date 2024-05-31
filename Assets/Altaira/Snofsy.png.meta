@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Snofsy_0: 4221627422995500684
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

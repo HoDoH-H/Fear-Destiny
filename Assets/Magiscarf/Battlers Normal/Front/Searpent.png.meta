@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Searpent_0: -2880826157882225045
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

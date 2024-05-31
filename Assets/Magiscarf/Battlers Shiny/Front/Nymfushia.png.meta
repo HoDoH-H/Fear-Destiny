@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Nymfushia_0: -4315609107740099737
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

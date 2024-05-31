@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Vitail_0: 4904686449981926401
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

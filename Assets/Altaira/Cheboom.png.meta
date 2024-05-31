@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Cheboom_0: -3461252110166413366
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

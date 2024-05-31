@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Tenma_0: 6569726994648210917
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

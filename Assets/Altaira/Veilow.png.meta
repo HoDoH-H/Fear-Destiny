@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Veilow_0: 2737881726513515137
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

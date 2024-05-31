@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Roarmar_0: -1767819459751857284
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

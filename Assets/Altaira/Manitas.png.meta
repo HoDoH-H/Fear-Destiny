@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Manitas_0: 7356512576572256397
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

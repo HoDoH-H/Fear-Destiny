@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Skelleks_0: -683152569519798329
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

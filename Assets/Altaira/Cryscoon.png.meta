@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Cryscoon_0: 6822882633632489145
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

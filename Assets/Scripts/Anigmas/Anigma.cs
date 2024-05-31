@@ -1,11 +1,10 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Anigma
 {
-    AnigmaBase _base;
-    int level;
+    public AnigmaBase Base {  get; set; }
+    public int Level { get; set; }
 
     public int HP {  get; set; }
 
@@ -13,15 +12,15 @@ public class Anigma
 
     public Anigma(AnigmaBase aBase, int aLevel)
     {
-        _base = aBase;
-        level = aLevel;
-        HP = _base.MaxHp;
+        Base = aBase;
+        Level = aLevel;
+        HP = MaxHp;
 
         //Geenerate the moves
         Moves = new List<Move>();
-        foreach (var move in _base.LearnableMoves)
+        foreach (var move in Base.LearnableMoves)
         {
-            if (move.Level <= level)
+            if (move.Level <= Level)
             {
                 Moves.Add(new Move(move.Base));
             }
@@ -35,31 +34,31 @@ public class Anigma
 
     public int Attack
     {
-        get { return Mathf.FloorToInt((2 * _base.Attack + _base.IAttack + (_base.EAttack / 4) * level) / 100) + 5; }
+        get { return Mathf.FloorToInt((2 * Base.Attack + Base.IAttack + (Base.EAttack / 4) * Level) / 100) + 5; }
     }
 
     public int Defense
     {
-        get { return Mathf.FloorToInt((2 * _base.Defense + _base.IDefense + (_base.EDefense / 4) * level) / 100) + 5; }
+        get { return Mathf.FloorToInt((2 * Base.Defense + Base.IDefense + (Base.EDefense / 4) * Level) / 100) + 5; }
     }
 
     public int SpAttack
     {
-        get { return Mathf.FloorToInt((2 * _base.SpAttack + _base.ISpAttack + (_base.ESpAttack / 4) * level) / 100) + 5; }
+        get { return Mathf.FloorToInt((2 * Base.SpAttack + Base.ISpAttack + (Base.ESpAttack / 4) * Level) / 100) + 5; }
     }
 
     public int SpDefense
     {
-        get { return Mathf.FloorToInt((2 * _base.SpDefense + _base.ISpDefense + (_base.ESpDefense / 4) * level) / 100) + 5; }
+        get { return Mathf.FloorToInt((2 * Base.SpDefense + Base.ISpDefense + (Base.ESpDefense / 4) * Level) / 100) + 5; }
     }
 
     public int Speed
     {
-        get { return Mathf.FloorToInt((2 * _base.Speed + _base.ISpeed + (_base.ESpeed / 4) * level) / 100) + 5; }
+        get { return Mathf.FloorToInt((2 * Base.Speed + Base.ISpeed + (Base.ESpeed / 4) * Level) / 100) + 5; }
     }
 
     public int MaxHp
     {
-        get { return Mathf.FloorToInt((2 * _base.MaxHp + _base.IMaxHp + (_base.EMaxHp / 4) * level) / 100) + level + 10; }
+        get { return Mathf.FloorToInt((2 * Base.MaxHp + Base.IMaxHp + (Base.EMaxHp / 4) * Level) / 100) + Level + 10; }
     }
 }

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Chajill_0: -2782634236308646869
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

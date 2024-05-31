@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Beeheave(Electric)_0: -3250558192902437167
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

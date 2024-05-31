@@ -61,7 +61,7 @@ public class AnigmaBase : ScriptableObject
     //Properties
     public string Name { get { return name; } }
     public string Description { get { return description; } }
-    public Sprite Sprite { get { return frontSprite; } }
+    public Sprite FrontSprite { get { return frontSprite; } }
     public Sprite BackSprite { get { return backSprite; } }
     public AnigmaType Type1 { get { return type1; } }
     public AnigmaType Type2 { get { return type2; } }

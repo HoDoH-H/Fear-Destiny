@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sycoral_0: 2630704607487277798
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

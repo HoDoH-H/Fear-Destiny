@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Glaucon_0: -8434071991665886313
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Growl
   description: Lowers opponent's Attack.
-  type: 0
+  type: 1
   power: 0
   accuracy: 100
   usePoints: 40
   statusSelf: 
-  StatusSelfAccuracy: 
+  statusSelfAccuracy: 
   statusOpponent: 
-  StatusOpponentAccuracy: 
+  statusOpponentAccuracy: 
   effectSelf: 
   EffectSelfAccuracy: 0
   effectValuesSelf: 

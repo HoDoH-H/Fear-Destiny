@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Hoolihog_0: 8113789162459861947
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

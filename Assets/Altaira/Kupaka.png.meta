@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Kupaka_0: -551133577867645976
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Dustfully_0: 3656665134033235423
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

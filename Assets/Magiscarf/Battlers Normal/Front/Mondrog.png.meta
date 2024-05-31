@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Mondrog_0: 6003178583958154178
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

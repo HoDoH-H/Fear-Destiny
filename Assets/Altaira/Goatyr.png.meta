@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Goatyr_0: -2780856057762948149
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

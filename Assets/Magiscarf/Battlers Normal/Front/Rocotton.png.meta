@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Rocotton_0: -136106486420635371
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

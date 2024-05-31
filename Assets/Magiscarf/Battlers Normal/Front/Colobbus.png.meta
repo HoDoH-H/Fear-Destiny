@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Colobbus_0: -1031922905527755772
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

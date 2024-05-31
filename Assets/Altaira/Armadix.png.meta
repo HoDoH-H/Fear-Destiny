@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Armadix_0: -6095377896523499938
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

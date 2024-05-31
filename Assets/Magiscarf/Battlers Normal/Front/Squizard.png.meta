@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Squizard_0: -5380607559012624712
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

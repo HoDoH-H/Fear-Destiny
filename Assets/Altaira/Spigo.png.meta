@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Spigo_0: 1305851191242941540
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

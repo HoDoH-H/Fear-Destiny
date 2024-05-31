@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Fangtomask_0: -9166449473740308425
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

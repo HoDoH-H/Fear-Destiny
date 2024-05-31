@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Wyntry_0: 7278168198986461561
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

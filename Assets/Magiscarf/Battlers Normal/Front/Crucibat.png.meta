@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Crucibat_0: 7307644178127655593
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

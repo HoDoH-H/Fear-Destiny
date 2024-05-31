@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Stubhorn(Normal)_0: 5399452044108468614
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Clodiva_0: 2504894536238410829
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

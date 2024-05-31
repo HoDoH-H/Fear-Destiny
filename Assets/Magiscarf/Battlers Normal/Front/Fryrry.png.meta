@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Fryrry_0: -1080704100006216512
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

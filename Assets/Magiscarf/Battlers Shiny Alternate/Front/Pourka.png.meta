@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Pourka_0: 8364808608291260634
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Flookha_0: 594050455722106223
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

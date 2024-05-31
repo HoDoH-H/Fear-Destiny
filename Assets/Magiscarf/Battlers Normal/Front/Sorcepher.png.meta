@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sorcepher_0: -1157914763263963910
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Folnir_0: -631941690790065114
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

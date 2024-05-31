@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Gelescent_0: -1578502092634923516
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Roogilist_0: -2925984110247689616
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

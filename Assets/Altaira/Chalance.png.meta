@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Chalance_0: 9212892224990049969
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

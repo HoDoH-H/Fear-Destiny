@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Scavengila_0: -688414992909061259
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Horbak_0: -5478707190044216928
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Pawky_0: 3608834916738465405
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

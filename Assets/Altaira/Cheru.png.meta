@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Cheru_0: 1329008109842742890
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Coafire_0: 771292512866568832
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

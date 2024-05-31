@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Scarambi_0: -9025676541647879434
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

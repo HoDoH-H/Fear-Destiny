@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Winbee_0: 8698499621030522269
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
