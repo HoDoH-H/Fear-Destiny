@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd91ca33a0282d543a9ee093c6d2c2a5, type: 3}
+  m_Name: Sithwitch
+  m_EditorClassIdentifier: 
+  name: Sithwitch
+  description: "Sithwitch is the evolved form of Apprensith, embodying a more formidable
+    and mystical presence. Its green body has grown taller and more agile and it
+    wrap its hand with petal-like magical gloves, useful for both attack and defense.
+    Sithwitch possesses a powerful connection to the spirit world, allowing it to
+    manipulate magic energy with ease. This Pok\xE9mon often floats above the ground,
+    moving gracefully through the air as it watches over its territory."
+  frontSprite: {fileID: -2040696674307796081, guid: 47af217c230702248b70d373ccae1d5f, type: 3}
+  backSprite: {fileID: -2040696674307796081, guid: b9575c02ee9b5d344a2143ed40bf54dc, type: 3}
+  type1: 12
+  type2: 20
+  maxHp: 75
+  attack: 60
+  defense: 70
+  spAttack: 90
+  spDefense: 85
+  speed: 65
+  iMaxHp: 0
+  iAttack: 0
+  iDefense: 0
+  iSpAttack: 0
+  iSpDefense: 0
+  iSpeed: 0
+  eMaxHp: 0
+  eAttack: 0
+  eDefense: 0
+  eSpAttack: 0
+  eSpDefense: 0
+  eSpeed: 0
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: 7c98ab2dffb01d04194537f10d97a5a9, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 419ae0b7721087a439288ef195777522, type: 2}
+    level: 4
+  - moveBase: {fileID: 11400000, guid: 392053bbe8ca38d41b1ea413133f2e9b, type: 2}
+    level: 7
+  - moveBase: {fileID: 11400000, guid: 2018e8e287fe7864d8761fa69d294e73, type: 2}
+    level: 10

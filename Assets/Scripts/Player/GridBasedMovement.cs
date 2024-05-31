@@ -1,11 +1,18 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class GridBasedMovement : MonoBehaviour
 {
 
+    public bool isWalking = false;
+    public bool canMove = true;
+
     public Transform movePoint;
+
     public LayerMask whatStopsMovement;
+    public LayerMask tallGrass;
+
     public Animator anim;
 
     public float moveSpeed;
@@ -56,25 +63,74 @@ public class GridBasedMovement : MonoBehaviour
             direction.y = 0;
         }
 
-        if (Vector3.Distance(transform.position, movePoint.position) <= 0.05f)
+        if(canMove)
         {
-            if (Mathf.Abs(direction.x) > 0)
+            if (Vector3.Distance(transform.position, movePoint.position) <= 0.05f)
             {
-                if(!Physics2D.OverlapCircle(movePoint.position + new Vector3(direction.x, 0, 0), 0.45f, whatStopsMovement))
+                if (isWalking)
                 {
-                    movePoint.position += new Vector3(direction.x, 0, 0);
+                    CheckForEncounter();
                 }
-            }
 
-            if (Mathf.Abs(direction.y) > 0)
-            {
-                if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(0, direction.y, 0), 0.45f, whatStopsMovement))
+                if (isWalking && direction == Vector2.zero)
                 {
-                    movePoint.position += new Vector3(0, direction.y, 0);
+                    anim.SetBool("IsWalking", false);
+                    isWalking = false;
+                }
+                if (direction != Vector2.zero)
+                {
+                    anim.SetFloat("DirectionX", direction.x);
+                    anim.SetFloat("DirectionY", direction.y);
+                }
+
+                if (Mathf.Abs(direction.x) > 0)
+                {
+                    if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(direction.x, 0, 0), 0.45f, whatStopsMovement))
+                    {
+                        movePoint.position += new Vector3(direction.x, 0, 0);
+                    }
+                }
+
+                if (Mathf.Abs(direction.y) > 0)
+                {
+                    if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(0, direction.y, 0), 0.45f, whatStopsMovement))
+                    {
+                        movePoint.position += new Vector3(0, direction.y, 0);
+                    }
                 }
             }
-            anim.SetFloat("DirectionX", direction.x);
-            anim.SetFloat("DirectionY", direction.y);
+            else
+            {
+                if (!isWalking)
+                {
+                    isWalking = true;
+                    anim.SetBool("IsWalking", true);
+                }
+            }
         }
+        else
+        {
+            if (isWalking) isWalking = false; anim.SetBool("IsWalking", false);
+        }
+    }
+
+    private void CheckForEncounter()
+    {
+        if (Physics2D.OverlapCircle(movePoint.position, 0.45f, tallGrass))
+        {
+            if(Random.Range(1, 101) <= 10)
+            {
+                Debug.Log("Encountered a wild monster");
+                canMove = false;
+                StartCoroutine(Timer(1f));
+
+            }
+        }
+    }
+
+    IEnumerator Timer(float time)
+    {
+        yield return new WaitForSeconds(time);
+        canMove = true;
     }
 }

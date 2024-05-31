@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2e12288949c3a4d885f65e3948438f, type: 3}
+  m_Name: Growl
+  m_EditorClassIdentifier: 
+  name: Growl
+  description: Lowers opponent's Attack.
+  type: 0
+  power: 0
+  accuracy: 100
+  usePoints: 40
+  statusSelf: 
+  StatusSelfAccuracy: 
+  statusOpponent: 
+  StatusOpponentAccuracy: 
+  effectSelf: 
+  EffectSelfAccuracy: 0
+  effectValuesSelf: 
+  effectOpponent: 02000000
+  EffectOpponentAccuracy: 100
+  effectValuesOpponent: 00000000
