@@ -22,7 +22,7 @@ MonoBehaviour:
     to protect itself and its habitat."
   frontSprite: {fileID: 8611254305700795036, guid: 92c8494c39eb20a41978d5c7f3912ecd, type: 3}
   backSprite: {fileID: 8611254305700795036, guid: 5056bb8e0203ac548872b516426907b9, type: 3}
-  type1: 12
+  type1: 2
   type2: 20
   maxHp: 49
   attack: 46

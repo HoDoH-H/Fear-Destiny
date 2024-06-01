@@ -8,6 +8,6 @@ public class Move
     public Move(MoveBase aBase)
     {
         Base = aBase;
-        UP = aBase.UsePoints;
+        UP = aBase.UP;
     }
 }

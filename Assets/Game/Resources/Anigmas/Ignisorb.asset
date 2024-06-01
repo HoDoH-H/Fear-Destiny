@@ -20,7 +20,7 @@ MonoBehaviour:
     of fire when threatened."
   frontSprite: {fileID: -7063285090536975615, guid: d7cbb1907e45d9d4babfba53a52d1ea1, type: 3}
   backSprite: {fileID: -7063285090536975615, guid: bec9b18b65e3ff74887a13836dead441, type: 3}
-  type1: 10
+  type1: 3
   type2: 0
   maxHp: 47
   attack: 53

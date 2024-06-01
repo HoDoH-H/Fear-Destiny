@@ -21,7 +21,7 @@ MonoBehaviour:
     moving gracefully through the air as it watches over its territory."
   frontSprite: {fileID: -2040696674307796081, guid: 47af217c230702248b70d373ccae1d5f, type: 3}
   backSprite: {fileID: -2040696674307796081, guid: b9575c02ee9b5d344a2143ed40bf54dc, type: 3}
-  type1: 12
+  type1: 2
   type2: 20
   maxHp: 75
   attack: 60

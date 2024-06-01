@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Bite
   description: May cause flinching.
-  type: 0
+  type: 16
   power: 60
   accuracy: 100
   usePoints: 25

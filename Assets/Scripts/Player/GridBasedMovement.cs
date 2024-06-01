@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,6 +13,8 @@ public class GridBasedMovement : MonoBehaviour
 
     public LayerMask whatStopsMovement;
     public LayerMask tallGrass;
+
+    public event Action OnEncountered;
 
     public Animator anim;
 
@@ -45,7 +48,7 @@ public class GridBasedMovement : MonoBehaviour
         move.Disable();
     }
 
-    private void Update()
+    public void HandleUpdate()
     {
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
 
@@ -118,19 +121,12 @@ public class GridBasedMovement : MonoBehaviour
     {
         if (Physics2D.OverlapCircle(movePoint.position, 0.45f, tallGrass))
         {
-            if(Random.Range(1, 101) <= 10)
+            if(UnityEngine.Random.Range(1, 101) <= 10)
             {
-                Debug.Log("Encountered a wild monster");
-                canMove = false;
-                StartCoroutine(Timer(1f));
-
+                anim.SetBool("IsWalking", false);
+                isWalking = false;
+                OnEncountered();
             }
         }
-    }
-
-    IEnumerator Timer(float time)
-    {
-        yield return new WaitForSeconds(time);
-        canMove = true;
     }
 }

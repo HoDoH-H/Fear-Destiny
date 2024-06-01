@@ -18,6 +18,7 @@ MonoBehaviour:
   power: 0
   accuracy: 100
   usePoints: 40
+  style: 2
   statusSelf: 
   statusSelfAccuracy: 
   statusOpponent: 

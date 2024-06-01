@@ -21,7 +21,7 @@ MonoBehaviour:
     When threatened, it can create intense psychic waves to disorient its foes."
   frontSprite: {fileID: -456865183306999168, guid: e8f4b088e05fe3448a3e134325fae2b1, type: 3}
   backSprite: {fileID: 0}
-  type1: 14
+  type1: 4
   type2: 11
   maxHp: 37
   attack: 48

@@ -14,6 +14,7 @@ public class MoveBase : ScriptableObject
     [SerializeField] int power;
     [SerializeField] int accuracy;
     [SerializeField] int usePoints;
+    [SerializeField] AttackStyles style;
 
     [Header("Status Self")]
     [SerializeField] StatusEffectSelf[] statusSelf;
@@ -38,7 +39,8 @@ public class MoveBase : ScriptableObject
     public AnigmaType Type { get {  return type; } }
     public int Power { get { return power; } }
     public int Accuracy { get { return accuracy; } }
-    public int UsePoints { get {  return usePoints; } }
+    public int UP { get {  return usePoints; } }
+    public AttackStyles Style { get { return style; } }
     public StatusEffectSelf[] StatusSelf { get {  return statusSelf; } }
     public int[] StatusSelfAccuracy { get { return statusSelfAccuracy; } }
     public StatusEffectOpponent[] StatusOpponent { get { return statusOpponent; } }
@@ -120,4 +122,11 @@ public enum StatModifierValues
     Normal,
     Sharply,
     Tremendous
+}
+
+public enum AttackStyles
+{
+    Physical,
+    Special,
+    Status
 }

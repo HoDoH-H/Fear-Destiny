@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2e12288949c3a4d885f65e3948438f, type: 3}
   m_Name: Ember
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  type: 10
-  power: 45
+  name: Ember
+  description: May burn opponent.
+  type: 3
+  power: 40
   accuracy: 100
   usePoints: 25
+  style: 1
   statusSelf: 
   statusSelfAccuracy: 
   statusOpponent: 04000000

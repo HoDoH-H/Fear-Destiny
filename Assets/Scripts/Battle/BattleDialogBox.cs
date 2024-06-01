@@ -32,6 +32,8 @@ public class BattleDialogBox : MonoBehaviour
             dialogText.text += letter;
             yield return new WaitForSeconds(1f/letterPerSecond);
         }
+
+        yield return new WaitForSeconds(1f);
     }
 
     public void EnableDialogText(bool enable)
@@ -81,7 +83,7 @@ public class BattleDialogBox : MonoBehaviour
 
         if (move != null)
         {
-            upText.text = $"UP {move.UP}/{move.Base.UsePoints}";
+            upText.text = $"UP {move.UP}/{move.Base.UP}";
             typeText.text = move.Base.Type.ToString();
         }
     }

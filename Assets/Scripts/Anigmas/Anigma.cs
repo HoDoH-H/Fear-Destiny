@@ -1,22 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Anigma
 {
-    public AnigmaBase Base {  get; set; }
-    public int Level { get; set; }
+    [SerializeField] AnigmaBase _base;
+    [SerializeField] int level;
+
+    public AnigmaBase Base { get { return _base; } }
+    public int Level { get { return level; } }
 
     public int HP {  get; set; }
 
     public List<Move> Moves {  get; set; }
 
-    public Anigma(AnigmaBase aBase, int aLevel)
+    public void Init()
     {
-        Base = aBase;
-        Level = aLevel;
         HP = MaxHp;
 
-        //Geenerate the moves
+        //Generate moves
         Moves = new List<Move>();
         foreach (var move in Base.LearnableMoves)
         {
@@ -61,4 +63,68 @@ public class Anigma
     {
         get { return Mathf.FloorToInt((2 * Base.MaxHp + Base.IMaxHp + (Base.EMaxHp / 4) * Level) / 100) + Level + 10; }
     }
+
+    public DamageDetails TakeDamage(Move move, Anigma attacker)
+    {
+        float critical = 1f;
+        if (Random.value * 100f <= 6.25f)
+        {
+            critical = 2f;
+        }
+
+        float type = TypeChart.GetEffectiveness(move.Base.Type, this.Base.Type1) * TypeChart.GetEffectiveness(move.Base.Type, this.Base.Type2);
+
+        var damageDetails = new DamageDetails
+        {
+            TypeEffectiveness = type,
+            Critical = critical,
+            Fainted = false,
+        };
+
+        float attack = 0;
+        float defense = 0;
+
+        if (move.Base.Style == AttackStyles.Physical || move.Base.Style == AttackStyles.Physical)
+        {
+            attack = attacker.Attack;
+            defense = Defense;
+        }
+        else if (move.Base.Style == AttackStyles.Special)
+        {
+            attack = attacker.SpAttack;
+            defense = SpDefense;
+        }
+
+        float modifiers = Random.Range(0.85f, 1f) * type * critical;
+        float a = (2 * attacker.Level + 10) / 250f;
+        float d = a * move.Base.Power * (attack / defense) + 2;
+        int damage = Mathf.FloorToInt(d * modifiers);
+
+        if (move.Base.Power > 0)
+        {
+            HP -= damage;
+        }
+
+        if (HP <= 0)
+        {
+            HP = 0;
+            damageDetails.Fainted = true;
+        }
+        return damageDetails;
+    }
+
+    public Move GetRandomMove()
+    {
+        int r = Random.Range(0, Moves.Count);
+        return Moves[r];
+    }
+}
+
+public class DamageDetails
+{
+    public bool Fainted { get; set; }
+
+    public float Critical { get; set; }
+
+    public float TypeEffectiveness { get; set; }
 }
