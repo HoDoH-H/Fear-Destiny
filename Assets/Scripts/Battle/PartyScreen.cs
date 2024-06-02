@@ -7,6 +7,7 @@ public class PartyScreen : MonoBehaviour
     [SerializeField] Text messageText;
 
     PartyMemberUI[] memberSlots;
+    List<Anigma> anigmas;
 
     public void Init()
     {
@@ -15,6 +16,7 @@ public class PartyScreen : MonoBehaviour
 
     public void SetPartyData(List<Anigma> anigmas)
     {
+        this.anigmas = anigmas;
         for (int i = 0; i < memberSlots.Length; i++)
         {
             if (i < anigmas.Count)
@@ -28,5 +30,25 @@ public class PartyScreen : MonoBehaviour
         }
 
         messageText.text = "Choose a Anigma.";
+    }
+
+    public void UpdateMemberSelection(int selectedMember)
+    {
+        for (int i = 0; i < anigmas.Count; i++)
+        {
+            if (i == selectedMember)
+            {
+                memberSlots[i].SetSelected(true);
+            }
+            else
+            {
+                memberSlots[i].SetSelected(false);
+            }
+        }
+    }
+
+    public void SetMessageText(string messageText)
+    {
+        this.messageText.text = messageText;
     }
 }

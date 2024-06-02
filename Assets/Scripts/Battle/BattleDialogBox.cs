@@ -15,6 +15,7 @@ public class BattleDialogBox : MonoBehaviour
 
     [SerializeField] List<Text> actionTexts;
     [SerializeField] List<Text> moveTexts;
+    [SerializeField] List<Text> memberTexts;
 
     [SerializeField] Text upText;
     [SerializeField] Text typeText;

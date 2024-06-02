@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,9 +20,12 @@ public class BattleSystem : MonoBehaviour
     BattleState state;
     [SerializeField] int currentAction;
     [SerializeField] int currentMove;
+    [SerializeField] int currentMember;
 
     AnigmaParty playerParty;
     Anigma wildAnigma;
+
+    // Region Start - Start battle
 
     public void StartBattle(AnigmaParty playerParty, Anigma wildAnigma)
     {
@@ -29,6 +33,10 @@ public class BattleSystem : MonoBehaviour
         this.wildAnigma = wildAnigma;
         StartCoroutine(SetupBattle());
     }
+
+
+
+
 
     public IEnumerator SetupBattle()
     {
@@ -46,6 +54,10 @@ public class BattleSystem : MonoBehaviour
         PlayerAction();
     }
 
+    // Region End - Start battle
+
+    // Region Start - UI Managers
+
     void PlayerAction()
     {
         state = BattleState.PlayerAction;
@@ -56,12 +68,18 @@ public class BattleSystem : MonoBehaviour
         partyScreen.gameObject.SetActive(false);
     }
 
+
+
+
     void PlayerParty()
     {
         state = BattleState.PartyScreen;
         partyScreen.SetPartyData(playerParty.Anigmas);
         partyScreen.gameObject.SetActive(true);
     }
+
+
+
 
     void PlayerMove()
     {
@@ -70,6 +88,10 @@ public class BattleSystem : MonoBehaviour
         dialogBox.EnableDialogText(false);
         dialogBox.EnableMoveSelector(true);
     }
+
+    // Region End - UI Managers
+
+    // Region Start - Battle
 
     IEnumerator PerformPlayerMove()
     {
@@ -104,6 +126,11 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+
+
+
+
+
     IEnumerator PerformOpponentMove()
     {
         state = BattleState.EnemyMove;
@@ -132,14 +159,7 @@ public class BattleSystem : MonoBehaviour
             var nextAnigma = playerParty.GetHealthyPokemon();
             if (nextAnigma != null)
             {
-                playerUnit.Setup(nextAnigma);
-                playerHUD.SetData(nextAnigma);
-
-                dialogBox.SetMoveNames(nextAnigma.Moves);
-
-                yield return dialogBox.TypeDialog($"{nextAnigma.Base.Name} go!");
-
-                PlayerAction();
+                PlayerParty();
             }
             else
             {
@@ -151,6 +171,10 @@ public class BattleSystem : MonoBehaviour
             PlayerAction();
         }
     }
+
+
+
+
 
     IEnumerator ShowDamageDetail(DamageDetails damageDetails, Anigma anigma)
     {
@@ -181,6 +205,10 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    // Region End - Battle
+
+    // Region Start - Battle States Handlers
+
     public void HandleUpdate()
     {
         if (state == BattleState.PlayerAction)
@@ -193,9 +221,13 @@ public class BattleSystem : MonoBehaviour
         }
         else if (state == BattleState.PartyScreen)
         {
-            HandlePartyScreen();
+            HandlePartySelection();
         }
     }
+
+
+
+
 
     void HandleActionSelection()
     {
@@ -269,14 +301,139 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    void HandlePartyScreen()
+
+
+
+
+    void HandlePartySelection()
     {
         if (Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Escape))
         {
             //Get back to action selection
             PlayerAction();
         }
+
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            if (currentMember == 0 && playerParty.Anigmas.Count > 1 || currentMember == 2 && playerParty.Anigmas.Count > 3 || currentMember == 4 && playerParty.Anigmas.Count > 5)
+            {
+                ++currentMember;
+            }
+            else if (currentMember == 2 && playerParty.Anigmas.Count == 3 || currentMember == 4 && playerParty.Anigmas.Count == 5)
+            {
+                --currentMember;
+            }
+            else
+            {
+                if (currentMember == 1 || currentMember == 3 || currentMember == 5)
+                    --currentMember;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            if (currentMember == 1 || currentMember == 3 || currentMember == 5)
+            {
+                --currentMember;
+            }
+            else
+            {
+                if (playerParty.Anigmas.Count > 1 && currentMember == 0 || playerParty.Anigmas.Count > 3 && currentMember == 2 || playerParty.Anigmas.Count > 5 && currentMember == 4)
+                {
+                    ++currentMember;
+                }
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if (currentMember > 1)
+            {
+                currentMember = currentMember - 2;
+            }
+            else
+            {
+                if (playerParty.Anigmas.Count > 4 && currentMember == 0 || playerParty.Anigmas.Count > 5 && currentMember == 1)
+                {
+                    currentMember = currentMember + 4;
+                }
+                else if (playerParty.Anigmas.Count > 2 && currentMember == 0 || playerParty.Anigmas.Count > 3 && currentMember == 1)
+                {
+                    currentMember = currentMember + 2;
+                }
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            if (currentMember + 2 < playerParty.Anigmas.Count)
+            {
+                currentMember = currentMember + 2;
+            }
+            else if (currentMember + 1 < playerParty.Anigmas.Count && currentMember % 2 == 1)
+            {
+                currentMember++;
+            }
+            else
+            {
+                if (currentMember % 2 == 0)
+                    currentMember = 0;
+                else
+                    currentMember = 1;
+            }
+        }
+
+        partyScreen.UpdateMemberSelection(currentMember);
+
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            var selectedMember = playerParty.Anigmas[currentMember];
+            if(selectedMember.HP <= 0)
+            {
+                partyScreen.SetMessageText("You can't send out a fainted anigma...");
+                return;
+            }
+            else if (selectedMember == playerUnit.Anigma)
+            {
+                partyScreen.SetMessageText("You can't switch with the same anigma!");
+                return;
+            }
+
+            partyScreen.gameObject.SetActive(false);
+            state = BattleState.Busy;
+            StartCoroutine(SwitchAnigma(selectedMember));
+        }
     }
+
+    IEnumerator SwitchAnigma(Anigma newAnigma)
+    {
+        var wasFainted = true;
+        if (playerUnit.Anigma.HP > 0)
+        {
+            wasFainted = false;
+            yield return dialogBox.TypeDialog($"Come back {playerUnit.Anigma.Base.Name}!");
+            playerUnit.PlayFaintAnimation();
+            yield return new WaitForSeconds(1.5f);
+        }
+
+        playerUnit.Setup(newAnigma);
+        playerHUD.SetData(newAnigma);
+
+        dialogBox.SetMoveNames(newAnigma.Moves);
+
+        yield return dialogBox.TypeDialog($"{newAnigma.Base.Name} go!");
+
+        if (!wasFainted)
+        {
+            yield return PerformOpponentMove();
+        }
+        else
+        {
+            PlayerAction();
+        }
+    }
+
+
+
+
+
 
     void HandleMoveSelection()
     {
@@ -356,4 +513,6 @@ public class BattleSystem : MonoBehaviour
             StartCoroutine(PerformPlayerMove());
         }
     }
+
+    // Region End - Battle States Handlers
 }
