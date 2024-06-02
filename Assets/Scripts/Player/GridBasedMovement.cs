@@ -123,6 +123,8 @@ public class GridBasedMovement : MonoBehaviour
         {
             if(UnityEngine.Random.Range(1, 101) <= 10)
             {
+                move.Reset();
+                direction = Vector2.zero;
                 anim.SetBool("IsWalking", false);
                 isWalking = false;
                 OnEncountered();

@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public enum BattleState { Start, PlayerAction, PlayerMove, EnemyMove, Busy}
+public enum BattleState { Start, PlayerAction, PlayerMove, EnemyMove, Busy, PartyScreen }
 
 public class BattleSystem : MonoBehaviour
 {
@@ -12,6 +12,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] BattleUnit opponentUnit;
     [SerializeField] BattleHUD opponentHUD;
     [SerializeField] BattleDialogBox dialogBox;
+    [SerializeField] PartyScreen partyScreen;
 
     public event Action<bool> OnBattleOver;
 
@@ -36,6 +37,8 @@ public class BattleSystem : MonoBehaviour
         playerHUD.SetData(playerUnit.Anigma);
         opponentHUD.SetData(opponentUnit.Anigma);
 
+        partyScreen.Init();
+
         dialogBox.SetMoveNames(playerUnit.Anigma.Moves);
 
         yield return dialogBox.TypeDialog($"A wild {opponentUnit.Anigma.Base.Name} appeared.");
@@ -46,10 +49,18 @@ public class BattleSystem : MonoBehaviour
     void PlayerAction()
     {
         state = BattleState.PlayerAction;
-        StartCoroutine(dialogBox.TypeDialog("Choose an action"));
+        dialogBox.SetDialog("Choose an action");
         dialogBox.EnableActionSelector(true);
         dialogBox.EnableDialogText(true);
         dialogBox.EnableMoveSelector(false);
+        partyScreen.gameObject.SetActive(false);
+    }
+
+    void PlayerParty()
+    {
+        state = BattleState.PartyScreen;
+        partyScreen.SetPartyData(playerParty.Anigmas);
+        partyScreen.gameObject.SetActive(true);
     }
 
     void PlayerMove()
@@ -118,7 +129,22 @@ public class BattleSystem : MonoBehaviour
             playerUnit.PlayFaintAnimation();
 
             yield return new WaitForSeconds(1.5f);
-            OnBattleOver(false);
+            var nextAnigma = playerParty.GetHealthyPokemon();
+            if (nextAnigma != null)
+            {
+                playerUnit.Setup(nextAnigma);
+                playerHUD.SetData(nextAnigma);
+
+                dialogBox.SetMoveNames(nextAnigma.Moves);
+
+                yield return dialogBox.TypeDialog($"{nextAnigma.Base.Name} go!");
+
+                PlayerAction();
+            }
+            else
+            {
+                OnBattleOver(false);
+            }
         }
         else
         {
@@ -165,13 +191,17 @@ public class BattleSystem : MonoBehaviour
         {
             HandleMoveSelection();
         }
+        else if (state == BattleState.PartyScreen)
+        {
+            HandlePartyScreen();
+        }
     }
 
     void HandleActionSelection()
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if(currentAction < 1)
+            if (currentAction == 0 || currentAction == 2)
             {
                 ++currentAction;
             }
@@ -180,15 +210,37 @@ public class BattleSystem : MonoBehaviour
                 --currentAction;
             }
         }
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if (currentAction > 0)
+            if (currentAction == 1 || currentAction == 3)
             {
                 --currentAction;
             }
             else
             {
                 ++currentAction;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if (currentAction == 2 || currentAction == 3)
+            {
+                currentAction = currentAction - 2;
+            }
+            else
+            {
+                currentAction = currentAction + 2;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            if (currentAction == 0 || currentAction == 1)
+            {
+                currentAction = currentAction + 2;
+            }
+            else
+            {
+                currentAction = currentAction - 2;
             }
         }
 
@@ -203,8 +255,26 @@ public class BattleSystem : MonoBehaviour
             }
             else if (currentAction == 1)
             {
+                //Open party screen
+                PlayerParty();
+            }
+            else if (currentAction == 2)
+            {
+                print("Bag");
+            }
+            else if (currentAction == 3)
+            {
                 print("Run");
             }
+        }
+    }
+
+    void HandlePartyScreen()
+    {
+        if (Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Escape))
+        {
+            //Get back to action selection
+            PlayerAction();
         }
     }
 
@@ -218,9 +288,13 @@ public class BattleSystem : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (currentMove < 1 && playerUnit.Anigma.Moves.Count > 1 || currentMove < 3 && currentMove > 1 && playerUnit.Anigma.Moves.Count > 3)
+            if (currentMove == 0 && playerUnit.Anigma.Moves.Count > 1 || currentMove == 2 && playerUnit.Anigma.Moves.Count > 3)
             {
                 ++currentMove;
+            }
+            else if (currentMove == 2 && playerUnit.Anigma.Moves.Count == 3)
+            {
+                --currentMove;
             }
             else
             {
@@ -230,7 +304,7 @@ public class BattleSystem : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if (currentMove > 0 && currentMove < 2 || currentMove > 2)
+            if (currentMove == 1 || currentMove == 3)
             {
                 --currentMove;
             }
@@ -261,6 +335,10 @@ public class BattleSystem : MonoBehaviour
             if (currentMove == 0 && playerUnit.Anigma.Moves.Count > 2 || currentMove == 1 && playerUnit.Anigma.Moves.Count > 3)
             {
                 currentMove = currentMove + 2;
+            }
+            else if (currentMove == 1 && playerUnit.Anigma.Moves.Count == 3)
+            {
+                currentMove++;
             }
             else
             {

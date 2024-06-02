@@ -67,7 +67,7 @@ public class Anigma
     public DamageDetails TakeDamage(Move move, Anigma attacker)
     {
         float critical = 1f;
-        if (Random.value * 100f <= 6.25f)
+        if (Random.value * 100f <= 6.25f && move.Base.Power > 0)
         {
             critical = 2f;
         }
