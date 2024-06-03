@@ -12972,8 +12972,6 @@ MonoBehaviour:
     level: 5
   - _base: {fileID: 11400000, guid: 82a836a8794118a478235ff31f6aea83, type: 2}
     level: 5
-  - _base: {fileID: 11400000, guid: 9b7a311e482096546ad22e57da69c41b, type: 2}
-    level: 5
 --- !u!4 &1832923533
 Transform:
   m_ObjectHideFlags: 0
