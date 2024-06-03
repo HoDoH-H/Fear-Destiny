@@ -155,7 +155,7 @@ public class BattleSystem : MonoBehaviour
 
         if (move.Base.Category == AttackCategory.Status)
         {
-            
+            yield return RunMoveEffect(move, sourceUnit.Anigma, targetUnit.Anigma);
         }
         else
         {
