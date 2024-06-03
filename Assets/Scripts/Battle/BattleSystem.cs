@@ -47,16 +47,29 @@ public class BattleSystem : MonoBehaviour
 
         yield return dialogBox.TypeDialog($"A wild {opponentUnit.Anigma.Base.Name} appeared.");
 
-        ActionSelection();
+        ChooseFirstTurn();
     }
 
     // Region End - Start battle
 
     // Region Start - UI Managers
 
+    void ChooseFirstTurn()
+    {
+        if (playerUnit.Anigma.Speed >= opponentUnit.Anigma.Speed)
+        {
+            ActionSelection();
+        }
+        else
+        {
+            OpponentMove();
+        }
+    }
+
     void BattleOver(bool isWon)
     {
         state = BattleState.BattleOver;
+        playerParty.Anigmas.ForEach(p => p.OnBattleOver());
         OnBattleOver(isWon);
     }
 
@@ -142,18 +155,7 @@ public class BattleSystem : MonoBehaviour
 
         if (move.Base.Category == AttackCategory.Status)
         {
-            if (move.Base.Effects.Boosts != null)
-            {
-                var effect = move.Base.Effects;
-                if (move.Base.Target == MoveTarget.Self)
-                {
-                    sourceUnit.Anigma.ApplyBoosts(effect.Boosts);
-                }
-                else
-                {
-                    targetUnit.Anigma.ApplyBoosts(effect.Boosts);
-                }
-            }
+            
         }
         else
         {
@@ -170,6 +172,17 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             
             CheckForBattleOver(targetUnit);
+        }
+    }
+
+
+
+    IEnumerator ShowStatusChanges(Anigma anigma)
+    {
+        while(anigma.StatusChanges.Count > 0)
+        {
+            var message = anigma.StatusChanges.Dequeue();
+            yield return dialogBox.TypeDialog(message);
         }
     }
 
@@ -196,6 +209,25 @@ public class BattleSystem : MonoBehaviour
     }
 
 
+
+    IEnumerator RunMoveEffect(Move move, Anigma source, Anigma target)
+    {
+        var effect = move.Base.Effects;
+        if (effect.Boosts != null)
+        {
+            if (move.Base.Target == MoveTarget.Self)
+            {
+                source.ApplyBoosts(effect.Boosts);
+            }
+            else
+            {
+                target.ApplyBoosts(effect.Boosts);
+            }
+        }
+
+        yield return ShowStatusChanges(source);
+        yield return ShowStatusChanges(target);
+    }
 
 
 
@@ -442,13 +474,13 @@ public class BattleSystem : MonoBehaviour
 
         yield return dialogBox.TypeDialog($"{newAnigma.Base.Name} go!");
 
-        if (!wasFainted)
+        if (wasFainted)
         {
-            yield return OpponentMove();
+            ChooseFirstTurn();
         }
         else
         {
-            ActionSelection();
+            yield return OpponentMove();
         }
     }
 

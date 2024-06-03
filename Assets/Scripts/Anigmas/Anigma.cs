@@ -16,6 +16,8 @@ public class Anigma
     public Dictionary<Stat, int> Stats { get; private set; }
     public Dictionary<Stat, int> StatBoosts { get; private set; }
 
+    public Queue<string> StatusChanges { get; private set; } = new Queue<string>();
+
     public void Init()
     {
         //Generate moves
@@ -36,14 +38,7 @@ public class Anigma
         CalculateStats();
         HP = MaxHp;
 
-        StatBoosts = new Dictionary<Stat, int>()
-        {
-            {Stat.Attack, 0},
-            {Stat.Defense, 0},
-            {Stat.SpAttack, 0},
-            {Stat.SpDefense, 0},
-            {Stat.Speed, 0}
-        };
+        ResetStatBoost();
     }
 
     void CalculateStats()
@@ -57,6 +52,20 @@ public class Anigma
 
         MaxHp = Mathf.FloorToInt((2 * Base.MaxHp + Base.IMaxHp + (Base.EMaxHp / 4) * Level) / 100) + Level + 10;
     }
+
+
+    void ResetStatBoost()
+    {
+        StatBoosts = new Dictionary<Stat, int>()
+        {
+            {Stat.Attack, 0},
+            {Stat.Defense, 0},
+            {Stat.SpAttack, 0},
+            {Stat.SpDefense, 0},
+            {Stat.Speed, 0}
+        };
+    }
+
 
     int GetStat(Stat stat)
     {
@@ -87,7 +96,29 @@ public class Anigma
 
             StatBoosts[stat] = Mathf.Clamp(StatBoosts[stat] + boost, -6, 6);
 
-            Debug.Log($"{stat} has been boosted to {StatBoosts[stat]}");
+            if (boost > 0)
+            {
+                if (boost > 1)
+                {
+                    StatusChanges.Enqueue($"{Base.Name}'s {stat} tremendously rose!");
+                }
+                else
+                {
+                    StatusChanges.Enqueue($"{Base.Name}'s {stat} rose!");
+                }
+                
+            }
+            else
+            {
+                if (boost < -1)
+                {
+                    StatusChanges.Enqueue($"{Base.Name}'s {stat} tremendously fell!");
+                }
+                else
+                {
+                    StatusChanges.Enqueue($"{Base.Name}'s {stat} fell!");
+                }
+            }
         }
     }
 
@@ -119,6 +150,11 @@ public class Anigma
     public int MaxHp
     {
         get; private set;
+    }
+
+    public void OnBattleOver()
+    {
+        ResetStatBoost();
     }
 
     public DamageDetails TakeDamage(Move move, Anigma attacker)
