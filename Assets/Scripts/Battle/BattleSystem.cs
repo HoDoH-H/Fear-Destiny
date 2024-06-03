@@ -4,14 +4,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public enum BattleState { Start, PlayerAction, PlayerMove, EnemyMove, Busy, PartyScreen }
+public enum BattleState { Start, ActionSelection, MoveSelection, PerformMove, Busy, PartyScreen, BattleOver }
 
 public class BattleSystem : MonoBehaviour
 {
     [SerializeField] BattleUnit playerUnit;
-    [SerializeField] BattleHUD playerHUD;
     [SerializeField] BattleUnit opponentUnit;
-    [SerializeField] BattleHUD opponentHUD;
     [SerializeField] BattleDialogBox dialogBox;
     [SerializeField] PartyScreen partyScreen;
 
@@ -42,8 +40,6 @@ public class BattleSystem : MonoBehaviour
     {
         playerUnit.Setup(playerParty.GetHealthyPokemon());
         opponentUnit.Setup(wildAnigma);
-        playerHUD.SetData(playerUnit.Anigma);
-        opponentHUD.SetData(opponentUnit.Anigma);
 
         partyScreen.Init();
 
@@ -51,16 +47,22 @@ public class BattleSystem : MonoBehaviour
 
         yield return dialogBox.TypeDialog($"A wild {opponentUnit.Anigma.Base.Name} appeared.");
 
-        PlayerAction();
+        ActionSelection();
     }
 
     // Region End - Start battle
 
     // Region Start - UI Managers
 
-    void PlayerAction()
+    void BattleOver(bool isWon)
     {
-        state = BattleState.PlayerAction;
+        state = BattleState.BattleOver;
+        OnBattleOver(isWon);
+    }
+
+    void ActionSelection()
+    {
+        state = BattleState.ActionSelection;
         dialogBox.SetDialog("Choose an action");
         dialogBox.EnableActionSelector(true);
         dialogBox.EnableDialogText(true);
@@ -71,7 +73,7 @@ public class BattleSystem : MonoBehaviour
 
 
 
-    void PlayerParty()
+    void OpenPartyScreen()
     {
         state = BattleState.PartyScreen;
         partyScreen.SetPartyData(playerParty.Anigmas);
@@ -81,9 +83,9 @@ public class BattleSystem : MonoBehaviour
 
 
 
-    void PlayerMove()
+    void MoveSelection()
     {
-        state = BattleState.PlayerMove;
+        state = BattleState.MoveSelection;
         dialogBox.EnableActionSelector(false);
         dialogBox.EnableDialogText(false);
         dialogBox.EnableMoveSelector(true);
@@ -93,36 +95,17 @@ public class BattleSystem : MonoBehaviour
 
     // Region Start - Battle
 
-    IEnumerator PerformPlayerMove()
+    IEnumerator PlayerMove()
     {
-        state = BattleState.Busy;
+        state = BattleState.PerformMove;
 
         var move = playerUnit.Anigma.Moves[currentMove];
 
-        move.UP--;
-        yield return dialogBox.TypeDialog($"{playerUnit.Anigma.Base.Name} used {move.Base.Name}.");
+        yield return RunMove(playerUnit, opponentUnit, move);
 
-        playerUnit.PlayAttackAnimation();
-        yield return new WaitForSeconds(0.5f);
-
-        opponentUnit.PlayHitAnimation();
-        var damageDetails = opponentUnit.Anigma.TakeDamage(move, playerUnit.Anigma);
-
-        yield return opponentHUD.UpdateHP();
-
-        yield return ShowDamageDetail(damageDetails, opponentUnit.Anigma);
-
-        if (damageDetails.Fainted)
+        if (state == BattleState.PerformMove)
         {
-            yield return dialogBox.TypeDialog($"{opponentUnit.Anigma.Base.Name} fainted.");
-            opponentUnit.PlayFaintAnimation();
-
-            yield return new WaitForSeconds(1.5f);
-            OnBattleOver(true);
-        }
-        else
-        {
-            StartCoroutine(PerformOpponentMove());
+            yield return OpponentMove();
         }
     }
 
@@ -131,44 +114,84 @@ public class BattleSystem : MonoBehaviour
 
 
 
-    IEnumerator PerformOpponentMove()
+    IEnumerator OpponentMove()
     {
-        state = BattleState.EnemyMove;
+        state = BattleState.PerformMove;
 
         var move = opponentUnit.Anigma.GetRandomMove();
 
-        move.UP--;
-        yield return dialogBox.TypeDialog($"{opponentUnit.Anigma.Base.Name} used {move.Base.Name}.");
+        yield return RunMove(opponentUnit, playerUnit, move);
 
-        opponentUnit.PlayAttackAnimation();
-        yield return new WaitForSeconds(0.5f);
-
-        playerUnit.PlayHitAnimation();
-        var damageDetails = playerUnit.Anigma.TakeDamage(move, opponentUnit.Anigma);
-
-        yield return playerHUD.UpdateHP();
-
-        yield return ShowDamageDetail(damageDetails, playerUnit.Anigma);
-
-        if (damageDetails.Fainted)
+        if (state == BattleState.PerformMove)
         {
-            yield return dialogBox.TypeDialog($"{playerUnit.Anigma.Base.Name} fainted.");
-            playerUnit.PlayFaintAnimation();
+            ActionSelection();
+        }
+    }
 
-            yield return new WaitForSeconds(1.5f);
-            var nextAnigma = playerParty.GetHealthyPokemon();
-            if (nextAnigma != null)
+
+
+
+    IEnumerator RunMove(BattleUnit sourceUnit, BattleUnit targetUnit, Move move)
+    {
+        move.UP--;
+        yield return dialogBox.TypeDialog($"{sourceUnit.Anigma.Base.Name} used {move.Base.Name}.");
+
+        sourceUnit.PlayAttackAnimation();
+        yield return new WaitForSeconds(0.5f);
+        targetUnit.PlayHitAnimation();
+
+        if (move.Base.Category == AttackCategory.Status)
+        {
+            if (move.Base.Effects.Boosts != null)
             {
-                PlayerParty();
-            }
-            else
-            {
-                OnBattleOver(false);
+                var effect = move.Base.Effects;
+                if (move.Base.Target == MoveTarget.Self)
+                {
+                    sourceUnit.Anigma.ApplyBoosts(effect.Boosts);
+                }
+                else
+                {
+                    targetUnit.Anigma.ApplyBoosts(effect.Boosts);
+                }
             }
         }
         else
         {
-            PlayerAction();
+            var damageDetails = targetUnit.Anigma.TakeDamage(move, sourceUnit.Anigma);
+            yield return targetUnit.Hud.UpdateHP();
+            yield return ShowDamageDetail(damageDetails, targetUnit.Anigma);
+        }
+
+        if (targetUnit.Anigma.HP <= 0)
+        {
+            yield return dialogBox.TypeDialog($"{targetUnit.Anigma.Base.Name} fainted.");
+            targetUnit.PlayFaintAnimation();
+
+            yield return new WaitForSeconds(1.5f);
+            
+            CheckForBattleOver(targetUnit);
+        }
+    }
+
+
+
+    void CheckForBattleOver(BattleUnit faintedUnit)
+    {
+        if (faintedUnit.IsPlayerUnit)
+        {
+            var nextAnigma = playerParty.GetHealthyPokemon();
+            if (nextAnigma != null)
+            {
+                OpenPartyScreen();
+            }
+            else
+            {
+                BattleOver(false);
+            }
+        }
+        else
+        {
+            BattleOver(true);
         }
     }
 
@@ -211,11 +234,11 @@ public class BattleSystem : MonoBehaviour
 
     public void HandleUpdate()
     {
-        if (state == BattleState.PlayerAction)
+        if (state == BattleState.ActionSelection)
         {
             HandleActionSelection();
         }
-        else if (state == BattleState.PlayerMove)
+        else if (state == BattleState.MoveSelection)
         {
             HandleMoveSelection();
         }
@@ -283,12 +306,12 @@ public class BattleSystem : MonoBehaviour
             if (currentAction == 0)
             {
                 //Fight
-                PlayerMove();
+                MoveSelection();
             }
             else if (currentAction == 1)
             {
                 //Open party screen
-                PlayerParty();
+                OpenPartyScreen();
             }
             else if (currentAction == 2)
             {
@@ -310,7 +333,7 @@ public class BattleSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Escape))
         {
             //Get back to action selection
-            PlayerAction();
+            ActionSelection();
         }
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -414,7 +437,6 @@ public class BattleSystem : MonoBehaviour
         }
 
         playerUnit.Setup(newAnigma);
-        playerHUD.SetData(newAnigma);
 
         dialogBox.SetMoveNames(newAnigma.Moves);
 
@@ -422,11 +444,11 @@ public class BattleSystem : MonoBehaviour
 
         if (!wasFainted)
         {
-            yield return PerformOpponentMove();
+            yield return OpponentMove();
         }
         else
         {
-            PlayerAction();
+            ActionSelection();
         }
     }
 
@@ -440,7 +462,7 @@ public class BattleSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Escape))
         {
             //Get back to action selection
-            PlayerAction();
+            ActionSelection();
         }
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -510,7 +532,7 @@ public class BattleSystem : MonoBehaviour
         {
             dialogBox.EnableMoveSelector(false);
             dialogBox.EnableDialogText(true);
-            StartCoroutine(PerformPlayerMove());
+            StartCoroutine(PlayerMove());
         }
     }
 

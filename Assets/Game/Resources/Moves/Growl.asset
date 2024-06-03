@@ -19,13 +19,8 @@ MonoBehaviour:
   accuracy: 100
   usePoints: 40
   style: 2
-  statusSelf: 
-  statusSelfAccuracy: 
-  statusOpponent: 
-  statusOpponentAccuracy: 
-  effectSelf: 
-  EffectSelfAccuracy: 0
-  effectValuesSelf: 
-  effectOpponent: 02000000
-  EffectOpponentAccuracy: 100
-  effectValuesOpponent: 00000000
+  effects:
+    boosts:
+    - stat: 0
+      boost: -1
+  target: 0

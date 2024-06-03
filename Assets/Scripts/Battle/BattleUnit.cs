@@ -5,6 +5,11 @@ using DG.Tweening;
 public class BattleUnit : MonoBehaviour
 {
     [SerializeField] bool isPlayerUnit;
+    [SerializeField] BattleHUD hud;
+
+    public BattleHUD Hud { get { return hud; } }
+
+    public bool IsPlayerUnit { get { return isPlayerUnit; } }
 
     public Anigma Anigma { get; set; }
 
@@ -29,6 +34,8 @@ public class BattleUnit : MonoBehaviour
         {
             image.sprite = Anigma.Base.FrontSprite;
         }
+
+        hud.SetData(anigma);
 
         image.color = originalColor;
 

@@ -121,6 +121,15 @@ public enum AnigmaType
     Magic
 }
 
+public enum Stat
+{
+    Attack,
+    Defense,
+    SpAttack,
+    SpDefense,
+    Speed,
+}
+
 public class TypeChart
 {
     static float[][] chart =
