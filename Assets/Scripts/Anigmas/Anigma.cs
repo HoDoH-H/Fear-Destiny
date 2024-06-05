@@ -15,6 +15,12 @@ public class Anigma
     public List<Move> Moves {  get; set; }
     public Dictionary<Stat, int> Stats { get; private set; }
     public Dictionary<Stat, int> StatBoosts { get; private set; }
+    public Condition Status { get; set; }
+    public Condition VolatileStatus { get; set; }
+    public int VolatileStatusTime { get; set; }
+    public bool HpChanged { get; set; }
+    public int StatusTime { get; set; }
+    public event System.Action OnStatusChanged;
 
     public Queue<string> StatusChanges { get; private set; } = new Queue<string>();
 
@@ -39,6 +45,8 @@ public class Anigma
         HP = MaxHp;
 
         ResetStatBoost();
+        Status = null;
+        VolatileStatus = null;
     }
 
     void CalculateStats()
@@ -62,7 +70,9 @@ public class Anigma
             {Stat.Defense, 0},
             {Stat.SpAttack, 0},
             {Stat.SpDefense, 0},
-            {Stat.Speed, 0}
+            {Stat.Speed, 0},
+            {Stat.Accuracy, 0},
+            {Stat.Evasiveness, 0}
         };
     }
 
@@ -154,6 +164,7 @@ public class Anigma
 
     public void OnBattleOver()
     {
+        VolatileStatus = null;
         ResetStatBoost();
     }
 
@@ -185,23 +196,78 @@ public class Anigma
         float d = a * move.Base.Power * (attack / defense) + 2;
         int damage = Mathf.FloorToInt(d * modifiers);
 
-        if (move.Base.Power > 0)
-        {
-            HP -= damage;
-        }
+        UpdateHP(damage);
 
-        if (HP <= 0)
-        {
-            HP = 0;
-            damageDetails.Fainted = true;
-        }
         return damageDetails;
+    }
+
+    public void UpdateHP(int damage)
+    {
+        HP = Mathf.Clamp(HP - damage, 0, MaxHp);
+        HpChanged = true;
+    }
+
+    public void SetStatus(ConditionID status)
+    {
+        if (Status != null) { return; }
+
+        Status = ConditionDB.Conditions[status];
+        Status?.OnStart?.Invoke(this);
+        StatusChanges.Enqueue($"{Base.Name} {Status.StartMessage}");
+        OnStatusChanged?.Invoke();
+    }
+
+    public void SetVolatileStatus(ConditionID status)
+    {
+        if (VolatileStatus != null) { return; }
+
+        VolatileStatus = ConditionDB.Conditions[status];
+        VolatileStatus?.OnStart?.Invoke(this);
+        StatusChanges.Enqueue($"{Base.Name} {VolatileStatus.StartMessage}");
+    }
+
+    public void CureStatus()
+    {
+        Status = null;
+        OnStatusChanged?.Invoke();
+    }
+
+    public void CureVolatileStatus()
+    {
+        VolatileStatus = null;
     }
 
     public Move GetRandomMove()
     {
         int r = Random.Range(0, Moves.Count);
         return Moves[r];
+    }
+
+    public bool OnBeforeMove()
+    {
+        bool canPerformMove = true;
+        if (Status?.OnBeforeMove != null)
+        {
+            if (!Status.OnBeforeMove(this))
+            {
+                canPerformMove = false;
+            }
+        }
+
+        if (VolatileStatus?.OnBeforeMove != null)
+        {
+            if (!VolatileStatus.OnBeforeMove(this))
+            {
+                canPerformMove = false;
+            }
+        }
+        return canPerformMove;
+    }
+
+    public void OnAfterTurn()
+    {
+        Status?.OnAfterTurn?.Invoke(this);
+        VolatileStatus?.OnAfterTurn?.Invoke(this);
     }
 }
 

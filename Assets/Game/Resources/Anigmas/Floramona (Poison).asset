@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd91ca33a0282d543a9ee093c6d2c2a5, type: 3}
-  m_Name: Rhinplink
+  m_Name: Floramona (Poison)
   m_EditorClassIdentifier: 
-  name: Rhinplink
+  name: Floramona
   description: 
-  frontSprite: {fileID: -200992529105813746, guid: d0d86e7b7bc0fd84da79c0f55252bd42, type: 3}
-  backSprite: {fileID: -200992529105813746, guid: 0e2c7092d54645540b862cf3a0c0c89e, type: 3}
-  type1: 2
-  type2: 0
-  maxHp: 47
-  attack: 38
-  defense: 48
-  spAttack: 51
-  spDefense: 43
-  speed: 47
+  frontSprite: {fileID: -8519887813763383287, guid: 2304374b5db7676418433a100a00db9d, type: 3}
+  backSprite: {fileID: -8519887813763383287, guid: 9f0bd168d557a564e87cc4b03e25d083, type: 3}
+  type1: 8
+  type2: 19
+  maxHp: 46
+  attack: 57
+  defense: 55
+  spAttack: 74
+  spDefense: 68
+  speed: 60
   iMaxHp: 0
   iAttack: 0
   iDefense: 0
@@ -37,11 +37,11 @@ MonoBehaviour:
   eSpDefense: 0
   eSpeed: 0
   learnableMoves:
+  - moveBase: {fileID: 11400000, guid: 419ae0b7721087a439288ef195777522, type: 2}
+    level: 1
   - moveBase: {fileID: 11400000, guid: 7c98ab2dffb01d04194537f10d97a5a9, type: 2}
     level: 1
-  - moveBase: {fileID: 11400000, guid: 419ae0b7721087a439288ef195777522, type: 2}
-    level: 4
   - moveBase: {fileID: 11400000, guid: 2018e8e287fe7864d8761fa69d294e73, type: 2}
-    level: 7
-  - moveBase: {fileID: 11400000, guid: 0361cdf10ad24fb4b98f1feb648d01e7, type: 2}
-    level: 9
+    level: 5
+  - moveBase: {fileID: 11400000, guid: a7e796104c6e6b04b8be727502d1e1ba, type: 2}
+    level: 8

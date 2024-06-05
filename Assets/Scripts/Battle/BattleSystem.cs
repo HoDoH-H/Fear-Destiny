@@ -62,7 +62,7 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-            OpponentMove();
+            StartCoroutine(OpponentMove());
         }
     }
 
@@ -146,33 +146,126 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator RunMove(BattleUnit sourceUnit, BattleUnit targetUnit, Move move)
     {
+        bool canRunMove = sourceUnit.Anigma.OnBeforeMove();
+
+        if (!canRunMove)
+        {
+            yield return ShowStatusChanges(sourceUnit.Anigma);
+            yield return sourceUnit.Hud.UpdateHP();
+            if (sourceUnit.Anigma.HP <= 0)
+            {
+                yield return dialogBox.TypeDialog($"{sourceUnit.Anigma.Base.Name} fainted.");
+                sourceUnit.PlayFaintAnimation();
+
+                yield return new WaitForSeconds(1.5f);
+
+                CheckForBattleOver(sourceUnit);
+            }
+            yield break;
+        }
+        yield return ShowStatusChanges(sourceUnit.Anigma);
+
         move.UP--;
         yield return dialogBox.TypeDialog($"{sourceUnit.Anigma.Base.Name} used {move.Base.Name}.");
 
         sourceUnit.PlayAttackAnimation();
-        yield return new WaitForSeconds(0.5f);
-        targetUnit.PlayHitAnimation();
 
-        if (move.Base.Category == AttackCategory.Status)
+        if (CheckIfMoveHits(move, sourceUnit.Anigma, targetUnit.Anigma))
         {
-            yield return RunMoveEffect(move, sourceUnit.Anigma, targetUnit.Anigma);
+
+            yield return new WaitForSeconds(0.5f);
+            targetUnit.PlayHitAnimation();
+
+            if (move.Base.Category == AttackCategory.Status)
+            {
+                yield return RunMoveEffect(move.Base.Effects, sourceUnit.Anigma, targetUnit.Anigma, move.Base.Target);
+            }
+            else
+            {
+                var damageDetails = targetUnit.Anigma.TakeDamage(move, sourceUnit.Anigma);
+                yield return targetUnit.Hud.UpdateHP();
+                yield return ShowDamageDetail(damageDetails, targetUnit.Anigma);
+            }
+
+            if (move.Base.Secondaries != null && move.Base.Secondaries.Count > 0 && targetUnit.Anigma.HP > 0)
+            {
+                foreach (var secondary in move.Base.Secondaries)
+                {
+                    var rnd = UnityEngine.Random.Range(1, 101);
+                    if (rnd <= secondary.Chance)
+                    {
+                        yield return RunMoveEffect(secondary, sourceUnit.Anigma, targetUnit.Anigma, secondary.Target);
+                    }
+                }
+            }
+
+            if (targetUnit.Anigma.HP <= 0)
+            {
+                yield return dialogBox.TypeDialog($"{targetUnit.Anigma.Base.Name} fainted.");
+                targetUnit.PlayFaintAnimation();
+
+                yield return new WaitForSeconds(1.5f);
+
+                CheckForBattleOver(targetUnit);
+            }
         }
         else
         {
-            var damageDetails = targetUnit.Anigma.TakeDamage(move, sourceUnit.Anigma);
-            yield return targetUnit.Hud.UpdateHP();
-            yield return ShowDamageDetail(damageDetails, targetUnit.Anigma);
+            yield return new WaitForSeconds(0.35f);
+            yield return dialogBox.TypeDialog($"{sourceUnit.Anigma.Base.Name}'s attack missed...");
         }
 
-        if (targetUnit.Anigma.HP <= 0)
+
+        // Statuses like burn or poison will hurt the anigma after the turn
+        sourceUnit.Anigma.OnAfterTurn();
+        yield return ShowStatusChanges(sourceUnit.Anigma);
+        yield return sourceUnit.Hud.UpdateHP();
+
+        if (sourceUnit.Anigma.HP <= 0)
         {
-            yield return dialogBox.TypeDialog($"{targetUnit.Anigma.Base.Name} fainted.");
-            targetUnit.PlayFaintAnimation();
+            yield return dialogBox.TypeDialog($"{sourceUnit.Anigma.Base.Name} fainted.");
+            sourceUnit.PlayFaintAnimation();
 
             yield return new WaitForSeconds(1.5f);
-            
-            CheckForBattleOver(targetUnit);
+
+            CheckForBattleOver(sourceUnit);
         }
+    }
+
+
+
+
+    bool CheckIfMoveHits(Move move, Anigma source, Anigma target)
+    {
+        if (move.Base.AlwaysHits)
+            return true;
+
+        float moveAccuracy = move.Base.Accuracy;
+
+        int accuracy = source.StatBoosts[Stat.Accuracy];
+        int evasiveness = target.StatBoosts[Stat.Evasiveness];
+
+        var boostValues = new float[] { 1f, 4f / 3f, 5f / 3f, 2f, 7f / 3f, 8f / 3f, 3f };
+
+        if (accuracy > 0)
+        {
+            moveAccuracy *= boostValues[accuracy];
+        }
+        else
+        {
+            moveAccuracy /= boostValues[-accuracy];
+        }
+
+        if (evasiveness > 0)
+        {
+            moveAccuracy /= boostValues[accuracy];
+        }
+        else
+        {
+            moveAccuracy *= boostValues[-accuracy];
+        }
+
+        return UnityEngine.Random.Range(1, 101) <= moveAccuracy;
     }
 
 
@@ -210,12 +303,12 @@ public class BattleSystem : MonoBehaviour
 
 
 
-    IEnumerator RunMoveEffect(Move move, Anigma source, Anigma target)
+    IEnumerator RunMoveEffect(MoveEffects effect, Anigma source, Anigma target, MoveTarget moveTarget)
     {
-        var effect = move.Base.Effects;
+        // Stat Boosting
         if (effect.Boosts != null)
         {
-            if (move.Base.Target == MoveTarget.Self)
+            if (moveTarget == MoveTarget.Self)
             {
                 source.ApplyBoosts(effect.Boosts);
             }
@@ -223,6 +316,18 @@ public class BattleSystem : MonoBehaviour
             {
                 target.ApplyBoosts(effect.Boosts);
             }
+        }
+
+        // Status Condition
+        if (effect.Status != ConditionID.None)
+        {
+            target.SetStatus(effect.Status);
+        }
+
+        // Volatile Status Condition
+        if (effect.VolatileStatus != ConditionID.None)
+        {
+            target.SetVolatileStatus(effect.VolatileStatus);
         }
 
         yield return ShowStatusChanges(source);
@@ -491,6 +596,11 @@ public class BattleSystem : MonoBehaviour
 
     void HandleMoveSelection()
     {
+        if (currentMove >= playerUnit.Anigma.Moves.Count)
+        {
+            currentMove = 0;
+        }
+
         if (Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Escape))
         {
             //Get back to action selection

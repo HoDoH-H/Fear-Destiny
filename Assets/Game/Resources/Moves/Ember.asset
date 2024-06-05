@@ -17,15 +17,17 @@ MonoBehaviour:
   type: 3
   power: 40
   accuracy: 100
+  alwaysHits: 0
   usePoints: 25
   style: 1
-  statusSelf: 
-  statusSelfAccuracy: 
-  statusOpponent: 04000000
-  statusOpponentAccuracy: 0a000000
-  effectSelf: 
-  EffectSelfAccuracy: 0
-  effectValuesSelf: 
-  effectOpponent: 
-  EffectOpponentAccuracy: 0
-  effectValuesOpponent: 
+  effects:
+    boosts: []
+    status: 0
+    volatileStatus: 0
+  secondaryEffects:
+  - boosts: []
+    status: 2
+    volatileStatus: 0
+    chance: 50
+    target: 0
+  target: 0
