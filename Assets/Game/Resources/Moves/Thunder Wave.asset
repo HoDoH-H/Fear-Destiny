@@ -17,9 +17,13 @@ MonoBehaviour:
   type: 5
   power: 0
   accuracy: 100
-  usePoints: 20
+  alwaysHits: 0
+  up: 15
+  priority: 0
   style: 2
   effects:
     boosts: []
     status: 4
+    volatileStatus: 0
+  secondaryEffects: []
   target: 0

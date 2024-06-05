@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
@@ -13,6 +14,7 @@ public class Anigma
     public int HP {  get; set; }
 
     public List<Move> Moves {  get; set; }
+    public Move CurrentMove { get; set; }
     public Dictionary<Stat, int> Stats { get; private set; }
     public Dictionary<Stat, int> StatBoosts { get; private set; }
     public Condition Status { get; set; }
@@ -91,7 +93,7 @@ public class Anigma
         }
         else
         {
-            statVal = Mathf.FloorToInt(statVal / boostValues[boost]);
+            statVal = Mathf.FloorToInt(statVal / boostValues[Mathf.Abs(boost)]);
         }
 
         return statVal;
@@ -239,8 +241,10 @@ public class Anigma
 
     public Move GetRandomMove()
     {
-        int r = Random.Range(0, Moves.Count);
-        return Moves[r];
+        var movesWithUP = Moves.Where(x => x.UP > 0).ToList();
+
+        int r = Random.Range(0, movesWithUP.Count);
+        return movesWithUP[r];
     }
 
     public bool OnBeforeMove()

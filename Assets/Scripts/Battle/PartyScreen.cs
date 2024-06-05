@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PartyScreen : MonoBehaviour
 {
-    [SerializeField] Text messageText;
+    [SerializeField] TextMeshProUGUI messageText;
 
     PartyMemberUI[] memberSlots;
     List<Anigma> anigmas;

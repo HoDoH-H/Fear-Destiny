@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,17 +9,17 @@ public class BattleDialogBox : MonoBehaviour
     [SerializeField] int letterPerSecond;
     [SerializeField] Color highlightedColor;
 
-    [SerializeField] Text dialogText;
+    [SerializeField] TextMeshProUGUI dialogText;
     [SerializeField] GameObject actionSelector;
     [SerializeField] GameObject moveSelector;
     [SerializeField] GameObject moveDetails;
 
-    [SerializeField] List<Text> actionTexts;
-    [SerializeField] List<Text> moveTexts;
-    [SerializeField] List<Text> memberTexts;
+    [SerializeField] List<TextMeshProUGUI> actionTexts;
+    [SerializeField] List<TextMeshProUGUI> moveTexts;
+    [SerializeField] List<TextMeshProUGUI> memberTexts;
 
-    [SerializeField] Text upText;
-    [SerializeField] Text typeText;
+    [SerializeField] TextMeshProUGUI upText;
+    [SerializeField] TextMeshProUGUI typeText;
 
     public void SetDialog(string dialog)
     {
@@ -39,7 +40,7 @@ public class BattleDialogBox : MonoBehaviour
 
     public void EnableDialogText(bool enable)
     {
-        dialogText.enabled = enable;
+        dialogText.gameObject.SetActive(enable);
     }
 
     public void EnableActionSelector(bool enable)
@@ -86,6 +87,11 @@ public class BattleDialogBox : MonoBehaviour
         {
             upText.text = $"UP {move.UP}/{move.Base.UP}";
             typeText.text = move.Base.Type.ToString();
+
+            if (move.UP <= 0)
+                upText.color = Color.red;
+            else
+                upText.color = Color.black;
         }
     }
 

@@ -3,15 +3,17 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class GridBasedMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
 
     public bool isWalking = false;
     public bool canMove = true;
+    public bool canInteract = true;
 
     public Transform movePoint;
 
     public LayerMask whatStopsMovement;
+    public LayerMask whatIsInteractable;
     public LayerMask tallGrass;
 
     public event Action OnEncountered;
@@ -50,12 +52,45 @@ public class GridBasedMovement : MonoBehaviour
 
     public void HandleUpdate()
     {
+        MovePlayer();
+        if (InputEvents.Instance.i_Pressed)
+            PlayerInteract();
+    }
+
+    private void PlayerInteract()
+    {
+        InputEvents.Instance.i_Pressed = false;
+        var actualDirection = new Vector2();
+        actualDirection.x = anim.GetFloat("DirectionX");
+        actualDirection.y = anim.GetFloat("DirectionY");
+
+        if (Mathf.Abs(actualDirection.x) > 0)
+        {
+            var collider = Physics2D.OverlapCircle(movePoint.position + new Vector3(actualDirection.x, 0, 0), 0.45f, whatIsInteractable);
+            if (collider != null)
+            {
+                collider.GetComponent<Interactable>()?.Interact();
+            }
+        }
+
+        if (Mathf.Abs(actualDirection.y) > 0)
+        {
+            var collider = Physics2D.OverlapCircle(movePoint.position + new Vector3(0, actualDirection.y, 0), 0.45f, whatIsInteractable);
+            if (collider != null)
+            {
+                collider.GetComponent<Interactable>()?.Interact();
+            }
+        }
+    }
+
+    private void MovePlayer()
+    {
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
 
         direction = move.ReadValue<Vector2>();
-        if(direction.x != 0 && direction.y != 0)
+        if (direction.x != 0 && direction.y != 0)
         {
-            if(direction.x > 0)
+            if (direction.x > 0)
             {
                 direction.x = 1;
             }
@@ -66,7 +101,7 @@ public class GridBasedMovement : MonoBehaviour
             direction.y = 0;
         }
 
-        if(canMove)
+        if (canMove)
         {
             if (Vector3.Distance(transform.position, movePoint.position) <= 0.05f)
             {

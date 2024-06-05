@@ -4,7 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public enum BattleState { Start, ActionSelection, MoveSelection, PerformMove, Busy, PartyScreen, BattleOver }
+public enum BattleState { Start, ActionSelection, MoveSelection, RunningTurn, Busy, PartyScreen, BattleOver }
+public enum BattleAction { Move, SwitchAnigma, UseItem, Run}
 
 public class BattleSystem : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class BattleSystem : MonoBehaviour
     public event Action<bool> OnBattleOver;
 
     BattleState state;
+    BattleState? previousState;
+
+
     [SerializeField] int currentAction;
     [SerializeField] int currentMove;
     [SerializeField] int currentMember;
@@ -47,24 +51,12 @@ public class BattleSystem : MonoBehaviour
 
         yield return dialogBox.TypeDialog($"A wild {opponentUnit.Anigma.Base.Name} appeared.");
 
-        ChooseFirstTurn();
+        ActionSelection();
     }
 
     // Region End - Start battle
 
     // Region Start - UI Managers
-
-    void ChooseFirstTurn()
-    {
-        if (playerUnit.Anigma.Speed >= opponentUnit.Anigma.Speed)
-        {
-            ActionSelection();
-        }
-        else
-        {
-            StartCoroutine(OpponentMove());
-        }
-    }
 
     void BattleOver(bool isWon)
     {
@@ -108,34 +100,61 @@ public class BattleSystem : MonoBehaviour
 
     // Region Start - Battle
 
-    IEnumerator PlayerMove()
+
+    IEnumerator RunTurns(BattleAction playerAction)
     {
-        state = BattleState.PerformMove;
+        state = BattleState.RunningTurn;
 
-        var move = playerUnit.Anigma.Moves[currentMove];
-
-        yield return RunMove(playerUnit, opponentUnit, move);
-
-        if (state == BattleState.PerformMove)
+        if (playerAction == BattleAction.Move)
         {
-            yield return OpponentMove();
+            playerUnit.Anigma.CurrentMove = playerUnit.Anigma.Moves[currentMove];
+            opponentUnit.Anigma.CurrentMove = opponentUnit.Anigma.GetRandomMove();
+
+            int playerMovePriority = playerUnit.Anigma.CurrentMove.Base.Priority;
+            int opponentMovePriority = opponentUnit.Anigma.CurrentMove.Base.Priority;
+
+            // Check who goes first
+            bool playerGoesFirst = true;
+            if (opponentMovePriority > playerMovePriority)
+                playerGoesFirst=false;
+            else if (opponentMovePriority == playerMovePriority)
+                playerGoesFirst = playerUnit.Anigma.Speed >= opponentUnit.Anigma.Speed;
+
+            var firstUnit = (playerGoesFirst ? playerUnit : opponentUnit);
+            var secondUnit = (playerGoesFirst ? opponentUnit : playerUnit);
+
+            var secondAnigma = secondUnit.Anigma;
+
+            // First turn
+            yield return RunMove(firstUnit, secondUnit, firstUnit.Anigma.CurrentMove);
+            yield return RunAfterTurn(firstUnit);
+            if (state == BattleState.BattleOver) yield break;
+
+            if (secondAnigma.HP > 0)
+            {
+                // Second turn
+                yield return RunMove(secondUnit, firstUnit, secondUnit.Anigma.CurrentMove);
+                yield return RunAfterTurn(secondUnit);
+                if (state == BattleState.BattleOver) yield break;
+            }
         }
-    }
+        else
+        {
+            if (playerAction == BattleAction.SwitchAnigma)
+            {
+                var selectedAnigma = playerParty.Anigmas[currentMember];
+                state = BattleState.Busy;
+                yield return SwitchAnigma(selectedAnigma);
+            }
 
+            // Opponent Turn
+            var opponentMove = opponentUnit.Anigma.GetRandomMove();
+            yield return RunMove( opponentUnit, playerUnit,opponentMove);
+            yield return RunAfterTurn(opponentUnit);
+            if (state == BattleState.BattleOver) yield break;
+        }
 
-
-
-
-
-    IEnumerator OpponentMove()
-    {
-        state = BattleState.PerformMove;
-
-        var move = opponentUnit.Anigma.GetRandomMove();
-
-        yield return RunMove(opponentUnit, playerUnit, move);
-
-        if (state == BattleState.PerformMove)
+        if (state != BattleState.BattleOver)
         {
             ActionSelection();
         }
@@ -214,7 +233,14 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(0.35f);
             yield return dialogBox.TypeDialog($"{sourceUnit.Anigma.Base.Name}'s attack missed...");
         }
+    }
 
+
+
+    IEnumerator RunAfterTurn(BattleUnit sourceUnit)
+    {
+        if (state == BattleState.BattleOver) yield break;
+        yield return new WaitUntil(() => state == BattleState.RunningTurn);
 
         // Statuses like burn or poison will hurt the anigma after the turn
         sourceUnit.Anigma.OnAfterTurn();
@@ -448,6 +474,7 @@ public class BattleSystem : MonoBehaviour
             else if (currentAction == 1)
             {
                 //Open party screen
+                previousState = state;
                 OpenPartyScreen();
             }
             else if (currentAction == 2)
@@ -557,17 +584,24 @@ public class BattleSystem : MonoBehaviour
             }
 
             partyScreen.gameObject.SetActive(false);
-            state = BattleState.Busy;
-            StartCoroutine(SwitchAnigma(selectedMember));
+
+            if (previousState == BattleState.ActionSelection)
+            {
+                previousState = null;
+                StartCoroutine(RunTurns(BattleAction.SwitchAnigma));
+            }
+            else
+            {
+                state = BattleState.Busy;
+                StartCoroutine(SwitchAnigma(selectedMember));
+            }
         }
     }
 
     IEnumerator SwitchAnigma(Anigma newAnigma)
     {
-        var wasFainted = true;
         if (playerUnit.Anigma.HP > 0)
         {
-            wasFainted = false;
             yield return dialogBox.TypeDialog($"Come back {playerUnit.Anigma.Base.Name}!");
             playerUnit.PlayFaintAnimation();
             yield return new WaitForSeconds(1.5f);
@@ -579,14 +613,7 @@ public class BattleSystem : MonoBehaviour
 
         yield return dialogBox.TypeDialog($"{newAnigma.Base.Name} go!");
 
-        if (wasFainted)
-        {
-            ChooseFirstTurn();
-        }
-        else
-        {
-            yield return OpponentMove();
-        }
+        state = BattleState.RunningTurn;
     }
 
 
@@ -672,9 +699,12 @@ public class BattleSystem : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
+            var move = playerUnit.Anigma.Moves[currentMove];
+            if (move.UP <= 0) return;
+
             dialogBox.EnableMoveSelector(false);
             dialogBox.EnableDialogText(true);
-            StartCoroutine(PlayerMove());
+            StartCoroutine(RunTurns(BattleAction.Move));
         }
     }
 

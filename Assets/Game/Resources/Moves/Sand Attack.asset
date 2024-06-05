@@ -18,7 +18,8 @@ MonoBehaviour:
   power: 0
   accuracy: 100
   alwaysHits: 0
-  usePoints: 0
+  up: 20
+  priority: 0
   style: 2
   effects:
     boosts:
@@ -26,4 +27,5 @@ MonoBehaviour:
       boost: -2
     status: 0
     volatileStatus: 0
+  secondaryEffects: []
   target: 0
