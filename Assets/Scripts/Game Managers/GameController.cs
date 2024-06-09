@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum GameState { FreeRoam, Battle, Dialog}
+public enum GameState { FreeRoam, Battle, Dialog, Cutscene}
 
 public class GameController : MonoBehaviour
 {
@@ -10,8 +10,11 @@ public class GameController : MonoBehaviour
 
     GameState state;
 
+    public static GameController Instance;
+
     private void Awake()
     {
+        Instance = this;
         ConditionDB.Init();
     }
 
@@ -19,6 +22,16 @@ public class GameController : MonoBehaviour
     {
         playerController.OnEncountered += StartBattle;
         battleSystem.OnBattleOver += EndBattle;
+
+        playerController.OnEnterTrainersView += (Collider2D trainerCollider) =>
+        {
+            var trainer = trainerCollider.GetComponentInParent<TrainerController>();
+            if (trainer != null)
+            {
+                state = GameState.Cutscene;
+                StartCoroutine(trainer.TriggerTrainerBattle(playerController));
+            }
+        };
 
         DialogManager.Instance.OnShowDialog += () => {state = GameState.Dialog;};
         DialogManager.Instance.OnCloseDialog += () =>
@@ -40,8 +53,29 @@ public class GameController : MonoBehaviour
         battleSystem.StartBattle(playerParty, wildAnigma);
     }
 
+    TrainerController trainer;
+
+    public void StartTrainerBattle(TrainerController trainer)
+    {
+        state = GameState.Battle;
+        battleSystem.gameObject.SetActive(true);
+        playerCamera.gameObject.SetActive(false);
+
+        this.trainer = trainer;
+        var playerParty = playerController.GetComponent<AnigmaParty>();
+        var trainerParty = trainer.GetComponent<AnigmaParty>();
+
+        battleSystem.StartTrainerBattle(playerParty, trainerParty);
+    }
+
     void EndBattle(bool won)
     {
+        if (trainer != null && won)
+        {
+            trainer.BattleLost();
+            trainer = null;
+        }
+
         state = GameState.FreeRoam;
         battleSystem.gameObject.SetActive(false);
         playerCamera.gameObject.SetActive(true);

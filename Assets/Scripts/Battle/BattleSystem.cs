@@ -1,10 +1,12 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
-public enum BattleState { Start, ActionSelection, MoveSelection, RunningTurn, Busy, PartyScreen, BattleOver }
+public enum BattleState { Start, ActionSelection, MoveSelection, RunningTurn, Busy, PartyScreen, AboutToUse, BattleOver }
 public enum BattleAction { Move, SwitchAnigma, UseItem, Run}
 
 public class BattleSystem : MonoBehaviour
@@ -13,6 +15,9 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] BattleUnit opponentUnit;
     [SerializeField] BattleDialogBox dialogBox;
     [SerializeField] PartyScreen partyScreen;
+    [SerializeField] Image playerImage;
+    [SerializeField] Image trainerImage;
+    [SerializeField] GameObject ringSprite;
 
     public event Action<bool> OnBattleOver;
 
@@ -20,37 +25,87 @@ public class BattleSystem : MonoBehaviour
     BattleState? previousState;
 
 
-    [SerializeField] int currentAction;
-    [SerializeField] int currentMove;
-    [SerializeField] int currentMember;
+     int currentAction;
+     int currentMove;
+     int currentMember;
+    bool aboutToUseChoice = true;
 
     AnigmaParty playerParty;
+    AnigmaParty trainerParty;
     Anigma wildAnigma;
+
+    bool isTrainerBattle = false;
+    PlayerController player;
+    TrainerController trainer;
 
     // Region Start - Start battle
 
     public void StartBattle(AnigmaParty playerParty, Anigma wildAnigma)
     {
+        isTrainerBattle=false;
         this.playerParty = playerParty;
         this.wildAnigma = wildAnigma;
+        player = playerParty.GetComponent<PlayerController>();
         StartCoroutine(SetupBattle());
     }
 
+    public void StartTrainerBattle(AnigmaParty playerParty, AnigmaParty trainerParty)
+    {
+        this.playerParty = playerParty;
+        this.trainerParty = trainerParty;
 
+        isTrainerBattle = true;
+        player = playerParty.GetComponent<PlayerController>();
+        trainer = trainerParty.GetComponent<TrainerController>();
 
-
+        StartCoroutine(SetupBattle());
+    }
 
     public IEnumerator SetupBattle()
     {
-        playerUnit.Setup(playerParty.GetHealthyPokemon());
-        opponentUnit.Setup(wildAnigma);
+        playerUnit.Clear();
+        opponentUnit.Clear();
+
+        if (!isTrainerBattle)
+        {
+            // Wild Anigma Battle
+            playerUnit.Setup(playerParty.GetHealthyAnigma());
+            opponentUnit.Setup(wildAnigma);
+
+            dialogBox.SetMoveNames(playerUnit.Anigma.Moves);
+
+            yield return dialogBox.TypeDialog($"A wild {opponentUnit.Anigma.Base.Name} appeared.");
+        }
+        else
+        {
+            // Trainer Battle
+            playerUnit.gameObject.SetActive(false);
+            opponentUnit.gameObject.SetActive(false);
+
+            playerImage.gameObject.SetActive(true);
+            trainerImage.gameObject.SetActive(true);
+            playerImage.sprite = player.Sprite;
+            trainerImage.sprite = trainer.Sprite;
+
+            yield return dialogBox.TypeDialog($"{trainer.Name} wants to battle!");
+
+            // Send out first anigma of the trainer
+            trainerImage.gameObject.SetActive(false);
+            opponentUnit.gameObject.SetActive(true);
+            var opponentAnigma = trainerParty.GetHealthyAnigma();
+            opponentUnit.Setup(opponentAnigma);
+            yield return dialogBox.TypeDialog($"{trainer.Name} send out {opponentAnigma.Base.Name}!");
+
+            // Send out first anigma of the player
+            playerImage.gameObject.SetActive(false);
+            playerUnit.gameObject.SetActive(true);
+            var playerAnigma = playerParty.GetHealthyAnigma();
+            playerUnit.Setup(playerAnigma);
+            yield return dialogBox.TypeDialog($"{playerAnigma.Base.Name} go!");
+            dialogBox.SetMoveNames(playerUnit.Anigma.Moves);
+        }
 
         partyScreen.Init();
-
-        dialogBox.SetMoveNames(playerUnit.Anigma.Moves);
-
-        yield return dialogBox.TypeDialog($"A wild {opponentUnit.Anigma.Base.Name} appeared.");
-
         ActionSelection();
     }
 
@@ -75,9 +130,6 @@ public class BattleSystem : MonoBehaviour
         partyScreen.gameObject.SetActive(false);
     }
 
-
-
-
     void OpenPartyScreen()
     {
         state = BattleState.PartyScreen;
@@ -85,15 +137,21 @@ public class BattleSystem : MonoBehaviour
         partyScreen.gameObject.SetActive(true);
     }
 
-
-
-
     void MoveSelection()
     {
         state = BattleState.MoveSelection;
         dialogBox.EnableActionSelector(false);
         dialogBox.EnableDialogText(false);
         dialogBox.EnableMoveSelector(true);
+    }
+
+    IEnumerator AboutToUse(Anigma newAnigma)
+    {
+        state = BattleState.Busy;
+        yield return dialogBox.TypeDialog($"{trainer.Name} is about to send another anigma. Do you want to change yours?");
+
+        state = BattleState.AboutToUse;
+        dialogBox.EnableChoiceBox(true);
     }
 
     // Region End - UI Managers
@@ -159,9 +217,6 @@ public class BattleSystem : MonoBehaviour
             ActionSelection();
         }
     }
-
-
-
 
     IEnumerator RunMove(BattleUnit sourceUnit, BattleUnit targetUnit, Move move)
     {
@@ -235,8 +290,6 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-
-
     IEnumerator RunAfterTurn(BattleUnit sourceUnit)
     {
         if (state == BattleState.BattleOver) yield break;
@@ -255,11 +308,9 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
 
             CheckForBattleOver(sourceUnit);
+            yield return new WaitUntil(() => state == BattleState.RunningTurn);
         }
     }
-
-
-
 
     bool CheckIfMoveHits(Move move, Anigma source, Anigma target)
     {
@@ -294,8 +345,6 @@ public class BattleSystem : MonoBehaviour
         return UnityEngine.Random.Range(1, 101) <= moveAccuracy;
     }
 
-
-
     IEnumerator ShowStatusChanges(Anigma anigma)
     {
         while(anigma.StatusChanges.Count > 0)
@@ -305,13 +354,11 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-
-
     void CheckForBattleOver(BattleUnit faintedUnit)
     {
         if (faintedUnit.IsPlayerUnit)
         {
-            var nextAnigma = playerParty.GetHealthyPokemon();
+            var nextAnigma = playerParty.GetHealthyAnigma();
             if (nextAnigma != null)
             {
                 OpenPartyScreen();
@@ -323,11 +370,24 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-            BattleOver(true);
+            if (!isTrainerBattle)
+            {
+                BattleOver(true);
+            }
+            else
+            {
+                var nextAnigma = trainerParty.GetHealthyAnigma();
+                if (nextAnigma != null)
+                {
+                    StartCoroutine(AboutToUse(nextAnigma));
+                }
+                else
+                {
+                    BattleOver(true);
+                }
+            }
         }
     }
-
-
 
     IEnumerator RunMoveEffect(MoveEffects effect, Anigma source, Anigma target, MoveTarget moveTarget)
     {
@@ -360,8 +420,6 @@ public class BattleSystem : MonoBehaviour
         yield return ShowStatusChanges(target);
     }
 
-
-
     IEnumerator ShowDamageDetail(DamageDetails damageDetails, Anigma anigma)
     {
         if (damageDetails.Critical > 1f)
@@ -391,6 +449,96 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    IEnumerator SwitchAnigma(Anigma newAnigma)
+    {
+        if (playerUnit.Anigma.HP > 0)
+        {
+            yield return dialogBox.TypeDialog($"Come back {playerUnit.Anigma.Base.Name}!");
+            playerUnit.PlayFaintAnimation();
+            yield return new WaitForSeconds(1.5f);
+        }
+
+        playerUnit.Setup(newAnigma);
+
+        dialogBox.SetMoveNames(newAnigma.Moves);
+
+        yield return dialogBox.TypeDialog($"{newAnigma.Base.Name} go!");
+
+        if (previousState == null)
+        {
+            state = BattleState.RunningTurn;
+        }
+        else if (previousState == BattleState.AboutToUse)
+        {
+            previousState = null;
+            StartCoroutine(SendNextTrainerAnigma());
+        }
+    }
+
+    IEnumerator SendNextTrainerAnigma()
+    {
+        state = BattleState.Busy;
+        var nextAnigma = trainerParty.GetHealthyAnigma();
+        opponentUnit.Setup(nextAnigma);
+        yield return dialogBox.TypeDialog($"{trainer.Name} send out {nextAnigma.Base.Name}!");
+
+        state = BattleState.RunningTurn;
+    }
+
+    IEnumerator TriggerRing()
+    {
+        state = BattleState.Busy;
+
+        yield return dialogBox.TypeDialog($"{player.Name} triggered a Ring!");
+
+        var ringObj = Instantiate(ringSprite, playerUnit.transform.position - new Vector3(2, 0), Quaternion.identity);
+        var ring = ringObj.GetComponent<SpriteRenderer>();
+
+        // Animations
+        yield return ring.transform.DOJump(opponentUnit.transform.position + new Vector3(0, 2.5f), 2, 1, 1f).WaitForCompletion();
+        yield return opponentUnit.PlayCaptureAnimation();
+        yield return ring.transform.DOMoveY(opponentUnit.transform.position.y - 0.5f, 1f).WaitForCompletion();
+
+        int shakeCount = TryToCatchAnigma(opponentUnit.Anigma);
+
+        for (int i = 0; i < Mathf.Min(shakeCount, 3); i++)
+        {
+            var sequence = DOTween.Sequence();
+            sequence.Append(ring.transform.DOPunchPosition(new Vector3(0.10f, 0), 0.8f));
+            sequence.Join(ring.transform.DOPunchPosition(new Vector3(0, 0.10f), 0.8f));
+            sequence.Join(ring.DOColor(new Color(1, 0.6622641f, 0.6622641f), 0.8f));
+            sequence.Append(ring.DOColor(new Color(1, 1, 1), 0.8f));
+            yield return sequence.WaitForCompletion();
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        if (shakeCount == 5)
+        {
+            // Anigma is caught
+            yield return dialogBox.TypeDialog($"{opponentUnit.Anigma.Base.Name} was successfully ");
+        }
+    }
+
+    int TryToCatchAnigma(Anigma anigma)
+    {
+        float a = (3 * anigma.MaxHp - 2 * anigma.HP) * anigma.Base.CatchRate * ConditionDB.GetStatusBonus(anigma.Status) / (3 * anigma.MaxHp);
+
+        if (a >= 255)
+            return 5;
+
+        float b = 1048560 / Mathf.Sqrt(Mathf.Sqrt(16711680 / a));
+
+        int shakeCount = 0;
+        while (shakeCount < 5)
+        {
+            if (UnityEngine.Random.Range(0, 65535) >= b)
+                break;
+
+            ++shakeCount;
+        }
+        return shakeCount;
+    }
+
     // Region End - Battle
 
     // Region Start - Battle States Handlers
@@ -409,11 +557,16 @@ public class BattleSystem : MonoBehaviour
         {
             HandlePartySelection();
         }
+        else if (state == BattleState.AboutToUse)
+        {
+            HandleAboutToUse();
+        }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            StartCoroutine(TriggerRing());
+        }
     }
-
-
-
-
 
     void HandleActionSelection()
     {
@@ -488,16 +641,24 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-
-
-
-
     void HandlePartySelection()
     {
         if (Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Escape))
         {
+            if (playerUnit.Anigma.HP <= 0)
+            {
+                partyScreen.SetMessageText("You have to choose another anigma to continue.");
+                return;
+            }
+
             //Get back to action selection
-            ActionSelection();
+            if (previousState == BattleState.AboutToUse)
+            {
+                previousState = null;
+                StartCoroutine(SendNextTrainerAnigma());
+            }
+            else
+                ActionSelection();
         }
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -598,28 +759,35 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    IEnumerator SwitchAnigma(Anigma newAnigma)
+    void HandleAboutToUse()
     {
-        if (playerUnit.Anigma.HP > 0)
+        if (Input.GetKeyDown(KeyCode.UpArrow) ||  Input.GetKeyDown(KeyCode.DownArrow))
+            aboutToUseChoice = !aboutToUseChoice;
+
+        dialogBox.UpdateChoiceBox(aboutToUseChoice);
+
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
-            yield return dialogBox.TypeDialog($"Come back {playerUnit.Anigma.Base.Name}!");
-            playerUnit.PlayFaintAnimation();
-            yield return new WaitForSeconds(1.5f);
+            dialogBox.EnableChoiceBox(false);
+            if (aboutToUseChoice)
+            {
+                // yes
+                previousState = BattleState.AboutToUse;
+                OpenPartyScreen();
+            }
+            else
+            {
+                // no
+                StartCoroutine(SendNextTrainerAnigma());
+            }
         }
-
-        playerUnit.Setup(newAnigma);
-
-        dialogBox.SetMoveNames(newAnigma.Moves);
-
-        yield return dialogBox.TypeDialog($"{newAnigma.Base.Name} go!");
-
-        state = BattleState.RunningTurn;
+        else if (Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Escape))
+        {
+            // no
+            dialogBox.EnableChoiceBox(false);
+            StartCoroutine(SendNextTrainerAnigma());
+        }
     }
-
-
-
-
-
 
     void HandleMoveSelection()
     {

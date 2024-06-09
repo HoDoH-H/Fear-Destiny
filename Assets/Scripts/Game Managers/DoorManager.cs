@@ -7,21 +7,28 @@ public class DoorManager : MonoBehaviour
     public Animator anim;
     public bool canBeInteracted;
 
+    private PlayerController player;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         canBeInteracted = collision.CompareTag("Player");
+        player = collision.GetComponent<PlayerController>();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         canBeInteracted = !collision.CompareTag("Player");
+        player = null;
     }
 
     private void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.Z) && canBeInteracted)
+        if (player != null)
         {
-            anim.SetTrigger("Open");
+            if (player.input.y > 0 && canBeInteracted)
+            {
+                anim.SetTrigger("Open");
+            }
         }
     }
 }

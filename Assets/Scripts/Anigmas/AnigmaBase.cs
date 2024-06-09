@@ -31,6 +31,7 @@ public class AnigmaBase : ScriptableObject
     [SerializeField] int spAttack;
     [SerializeField] int spDefense;
     [SerializeField] int speed;
+    [SerializeField] int catchRate = 255;
 
     [Space]
     [Header("Inherited Power")]
@@ -84,6 +85,7 @@ public class AnigmaBase : ScriptableObject
     public int ESpDefense { get { return eSpDefense; } }
     public int ESpeed { get { return eSpeed; } }
     public List<LearnableMove> LearnableMoves{get{ return learnableMoves; } }
+    public int CatchRate => catchRate;
 }
 
 [System.Serializable]

@@ -10,13 +10,13 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Stop Movement
+  - Solid
   - Water
   - UI
   - TallGrass
   - Interactable
-  - 
-  - 
+  - Player
+  - FovLayer
   - 
   - 
   - 
@@ -42,6 +42,18 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2467127619
+    locked: 0
+  - name: Player
+    uniqueID: 1632189941
+    locked: 0
+  - name: Foreground
+    uniqueID: 2030485677
+    locked: 0
+  - name: Battle
+    uniqueID: 157292345
     locked: 0
   m_RenderingLayers:
   - Default

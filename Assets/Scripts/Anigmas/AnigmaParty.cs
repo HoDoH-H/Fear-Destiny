@@ -16,7 +16,7 @@ public class AnigmaParty : MonoBehaviour
         }
     }
 
-    public Anigma GetHealthyPokemon()
+    public Anigma GetHealthyAnigma()
     {
         return anigmas.Where(x => x.HP > 0).FirstOrDefault();
     }
