@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 [System.Serializable]
@@ -8,11 +9,18 @@ public class Anigma
     [SerializeField] AnigmaBase _base;
     [SerializeField] int level;
 
+    public Anigma(AnigmaBase aBase, int alevel)
+    {
+        _base = aBase;
+        level = alevel;
+        Init();
+    }
+
     public AnigmaBase Base { get { return _base; } }
     public int Level { get { return level; } }
 
+    public int Exp { get; set; }
     public int HP {  get; set; }
-
     public List<Move> Moves {  get; set; }
     public Move CurrentMove { get; set; }
     public Dictionary<Stat, int> Stats { get; private set; }
@@ -24,7 +32,7 @@ public class Anigma
     public int StatusTime { get; set; }
     public event System.Action OnStatusChanged;
 
-    public Queue<string> StatusChanges { get; private set; } = new Queue<string>();
+    public Queue<string> StatusChanges { get; private set; }
 
     public void Init()
     {
@@ -37,15 +45,18 @@ public class Anigma
                 Moves.Add(new Move(move.Base));
             }
 
-            if (Moves.Count >= 4)
+            if (Moves.Count >= AnigmaBase.MaxNumOfMoves)
             {
                 break;
             }
         }
 
+        Exp = Base.GetExpForLevel(Level);
+
         CalculateStats();
         HP = MaxHp;
 
+        StatusChanges = new Queue<string>();
         ResetStatBoost();
         Status = null;
         VolatileStatus = null;
@@ -132,6 +143,29 @@ public class Anigma
                 }
             }
         }
+    }
+
+    public bool CheckForLevelUp()
+    {
+        if (Exp > Base.GetExpForLevel(level + 1))
+        {
+            ++level;
+            return true;
+        }
+        return false;
+    }
+
+    public LearnableMove GetLearnableMoveAtCurrLevel()
+    {
+        return Base.LearnableMoves.Where(x => x.Level == level).FirstOrDefault();
+    }
+
+    public void LearnMove(LearnableMove moveToLearn)
+    {
+        if (Moves.Count > AnigmaBase.MaxNumOfMoves)
+            return;
+
+        Moves.Add(new Move(moveToLearn.Base));
     }
 
     public int Attack

@@ -1,3 +1,5 @@
+using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,7 +11,8 @@ public class BattleHUD : MonoBehaviour
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] TextMeshProUGUI levelText;
     [SerializeField] TextMeshProUGUI statusText;
-    [SerializeField] HpBar hpBar;
+    [SerializeField] HpBar hpBar; 
+    [SerializeField] GameObject expBar;
 
     [Header("Status Colors")]
     [SerializeField] Color psnColor;
@@ -26,8 +29,9 @@ public class BattleHUD : MonoBehaviour
         _anigma = anigma;
 
         nameText.text = anigma.Base.Name;
-        levelText.text = "Lvl" + anigma.Level;
+        SetLevel();
         hpBar.SetHp((float)anigma.HP / anigma.MaxHp);
+        SetExp();
 
         statusColors = new Dictionary<ConditionID, Color>() 
         {
@@ -53,6 +57,41 @@ public class BattleHUD : MonoBehaviour
             statusText.text = _anigma.Status.Id.ToString().ToUpper();
             statusText.color = statusColors[_anigma.Status.Id];
         }
+    }
+
+    public void SetLevel()
+    {
+        levelText.text = "Lvl" + _anigma.Level;
+    }
+
+    public void SetExp()
+    {
+        if (expBar == null) return;
+
+        float normalizedExp = GetNormalizedExp();
+        expBar.transform.localScale = new Vector3 (normalizedExp, 1, 1);
+    }
+
+    public IEnumerator SetExpSmooth(bool reset=false)
+    {
+        if (expBar == null) yield break;
+
+        if (reset)
+        {
+            expBar.transform.localScale = new Vector3(0, 1, 1);
+        }
+
+        float normalizedExp = GetNormalizedExp();
+        yield return expBar.transform.DOScaleX(normalizedExp, 1.5f).WaitForCompletion();
+    }
+
+    float GetNormalizedExp()
+    {
+        int currentLevelExp = _anigma.Base.GetExpForLevel(_anigma.Level);
+        int nextLevelExp = _anigma.Base.GetExpForLevel(_anigma.Level + 1);
+
+        float normalizedExp = (float)(_anigma.Exp - currentLevelExp) / (nextLevelExp - currentLevelExp);
+        return Mathf.Clamp01(normalizedExp);
     }
 
     public IEnumerator UpdateHP()

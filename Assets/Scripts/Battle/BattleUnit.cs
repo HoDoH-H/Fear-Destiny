@@ -39,6 +39,7 @@ public class BattleUnit : MonoBehaviour
         hud.gameObject.SetActive(true);
         hud.SetData(anigma);
 
+        transform.localScale = new Vector3(1f, 1f, 1f);
         image.color = originalColor;
 
         PlayEnterAnimation();
@@ -99,6 +100,15 @@ public class BattleUnit : MonoBehaviour
         sequence.Append(image.DOFade(0f, 0.5f));
         sequence.Join(transform.DOLocalMoveY(originalPos.y + 107.5f, 0.5f));
         sequence.Join(transform.DOScale(new Vector3(0.3f, 0.3f, 1f), 0.5f));
+        yield return sequence.WaitForCompletion();
+    }
+
+    public IEnumerator PlayBreakOutAnimation()
+    {
+        var sequence = DOTween.Sequence();
+        sequence.Append(image.DOFade(100f, 0.5f));
+        sequence.Join(transform.DOLocalMoveY(originalPos.y, 0.5f));
+        sequence.Join(transform.DOScale(new Vector3(1f, 1f, 1f), 0.5f));
         yield return sequence.WaitForCompletion();
     }
 }

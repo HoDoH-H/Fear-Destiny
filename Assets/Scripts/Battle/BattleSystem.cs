@@ -1,12 +1,13 @@
 using DG.Tweening;
 using System;
 using System.Collections;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public enum BattleState { Start, ActionSelection, MoveSelection, RunningTurn, Busy, PartyScreen, AboutToUse, BattleOver }
+public enum BattleState { Start, ActionSelection, MoveSelection, RunningTurn, Busy, PartyScreen, AboutToUse, MoveToForget, BattleOver }
 public enum BattleAction { Move, SwitchAnigma, UseItem, Run}
 
 public class BattleSystem : MonoBehaviour
@@ -18,6 +19,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] Image playerImage;
     [SerializeField] Image trainerImage;
     [SerializeField] GameObject ringSprite;
+    [SerializeField] MoveSelectionUI moveSelectionUI;
 
     public event Action<bool> OnBattleOver;
 
@@ -37,6 +39,9 @@ public class BattleSystem : MonoBehaviour
     bool isTrainerBattle = false;
     PlayerController player;
     TrainerController trainer;
+
+    int escapeAttemps;
+    MoveBase moveToLearn;
 
     // Region Start - Start battle
 
@@ -65,6 +70,8 @@ public class BattleSystem : MonoBehaviour
     {
         playerUnit.Clear();
         opponentUnit.Clear();
+
+        escapeAttemps = 0;
 
         if (!isTrainerBattle)
         {
@@ -145,6 +152,17 @@ public class BattleSystem : MonoBehaviour
         dialogBox.EnableMoveSelector(true);
     }
 
+    IEnumerator ChooseMoveToForget(Anigma anigma, MoveBase newMove)
+    {
+        state = BattleState.Busy;
+        yield return dialogBox.TypeDialog($"Choose a move you want to forget...");
+        moveSelectionUI.gameObject.SetActive(true);
+        moveSelectionUI.SetMoveData(anigma.Moves.Select(x => x.Base).ToList(), newMove);
+        moveToLearn = newMove;
+
+        state = BattleState.MoveToForget;
+    }
+
     IEnumerator AboutToUse(Anigma newAnigma)
     {
         state = BattleState.Busy;
@@ -203,6 +221,31 @@ public class BattleSystem : MonoBehaviour
                 var selectedAnigma = playerParty.Anigmas[currentMember];
                 state = BattleState.Busy;
                 yield return SwitchAnigma(selectedAnigma);
+            }
+            else if (playerAction == BattleAction.UseItem)
+            {
+                if (isTrainerBattle)
+                {
+                    yield return dialogBox.TypeDialog($"You can't catch other trainer's anigmas!");
+                    ActionSelection();
+                    yield break;
+                }
+                else
+                {
+                    dialogBox.EnableActionSelector(false);
+                    yield return TriggerRing();
+                }
+            }
+            else if (playerAction == BattleAction.Run)
+            {
+                if (isTrainerBattle)
+                {
+                    yield return dialogBox.TypeDialog($"You can't run from trainer battles!");
+                    ActionSelection();
+                    yield break;
+                }
+                else
+                    yield return TryToEscape();
             }
 
             // Opponent Turn
@@ -275,12 +318,7 @@ public class BattleSystem : MonoBehaviour
 
             if (targetUnit.Anigma.HP <= 0)
             {
-                yield return dialogBox.TypeDialog($"{targetUnit.Anigma.Base.Name} fainted.");
-                targetUnit.PlayFaintAnimation();
-
-                yield return new WaitForSeconds(1.5f);
-
-                CheckForBattleOver(targetUnit);
+                yield return HandleAnigmaFainted(targetUnit);
             }
         }
         else
@@ -302,12 +340,7 @@ public class BattleSystem : MonoBehaviour
 
         if (sourceUnit.Anigma.HP <= 0)
         {
-            yield return dialogBox.TypeDialog($"{sourceUnit.Anigma.Base.Name} fainted.");
-            sourceUnit.PlayFaintAnimation();
-
-            yield return new WaitForSeconds(1.5f);
-
-            CheckForBattleOver(sourceUnit);
+            yield return HandleAnigmaFainted(sourceUnit);
             yield return new WaitUntil(() => state == BattleState.RunningTurn);
         }
     }
@@ -352,6 +385,60 @@ public class BattleSystem : MonoBehaviour
             var message = anigma.StatusChanges.Dequeue();
             yield return dialogBox.TypeDialog(message);
         }
+    }
+
+    IEnumerator HandleAnigmaFainted(BattleUnit faintedUnit)
+    {
+        yield return dialogBox.TypeDialog($"{faintedUnit.Anigma.Base.Name} fainted.");
+        faintedUnit.PlayFaintAnimation();
+
+        yield return new WaitForSeconds(1.5f);
+
+        if (!faintedUnit.IsPlayerUnit)
+        {
+            // Exp Gain
+            int expYield = faintedUnit.Anigma.Base.ExpYield;
+            int opponentLevel = faintedUnit.Anigma.Level;
+            float trainerBonus = (isTrainerBattle) ? 1.5f : 1;
+
+            int expGain = Mathf.FloorToInt((expYield * opponentLevel * trainerBonus) / 7);
+            playerUnit.Anigma.Exp += expGain;
+            yield return dialogBox.TypeDialog($"{playerUnit.Anigma.Base.Name} gained {expGain} exp.");
+            yield return playerUnit.Hud.SetExpSmooth();
+
+            // Check Level Up
+            while (playerUnit.Anigma.CheckForLevelUp())
+            {
+                playerUnit.Hud.SetLevel();
+                yield return dialogBox.TypeDialog($"{playerUnit.Anigma.Base.Name} ascended to level {playerUnit.Anigma.Level}!");
+
+                // Try to learn a new move
+                var newMove = playerUnit.Anigma.GetLearnableMoveAtCurrLevel();
+                if (newMove != null)
+                {
+                    if (playerUnit.Anigma.Moves.Count < AnigmaBase.MaxNumOfMoves)
+                    {
+                        playerUnit.Anigma.LearnMove(newMove);
+                        yield return dialogBox.TypeDialog($"{playerUnit.Anigma.Base.Name} learned {newMove.Base.Name}!");
+                        dialogBox.SetMoveNames(playerUnit.Anigma.Moves);
+                    }
+                    else
+                    {
+                        // Need to forget a move to learn a new one
+                        yield return dialogBox.TypeDialog($"{playerUnit.Anigma.Base.Name} is attempting to acquire {newMove.Base.Name}...");
+                        yield return dialogBox.TypeDialog($"But an Anigma cannot learn more than {AnigmaBase.MaxNumOfMoves} moves!");
+                        yield return ChooseMoveToForget(playerUnit.Anigma, newMove.Base);
+                        yield return new WaitUntil(() => state != BattleState.MoveToForget);
+                        yield return new WaitForSeconds(2f);
+                    }
+                }
+
+                yield return playerUnit.Hud.SetExpSmooth(true);
+            }
+        }
+
+        yield return new WaitForSeconds(0.75f);
+        CheckForBattleOver(faintedUnit);
     }
 
     void CheckForBattleOver(BattleUnit faintedUnit)
@@ -489,6 +576,13 @@ public class BattleSystem : MonoBehaviour
     {
         state = BattleState.Busy;
 
+        if (isTrainerBattle)
+        {
+            yield return dialogBox.TypeDialog($"You can't steal trainers anigmas!");
+            state = BattleState.RunningTurn;
+            yield break;
+        }
+
         yield return dialogBox.TypeDialog($"{player.Name} triggered a Ring!");
 
         var ringObj = Instantiate(ringSprite, playerUnit.transform.position - new Vector3(2, 0), Quaternion.identity);
@@ -504,8 +598,8 @@ public class BattleSystem : MonoBehaviour
         for (int i = 0; i < Mathf.Min(shakeCount, 3); i++)
         {
             var sequence = DOTween.Sequence();
-            sequence.Append(ring.transform.DOPunchPosition(new Vector3(0.10f, 0), 0.8f));
-            sequence.Join(ring.transform.DOPunchPosition(new Vector3(0, 0.10f), 0.8f));
+            sequence.Append(ring.transform.DOPunchPosition(new Vector3(0.10f, 0.10f), 0.8f));
+            //sequence.Join(ring.transform.DOPunchPosition(new Vector3(0, 0.10f), 0.8f));
             sequence.Join(ring.DOColor(new Color(1, 0.6622641f, 0.6622641f), 0.8f));
             sequence.Append(ring.DOColor(new Color(1, 1, 1), 0.8f));
             yield return sequence.WaitForCompletion();
@@ -515,7 +609,37 @@ public class BattleSystem : MonoBehaviour
         if (shakeCount == 5)
         {
             // Anigma is caught
-            yield return dialogBox.TypeDialog($"{opponentUnit.Anigma.Base.Name} was successfully ");
+            yield return dialogBox.TypeDialog($"{opponentUnit.Anigma.Base.Name} was caught!");
+            yield return ring.DOFade(0f, 1.5f).WaitForCompletion();
+
+            playerParty.AddAnigma(opponentUnit.Anigma);
+            yield return dialogBox.TypeDialog($"{opponentUnit.Anigma.Base.Name} has been added to your party.");
+
+            Destroy(ring);
+            BattleOver(true);
+        }
+        else
+        {
+            // Anigma broke out
+            yield return new WaitForSeconds(1);
+            var sequence = DOTween.Sequence();
+            sequence.Append(ring.transform.DOPunchPosition(new Vector3(0.12f, 0), 0.8f));
+            sequence.Join(ring.transform.DOPunchPosition(new Vector3(0, 0.12f), 0.8f));
+            sequence.Join(ring.DOColor(new Color(1, 0.5f, 0.5f), 0.8f));
+            sequence.Append(ring.transform.DOScale(new Vector3(0.3f, 0.3f), 0.2f));
+            sequence.Join(ring.DOFade(0f, 0.2f));
+            yield return new WaitForSeconds(0.7f);
+            yield return opponentUnit.PlayBreakOutAnimation();
+
+            if (shakeCount < 2)
+                yield return dialogBox.TypeDialog($"{opponentUnit.Anigma.Base.Name} broke free easily!");
+            else if (shakeCount < 3)
+                yield return dialogBox.TypeDialog($"{opponentUnit.Anigma.Base.Name} broke free!");
+            else
+                yield return dialogBox.TypeDialog($"Almost caught it!");
+
+            Destroy(ring);
+            state = BattleState.RunningTurn;
         }
     }
 
@@ -537,6 +661,48 @@ public class BattleSystem : MonoBehaviour
             ++shakeCount;
         }
         return shakeCount;
+    }
+
+    IEnumerator TryToEscape()
+    {
+        state = BattleState.Busy;
+
+        if (isTrainerBattle)
+        {
+            yield return dialogBox.TypeDialog($"You can't run from trainer battles!");
+            state = BattleState.RunningTurn;
+            yield break;
+        }
+
+        ++escapeAttemps;
+
+        int playerSpeed = playerUnit.Anigma.Speed;
+        int opponentSpeed = opponentUnit.Anigma.Speed;
+
+        if (playerSpeed > opponentSpeed)
+        {
+            yield return dialogBox.TypeDialog($"You ran away safely!");
+            BattleOver(true);
+        }
+        else
+        {
+            float f = (playerSpeed * 128) / opponentSpeed + 30 * escapeAttemps;
+            f = f % 256;
+
+            if (UnityEngine.Random.Range(0, 256) < f)
+            {
+                yield return dialogBox.TypeDialog($"You ran away safely!");
+                BattleOver(true);
+            }
+            else
+            {
+                if (escapeAttemps < 3)
+                    yield return dialogBox.TypeDialog($"You couldn't escape...");
+                else
+                    yield return dialogBox.TypeDialog($"Unfortunately you couldn't escape...");
+                state = BattleState.RunningTurn;
+            }
+        }
     }
 
     // Region End - Battle
@@ -561,10 +727,30 @@ public class BattleSystem : MonoBehaviour
         {
             HandleAboutToUse();
         }
-
-        if (Input.GetKeyDown(KeyCode.T))
+        else if (state == BattleState.MoveToForget)
         {
-            StartCoroutine(TriggerRing());
+            Action<int> onMoveSelected = (moveIndex) =>
+            {
+                moveSelectionUI.gameObject.SetActive(false);
+                if (moveIndex == AnigmaBase.MaxNumOfMoves)
+                {
+                    // Don't learn the new move
+                    StartCoroutine(dialogBox.TypeDialog($"{playerUnit.Anigma.Base.Name} did not acquired {moveToLearn.Name}"));
+                }
+                else
+                {
+                    // Forget the selected move and learn the new one
+                    var selectedMove = playerUnit.Anigma.Moves[moveIndex].Base;
+
+                    playerUnit.Anigma.Moves[moveIndex] = new Move(moveToLearn);
+                    StartCoroutine(dialogBox.TypeDialog($"{playerUnit.Anigma.Base.Name} forgot {selectedMove.Name} and successfully acquired {moveToLearn.Name}"));
+                }
+
+                moveToLearn = null;
+                state = BattleState.RunningTurn;
+            };
+            
+            moveSelectionUI.HandleMoveSelection(onMoveSelected);
         }
     }
 
@@ -632,11 +818,13 @@ public class BattleSystem : MonoBehaviour
             }
             else if (currentAction == 2)
             {
-                print("Bag");
+                // TODO - Open bag ; NOW - Trigger ring
+                StartCoroutine(RunTurns(BattleAction.UseItem));
             }
             else if (currentAction == 3)
             {
-                print("Run");
+                // Run away
+                StartCoroutine(RunTurns(BattleAction.Run));
             }
         }
     }

@@ -12,7 +12,7 @@ public class PartyScreen : MonoBehaviour
 
     public void Init()
     {
-        memberSlots = GetComponentsInChildren<PartyMemberUI>();
+        memberSlots = GetComponentsInChildren<PartyMemberUI>(true);
     }
 
     public void SetPartyData(List<Anigma> anigmas)
@@ -22,6 +22,7 @@ public class PartyScreen : MonoBehaviour
         {
             if (i < anigmas.Count)
             {
+                memberSlots[i].gameObject.SetActive(true);
                 memberSlots[i].SetData(anigmas[i]);
             }
             else

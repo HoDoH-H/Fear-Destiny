@@ -29,6 +29,9 @@ MonoBehaviour:
   spAttack: 35
   spDefense: 50
   speed: 60
+  catchRate: 255
+  expYield: 200
+  growthRate: 2
   iMaxHp: 0
   iAttack: 0
   iDefense: 0

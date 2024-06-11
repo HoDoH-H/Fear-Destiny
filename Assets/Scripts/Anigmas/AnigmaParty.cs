@@ -20,4 +20,16 @@ public class AnigmaParty : MonoBehaviour
     {
         return anigmas.Where(x => x.HP > 0).FirstOrDefault();
     }
+
+    public void AddAnigma(Anigma newAnigma)
+    {
+        if (anigmas.Count < 6)
+        {
+            anigmas.Add(newAnigma);
+        }
+        else
+        {
+            // TODO - Add to the pc one that's implemented
+        }
+    }
 }

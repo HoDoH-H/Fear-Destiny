@@ -1,4 +1,7 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum GameState { FreeRoam, Battle, Dialog, Cutscene}
 
@@ -7,6 +10,7 @@ public class GameController : MonoBehaviour
     [SerializeField] PlayerController playerController;
     [SerializeField] BattleSystem battleSystem;
     [SerializeField] Camera playerCamera;
+    [SerializeField] Material battleTransition;
 
     GameState state;
 
@@ -20,6 +24,10 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        battleTransition.SetFloat("_Cutoff", 0f);
+        battleTransition.SetFloat("_Fade", 1);
+
+
         playerController.OnEncountered += StartBattle;
         battleSystem.OnBattleOver += EndBattle;
 
@@ -41,8 +49,73 @@ public class GameController : MonoBehaviour
         };
     }
 
+    void EnablePlayerMovements(bool enable)
+    {
+        playerController.CanMove = enable;
+    }
+
     void StartBattle()
     {
+        EnablePlayerMovements(false);
+        if (battleTransition == null)
+        {
+            state = GameState.Battle;
+            battleSystem.gameObject.SetActive(true);
+            playerCamera.gameObject.SetActive(false);
+
+            var playerParty = playerController.GetComponent<AnigmaParty>();
+            var wildAnigma = FindObjectOfType<MapArea>().GetComponent<MapArea>().GetRandomWildAnigma();
+
+            var wildAnigmaCopy = new Anigma(wildAnigma.Base, wildAnigma.Level);
+
+            battleSystem.StartBattle(playerParty, wildAnigmaCopy);
+        }
+        else
+            StartCoroutine(StartBattleWithTransition());
+    }
+
+    IEnumerator StartBattleWithTransition()
+    {
+
+        battleTransition.SetFloat("_Fade", 0);
+        battleTransition.SetFloat("_Cutoff", 1);
+        battleTransition.SetColor("_Color", Color.white);
+        var fade = 0f;
+        for (int i = 0; i < 2; i++)
+        {
+            while (fade < 0.5f)
+            {
+                fade += Time.deltaTime;
+                battleTransition.SetFloat("_Fade", fade);
+                yield return new WaitForSeconds(0.0000000001f);
+            }
+            while (fade > 0f)
+            {
+                fade -= Time.deltaTime;
+                battleTransition.SetFloat("_Fade", fade);
+                yield return new WaitForSeconds(0.0000000001f);
+            }
+            yield return new WaitForSeconds(0.05f);
+        }
+        battleTransition.SetFloat("_Cutoff", 0);
+        battleTransition.SetFloat("_Fade", 1);
+        battleTransition.SetColor("_Color", new Color(0.08447679f, 0.08447679f, 0.08447679f, 1));
+
+        yield return new WaitForSeconds(0.2f);
+        var cutOff = 0f;
+        while (true) 
+        {
+            cutOff += Time.deltaTime;
+            if (cutOff > 1f)
+            {
+                battleTransition.SetFloat("_Cutoff", 1);
+                break;
+            }
+            battleTransition.SetFloat("_Cutoff", cutOff);
+            yield return new WaitForSeconds(0.00001f);
+        }
+        yield return new WaitForSeconds(0.5f);
+
         state = GameState.Battle;
         battleSystem.gameObject.SetActive(true);
         playerCamera.gameObject.SetActive(false);
@@ -50,7 +123,9 @@ public class GameController : MonoBehaviour
         var playerParty = playerController.GetComponent<AnigmaParty>();
         var wildAnigma = FindObjectOfType<MapArea>().GetComponent<MapArea>().GetRandomWildAnigma();
 
-        battleSystem.StartBattle(playerParty, wildAnigma);
+        var wildAnigmaCopy = new Anigma(wildAnigma.Base, wildAnigma.Level);
+
+        battleSystem.StartBattle(playerParty, wildAnigmaCopy);
     }
 
     TrainerController trainer;
@@ -79,6 +154,31 @@ public class GameController : MonoBehaviour
         state = GameState.FreeRoam;
         battleSystem.gameObject.SetActive(false);
         playerCamera.gameObject.SetActive(true);
+        StartCoroutine(EndBattleTransition(true));
+    }
+
+    IEnumerator EndBattleTransition(bool isMainToBattle)
+    {
+        if (isMainToBattle)
+        {
+            var fade = 1f;
+            while (true)
+            {
+                fade -= Time.deltaTime;
+                if (fade < 0f)
+                {
+                    battleTransition.SetFloat("_Fade", 0);
+                    break;
+                }
+                battleTransition.SetFloat("_Fade", fade);
+                yield return new WaitForSeconds(0.00005f);
+            }
+        }
+
+        EnablePlayerMovements(true);
+
+        battleTransition.SetFloat("_Cutoff", 0);
+        battleTransition.SetFloat("_Fade", 100);
     }
 
     private void Update()
@@ -95,5 +195,12 @@ public class GameController : MonoBehaviour
         { 
             DialogManager.Instance.HandleUpdate();
         }
+    }
+
+    private void OnApplicationQuit()
+    {
+        battleTransition.SetColor("_Color", new Color(0.08447679f, 0.08447679f, 0.08447679f, 1));
+        battleTransition.SetFloat("_Cutoff", 0);
+        battleTransition.SetFloat("_Fade", 100);
     }
 }

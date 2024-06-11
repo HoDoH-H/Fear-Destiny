@@ -32,6 +32,8 @@ public class AnigmaBase : ScriptableObject
     [SerializeField] int spDefense;
     [SerializeField] int speed;
     [SerializeField] int catchRate = 255;
+    [SerializeField] int expYield;
+    [SerializeField] GrowthRate growthRate = GrowthRate.MediumFast;
 
     [Space]
     [Header("Inherited Power")]
@@ -57,7 +59,61 @@ public class AnigmaBase : ScriptableObject
     [Header("Learnable Moves")]
     [SerializeField] List<LearnableMove> learnableMoves;
 
+    public static int MaxNumOfMoves { get; set; } = 4;
 
+    public int GetExpForLevel(int level)
+    {
+        if (growthRate == GrowthRate.Fast)
+        {
+            return 4 * Mathf.FloorToInt(Mathf.Pow(level, 3)) / 5;
+        }
+        else if (growthRate == GrowthRate.MediumFast)
+        {
+            return Mathf.FloorToInt(Mathf.Pow(level, 3));
+        }
+        else if (growthRate == GrowthRate.MediumSlow)
+        {
+            return 6 / 5 * Mathf.FloorToInt(Mathf.Pow(level, 3)) - 15 * Mathf.FloorToInt(Mathf.Pow(level, 2)) + 100 * level - 140;
+        }
+        else if (growthRate == GrowthRate.Slow)
+        {
+            return 5 * Mathf.FloorToInt(Mathf.Pow(level, 3)) / 4;
+        }
+        else if (growthRate == GrowthRate.Heratic)
+        {
+            if (level < 50)
+            {
+                return (Mathf.FloorToInt(Mathf.Pow(level, 3)) * (100 - level)) / 50;
+            }
+            else if (level < 68)
+            {
+                return (Mathf.FloorToInt(Mathf.Pow(level, 3)) * (150 - level)) / 100;
+            }
+            else if (level < 98)
+            {
+                return (Mathf.FloorToInt(Mathf.Pow(level, 3) * ((1911 - 10 * level) / 3))) / 500;
+            }
+            else
+            {
+                return (Mathf.FloorToInt(Mathf.Pow(level, 3)) * (160 - level)) / 100;
+            }
+        }
+        else
+        {
+            if (level < 15)
+            {
+                return Mathf.FloorToInt(Mathf.Pow(level, 3)) * ((level + 1) / 3 + 24) / 50;
+            }
+            else if (level < 36)
+            {
+                return Mathf.FloorToInt(Mathf.Pow(level, 3)) * (level + 14) / 50;
+            }
+            else
+            {
+                return (Mathf.FloorToInt(Mathf.Pow(level, 3)) - (level / 2 + 32)) / 50;
+            }
+        }
+    }
 
     //Properties
     public string Name { get { return name; } }
@@ -86,6 +142,8 @@ public class AnigmaBase : ScriptableObject
     public int ESpeed { get { return eSpeed; } }
     public List<LearnableMove> LearnableMoves{get{ return learnableMoves; } }
     public int CatchRate => catchRate;
+    public int ExpYield => expYield;
+    public GrowthRate GrowthRate => growthRate;
 }
 
 [System.Serializable]
@@ -120,7 +178,18 @@ public enum AnigmaType
     Steel,
     Sound,
     Bright,
-    Magic
+    Magic,
+    Plasma
+}
+
+public enum GrowthRate
+{
+    Heratic,
+    Fast,
+    MediumFast,
+    MediumSlow,
+    Slow,
+    Spasmodic,
 }
 
 public enum Stat

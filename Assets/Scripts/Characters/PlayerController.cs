@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public event Action<Collider2D> OnEnterTrainersView;
 
     public Vector2 input;
+    public bool CanMove = true;
     private Character character;
 
     private InputSystem_Actions playerControls;
@@ -37,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
     public void HandleUpdate()
     {
-        if (!character.IsMoving)
+        if (!character.IsMoving && CanMove)
         {
             input = move.ReadValue<Vector2>();
 
