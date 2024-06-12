@@ -1,18 +1,25 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum State { Choice, MoveSelection}
+public enum ForgetMoveState { Choice, MoveSelection}
 
 public class MoveSelectionUI : MonoBehaviour
 {
     [SerializeField] List<TextMeshProUGUI> moveTexts;
+    [SerializeField] List<TextMeshProUGUI> dialogTexts;
     [SerializeField] Color highlightedColor;
+    [SerializeField] GameObject moveSelectionPanel;
+    [SerializeField] GameObject dialogSelectionPanel;
+    [SerializeField] BattleDialogBox dialogBox;
 
     int currentSelection = 0;
-    State currState = State.Choice;
+    bool wantToChange = true;
+    bool canSelect = true;
+    ForgetMoveState currState = ForgetMoveState.Choice;
 
     public void SetMoveData(List<MoveBase> currentMoves, MoveBase newMove)
     {
@@ -26,41 +33,96 @@ public class MoveSelectionUI : MonoBehaviour
 
     public void HandleMoveSelection(Action<int> onSelected)
     {
-        // TODO - Make Dialog to ask if player want to forgot the move
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (currState == ForgetMoveState.MoveSelection && canSelect)
         {
-            if (currentSelection < moveTexts.Count)
+            if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                ++currentSelection;
+                if (currentSelection < moveTexts.Count - 2)
+                {
+                    ++currentSelection;
+                }
+                else
+                {
+                    currentSelection = 0;
+                }
             }
-            else
+            else if (Input.GetKeyDown(KeyCode.UpArrow))
             {
+                if (currentSelection > 0)
+                {
+                    --currentSelection;
+                }
+                else
+                {
+                    currentSelection = moveTexts.Count - 2;
+                }
+            }
+        }
+        else if (currState == ForgetMoveState.Choice && canSelect)
+        {
+            if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                wantToChange = !wantToChange;
+            }
+        }
+
+        if (currState == ForgetMoveState.MoveSelection)
+            UpdateMoveSelection(currentSelection);
+        else if (currState == ForgetMoveState.Choice)
+            UpdateDialogSelection();
+
+        if (Input.GetKeyDown(KeyCode.KeypadEnter) && canSelect || Input.GetKeyDown(KeyCode.Return) && canSelect) 
+        {
+            if (currState == ForgetMoveState.MoveSelection)
+            {
+                wantToChange = true;
+                var selected = currentSelection;
                 currentSelection = 0;
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            if (currentSelection > 0)
-            {
-                --currentSelection;
+                currState = ForgetMoveState.Choice;
+                onSelected?.Invoke(selected);
             }
             else
             {
-                currentSelection = moveTexts.Count;
+                if (wantToChange)
+                {
+                    currState = ForgetMoveState.MoveSelection;
+                    StartCoroutine(UpdateState());
+                }
+                else
+                {
+                    wantToChange = true;
+                    currState = ForgetMoveState.Choice;
+                    onSelected?.Invoke(AnigmaBase.MaxNumOfMoves);
+                }
             }
         }
-
-        UpdateMoveSelection(currentSelection);
-
-        if (Input.GetKeyDown (KeyCode.KeypadEnter | KeyCode.Return)) 
-        { 
-            onSelected?.Invoke(currentSelection);
+        else if (Input.GetKeyDown(KeyCode.Backspace) && canSelect || Input.GetKeyDown(KeyCode.Escape) && canSelect)
+        {
+            if (currState == ForgetMoveState.MoveSelection)
+            {
+                currState = ForgetMoveState.Choice;
+                StartCoroutine(UpdateState());
+            }
+            else
+            {
+                if (wantToChange)
+                {
+                    wantToChange = !wantToChange;
+                    UpdateDialogSelection();
+                }
+                else
+                {
+                    wantToChange = true;
+                    currState = ForgetMoveState.Choice;
+                    onSelected?.Invoke(AnigmaBase.MaxNumOfMoves + 1);
+                }
+            }
         }
     }
 
     public void UpdateMoveSelection(int selection)
     {
-        for (int i = 0; i < AnigmaBase.MaxNumOfMoves+1; i++)
+        for (int i = 0; i < AnigmaBase.MaxNumOfMoves; i++)
         {
             if (i == selection)
             {
@@ -70,6 +132,39 @@ public class MoveSelectionUI : MonoBehaviour
             {
                 moveTexts[i].color = Color.black;
             }
+        }
+    }
+
+    IEnumerator UpdateState()
+    {
+        canSelect = false;
+        if (currState == ForgetMoveState.MoveSelection)
+        {
+            dialogSelectionPanel.SetActive(false);
+            yield return dialogBox.TypeDialog($"Choose a move you want to forget...");
+            moveSelectionPanel.SetActive(true);
+        }
+        else if (currState == ForgetMoveState.Choice)
+        {
+            dialogSelectionPanel.SetActive(false);
+            moveSelectionPanel.SetActive(false);
+            yield return dialogBox.TypeDialog($"Do you want to forget a move?");
+            dialogSelectionPanel.SetActive(true);
+        }
+        canSelect = true;
+    }
+
+    public void UpdateDialogSelection()
+    {
+        if (wantToChange)
+        {
+            dialogTexts[0].color = highlightedColor;
+            dialogTexts[1].color = Color.black;
+        }
+        else
+        {
+            dialogTexts[0].color = Color.black;
+            dialogTexts[1].color = highlightedColor;
         }
     }
 }

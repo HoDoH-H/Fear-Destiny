@@ -155,7 +155,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator ChooseMoveToForget(Anigma anigma, MoveBase newMove)
     {
         state = BattleState.Busy;
-        yield return dialogBox.TypeDialog($"Choose a move you want to forget...");
+        yield return dialogBox.TypeDialog($"Do you want that {anigma.Base.Name} forget a move to learn this new one?");
         moveSelectionUI.gameObject.SetActive(true);
         moveSelectionUI.SetMoveData(anigma.Moves.Select(x => x.Base).ToList(), newMove);
         moveToLearn = newMove;

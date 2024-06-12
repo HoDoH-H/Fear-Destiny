@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a2e12288949c3a4d885f65e3948438f, type: 3}
-  m_Name: Thunder Wave
+  m_Name: Bump
   m_EditorClassIdentifier: 
-  name: Thunder Wave
-  description: Paralyze the opponent.
-  type: 5
-  power: 0
+  name: Bump
+  description: 
+  type: 1
+  power: 40
   accuracy: 100
   alwaysHits: 0
-  up: 15
+  up: 20
   priority: 0
-  style: 2
+  style: 0
   effects:
     boosts: []
-    status: 4
+    status: 0
     volatileStatus: 0
   secondaryEffects: []
   target: 0

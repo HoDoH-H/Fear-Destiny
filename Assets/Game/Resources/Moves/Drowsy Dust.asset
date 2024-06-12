@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a2e12288949c3a4d885f65e3948438f, type: 3}
-  m_Name: Sand Attack
+  m_Name: Drowsy Dust
   m_EditorClassIdentifier: 
-  name: Sand Attack
-  description: 
-  type: 9
+  name: Drowsy Dust
+  description: Make the opponent fall asleep.
+  type: 1
   power: 0
   accuracy: 100
   alwaysHits: 0
@@ -22,10 +22,8 @@ MonoBehaviour:
   priority: 0
   style: 2
   effects:
-    boosts:
-    - stat: 5
-      boost: -1
-    status: 0
+    boosts: []
+    status: 3
     volatileStatus: 0
   secondaryEffects: []
   target: 0

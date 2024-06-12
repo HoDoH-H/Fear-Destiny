@@ -10,22 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a2e12288949c3a4d885f65e3948438f, type: 3}
-  m_Name: Growl
+  m_Name: Static Wave
   m_EditorClassIdentifier: 
-  name: Growl
-  description: Lowers opponent's Attack.
-  type: 1
+  name: Static Wave
+  description: Paralyze the opponent.
+  type: 5
   power: 0
   accuracy: 100
   alwaysHits: 0
-  up: 40
+  up: 15
   priority: 0
   style: 2
   effects:
-    boosts:
-    - stat: 0
-      boost: -1
-    status: 0
+    boosts: []
+    status: 4
     volatileStatus: 0
   secondaryEffects: []
   target: 0
