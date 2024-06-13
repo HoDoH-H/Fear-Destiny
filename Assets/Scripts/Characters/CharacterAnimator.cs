@@ -78,7 +78,7 @@ public class CharacterAnimator : MonoBehaviour
         {
             MoveY = -1;
         }
-        else if (dir == FacingDirection.Right)
+        else if (dir == FacingDirection.Up)
         {
             MoveY = 1;
         }
