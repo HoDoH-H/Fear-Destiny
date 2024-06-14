@@ -171,5 +171,5 @@ public enum ConditionID
     leechSeed,
     bleed,
     deaf,
-    bld
+    blnd
 }
