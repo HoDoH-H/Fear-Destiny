@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public enum ForgetMoveState { Choice, MoveSelection}
 
@@ -114,7 +113,7 @@ public class MoveSelectionUI : MonoBehaviour
                 {
                     wantToChange = true;
                     currState = ForgetMoveState.Choice;
-                    onSelected?.Invoke(AnigmaBase.MaxNumOfMoves + 1);
+                    onSelected?.Invoke(AnigmaBase.MaxNumOfMoves);
                 }
             }
         }

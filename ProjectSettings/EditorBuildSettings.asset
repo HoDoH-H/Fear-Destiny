@@ -6,8 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: "Assets/Scenes/Br\xFBmeuseWoods - Speranza Town.unity"
+    guid: 599a1b5b1c4552a449977d60d75f5b02
+  - enabled: 1
+    path: "Assets/Scenes/Br\xFBmeuseWoods - North.unity"
+    guid: ae1d05bbbabb7574ba6da3715f18547e
+  - enabled: 1
+    path: "Assets/Scenes/Br\xFBmeuseWoods - East.unity"
+    guid: 47ff63403c88bf24882b14196c523510
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: de03236a6d3a9e44385eec4cc2812601, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}

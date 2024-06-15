@@ -1,9 +1,7 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
-public enum GameState { FreeRoam, Battle, Dialog, Cutscene}
+public enum GameState { FreeRoam, Battle, Dialog, Cutscene, Paused}
 
 public class GameController : MonoBehaviour
 {
@@ -13,6 +11,7 @@ public class GameController : MonoBehaviour
     [SerializeField] Material battleTransition;
 
     GameState state;
+    GameState stateBeforePause;
 
     public static GameController Instance;
 
@@ -27,19 +26,7 @@ public class GameController : MonoBehaviour
         battleTransition.SetFloat("_Cutoff", 0f);
         battleTransition.SetFloat("_Fade", 1);
 
-
-        playerController.OnEncountered += StartBattle;
         battleSystem.OnBattleOver += EndBattle;
-
-        playerController.OnEnterTrainersView += (Collider2D trainerCollider) =>
-        {
-            var trainer = trainerCollider.GetComponentInParent<TrainerController>();
-            if (trainer != null)
-            {
-                state = GameState.Cutscene;
-                StartCoroutine(trainer.TriggerTrainerBattle(playerController));
-            }
-        };
 
         DialogManager.Instance.OnShowDialog += () => {state = GameState.Dialog;};
         DialogManager.Instance.OnCloseDialog += () =>
@@ -49,12 +36,25 @@ public class GameController : MonoBehaviour
         };
     }
 
+    public void PauseGame(bool pause)
+    {
+        if (pause)
+        {
+            stateBeforePause = state;
+            state = GameState.Paused;
+        }
+        else
+        {
+            state = stateBeforePause;
+        }
+    }
+
     void EnablePlayerMovements(bool enable)
     {
         playerController.CanMove = enable;
     }
 
-    void StartBattle()
+    public void StartBattle()
     {
         EnablePlayerMovements(false);
         if (battleTransition == null)
@@ -141,6 +141,12 @@ public class GameController : MonoBehaviour
         var trainerParty = trainer.GetComponent<AnigmaParty>();
 
         battleSystem.StartTrainerBattle(playerParty, trainerParty);
+    }
+
+    public void OnEnterTrainersView(TrainerController trainer)
+    {
+        state = GameState.Cutscene;
+        StartCoroutine(trainer.TriggerTrainerBattle(playerController));
     }
 
     void EndBattle(bool won)
