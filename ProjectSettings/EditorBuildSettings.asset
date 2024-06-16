@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: "Assets/Scenes/Br\xFBmeuseWoods/Br\xFBmeuseWoods - Speranza Town.unity"
+    path: "Assets/Scenes/Br\xFBmeuseWoods/Speranza Town.unity"
     guid: 599a1b5b1c4552a449977d60d75f5b02
   - enabled: 1
     path: "Assets/Scenes/Br\xFBmeuseWoods/Br\xFBmeuseWoods - North.unity"
@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: "Assets/Scenes/Br\xFBmeuseWoods/Br\xFBmeuseWoods - East.unity"
     guid: 47ff63403c88bf24882b14196c523510
+  - enabled: 1
+    path: "Assets/Scenes/Br\xFBmeuseWoods/Br\xFBmeuseWoods - NorthEast.unity"
+    guid: 302aade4ebc1d9b40993204b86acba0e
   - enabled: 1
     path: "Assets/Scenes/Br\xFBmeuseWoods/Speranza Town/Rustic Anvil.unity"
     guid: 3132ddbdc26021f4eb89e197343f233f

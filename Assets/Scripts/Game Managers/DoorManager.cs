@@ -56,6 +56,6 @@ public class DoorManager : MonoBehaviour
     {
         anim.SetTrigger("Open");
         yield return new WaitForSeconds(0.5f);
-        this.GetComponent<Portal>().OnPlayerTriggered(player);
+        this.GetComponent<LocationPortal>()?.OnPlayerTriggered(player);
     }
 }

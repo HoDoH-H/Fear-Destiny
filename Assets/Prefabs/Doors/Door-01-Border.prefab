@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7892265973718446426}
   - component: {fileID: 8219875796138514112}
   - component: {fileID: 1782339855571957869}
-  - component: {fileID: 2712566770619722908}
+  - component: {fileID: 4384475048373829095}
   m_Layer: 0
   m_Name: Door-01-Border
   m_TagString: Untagged
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 8219875796138514112}
   canBeInteracted: 0
---- !u!114 &2712566770619722908
+--- !u!114 &4384475048373829095
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -183,10 +183,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4609786300097455660}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a75596280e147a245ab171ae69b90593, type: 3}
+  m_Script: {fileID: 11500000, guid: 86ec32c44ab2c82459b334263a5ea502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: -1
   spawnPoint: {fileID: 5032371151892619903}
   destinationPortal: 0
 --- !u!1 &6680370027452301259
