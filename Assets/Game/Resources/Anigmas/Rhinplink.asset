@@ -19,14 +19,14 @@ MonoBehaviour:
   type1: 2
   type2: 0
   maxHp: 47
-  attack: 38
+  attack: 63
   defense: 48
-  spAttack: 51
-  spDefense: 43
+  spAttack: 49
+  spDefense: 62
   speed: 47
   catchRate: 255
   expYield: 64
-  growthRate: 4
+  growthRate: 3
   iMaxHp: 0
   iAttack: 0
   iDefense: 0
