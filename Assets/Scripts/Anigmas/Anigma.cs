@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -58,6 +59,41 @@ public class Anigma
         StatusChanges = new Queue<string>();
         ResetStatBoost();
         Status = null;
+        VolatileStatus = null;
+    }
+
+    public AnigmaSaveData GetSaveData()
+    {
+        var saveData = new AnigmaSaveData()
+        {
+            name = Base.Name,
+            hp = HP,
+            level = Level,
+            exp = Exp,
+            statusId = Status?.Id,
+            moves = Moves.Select(m => m.GetSaveData()).ToList(),
+        };
+
+        return saveData;
+    }
+
+    public Anigma(AnigmaSaveData saveData)
+    {
+        _base = AnigmaDB.GetAnigmaByName(saveData.name);
+        HP = saveData.hp;
+        level = saveData.level;
+        Exp = saveData.exp;
+
+        if (saveData.statusId != null)
+            Status = ConditionDB.Conditions[saveData.statusId.Value];
+        else
+            Status = null;
+
+        Moves = saveData.moves.Select(m => new Move(m)).ToList();
+
+        CalculateStats();
+        StatusChanges = new Queue<string>();
+        ResetStatBoost();
         VolatileStatus = null;
     }
 
@@ -206,7 +242,7 @@ public class Anigma
     public DamageDetails TakeDamage(Move move, Anigma attacker)
     {
         float critical = 1f;
-        if (Random.value * 100f <= 6.25f && move.Base.Power > 0)
+        if (UnityEngine.Random.value * 100f <= 6.25f && move.Base.Power > 0)
         {
             critical = 2f;
         }
@@ -226,7 +262,7 @@ public class Anigma
         attack = (move.Base.Category == AttackCategory.Physical) ? attacker.SpAttack : attacker.Attack;
         defense = (move.Base.Category == AttackCategory.Physical) ? SpDefense : Defense;
 
-        float modifiers = Random.Range(0.85f, 1f) * type * critical;
+        float modifiers = UnityEngine.Random.Range(0.85f, 1f) * type * critical;
         float a = (2 * attacker.Level + 10) / 250f;
         float d = a * move.Base.Power * (attack / defense) + 2;
         int damage = Mathf.FloorToInt(d * modifiers);
@@ -276,7 +312,7 @@ public class Anigma
     {
         var movesWithUP = Moves.Where(x => x.UP > 0).ToList();
 
-        int r = Random.Range(0, movesWithUP.Count);
+        int r = UnityEngine.Random.Range(0, movesWithUP.Count);
         return movesWithUP[r];
     }
 
@@ -315,4 +351,15 @@ public class DamageDetails
     public float Critical { get; set; }
 
     public float TypeEffectiveness { get; set; }
+}
+
+[Serializable]
+public class AnigmaSaveData
+{
+    public string name;
+    public int hp;
+    public int level;
+    public int exp;
+    public ConditionID? statusId;
+    public List<MoveSaveData> moves;
 }

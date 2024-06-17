@@ -1,8 +1,11 @@
+using NUnit.Framework;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, ISavable
 {
     [SerializeField] string name;
     [SerializeField] Sprite sprite;
@@ -13,6 +16,7 @@ public class PlayerController : MonoBehaviour
 
     private InputSystem_Actions playerControls;
     private InputAction move;
+    public Vector2 direction;
 
     private void Awake()
     {
@@ -42,19 +46,20 @@ public class PlayerController : MonoBehaviour
 
             if (input != Vector2.zero)
             {
+                direction = input.normalized;
                 StartCoroutine(character.Move(input, OnMoveOver));
             }
         }
 
         character.HandleUpdate();
 
-        if (InputEvents.Instance.i_Pressed)
+        if (InputEvents.Instance.interact_Pressed)
             Interact();
     }
 
     private void Interact()
     {
-        InputEvents.Instance.i_Pressed = false;
+        InputEvents.Instance.interact_Pressed = false;
         var facingDir = new Vector3(character.Animator.MoveX, character.Animator.MoveY);
         var interactPos = transform.position + facingDir;
 
@@ -80,7 +85,43 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public object CaptureState()
+    {
+        var saveData = new PlayerSaveData() 
+        {
+            position = new float[] { transform.position.x, transform.position.y },
+            direction = new float[] { direction.x, direction.y },
+            anigmas = GetComponent<AnigmaParty>().Anigmas.Select(a => a.GetSaveData()).ToList(),
+        };
+
+        return saveData;
+    }
+
+    public void RestoreState(object state)
+    {
+        var saveData = (PlayerSaveData)state;
+
+        // Restore Player's position
+        transform.position = new Vector3(saveData.position[0], saveData.position[1]);
+
+        // Restore Player's direction
+        direction = new Vector3(saveData.direction[0], saveData.direction[1]);
+        Debug.Log(transform.position + new Vector3(direction.x, direction.y));
+        character.LookTowards(transform.position + new Vector3(direction.x, direction.y));
+
+        // Restore Player's Party
+        GetComponent<AnigmaParty>().Anigmas =  saveData.anigmas.Select(a => new Anigma(a)).ToList();
+    }
+
     public string Name { get => name; }
     public Sprite Sprite { get => sprite; }
     public Character Character => character;
+}
+
+[Serializable]
+public class PlayerSaveData
+{
+    public float[] position;
+    public float[] direction;
+    public List<AnigmaSaveData> anigmas;
 }

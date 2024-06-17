@@ -1,10 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public enum GameState { FreeRoam, Battle, Dialog, Cutscene, Paused}
+public enum GameState { FreeRoam, Battle, Dialog, Menu, Cutscene, Paused}
 
 public class GameController : MonoBehaviour
 {
+    [SerializeField] bool debug = false;
+
     [SerializeField] PlayerController playerController;
     [SerializeField] BattleSystem battleSystem;
     [SerializeField] Camera playerCamera;
@@ -16,12 +19,21 @@ public class GameController : MonoBehaviour
     public SceneDetails CurrentScene { get; private set; }
     public SceneDetails PrevScene { get; private set; }
 
+    MenuController menuController;
+
     public static GameController Instance;
+
+    string saveFileName = "1b3nzj7TLYXwj1Ml5Jw56jWxXV3UIwC81D8qhVNA40unU6NlBi";
 
     private void Awake()
     {
         Instance = this;
+
+        menuController = GetComponent<MenuController>();
+
         ConditionDB.Init();
+        AnigmaDB.Init();
+        MoveDB.Init();
     }
 
     private void Start()
@@ -35,8 +47,19 @@ public class GameController : MonoBehaviour
         DialogManager.Instance.OnCloseDialog += () =>
         {
             if (state == GameState.Dialog)
+            {
                 state = GameState.FreeRoam;
+            }
         };
+
+        menuController.OnBack += () =>
+        {
+            state = GameState.FreeRoam;
+        };
+        menuController.OnMenuSelected += OnMenuSelected;
+
+        if (!debug)
+            SavingSystem.i.Load(saveFileName);
     }
 
     public void PauseGame(bool pause)
@@ -195,6 +218,12 @@ public class GameController : MonoBehaviour
         if (state == GameState.FreeRoam)
         {
             playerController.HandleUpdate();
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                state = GameState.Menu;
+                menuController.OpenMenu();
+            }
         }
         else if (state == GameState.Battle)
         {
@@ -203,6 +232,10 @@ public class GameController : MonoBehaviour
         else if(state == GameState.Dialog) 
         { 
             DialogManager.Instance.HandleUpdate();
+        }
+        else if (state == GameState.Menu)
+        {
+            menuController.HandleUpdate();
         }
     }
 
@@ -217,5 +250,29 @@ public class GameController : MonoBehaviour
         battleTransition.SetColor("_Color", new Color(0.08447679f, 0.08447679f, 0.08447679f, 1));
         battleTransition.SetFloat("_Cutoff", 0);
         battleTransition.SetFloat("_Fade", 100);
+    }
+
+    void OnMenuSelected(int selectedItem)
+    {
+        if (selectedItem == 0)
+        {
+            // Anigmas
+        }
+        else if (selectedItem == 1)
+        {
+            // Bag
+        }
+        else if (selectedItem == 2)
+        {
+            // Save
+            SavingSystem.i.Save(saveFileName);
+        }
+        else if (selectedItem == 3)
+        {
+            // Load
+            SavingSystem.i.Load(saveFileName);
+        }
+
+        state = GameState.FreeRoam;
     }
 }

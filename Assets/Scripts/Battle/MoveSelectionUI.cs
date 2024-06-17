@@ -74,6 +74,9 @@ public class MoveSelectionUI : MonoBehaviour
         {
             if (currState == ForgetMoveState.MoveSelection)
             {
+                dialogSelectionPanel.SetActive(false);
+                moveSelectionPanel.SetActive(false);
+                dialogSelectionPanel.SetActive(true);
                 wantToChange = true;
                 var selected = currentSelection;
                 currentSelection = 0;

@@ -33,9 +33,9 @@ public class DialogManager : MonoBehaviour
 
     public void HandleUpdate()
     {
-        if (InputEvents.Instance.i_Pressed)
+        if (InputEvents.Instance.interact_Pressed)
         {
-            InputEvents.Instance.i_Pressed = false;
+            InputEvents.Instance.interact_Pressed = false;
             if (isTyping)
             {
                 isTyping = false;

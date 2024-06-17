@@ -6,7 +6,7 @@ public class AnigmaParty : MonoBehaviour
 {
     [SerializeField] List<Anigma> anigmas;
 
-    public List<Anigma> Anigmas {  get { return anigmas; } }
+    public List<Anigma> Anigmas {  get { return anigmas; }set { anigmas = value; } }
 
     private void Start()
     {

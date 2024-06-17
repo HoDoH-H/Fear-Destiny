@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Move
@@ -10,4 +11,28 @@ public class Move
         Base = aBase;
         UP = aBase.UP;
     }
+
+    public Move(MoveSaveData saveData)
+    {
+        Base = MoveDB.GetMoveByName(saveData.name);
+        UP = saveData.UP;
+    }
+
+    public MoveSaveData GetSaveData()
+    {
+        var saveData = new MoveSaveData()
+        {
+            name = Base.Name,
+            UP = UP,
+        };
+
+        return saveData;
+    }
+}
+
+[Serializable]
+public class MoveSaveData
+{
+    public string name;
+    public int UP;
 }

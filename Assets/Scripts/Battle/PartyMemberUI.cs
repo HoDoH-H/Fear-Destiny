@@ -8,7 +8,6 @@ public class PartyMemberUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] TextMeshProUGUI levelText;
     [SerializeField] HpBar hpBar;
-    [SerializeField] Color highlightedColor;
 
     Anigma _anigma;
 
@@ -25,7 +24,7 @@ public class PartyMemberUI : MonoBehaviour
     {
         if (isSelected)
         {
-            nameText.color = highlightedColor;
+            nameText.color = GlobalSettings.Instance.HighlightedColor;
         }
         else
         {

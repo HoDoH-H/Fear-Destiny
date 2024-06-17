@@ -66,6 +66,14 @@ public class CharacterAnimator : MonoBehaviour
 
     public void SetFacingDirection(FacingDirection dir)
     {
+        if (GetComponent<PlayerController>() != null)
+        {
+            if (GetComponent<PlayerController>().direction != Vector2.zero)
+            {
+                return;
+            }
+        }
+
         if (dir == FacingDirection.Left)
         {
             MoveX = -1;
