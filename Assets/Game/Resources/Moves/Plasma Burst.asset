@@ -12,18 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2e12288949c3a4d885f65e3948438f, type: 3}
   m_Name: Plasma Burst
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  type: 0
-  power: 0
-  accuracy: 0
+  name: Plasma Burst
+  description: A burst of plasma energy that shocks and sears, may paralyze or burn
+    the target.
+  type: 21
+  power: 110
+  accuracy: 85
   alwaysHits: 0
-  up: 0
+  up: 5
   priority: 0
-  style: 0
+  style: 1
   effects:
     boosts: []
     status: 0
     volatileStatus: 0
-  secondaryEffects: []
+  secondaryEffects:
+  - boosts: []
+    status: 2
+    volatileStatus: 0
+    chance: 10
+    target: 0
+  - boosts: []
+    status: 4
+    volatileStatus: 0
+    chance: 10
+    target: 0
   target: 0

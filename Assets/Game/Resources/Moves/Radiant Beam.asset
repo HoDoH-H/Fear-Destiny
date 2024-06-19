@@ -12,18 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2e12288949c3a4d885f65e3948438f, type: 3}
   m_Name: Radiant Beam
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  type: 0
-  power: 0
-  accuracy: 0
+  name: Radiant Beam
+  description: The user fires a concentrated beam of radiant light that can sear
+    the target.
+  type: 19
+  power: 90
+  accuracy: 100
   alwaysHits: 0
-  up: 0
+  up: 10
   priority: 0
   style: 0
   effects:
     boosts: []
     status: 0
     volatileStatus: 0
-  secondaryEffects: []
+  secondaryEffects:
+  - boosts: []
+    status: 2
+    volatileStatus: 0
+    chance: 10
+    target: 0
+  - boosts:
+    - stat: 5
+      boost: -1
+    status: 0
+    volatileStatus: 0
+    chance: 10
+    target: 0
   target: 0

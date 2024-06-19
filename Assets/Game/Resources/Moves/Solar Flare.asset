@@ -12,18 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2e12288949c3a4d885f65e3948438f, type: 3}
   m_Name: Solar Flare
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  type: 0
-  power: 0
-  accuracy: 0
+  name: Solar Flare
+  description: The user generates a powerful flare that blinds and confuses the target.
+  type: 19
+  power: 120
+  accuracy: 85
   alwaysHits: 0
-  up: 0
+  up: 5
   priority: 0
-  style: 0
+  style: 1
   effects:
     boosts: []
     status: 0
     volatileStatus: 0
-  secondaryEffects: []
+  secondaryEffects:
+  - boosts:
+    - stat: 5
+      boost: -1
+    status: 0
+    volatileStatus: 0
+    chance: 5
+    target: 0
+  - boosts: []
+    status: 0
+    volatileStatus: 8
+    chance: 10
+    target: 0
   target: 0

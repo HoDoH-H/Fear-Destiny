@@ -12,17 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2e12288949c3a4d885f65e3948438f, type: 3}
   m_Name: Ion Surge
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  type: 0
-  power: 0
-  accuracy: 0
+  name: Ion Surge
+  description: The user releases a surge of ions that weakens the target's defenses.
+  type: 21
+  power: 90
+  accuracy: 90
   alwaysHits: 0
-  up: 0
+  up: 10
   priority: 0
   style: 0
   effects:
-    boosts: []
+    boosts:
+    - stat: 1
+      boost: -1
     status: 0
     volatileStatus: 0
   secondaryEffects: []
