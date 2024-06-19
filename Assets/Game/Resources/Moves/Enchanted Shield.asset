@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2e12288949c3a4d885f65e3948438f, type: 3}
+  m_Name: Enchanted Shield
+  m_EditorClassIdentifier: 
+  name: Enchanted Shield
+  description: The user casts a magical shield that bolsters its defenses.
+  type: 20
+  power: 0
+  accuracy: 0
+  alwaysHits: 1
+  up: 25
+  priority: 0
+  style: 2
+  effects:
+    boosts:
+    - stat: 1
+      boost: 1
+    - stat: 3
+      boost: 1
+    status: 0
+    volatileStatus: 0
+  secondaryEffects: []
+  target: 0
