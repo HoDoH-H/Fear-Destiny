@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      "Br\xFBmeuseWoods - East_0": -5654812954767190436
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
