@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public enum GameState { FreeRoam, Battle, Dialog, Menu, Cutscene, Paused}
+public enum GameState { FreeRoam, Battle, Dialog, Menu, PartyScreen, Cutscene, Paused}
 
 public class GameController : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class GameController : MonoBehaviour
     [SerializeField] BattleSystem battleSystem;
     [SerializeField] Camera playerCamera;
     [SerializeField] Material battleTransition;
+    [SerializeField] PartyScreen partyScreen;
 
     GameState state;
     GameState stateBeforePause;
@@ -24,6 +26,8 @@ public class GameController : MonoBehaviour
     public static GameController Instance;
 
     string saveFileName = "1b3nzj7TLYXwj1Ml5Jw56jWxXV3UIwC81D8qhVNA40unU6NlBi";
+
+    public string SaveFileName => saveFileName;
 
     private void Awake()
     {
@@ -42,6 +46,8 @@ public class GameController : MonoBehaviour
         battleTransition.SetFloat("_Fade", 1);
 
         battleSystem.OnBattleOver += EndBattle;
+
+        partyScreen.Init();
 
         DialogManager.Instance.OnShowDialog += () => {state = GameState.Dialog;};
         DialogManager.Instance.OnCloseDialog += () =>
@@ -237,6 +243,21 @@ public class GameController : MonoBehaviour
         {
             menuController.HandleUpdate();
         }
+        else if (state == GameState.PartyScreen)
+        {
+            Action onSelected = () =>
+            {
+                // TODO - Summary Screen
+            };
+
+            Action onBack = () =>
+            {
+                partyScreen.gameObject.SetActive(false);
+                state = GameState.FreeRoam;
+            };
+
+            partyScreen.HandleUpdate(onSelected, onBack);
+        }
     }
 
     public void SetCurrentScene(SceneDetails currScene)
@@ -257,6 +278,9 @@ public class GameController : MonoBehaviour
         if (selectedItem == 0)
         {
             // Anigmas
+            partyScreen.gameObject.SetActive(true);
+            partyScreen.SetPartyData(playerController.GetComponent<AnigmaParty>().Anigmas);
+            state = GameState.PartyScreen;
         }
         else if (selectedItem == 1)
         {
@@ -266,13 +290,13 @@ public class GameController : MonoBehaviour
         {
             // Save
             SavingSystem.i.Save(saveFileName);
+            state = GameState.FreeRoam;
         }
         else if (selectedItem == 3)
         {
             // Load
             SavingSystem.i.Load(saveFileName);
+            state = GameState.FreeRoam;
         }
-
-        state = GameState.FreeRoam;
     }
 }

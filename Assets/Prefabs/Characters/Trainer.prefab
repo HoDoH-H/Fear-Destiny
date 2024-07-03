@@ -241,13 +241,12 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 8943fd0da8fa7844a825eb1c582b409c, type: 3}
   dialog:
     lines:
-    - Hey! Are you ready for your first friendly battle?
-    - Lets go!
+    - You picked the wrong day to cross us!
+    - Prepare to get your asses kicked!
   dialogAfterBattle:
     lines:
-    - You are very strong!
-    - I'll pray for your glory.
-    - Have a good journey!
+    - "Curse you... this isn\u2019t the end!"
+    - "Next time, you won\u2019t be so lucky!"
   exclamation: {fileID: 4111140380813501504}
   fov: {fileID: 279122827930800007}
 --- !u!114 &7279109375698514570

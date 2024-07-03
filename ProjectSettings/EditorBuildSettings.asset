@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Gameplay.unity
+    guid: 8b15ef7a95838e542a667938f7daeb17
+  - enabled: 1
     path: "Assets/Scenes/Br\xFBmeuseWoods/Speranza Town.unity"
     guid: 599a1b5b1c4552a449977d60d75f5b02
   - enabled: 1
@@ -29,6 +32,9 @@ EditorBuildSettings:
   - enabled: 1
     path: "Assets/Scenes/Br\xFBmeuseWoods/North/Br\xFBmeuseWoods - North - 04.unity"
     guid: 322f95822512b0e4190644fe9568f505
+  - enabled: 1
+    path: "Assets/Scenes/Br\xFBmeuseWoods/Speranza Town/Arcane Bazaar.unity"
+    guid: 7b24c1f2933bccf4994c297ce86ea43d
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: de03236a6d3a9e44385eec4cc2812601, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}

@@ -22,12 +22,10 @@ public class BattleSystem : MonoBehaviour
     public event Action<bool> OnBattleOver;
 
     BattleState state;
-    BattleState? previousState;
 
 
      int currentAction;
      int currentMove;
-     int currentMember;
     bool aboutToUseChoice = true;
 
     AnigmaParty playerParty;
@@ -123,6 +121,11 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.BattleOver;
         playerParty.Anigmas.ForEach(p => p.OnBattleOver());
         OnBattleOver(isWon);
+
+        if (!isWon)
+        {
+            SavingSystem.i.Load(GameController.Instance.SaveFileName);
+        }
     }
 
     void ActionSelection()
@@ -137,6 +140,7 @@ public class BattleSystem : MonoBehaviour
 
     void OpenPartyScreen()
     {
+        partyScreen.CalledFrom = state;
         state = BattleState.PartyScreen;
         partyScreen.SetPartyData(playerParty.Anigmas);
         partyScreen.gameObject.SetActive(true);
@@ -216,7 +220,7 @@ public class BattleSystem : MonoBehaviour
         {
             if (playerAction == BattleAction.SwitchAnigma)
             {
-                var selectedAnigma = playerParty.Anigmas[currentMember];
+                var selectedAnigma = partyScreen.SelectedMember;
                 state = BattleState.Busy;
                 yield return SwitchAnigma(selectedAnigma);
             }
@@ -446,6 +450,7 @@ public class BattleSystem : MonoBehaviour
             var nextAnigma = playerParty.GetHealthyAnigma();
             if (nextAnigma != null)
             {
+
                 OpenPartyScreen();
             }
             else
@@ -534,7 +539,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    IEnumerator SwitchAnigma(Anigma newAnigma)
+    IEnumerator SwitchAnigma(Anigma newAnigma, bool isTrainerAboutToUse=false)
     {
         if (playerUnit.Anigma.HP > 0)
         {
@@ -549,15 +554,10 @@ public class BattleSystem : MonoBehaviour
 
         yield return dialogBox.TypeDialog($"{newAnigma.Base.Name} go!");
 
-        if (previousState == null)
-        {
-            state = BattleState.RunningTurn;
-        }
-        else if (previousState == BattleState.AboutToUse)
-        {
-            previousState = null;
+        if (isTrainerAboutToUse)
             StartCoroutine(SendNextTrainerAnigma());
-        }
+        else
+            state = BattleState.RunningTurn;
     }
 
     IEnumerator SendNextTrainerAnigma()
@@ -811,7 +811,6 @@ public class BattleSystem : MonoBehaviour
             else if (currentAction == 1)
             {
                 //Open party screen
-                previousState = state;
                 OpenPartyScreen();
             }
             else if (currentAction == 2)
@@ -829,97 +828,10 @@ public class BattleSystem : MonoBehaviour
 
     void HandlePartySelection()
     {
-        if (Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Escape))
+        Action onSelected = () =>
         {
-            if (playerUnit.Anigma.HP <= 0)
-            {
-                partyScreen.SetMessageText("You have to choose another anigma to continue.");
-                return;
-            }
-
-            //Get back to action selection
-            if (previousState == BattleState.AboutToUse)
-            {
-                previousState = null;
-                StartCoroutine(SendNextTrainerAnigma());
-            }
-            else
-                ActionSelection();
-        }
-
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            if (currentMember == 0 && playerParty.Anigmas.Count > 1 || currentMember == 2 && playerParty.Anigmas.Count > 3 || currentMember == 4 && playerParty.Anigmas.Count > 5)
-            {
-                ++currentMember;
-            }
-            else if (currentMember == 2 && playerParty.Anigmas.Count == 3 || currentMember == 4 && playerParty.Anigmas.Count == 5)
-            {
-                --currentMember;
-            }
-            else
-            {
-                if (currentMember == 1 || currentMember == 3 || currentMember == 5)
-                    --currentMember;
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            if (currentMember == 1 || currentMember == 3 || currentMember == 5)
-            {
-                --currentMember;
-            }
-            else
-            {
-                if (playerParty.Anigmas.Count > 1 && currentMember == 0 || playerParty.Anigmas.Count > 3 && currentMember == 2 || playerParty.Anigmas.Count > 5 && currentMember == 4)
-                {
-                    ++currentMember;
-                }
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            if (currentMember > 1)
-            {
-                currentMember = currentMember - 2;
-            }
-            else
-            {
-                if (playerParty.Anigmas.Count > 4 && currentMember == 0 || playerParty.Anigmas.Count > 5 && currentMember == 1)
-                {
-                    currentMember = currentMember + 4;
-                }
-                else if (playerParty.Anigmas.Count > 2 && currentMember == 0 || playerParty.Anigmas.Count > 3 && currentMember == 1)
-                {
-                    currentMember = currentMember + 2;
-                }
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            if (currentMember + 2 < playerParty.Anigmas.Count)
-            {
-                currentMember = currentMember + 2;
-            }
-            else if (currentMember + 1 < playerParty.Anigmas.Count && currentMember % 2 == 1)
-            {
-                currentMember++;
-            }
-            else
-            {
-                if (currentMember % 2 == 0)
-                    currentMember = 0;
-                else
-                    currentMember = 1;
-            }
-        }
-
-        partyScreen.UpdateMemberSelection(currentMember);
-
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
-        {
-            var selectedMember = playerParty.Anigmas[currentMember];
-            if(selectedMember.HP <= 0)
+            var selectedMember = partyScreen.SelectedMember;
+            if (selectedMember.HP <= 0)
             {
                 partyScreen.SetMessageText("You can't send out a fainted anigma...");
                 return;
@@ -932,17 +844,42 @@ public class BattleSystem : MonoBehaviour
 
             partyScreen.gameObject.SetActive(false);
 
-            if (previousState == BattleState.ActionSelection)
+            if (partyScreen.CalledFrom == BattleState.ActionSelection)
             {
-                previousState = null;
                 StartCoroutine(RunTurns(BattleAction.SwitchAnigma));
             }
             else
             {
                 state = BattleState.Busy;
-                StartCoroutine(SwitchAnigma(selectedMember));
+                bool isTrainerAboutToUse = partyScreen.CalledFrom == BattleState.AboutToUse;
+                StartCoroutine(SwitchAnigma(selectedMember, isTrainerAboutToUse));
             }
-        }
+
+            partyScreen.CalledFrom = null;
+        };
+
+        Action onBack = () =>
+        {
+            if (playerUnit.Anigma.HP <= 0)
+            {
+                partyScreen.SetMessageText("You have to choose another anigma to continue.");
+                return;
+            }
+
+            partyScreen.gameObject.SetActive(false);
+
+            //Get back to action selection
+            if (partyScreen.CalledFrom == BattleState.AboutToUse)
+            {
+                StartCoroutine(SendNextTrainerAnigma());
+            }
+            else
+                ActionSelection();
+
+            partyScreen.CalledFrom = null;
+        };
+
+        partyScreen.HandleUpdate(onSelected, onBack);
     }
 
     void HandleAboutToUse()
@@ -958,7 +895,6 @@ public class BattleSystem : MonoBehaviour
             if (aboutToUseChoice)
             {
                 // yes
-                previousState = BattleState.AboutToUse;
                 OpenPartyScreen();
             }
             else

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Stick Jab
   description: 
-  type: 0
+  type: 2
   power: 40
   accuracy: 100
   alwaysHits: 0

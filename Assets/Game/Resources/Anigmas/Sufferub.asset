@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd91ca33a0282d543a9ee093c6d2c2a5, type: 3}
-  m_Name: Trunkorn
+  m_Name: Sufferub
   m_EditorClassIdentifier: 
-  name: Trunkorn
+  name: Sufferub
   description: 
-  frontSprite: {fileID: -7349110149113480487, guid: 881588c207b7723489b4d4a8ffaefa05, type: 3}
-  backSprite: {fileID: -7349110149113480487, guid: f7bcc5e0eb8546c4f894144fbe387466, type: 3}
-  type1: 2
-  type2: 13
-  maxHp: 61
-  attack: 78
-  defense: 60
-  spAttack: 62
-  spDefense: 81
-  speed: 62
+  frontSprite: {fileID: -7687281366060200168, guid: 94cdd4cb722d35d4fa844891d1fe04a9, type: 3}
+  backSprite: {fileID: -7687281366060200168, guid: 34187cddbd4ab6c4cad697a60782af66, type: 3}
+  type1: 12
+  type2: 0
+  maxHp: 39
+  attack: 42
+  defense: 42
+  spAttack: 57
+  spDefense: 43
+  speed: 50
   catchRate: 255
-  expYield: 140
-  growthRate: 3
+  expYield: 59
+  growthRate: 1
   iMaxHp: 0
   iAttack: 0
   iDefense: 0
@@ -44,15 +44,11 @@ MonoBehaviour:
     level: 1
   - moveBase: {fileID: 11400000, guid: 419ae0b7721087a439288ef195777522, type: 2}
     level: 5
-  - moveBase: {fileID: 11400000, guid: 2018e8e287fe7864d8761fa69d294e73, type: 2}
-    level: 7
-  - moveBase: {fileID: 11400000, guid: 2171044207da8084da429be846ccca44, type: 2}
-    level: 10
+  - moveBase: {fileID: 11400000, guid: 756989a87e7520c43ba3d43aa2425fed, type: 2}
+    level: 8
   - moveBase: {fileID: 11400000, guid: 1a224b76132c0884280f855cbe8b200f, type: 2}
     level: 12
+  - moveBase: {fileID: 11400000, guid: 2e77a13526c27614b90c8908dc135b26, type: 2}
+    level: 12
   - moveBase: {fileID: 11400000, guid: aa6dd53a711b38748be2a3454f0ded37, type: 2}
-    level: 15
-  - moveBase: {fileID: 11400000, guid: c122ab5bbf5be7549bf4afe95c9e684d, type: 2}
-    level: 18
-  - moveBase: {fileID: 11400000, guid: 53a02731480a7c443908b49aa18cee53, type: 2}
-    level: 21
+    level: 16
