@@ -209,6 +209,7 @@ GameObject:
   - component: {fileID: 2544539846631835566}
   - component: {fileID: 6999738144179313841}
   - component: {fileID: 3201746106409035397}
+  - component: {fileID: 5090950668378785515}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -322,6 +323,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 6f95e801fe4bad743a33540629d0b902, type: 3}
   input: {x: 0, y: 0}
   CanMove: 1
+  direction: {x: 0, y: 0}
 --- !u!114 &5776576929951179875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,16 +337,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anigmas:
-  - _base: {fileID: 11400000, guid: a64ac671940dfea4291ca34d9c30c394, type: 2}
-    level: 12
-  - _base: {fileID: 11400000, guid: 192c4c11db194ae4dad233f564416972, type: 2}
-    level: 11
-  - _base: {fileID: 11400000, guid: b5572a7fb68a134428775e74d534e918, type: 2}
-    level: 10
-  - _base: {fileID: 11400000, guid: b19b9b0d466145044bc60d1e5da958ab, type: 2}
-    level: 9
-  - _base: {fileID: 11400000, guid: 4ac4c7732eabfcc4285c20fb5a11a043, type: 2}
-    level: 9
+  - _base: {fileID: 11400000, guid: 82a836a8794118a478235ff31f6aea83, type: 2}
+    level: 5
 --- !u!114 &2544539846631835566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,3 +400,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uniqueId: 
+--- !u!114 &5090950668378785515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6416772818868538930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b384db8be6525f478c8c81af269232a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slots: []

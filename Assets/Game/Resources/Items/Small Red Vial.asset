@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb2867559426dec469e093a04a162ca5, type: 3}
+  m_Name: Small Red Vial
+  m_EditorClassIdentifier: 
+  name: Small Red Vial
+  description: This small shimmering vial contains a glowing, amber liquid that radiates
+    a warm, soothing aura.
+  icon: {fileID: -2445133492249524872, guid: c6d0e52e2a28d6d49807f04ddfb38a61, type: 3}
+  hpAmount: 25
+  restoreMaxHP: 0
+  upAmount: 0
+  restoreMaxUP: 0
+  manaAmount: 0
+  restoreMaxMana: 0
+  status: 0
+  recoverAllStatus: 0
+  revive: 0
+  maxRevive: 0
+  humans: 0
+  anigmas: 0

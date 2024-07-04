@@ -304,6 +304,7 @@ public class GameController : MonoBehaviour
         {
             // Bag
             inventoryUI.gameObject.SetActive(true);
+            inventoryUI.UpdateItemList();
             state = GameState.Bag;
         }
         else if (selectedItem == 2)

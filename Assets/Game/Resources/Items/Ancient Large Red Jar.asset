@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb2867559426dec469e093a04a162ca5, type: 3}
+  m_Name: Ancient Large Red Jar
+  m_EditorClassIdentifier: 
+  name: Ancient Large Red Jar
+  description: Housed in an ornate crystal vial, this amber liquid exudes a faint,
+    mesmerizing glow. The liquid's extraordinary quality whispers of ancient secrets
+    and unparalleled craftsmanship.
+  icon: {fileID: -3973429000732579732, guid: 80d864adccc3db449b2ba9c4c7c2cab1, type: 3}
+  hpAmount: 0
+  restoreMaxHP: 1
+  upAmount: 0
+  restoreMaxUP: 0
+  manaAmount: 0
+  restoreMaxMana: 0
+  status: 0
+  recoverAllStatus: 1
+  revive: 0
+  maxRevive: 0
+  humans: 0
+  anigmas: 0
