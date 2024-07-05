@@ -31,15 +31,19 @@ public class BattleUnit : MonoBehaviour
         if (isPlayerUnit && Anigma.Base.BackSprite != null)
         {
             image.sprite = Anigma.Base.BackSprite;
-        }else
+            image.SetNativeSize();
+            transform.localScale = new Vector3(0.5f, 0.5f, 1f);
+        }
+        else
         {
             image.sprite = Anigma.Base.FrontSprite;
+            image.SetNativeSize();
+            transform.localScale = new Vector3(0.45f, 0.45f, 1f);
         }
 
         hud.gameObject.SetActive(true);
         hud.SetData(anigma);
 
-        transform.localScale = new Vector3(1f, 1f, 1f);
         image.color = originalColor;
 
         PlayEnterAnimation();
