@@ -16,7 +16,7 @@ public class PartyMemberUI : MonoBehaviour
         _anigma = anigma;
 
         nameText.text = anigma.Base.Name;
-        levelText.text = "Lvl" + anigma.Level;
+        levelText.text = "Lv." + anigma.Level;
         hpBar.SetHp((float)anigma.HP / anigma.MaxHp);
     }
 
@@ -28,7 +28,7 @@ public class PartyMemberUI : MonoBehaviour
         }
         else
         {
-            nameText.color = Color.black;
+            nameText.color = GlobalSettings.Instance.BaseInvColor;
         }
     }
 }

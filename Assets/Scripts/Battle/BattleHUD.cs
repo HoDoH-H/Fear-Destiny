@@ -61,7 +61,7 @@ public class BattleHUD : MonoBehaviour
 
     public void SetLevel()
     {
-        levelText.text = "Lvl" + _anigma.Level;
+        levelText.text = "Lv." + _anigma.Level;
     }
 
     public void SetExp()

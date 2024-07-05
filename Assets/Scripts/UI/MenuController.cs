@@ -82,7 +82,7 @@ public class MenuController : MonoBehaviour
             }
             else
             {
-                menuItems[i].color = Color.black;
+                menuItems[i].color = GlobalSettings.Instance.BaseInvColor;
             }
         }
     }

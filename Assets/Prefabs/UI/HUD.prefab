@@ -70,7 +70,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 575009225618100115, guid: c6d5779aa78deee47ae7b8a3e598efc5, type: 3}
+  m_Sprite: {fileID: 443374929, guid: 2dbe0b27d0294a34087cdaad2bdb5d27, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -96,6 +96,7 @@ MonoBehaviour:
   levelText: {fileID: 3825215522465931009}
   statusText: {fileID: 5489722890634404626}
   hpBar: {fileID: 9131129851873772020}
+  expBar: {fileID: 0}
   psnColor: {r: 0.85882354, g: 0.20392157, b: 0.7921569, a: 1}
   brnColor: {r: 0.85882354, g: 0.20392156, b: 0.20392156, a: 1}
   slpColor: {r: 0.54901963, g: 0.46274513, b: 0.48235297, a: 1}
