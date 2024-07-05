@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Round Potion - MAGENTA - 0006_0: 5658582279531229983
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

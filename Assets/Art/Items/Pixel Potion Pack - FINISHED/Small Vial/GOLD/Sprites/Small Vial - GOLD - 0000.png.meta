@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Small Vial - GOLD - 0000_0: 7847557247773060783
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

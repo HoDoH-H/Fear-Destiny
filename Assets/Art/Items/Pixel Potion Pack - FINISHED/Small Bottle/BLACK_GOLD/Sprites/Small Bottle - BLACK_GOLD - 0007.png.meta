@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Small Bottle - BLACK_GOLD - 0007_0: -1454103747786414454
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

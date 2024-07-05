@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Small Bottle - RED_YELLOW - 0002_0: 1105510915818872250
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Bubbly Brew Bottle Rising - GOLD - Spritesheet_0: 6341086761132745721
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

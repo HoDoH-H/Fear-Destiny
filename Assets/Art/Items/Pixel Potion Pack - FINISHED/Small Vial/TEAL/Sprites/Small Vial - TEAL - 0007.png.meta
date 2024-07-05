@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Small Vial - TEAL - 0007_0: 7832983490957206855
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

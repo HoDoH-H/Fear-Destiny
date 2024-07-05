@@ -107,13 +107,13 @@ public class BattleDialogBox : MonoBehaviour
 
         if (move != null)
         {
-            upText.text = $"UP {move.UP}/{move.Base.UP}";
-            typeText.text = move.Base.Type.ToString();
+            upText.text = $"UP: {move.UP}/{move.Base.UP}";
+            typeText.text = $"Type: {move.Base.Type}";
 
             if (move.UP <= 0)
                 upText.color = Color.red;
             else
-                upText.color = Color.black;
+                upText.color = GlobalSettings.Instance.BaseInvColor;
         }
     }
 

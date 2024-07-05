@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Big Vial - BLUE - 0002_0: 1252027367857489971
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

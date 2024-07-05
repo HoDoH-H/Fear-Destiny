@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Small Bottle - PINK - 0007_0: 2061820160889790176
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

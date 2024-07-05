@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Glowing Potion - PURPLE - Spritesheet_0: 8324979708447419917
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

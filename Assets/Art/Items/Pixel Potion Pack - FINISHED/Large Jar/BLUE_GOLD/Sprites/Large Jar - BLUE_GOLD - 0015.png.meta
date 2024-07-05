@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Large Jar - BLUE_GOLD - 0015_0: 4339582832618164650
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

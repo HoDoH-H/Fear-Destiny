@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Large Jar - TURQUOISE - Spritesheet_0: 5442941741939947756
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

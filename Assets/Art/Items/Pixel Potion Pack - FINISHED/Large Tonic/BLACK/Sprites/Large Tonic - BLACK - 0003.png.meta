@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Large Tonic - BLACK - 0003_0: 2713056563809599792
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

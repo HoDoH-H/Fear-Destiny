@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Glowing Potion - RED - 0001_0: 897275500806187221
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

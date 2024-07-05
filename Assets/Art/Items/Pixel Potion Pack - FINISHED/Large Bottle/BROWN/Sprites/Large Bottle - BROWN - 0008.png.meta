@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Large Bottle - BROWN - 0008_0: 7123916455092208356
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

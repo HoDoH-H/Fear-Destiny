@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Big Vial - PINK - 0003_0: 1028544364926432712
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

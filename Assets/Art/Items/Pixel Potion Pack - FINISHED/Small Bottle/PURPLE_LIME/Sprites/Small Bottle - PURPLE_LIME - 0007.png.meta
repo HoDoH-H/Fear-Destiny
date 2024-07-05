@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Small Bottle - PURPLE_LIME - 0007_0: 3712924570114303627
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

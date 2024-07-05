@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Encased Potion - GOLD_PURPLE - 0005_0: -3796563731877949786
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

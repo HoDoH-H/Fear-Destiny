@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Small Elixir - PURPLE - Spritesheet_0: 7428673374017390807
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

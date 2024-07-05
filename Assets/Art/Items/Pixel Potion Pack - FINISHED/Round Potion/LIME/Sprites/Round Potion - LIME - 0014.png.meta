@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Round Potion - LIME - 0014_0: -5064296259456311208
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

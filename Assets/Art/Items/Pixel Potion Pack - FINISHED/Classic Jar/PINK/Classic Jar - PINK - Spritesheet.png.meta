@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Classic Jar - PINK - Spritesheet_0: 7690393073305196846
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

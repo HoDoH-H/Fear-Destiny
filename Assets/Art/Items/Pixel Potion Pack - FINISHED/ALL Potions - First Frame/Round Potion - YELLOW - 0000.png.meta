@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Round Potion - YELLOW - 0000_0: 6840621842076631843
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

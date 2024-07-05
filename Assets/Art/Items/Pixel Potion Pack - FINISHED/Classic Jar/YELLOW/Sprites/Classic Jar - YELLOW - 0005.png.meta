@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Classic Jar - YELLOW - 0005_0: 9199488123665557749
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

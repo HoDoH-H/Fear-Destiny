@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Small Bottle - PURPLE - Spritesheet_0: 9015717430470687774
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

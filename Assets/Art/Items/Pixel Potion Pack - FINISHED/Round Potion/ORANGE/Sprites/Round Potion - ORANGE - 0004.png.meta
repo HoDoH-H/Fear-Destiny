@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Round Potion - ORANGE - 0004_0: -7175128272225590141
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

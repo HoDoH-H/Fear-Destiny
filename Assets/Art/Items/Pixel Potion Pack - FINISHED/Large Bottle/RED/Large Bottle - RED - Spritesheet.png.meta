@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Large Bottle - RED - Spritesheet_0: 3466347230380518357
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

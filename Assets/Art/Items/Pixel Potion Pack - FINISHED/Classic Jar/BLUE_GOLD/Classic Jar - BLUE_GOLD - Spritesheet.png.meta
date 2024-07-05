@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Classic Jar - BLUE_GOLD - Spritesheet_0: 8462856180547625165
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

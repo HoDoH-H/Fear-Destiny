@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Bubbly Brew Bottle - CYAN - 0001_0: -5581785418131092553
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

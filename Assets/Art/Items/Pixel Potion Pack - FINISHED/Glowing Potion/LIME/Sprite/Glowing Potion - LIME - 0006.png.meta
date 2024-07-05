@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Glowing Potion - LIME - 0006_0: 3818186262343645084
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

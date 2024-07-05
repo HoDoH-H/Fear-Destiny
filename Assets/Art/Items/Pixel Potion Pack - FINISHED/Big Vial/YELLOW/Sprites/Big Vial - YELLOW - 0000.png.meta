@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Big Vial - YELLOW - 0000_0: -3324557285203555539
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

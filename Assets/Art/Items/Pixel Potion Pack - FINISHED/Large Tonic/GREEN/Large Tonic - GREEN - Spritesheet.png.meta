@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Large Tonic - GREEN - Spritesheet_0: 7163052468964491297
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

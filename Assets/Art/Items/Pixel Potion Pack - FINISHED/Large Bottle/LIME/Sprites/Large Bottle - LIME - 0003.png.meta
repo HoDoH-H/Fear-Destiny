@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Large Bottle - LIME - 0003_0: 7527919901279253220
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

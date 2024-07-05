@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Classic Jar - BLUE - Spritesheet_0: 2926667973348779853
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

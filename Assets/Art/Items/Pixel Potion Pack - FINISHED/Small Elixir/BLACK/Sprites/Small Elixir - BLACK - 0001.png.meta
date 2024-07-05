@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Small Elixir - BLACK - 0001_0: -5168548949644573471
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

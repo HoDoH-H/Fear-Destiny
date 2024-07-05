@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Encased Potion - BROWN_RED - 0002_0: 8585178963214375229
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
