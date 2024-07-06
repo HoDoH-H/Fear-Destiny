@@ -36,6 +36,9 @@ public class GameController : MonoBehaviour
 
         menuController = GetComponent<MenuController>();
 
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         ConditionDB.Init();
         AnigmaDB.Init();
         MoveDB.Init();
