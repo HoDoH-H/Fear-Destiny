@@ -7,7 +7,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum BattleState { Start, ActionSelection, MoveSelection, RunningTurn, Busy, PartyScreen, AboutToUse, MoveToForget, BattleOver }
+public enum BattleState { Start, ActionSelection, MoveSelection, RunningTurn, Busy, PartyScreen, Bag, AboutToUse, MoveToForget, BattleOver }
 public enum BattleAction { Move, SwitchAnigma, UseItem, Run}
 
 public class BattleSystem : MonoBehaviour
@@ -20,6 +20,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] Image trainerImage;
     [SerializeField] GameObject ringSprite;
     [SerializeField] MoveSelectionUI moveSelectionUI;
+    [SerializeField] InventoryUI inventoryUI;
 
     public event Action<bool> OnBattleOver;
 
@@ -139,7 +140,6 @@ public class BattleSystem : MonoBehaviour
         dialogBox.EnableActionSelector(true);
         dialogBox.EnableDialogText(true);
         dialogBox.EnableMoveSelector(false);
-        dialogBox.EnableBigDialogBox(false);
         partyScreen.gameObject.SetActive(false);
     }
 
@@ -148,6 +148,12 @@ public class BattleSystem : MonoBehaviour
         partyScreen.CalledFrom = state;
         state = BattleState.PartyScreen;
         partyScreen.gameObject.SetActive(true);
+    }
+
+    void OpenBag()
+    {
+        state = BattleState.Bag;
+        inventoryUI.gameObject.SetActive(true);
     }
 
     void MoveSelection()
@@ -181,7 +187,6 @@ public class BattleSystem : MonoBehaviour
     // Region End - UI Managers
 
     // Region Start - Battle
-
 
     IEnumerator RunTurns(BattleAction playerAction)
     {
@@ -230,17 +235,8 @@ public class BattleSystem : MonoBehaviour
             }
             else if (playerAction == BattleAction.UseItem)
             {
-                if (isTrainerBattle)
-                {
-                    yield return dialogBox.TypeDialog($"You can't catch other trainer's anigmas!");
-                    ActionSelection();
-                    yield break;
-                }
-                else
-                {
-                    dialogBox.EnableActionSelector(false);
-                    yield return TriggerRing();
-                }
+                // Inventory is handled from item screen, so do nothing and skip to opponent move.
+                dialogBox.EnableActionSelector(false);
             }
             else if (playerAction == BattleAction.Run)
             {
@@ -274,7 +270,7 @@ public class BattleSystem : MonoBehaviour
         if (!canRunMove)
         {
             yield return ShowStatusChanges(sourceUnit.Anigma);
-            yield return sourceUnit.Hud.UpdateHP();
+            yield return targetUnit.Hud.WaitForHPUpdate();
             if (sourceUnit.Anigma.HP <= 0)
             {
                 yield return dialogBox.TypeDialog($"{sourceUnit.Anigma.Base.Name} fainted.");
@@ -306,7 +302,7 @@ public class BattleSystem : MonoBehaviour
             else
             {
                 var damageDetails = targetUnit.Anigma.TakeDamage(move, sourceUnit.Anigma);
-                yield return targetUnit.Hud.UpdateHP();
+                yield return targetUnit.Hud.WaitForHPUpdate();
                 yield return ShowDamageDetail(damageDetails, targetUnit.Anigma);
             }
 
@@ -342,7 +338,7 @@ public class BattleSystem : MonoBehaviour
         // Statuses like burn or poison will hurt the anigma after the turn
         sourceUnit.Anigma.OnAfterTurn();
         yield return ShowStatusChanges(sourceUnit.Anigma);
-        yield return sourceUnit.Hud.UpdateHP();
+        yield return sourceUnit.Hud.WaitForHPUpdate();
 
         if (sourceUnit.Anigma.HP <= 0)
         {
@@ -730,6 +726,23 @@ public class BattleSystem : MonoBehaviour
         {
             HandleAboutToUse();
         }
+        else if (state == BattleState.Bag)
+        {
+            Action onBack = () =>
+            {
+                inventoryUI.gameObject.SetActive(false);
+                state = BattleState.ActionSelection;
+            };
+
+            Action onItemUsed = () => 
+            {
+                state = BattleState.Busy;
+                inventoryUI.gameObject.SetActive(false);
+                StartCoroutine(RunTurns(BattleAction.UseItem));
+            };
+
+            inventoryUI.HandleUpdate(onBack, onItemUsed);
+        }
         else if (state == BattleState.MoveToForget)
         {
             Action<int> onMoveSelected = (moveIndex) =>
@@ -820,8 +833,8 @@ public class BattleSystem : MonoBehaviour
             }
             else if (currentAction == 2)
             {
-                // TODO - Open bag ; NOW - Trigger ring
-                StartCoroutine(RunTurns(BattleAction.UseItem));
+                // Open bag
+                OpenBag();
             }
             else if (currentAction == 3)
             {

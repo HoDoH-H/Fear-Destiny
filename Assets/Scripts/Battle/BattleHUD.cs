@@ -26,6 +26,12 @@ public class BattleHUD : MonoBehaviour
 
     public void SetData(Anigma anigma)
     {
+        if (_anigma != null)
+        {
+            _anigma.OnStatusChanged -= SetStatusText;
+            _anigma.OnHPChanged -= UpdateHP;
+        }
+
         _anigma = anigma;
 
         nameText.text = anigma.Base.Name;
@@ -44,6 +50,7 @@ public class BattleHUD : MonoBehaviour
 
         SetStatusText();
         _anigma.OnStatusChanged += SetStatusText;
+        _anigma.OnHPChanged += UpdateHP;
     }
 
     void SetStatusText()
@@ -94,12 +101,18 @@ public class BattleHUD : MonoBehaviour
         return Mathf.Clamp01(normalizedExp);
     }
 
-    public IEnumerator UpdateHP()
+    public void UpdateHP()
     {
-        if (_anigma.HpChanged)
-        {
-            yield return hpBar.SetHpSmoothly((float)_anigma.HP / _anigma.MaxHp);
-            _anigma.HpChanged = false;
-        }
+        StartCoroutine(UpdateHPAsync());
+    }
+
+    public IEnumerator UpdateHPAsync()
+    {
+        yield return hpBar.SetHpSmoothly((float)_anigma.HP / _anigma.MaxHp);
+    }
+
+    public IEnumerator WaitForHPUpdate()
+    {
+        yield return new WaitUntil(() => hpBar.IsUpdating == false);
     }
 }

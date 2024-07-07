@@ -11,13 +11,19 @@ public class PartyMemberUI : MonoBehaviour
 
     Anigma _anigma;
 
-    public void SetData(Anigma anigma)
+    public void Init(Anigma anigma)
     {
         _anigma = anigma;
+        UpdateData();
 
-        nameText.text = anigma.Base.Name;
-        levelText.text = "Lv." + anigma.Level;
-        hpBar.SetHp((float)anigma.HP / anigma.MaxHp);
+        _anigma.OnHPChanged += UpdateData;
+    }
+
+    void UpdateData()
+    {
+        nameText.text = _anigma.Base.Name;
+        levelText.text = "Lv." + _anigma.Level;
+        hpBar.SetHp((float)_anigma.HP / _anigma.MaxHp);
     }
 
     public void SetSelected(bool isSelected)

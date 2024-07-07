@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
@@ -20,6 +21,8 @@ public class InventoryUI : MonoBehaviour
 
     [SerializeField] PartyScreen partyScreen;
 
+    Action onItemUsed;
+
     int selectedItem = 0;
     InventoryUIState state;
 
@@ -37,6 +40,8 @@ public class InventoryUI : MonoBehaviour
     private void Start()
     {
         UpdateItemList();
+
+        inventory.OnUpdated += UpdateItemList;
     }
 
     public void UpdateItemList()
@@ -59,8 +64,10 @@ public class InventoryUI : MonoBehaviour
         UpdateItemSelection();
     }
 
-    public void HandleUpdate(Action onBack)
+    public void HandleUpdate(Action onBack, Action onItemUsed=null)
     {
+        this.onItemUsed = onItemUsed;
+
         if ( state == InventoryUIState.ItemSelection)
         {
             int prevSelection = selectedItem;
@@ -99,7 +106,7 @@ public class InventoryUI : MonoBehaviour
         {
             Action onSelected = () =>
             {
-                // TODO - Use item on selected Anigma
+                StartCoroutine(UseItem());
             };
 
             Action onBackPartyScreen = () =>
@@ -109,6 +116,25 @@ public class InventoryUI : MonoBehaviour
 
             partyScreen.HandleUpdate(onSelected, onBackPartyScreen);
         }
+    }
+
+    IEnumerator UseItem()
+    {
+        state = InventoryUIState.Busy;
+
+        var usedItem = inventory.UseItem(selectedItem, partyScreen.SelectedMember);
+
+        if (usedItem != null)
+        {
+            yield return DialogManager.Instance.ShowDialogText($"You used {usedItem.Name}");
+            onItemUsed?.Invoke();
+        }
+        else
+        {
+            yield return DialogManager.Instance.ShowDialogText($"It won't have any effect!");
+        }
+
+        ClosePartyScreen();
     }
 
     void UpdateItemSelection()

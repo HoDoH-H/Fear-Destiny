@@ -26,7 +26,6 @@ public class PartyScreen : MonoBehaviour
         memberSlots = GetComponentsInChildren<PartyMemberUI>(true);
 
         party = AnigmaParty.GetPlayerParty();
-        Debug.Log(party.Anigmas[0].Base.Name);
         SetPartyData();
 
         party.OnUpdated += SetPartyData;
@@ -41,7 +40,7 @@ public class PartyScreen : MonoBehaviour
             if (i < anigmas.Count)
             {
                 memberSlots[i].gameObject.SetActive(true);
-                memberSlots[i].SetData(anigmas[i]);
+                memberSlots[i].Init(anigmas[i]);
             }
             else
             {

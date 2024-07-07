@@ -54,8 +54,10 @@ public class DoorManager : MonoBehaviour
 
     IEnumerator EnterHouse()
     {
+        player.CanMove = false;
         anim.SetTrigger("Open");
         yield return new WaitForSeconds(0.5f);
         this.GetComponent<LocationPortal>()?.OnPlayerTriggered(player);
+        player.CanMove = true;
     }
 }

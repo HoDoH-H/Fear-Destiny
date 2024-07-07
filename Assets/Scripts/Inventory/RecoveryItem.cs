@@ -27,4 +27,17 @@ public class RecoveryItem : ItemBase
     [Header("Is poisonous for")]
     [SerializeField] bool humans;
     [SerializeField] bool anigmas;
+
+    public override bool Use(Anigma anigma)
+    {
+        if (hpAmount > 0)
+        {
+            if (anigma.HP == anigma.MaxHp)
+                return false;
+
+            anigma.IncreaseHP(hpAmount);
+        }
+
+        return true;
+    }
 }

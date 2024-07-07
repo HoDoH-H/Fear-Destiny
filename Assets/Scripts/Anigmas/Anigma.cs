@@ -28,9 +28,9 @@ public class Anigma
     public Condition Status { get; set; }
     public Condition VolatileStatus { get; set; }
     public int VolatileStatusTime { get; set; }
-    public bool HpChanged { get; set; }
     public int StatusTime { get; set; }
     public event System.Action OnStatusChanged;
+    public event System.Action OnHPChanged;
 
     public Queue<string> StatusChanges { get; private set; }
 
@@ -267,15 +267,21 @@ public class Anigma
         float d = a * move.Base.Power * (attack / defense) + 2;
         int damage = Mathf.FloorToInt(d * modifiers);
 
-        UpdateHP(damage);
+        DecreaseHP(damage);
 
         return damageDetails;
     }
 
-    public void UpdateHP(int damage)
+    public void DecreaseHP(int damage)
     {
         HP = Mathf.Clamp(HP - damage, 0, MaxHp);
-        HpChanged = true;
+        OnHPChanged?.Invoke();
+    }
+
+    public void IncreaseHP(int amount)
+    {
+        HP = Mathf.Clamp(HP + amount, 0, MaxHp);
+        OnHPChanged?.Invoke();
     }
 
     public void SetStatus(ConditionID status)

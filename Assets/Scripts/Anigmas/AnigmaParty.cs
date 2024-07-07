@@ -9,7 +9,14 @@ public class AnigmaParty : MonoBehaviour
 
     public event Action OnUpdated;
 
-    public List<Anigma> Anigmas {  get { return anigmas; }set { anigmas = value; } }
+    public List<Anigma> Anigmas {  
+        get { 
+            return anigmas; 
+        }set { 
+            anigmas = value;
+            OnUpdated?.Invoke();
+        } 
+    }
 
     private void Start()
     {

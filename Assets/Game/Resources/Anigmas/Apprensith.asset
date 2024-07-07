@@ -24,12 +24,12 @@ MonoBehaviour:
   backSprite: {fileID: 8611254305700795036, guid: 5056bb8e0203ac548872b516426907b9, type: 3}
   type1: 2
   type2: 20
-  maxHp: 49
-  attack: 46
-  defense: 39
-  spAttack: 59
-  spDefense: 56
-  speed: 42
+  maxHp: 55
+  attack: 58
+  defense: 53
+  spAttack: 72
+  spDefense: 75
+  speed: 57
   catchRate: 255
   expYield: 91
   growthRate: 3

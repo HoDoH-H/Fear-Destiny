@@ -24,7 +24,7 @@ public class ConditionDB
                 StartMessage = "has been poisoned!",
                 OnAfterTurn = (Anigma anigma) =>
                 {
-                    anigma.UpdateHP(anigma.MaxHp / 8);
+                    anigma.DecreaseHP(anigma.MaxHp / 8);
                     anigma.StatusChanges.Enqueue($"{anigma.Base.Name} is hurt by poison");
                 }
             }
@@ -37,7 +37,7 @@ public class ConditionDB
                 StartMessage = "has been burned!",
                 OnAfterTurn = (Anigma anigma) =>
                 {
-                    anigma.UpdateHP(anigma.MaxHp / 16);
+                    anigma.DecreaseHP(anigma.MaxHp / 16);
                     anigma.StatusChanges.Enqueue($"{anigma.Base.Name} is hurt by its burn");
                 }
             }
@@ -136,7 +136,7 @@ public class ConditionDB
                         return true;
 
                     anigma.StatusChanges.Enqueue($"{anigma.Base.Name} hurt itself in its confusion");
-                    anigma.UpdateHP(anigma.MaxHp / 8);
+                    anigma.DecreaseHP(anigma.MaxHp / 8);
                     return false;
                 }
             }

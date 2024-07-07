@@ -50,6 +50,7 @@ public class BattleDialogBox : MonoBehaviour
     public void EnableActionSelector(bool enable)
     {
         actionSelector.SetActive(enable);
+        EnableBigDialogBox(!enable);
     }
 
     public void EnableChoiceBox(bool enable)
