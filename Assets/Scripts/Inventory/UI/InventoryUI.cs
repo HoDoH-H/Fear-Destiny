@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+
+public enum InventoryUIState { ItemSelection, PartySelection, Busy}
 
 public class InventoryUI : MonoBehaviour
 {
@@ -15,7 +18,10 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] Image upArrow;
     [SerializeField] Image downArrow;
 
+    [SerializeField] PartyScreen partyScreen;
+
     int selectedItem = 0;
+    InventoryUIState state;
 
     const int itemsInViewport = 8;
 
@@ -55,41 +61,70 @@ public class InventoryUI : MonoBehaviour
 
     public void HandleUpdate(Action onBack)
     {
-        int prevSelection = selectedItem;
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if ( state == InventoryUIState.ItemSelection)
         {
-            if (selectedItem < inventory.Slots.Count-1)
+            int prevSelection = selectedItem;
+            if (Input.GetKeyDown(GlobalSettings.Instance.DownKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.DownKeys[1]))
             {
-                selectedItem++;
+                if (selectedItem < inventory.Slots.Count-1)
+                {
+                    selectedItem++;
+                }
+                else
+                {
+                    selectedItem = 0;
+                }
             }
-            else
+            else if (Input.GetKeyDown(GlobalSettings.Instance.UpKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.UpKeys[1]))
             {
-                selectedItem = 0;
+                if (selectedItem > 0)
+                {
+                    selectedItem--;
+                }
+                else
+                {
+                    selectedItem = inventory.Slots.Count-1;
+                }
             }
-        }
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            if (selectedItem > 0)
-            {
-                selectedItem--;
-            }
-            else
-            {
-                selectedItem = inventory.Slots.Count-1;
-            }
-        }
 
-        if (prevSelection != selectedItem)
-            UpdateItemSelection();
+            if (prevSelection != selectedItem)
+                UpdateItemSelection();
 
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
+            if (Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[1]))
+                OpenPartyScreen();
+            else if (Input.GetKeyDown(GlobalSettings.Instance.BackKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.BackKeys[1]))
+                onBack?.Invoke();
+        }
+        else if (state == InventoryUIState.PartySelection)
         {
-            onBack?.Invoke();
+            Action onSelected = () =>
+            {
+                // TODO - Use item on selected Anigma
+            };
+
+            Action onBackPartyScreen = () =>
+            {
+                ClosePartyScreen();
+            };
+
+            partyScreen.HandleUpdate(onSelected, onBackPartyScreen);
         }
     }
 
     void UpdateItemSelection()
     {
+        if (inventory.Slots.Count == 0)
+        {
+            itemIcon.gameObject.SetActive(false);
+            description.gameObject.SetActive(false);
+            return;
+        }
+        else
+        {
+            itemIcon.gameObject.SetActive(true);
+            description.gameObject.SetActive(true);
+        }
+
         for (int i = 0; i < slotUIList.Count; i++)
         {
             if (i == selectedItem)
@@ -111,6 +146,9 @@ public class InventoryUI : MonoBehaviour
 
     void HandleScrolling()
     {
+        if (slotUIList.Count <= itemsInViewport)
+            return;
+
         float scrollPos = Mathf.Clamp(selectedItem - itemsInViewport/2, 0, slotUIList.Count) * slotUIList[0].Height;
         itemListRect.localPosition = new Vector2(itemListRect.localPosition.x, scrollPos);
 
@@ -119,5 +157,17 @@ public class InventoryUI : MonoBehaviour
 
         bool showDownArrow = selectedItem + itemsInViewport / 2 < slotUIList.Count;
         downArrow.gameObject.SetActive(showDownArrow);
+    }
+
+    void OpenPartyScreen()
+    {
+        state = InventoryUIState.PartySelection;
+        partyScreen.gameObject.SetActive(true);
+    }
+
+    void ClosePartyScreen()
+    {
+        state = InventoryUIState.ItemSelection;
+        partyScreen.gameObject.SetActive(false);
     }
 }

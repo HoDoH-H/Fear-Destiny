@@ -112,7 +112,7 @@ public class BattleUnit : MonoBehaviour
         var sequence = DOTween.Sequence();
         sequence.Append(image.DOFade(100f, 0.5f));
         sequence.Join(transform.DOLocalMoveY(originalPos.y, 0.5f));
-        sequence.Join(transform.DOScale(new Vector3(1f, 1f, 1f), 0.5f));
+        sequence.Join(transform.DOScale(new Vector3(0.5f, 0.5f, 1f), 0.5f));
         yield return sequence.WaitForCompletion();
     }
 }

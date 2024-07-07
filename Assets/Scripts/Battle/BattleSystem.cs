@@ -1,7 +1,9 @@
 using DG.Tweening;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,8 +26,8 @@ public class BattleSystem : MonoBehaviour
     BattleState state;
 
 
-     int currentAction;
-     int currentMove;
+    int currentAction;
+    int currentMove;
     bool aboutToUseChoice = true;
 
     AnigmaParty playerParty;
@@ -38,6 +40,8 @@ public class BattleSystem : MonoBehaviour
 
     int escapeAttemps;
     MoveBase moveToLearn;
+
+    List<Vector3> ringAnimVectors = new List<Vector3>() { new Vector3(0f, 0.10f), new Vector3(0.10f, 0.10f), new Vector3(0.10f, 0f), new Vector3(0.10f, -0.10f), new Vector3(0f, -0.10f), new Vector3(-0.10f, -0.10f), new Vector3(-0.10f, 0f), new Vector3(-0.10f, 0.10f) };
 
     // Region Start - Start battle
 
@@ -135,6 +139,7 @@ public class BattleSystem : MonoBehaviour
         dialogBox.EnableActionSelector(true);
         dialogBox.EnableDialogText(true);
         dialogBox.EnableMoveSelector(false);
+        dialogBox.EnableBigDialogBox(false);
         partyScreen.gameObject.SetActive(false);
     }
 
@@ -142,7 +147,6 @@ public class BattleSystem : MonoBehaviour
     {
         partyScreen.CalledFrom = state;
         state = BattleState.PartyScreen;
-        partyScreen.SetPartyData(playerParty.Anigmas);
         partyScreen.gameObject.SetActive(true);
     }
 
@@ -573,6 +577,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator TriggerRing()
     {
         state = BattleState.Busy;
+        dialogBox.EnableBigDialogBox(true);
 
         if (isTrainerBattle)
         {
@@ -596,8 +601,8 @@ public class BattleSystem : MonoBehaviour
         for (int i = 0; i < Mathf.Min(shakeCount, 3); i++)
         {
             var sequence = DOTween.Sequence();
-            sequence.Append(ring.transform.DOPunchPosition(new Vector3(0.10f, 0.10f), 0.8f));
-            //sequence.Join(ring.transform.DOPunchPosition(new Vector3(0, 0.10f), 0.8f));
+            int selectedAnim = UnityEngine.Random.Range(0, ringAnimVectors.Count);
+            sequence.Append(ring.transform.DOPunchPosition(ringAnimVectors[selectedAnim], 0.8f));
             sequence.Join(ring.DOColor(new Color(1, 0.6622641f, 0.6622641f), 0.8f));
             sequence.Append(ring.DOColor(new Color(1, 1, 1), 0.8f));
             yield return sequence.WaitForCompletion();
@@ -619,7 +624,7 @@ public class BattleSystem : MonoBehaviour
         else
         {
             // Anigma broke out
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.65f);
             var sequence = DOTween.Sequence();
             sequence.Append(ring.transform.DOPunchPosition(new Vector3(0.12f, 0), 0.8f));
             sequence.Join(ring.transform.DOPunchPosition(new Vector3(0, 0.12f), 0.8f));
@@ -754,7 +759,7 @@ public class BattleSystem : MonoBehaviour
 
     void HandleActionSelection()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(GlobalSettings.Instance.RightKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.RightKeys[1]))
         {
             if (currentAction == 0 || currentAction == 2)
             {
@@ -765,7 +770,7 @@ public class BattleSystem : MonoBehaviour
                 --currentAction;
             }
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKeyDown(GlobalSettings.Instance.LeftKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.LeftKeys[1]))
         {
             if (currentAction == 1 || currentAction == 3)
             {
@@ -776,7 +781,7 @@ public class BattleSystem : MonoBehaviour
                 ++currentAction;
             }
         }
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        else if (Input.GetKeyDown(GlobalSettings.Instance.UpKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.UpKeys[1]))
         {
             if (currentAction == 2 || currentAction == 3)
             {
@@ -787,7 +792,7 @@ public class BattleSystem : MonoBehaviour
                 currentAction = currentAction + 2;
             }
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKeyDown(GlobalSettings.Instance.DownKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.DownKeys[1]))
         {
             if (currentAction == 0 || currentAction == 1)
             {
@@ -801,7 +806,7 @@ public class BattleSystem : MonoBehaviour
 
         dialogBox.UpdateActionSelection(currentAction);
 
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        if (Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[1]))
         {
             if (currentAction == 0)
             {
@@ -884,12 +889,12 @@ public class BattleSystem : MonoBehaviour
 
     void HandleAboutToUse()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) ||  Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(GlobalSettings.Instance.UpKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.UpKeys[1]) || Input.GetKeyDown(GlobalSettings.Instance.DownKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.DownKeys[1]))
             aboutToUseChoice = !aboutToUseChoice;
 
         dialogBox.UpdateChoiceBox(aboutToUseChoice);
 
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        if (Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[1]))
         {
             dialogBox.EnableChoiceBox(false);
             if (aboutToUseChoice)
@@ -903,7 +908,7 @@ public class BattleSystem : MonoBehaviour
                 StartCoroutine(SendNextTrainerAnigma());
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Escape))
+        else if (Input.GetKeyDown(GlobalSettings.Instance.BackKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.BackKeys[1]))
         {
             // no
             dialogBox.EnableChoiceBox(false);
@@ -918,13 +923,13 @@ public class BattleSystem : MonoBehaviour
             currentMove = 0;
         }
 
-        if (Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(GlobalSettings.Instance.BackKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.BackKeys[1]))
         {
             //Get back to action selection
             ActionSelection();
         }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(GlobalSettings.Instance.RightKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.RightKeys[1]))
         {
             if (currentMove == 0 && playerUnit.Anigma.Moves.Count > 1 || currentMove == 2 && playerUnit.Anigma.Moves.Count > 3)
             {
@@ -940,7 +945,7 @@ public class BattleSystem : MonoBehaviour
                     --currentMove;
             }
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKeyDown(GlobalSettings.Instance.LeftKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.LeftKeys[1]))
         {
             if (currentMove == 1 || currentMove == 3)
             {
@@ -954,7 +959,7 @@ public class BattleSystem : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        else if (Input.GetKeyDown(GlobalSettings.Instance.UpKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.UpKeys[1]))
         {
             if (currentMove == 2 || currentMove == 3)
             {
@@ -968,7 +973,7 @@ public class BattleSystem : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKeyDown(GlobalSettings.Instance.DownKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.DownKeys[1]))
         {
             if (currentMove == 0 && playerUnit.Anigma.Moves.Count > 2 || currentMove == 1 && playerUnit.Anigma.Moves.Count > 3)
             {
@@ -987,13 +992,14 @@ public class BattleSystem : MonoBehaviour
 
         dialogBox.UpdateMoveSelection(currentMove, playerUnit.Anigma.Moves[currentMove]);
 
-        if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        if(Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[1]))
         {
             var move = playerUnit.Anigma.Moves[currentMove];
             if (move.UP <= 0) return;
 
             dialogBox.EnableMoveSelector(false);
             dialogBox.EnableDialogText(true);
+            dialogBox.EnableBigDialogBox(true);
             StartCoroutine(RunTurns(BattleAction.Move));
         }
     }

@@ -549,8 +549,8 @@ RectTransform:
   - {fileID: 8257173838554941401}
   - {fileID: 4764785599072213520}
   - {fileID: 4825932143547920030}
-  - {fileID: 5439700263898341624}
   - {fileID: 6768767581857276400}
+  - {fileID: 5439700263898341624}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -715,6 +715,9 @@ MonoBehaviour:
   itemSlotUI: {fileID: 631621518556148956, guid: 3dd6efe5433ee0b4f90f9cf2e774c4f3, type: 3}
   itemIcon: {fileID: 8473696140056062658}
   description: {fileID: 4170967256933920306}
+  upArrow: {fileID: 0}
+  downArrow: {fileID: 0}
+  partyScreen: {fileID: 0}
 --- !u!1 &4563285412934236521
 GameObject:
   m_ObjectHideFlags: 0

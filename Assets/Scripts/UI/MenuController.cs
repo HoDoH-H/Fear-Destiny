@@ -34,7 +34,7 @@ public class MenuController : MonoBehaviour
     public void HandleUpdate()
     {
         int prevSelection = selectedItem;
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(GlobalSettings.Instance.DownKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.DownKeys[1]))
         {
             if (selectedItem < menuItems.Count)
             {
@@ -45,7 +45,7 @@ public class MenuController : MonoBehaviour
                 selectedItem = 0;
             }
         }
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        else if (Input.GetKeyDown(GlobalSettings.Instance.UpKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.UpKeys[1]))
         {
             if (selectedItem > 0)
             {
@@ -60,12 +60,12 @@ public class MenuController : MonoBehaviour
         if (prevSelection != selectedItem)
             UpdateItemSelection();
 
-        if (Input.GetKeyDown(KeyCode.Return) ||  Input.GetKeyDown(KeyCode.KeypadEnter))
+        if (Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[1]))
         {
             OnMenuSelected?.Invoke(selectedItem);
             CloseMenu();
         }
-        else if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
+        else if (Input.GetKeyDown(GlobalSettings.Instance.BackKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.BackKeys[1]))
         {
             OnBack?.Invoke();
             CloseMenu();

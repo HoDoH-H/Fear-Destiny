@@ -34,7 +34,7 @@ public class MoveSelectionUI : MonoBehaviour
     {
         if (currState == ForgetMoveState.MoveSelection && canSelect)
         {
-            if (Input.GetKeyDown(KeyCode.DownArrow))
+            if (Input.GetKeyDown(GlobalSettings.Instance.DownKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.DownKeys[1]))
             {
                 if (currentSelection < moveTexts.Count - 2)
                 {
@@ -45,7 +45,7 @@ public class MoveSelectionUI : MonoBehaviour
                     currentSelection = 0;
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.UpArrow))
+            else if (Input.GetKeyDown(GlobalSettings.Instance.UpKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.UpKeys[1]))
             {
                 if (currentSelection > 0)
                 {
@@ -59,7 +59,7 @@ public class MoveSelectionUI : MonoBehaviour
         }
         else if (currState == ForgetMoveState.Choice && canSelect)
         {
-            if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyDown(GlobalSettings.Instance.DownKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.DownKeys[1]) || Input.GetKeyDown(GlobalSettings.Instance.UpKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.UpKeys[1]))
             {
                 wantToChange = !wantToChange;
             }
@@ -70,7 +70,7 @@ public class MoveSelectionUI : MonoBehaviour
         else if (currState == ForgetMoveState.Choice)
             UpdateDialogSelection();
 
-        if (Input.GetKeyDown(KeyCode.KeypadEnter) && canSelect || Input.GetKeyDown(KeyCode.Return) && canSelect) 
+        if (Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[0]) && canSelect || Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[1]) && canSelect) 
         {
             if (currState == ForgetMoveState.MoveSelection)
             {
@@ -98,7 +98,7 @@ public class MoveSelectionUI : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Backspace) && canSelect || Input.GetKeyDown(KeyCode.Escape) && canSelect)
+        else if (Input.GetKeyDown(GlobalSettings.Instance.BackKeys[0]) && canSelect || Input.GetKeyDown(GlobalSettings.Instance.BackKeys[1]) && canSelect)
         {
             if (currState == ForgetMoveState.MoveSelection)
             {

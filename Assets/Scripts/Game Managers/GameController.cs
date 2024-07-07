@@ -300,7 +300,6 @@ public class GameController : MonoBehaviour
         {
             // Anigmas
             partyScreen.gameObject.SetActive(true);
-            partyScreen.SetPartyData(playerController.GetComponent<AnigmaParty>().Anigmas);
             state = GameState.PartyScreen;
         }
         else if (selectedItem == 1)

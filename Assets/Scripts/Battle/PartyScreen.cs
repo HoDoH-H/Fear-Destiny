@@ -10,6 +10,7 @@ public class PartyScreen : MonoBehaviour
 
     PartyMemberUI[] memberSlots;
     List<Anigma> anigmas;
+    AnigmaParty party;
 
     int selection = 0;
 
@@ -23,11 +24,18 @@ public class PartyScreen : MonoBehaviour
     public void Init()
     {
         memberSlots = GetComponentsInChildren<PartyMemberUI>(true);
+
+        party = AnigmaParty.GetPlayerParty();
+        Debug.Log(party.Anigmas[0].Base.Name);
+        SetPartyData();
+
+        party.OnUpdated += SetPartyData;
     }
 
-    public void SetPartyData(List<Anigma> anigmas)
+    public void SetPartyData()
     {
-        this.anigmas = anigmas;
+        anigmas = party.Anigmas;
+
         for (int i = 0; i < memberSlots.Length; i++)
         {
             if (i < anigmas.Count)
@@ -70,7 +78,7 @@ public class PartyScreen : MonoBehaviour
     {
         var prevSelection = selection;
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(GlobalSettings.Instance.RightKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.RightKeys[1]))
         {
             if (selection == 0 && anigmas.Count > 1 || selection == 2 && anigmas.Count > 3 || selection == 4 && anigmas.Count > 5)
             {
@@ -86,7 +94,7 @@ public class PartyScreen : MonoBehaviour
                     --selection;
             }
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKeyDown(GlobalSettings.Instance.LeftKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.LeftKeys[1]))
         {
             if (selection == 1 || selection == 3 || selection == 5)
             {
@@ -100,7 +108,7 @@ public class PartyScreen : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        else if (Input.GetKeyDown(GlobalSettings.Instance.UpKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.UpKeys[1]))
         {
             if (selection > 1)
             {
@@ -118,7 +126,7 @@ public class PartyScreen : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKeyDown(GlobalSettings.Instance.DownKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.DownKeys[1]))
         {
             if (selection + 2 < anigmas.Count)
             {
@@ -140,11 +148,11 @@ public class PartyScreen : MonoBehaviour
         if (selection != prevSelection)
             UpdateMemberSelection(selection);
 
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        if (Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[1]))
         {
             onSelected?.Invoke();
         }
-        else if (Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Escape))
+        else if (Input.GetKeyDown(GlobalSettings.Instance.BackKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.BackKeys[1]))
         {
             onBack?.Invoke();
         }

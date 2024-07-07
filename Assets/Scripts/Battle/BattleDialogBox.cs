@@ -13,6 +13,7 @@ public class BattleDialogBox : MonoBehaviour
     [SerializeField] GameObject moveSelector;
     [SerializeField] GameObject moveDetails;
     [SerializeField] GameObject choiceBox;
+    [SerializeField] GameObject dialogBox;
 
     [SerializeField] List<TextMeshProUGUI> actionTexts;
     [SerializeField] List<TextMeshProUGUI> moveTexts;
@@ -60,6 +61,17 @@ public class BattleDialogBox : MonoBehaviour
     {
         moveSelector.SetActive(enable);
         moveDetails.SetActive(enable);
+    }
+
+    public void EnableBigDialogBox(bool enable)
+    {
+        if (enable)
+        {
+            dialogBox.gameObject.GetComponent<RectTransform>().offsetMax = new Vector2(0, dialogBox.gameObject.GetComponent<RectTransform>().offsetMax.y);
+            return;
+        }
+
+        dialogBox.gameObject.GetComponent<RectTransform>().offsetMax = new Vector2(-315, dialogBox.gameObject.GetComponent<RectTransform>().offsetMax.y);
     }
 
     public void UpdateActionSelection(int selectedAction)

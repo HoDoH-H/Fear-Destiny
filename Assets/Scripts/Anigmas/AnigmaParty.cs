@@ -1,10 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class AnigmaParty : MonoBehaviour
 {
     [SerializeField] List<Anigma> anigmas;
+
+    public event Action OnUpdated;
 
     public List<Anigma> Anigmas {  get { return anigmas; }set { anigmas = value; } }
 
@@ -26,10 +29,16 @@ public class AnigmaParty : MonoBehaviour
         if (anigmas.Count < 6)
         {
             anigmas.Add(newAnigma);
+            OnUpdated?.Invoke();
         }
         else
         {
             // TODO - Add to the pc one that's implemented
         }
+    }
+
+    public static AnigmaParty GetPlayerParty()
+    {
+        return FindObjectOfType<PlayerController>().GetComponent<AnigmaParty>();
     }
 }

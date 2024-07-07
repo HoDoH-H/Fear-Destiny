@@ -26,6 +26,7 @@ MonoBehaviour:
   status: 0
   recoverAllStatus: 1
   revive: 0
+  boostedRevive: 0
   maxRevive: 0
   humans: 0
   anigmas: 0
