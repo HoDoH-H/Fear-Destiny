@@ -13,8 +13,10 @@ public class InventoryUI : MonoBehaviour
 {
     [SerializeField] GameObject itemList;
     [SerializeField] ItemSlotUI itemSlotUI;
+
     [SerializeField] Image itemIcon;
     [SerializeField] TextMeshProUGUI description;
+    [SerializeField] TextMeshProUGUI category;
 
     [SerializeField] Image upArrow;
     [SerializeField] Image downArrow;
@@ -24,6 +26,7 @@ public class InventoryUI : MonoBehaviour
     Action onItemUsed;
 
     int selectedItem = 0;
+    int selectedCategory = 0;
     InventoryUIState state;
 
     const int itemsInViewport = 8;
@@ -39,6 +42,7 @@ public class InventoryUI : MonoBehaviour
 
     private void Start()
     {
+        ResetSelection();
         UpdateItemList();
 
         inventory.OnUpdated += UpdateItemList;
@@ -53,7 +57,7 @@ public class InventoryUI : MonoBehaviour
         }
 
         slotUIList = new List<ItemSlotUI>();
-        foreach (var itemSlot in inventory.Slots)
+        foreach (var itemSlot in inventory.GetSlotsByCategory(selectedCategory))
         {
             var slotUIObj = Instantiate(itemSlotUI, itemList.transform);
             slotUIObj.SetData(itemSlot);
@@ -61,6 +65,7 @@ public class InventoryUI : MonoBehaviour
             slotUIList.Add(slotUIObj);
         }
 
+        category.text = Inventory.ItemCategories[selectedCategory];
         UpdateItemSelection();
     }
 
@@ -71,35 +76,32 @@ public class InventoryUI : MonoBehaviour
         if ( state == InventoryUIState.ItemSelection)
         {
             int prevSelection = selectedItem;
-            if (Input.GetKeyDown(GlobalSettings.Instance.DownKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.DownKeys[1]))
-            {
-                if (selectedItem < inventory.Slots.Count-1)
-                {
-                    selectedItem++;
-                }
-                else
-                {
-                    selectedItem = 0;
-                }
-            }
-            else if (Input.GetKeyDown(GlobalSettings.Instance.UpKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.UpKeys[1]))
-            {
-                if (selectedItem > 0)
-                {
-                    selectedItem--;
-                }
-                else
-                {
-                    selectedItem = inventory.Slots.Count-1;
-                }
-            }
+            int prevCat = selectedCategory;
 
-            if (prevSelection != selectedItem)
+            if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Down))
+                selectedItem++;
+            else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Up))
+                selectedItem--;
+            else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Right))
+                selectedCategory++;
+            else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Left))
+                selectedCategory--;
+
+            selectedCategory = GameController.Instance.RotateSelection(selectedCategory, Inventory.ItemCategories.Count - 1);
+            selectedItem = GameController.Instance.RotateSelection(selectedItem, inventory.GetSlotsByCategory(selectedCategory).Count - 1);
+
+            if (prevCat != selectedCategory)
+            {
+                ResetSelection();
+                category.text = Inventory.ItemCategories[selectedCategory];
+                UpdateItemList(); 
+            }
+            else if (prevSelection != selectedItem)
                 UpdateItemSelection();
 
-            if (Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[1]))
+            if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Enter))
                 OpenPartyScreen();
-            else if (Input.GetKeyDown(GlobalSettings.Instance.BackKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.BackKeys[1]))
+            else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Back))
                 onBack?.Invoke();
         }
         else if (state == InventoryUIState.PartySelection)
@@ -122,7 +124,7 @@ public class InventoryUI : MonoBehaviour
     {
         state = InventoryUIState.Busy;
 
-        var usedItem = inventory.UseItem(selectedItem, partyScreen.SelectedMember);
+        var usedItem = inventory.UseItem(selectedItem, partyScreen.SelectedMember, selectedCategory);
 
         if (usedItem != null)
         {
@@ -146,10 +148,11 @@ public class InventoryUI : MonoBehaviour
 
     void UpdateItemSelection()
     {
-        if (inventory.Slots.Count == 0)
+        var slots = inventory.GetSlotsByCategory(selectedCategory);
+
+        if (slots.Count == 0)
         {
-            itemIcon.gameObject.SetActive(false);
-            description.gameObject.SetActive(false);
+            ResetSelection();
             return;
         }
         else
@@ -170,9 +173,9 @@ public class InventoryUI : MonoBehaviour
             }
         }
 
-        selectedItem = Mathf.Clamp(selectedItem, 0, inventory.Slots.Count - 1);
+        selectedItem = Mathf.Clamp(selectedItem, 0, slots.Count - 1);
 
-        var item = inventory.Slots[selectedItem].Item;
+        var item = slots[selectedItem].Item;
         itemIcon.sprite = item.Icon;
         description.text = item.Description;
 
@@ -192,6 +195,18 @@ public class InventoryUI : MonoBehaviour
 
         bool showDownArrow = selectedItem + itemsInViewport / 2 < slotUIList.Count;
         downArrow.gameObject.SetActive(showDownArrow);
+    }
+
+    void ResetSelection()
+    {
+        selectedItem = 0;
+
+        upArrow.gameObject.SetActive(false);
+        downArrow.gameObject.SetActive(false);
+
+        itemIcon.gameObject.SetActive(false);
+        description.text = null;
+        description.gameObject.SetActive(false);
     }
 
     void OpenPartyScreen()

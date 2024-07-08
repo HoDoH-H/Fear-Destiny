@@ -12,19 +12,32 @@ public class GlobalSettings : MonoBehaviour
     [SerializeField] List<KeyCode> leftKeys;
     [SerializeField] List<KeyCode> rightKeys;
 
+    List<List<KeyCode>> keyTypes;
+
     public Color HighlightedColor => highlightedColor;
     public Color BaseInvColor => baseInvColor;
-    public List<KeyCode> EnterKeys => enterKeys;
-    public List<KeyCode> BackKeys => backKeys;
-    public List<KeyCode> UpKeys => upKeys;
-    public List<KeyCode> DownKeys => downKeys;
-    public List<KeyCode> LeftKeys => leftKeys;
-    public List<KeyCode> RightKeys => rightKeys;
 
     public static GlobalSettings Instance;
 
     private void Awake()
     {
+        keyTypes = new List<List<KeyCode>>() { enterKeys, backKeys, upKeys, downKeys, leftKeys, rightKeys};
+
         Instance = this;
     }
+
+    public bool IsKeyDown(KeyList keyType)
+    {
+        foreach (var key in keyTypes[((int)keyType)])
+        {
+            if (Input.GetKeyDown(key))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public enum KeyList { Enter, Back, Up, Down, Left, Right }
 }

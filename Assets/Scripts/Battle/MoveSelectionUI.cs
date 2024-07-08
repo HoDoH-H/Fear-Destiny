@@ -34,7 +34,7 @@ public class MoveSelectionUI : MonoBehaviour
     {
         if (currState == ForgetMoveState.MoveSelection && canSelect)
         {
-            if (Input.GetKeyDown(GlobalSettings.Instance.DownKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.DownKeys[1]))
+            if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Down))
             {
                 if (currentSelection < moveTexts.Count - 2)
                 {
@@ -45,7 +45,7 @@ public class MoveSelectionUI : MonoBehaviour
                     currentSelection = 0;
                 }
             }
-            else if (Input.GetKeyDown(GlobalSettings.Instance.UpKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.UpKeys[1]))
+            else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Up))
             {
                 if (currentSelection > 0)
                 {
@@ -59,7 +59,7 @@ public class MoveSelectionUI : MonoBehaviour
         }
         else if (currState == ForgetMoveState.Choice && canSelect)
         {
-            if (Input.GetKeyDown(GlobalSettings.Instance.DownKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.DownKeys[1]) || Input.GetKeyDown(GlobalSettings.Instance.UpKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.UpKeys[1]))
+            if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Down) || GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Up))
             {
                 wantToChange = !wantToChange;
             }
@@ -70,7 +70,7 @@ public class MoveSelectionUI : MonoBehaviour
         else if (currState == ForgetMoveState.Choice)
             UpdateDialogSelection();
 
-        if (Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[0]) && canSelect || Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[1]) && canSelect) 
+        if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Enter) && canSelect) 
         {
             if (currState == ForgetMoveState.MoveSelection)
             {
@@ -98,7 +98,7 @@ public class MoveSelectionUI : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyDown(GlobalSettings.Instance.BackKeys[0]) && canSelect || Input.GetKeyDown(GlobalSettings.Instance.BackKeys[1]) && canSelect)
+        else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Back) && canSelect)
         {
             if (currState == ForgetMoveState.MoveSelection)
             {

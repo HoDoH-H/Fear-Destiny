@@ -5,34 +5,56 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] List<ItemSlot> slots;
+    [SerializeField] List<ItemSlot> itemsSlots;
+    [SerializeField] List<ItemSlot> recoverySlots;
+    [SerializeField] List<ItemSlot> ringSlots;
+    [SerializeField] List<ItemSlot> memorySlots;
+
+    List<List<ItemSlot>> allSlots;
 
     public event Action OnUpdated;
 
-    public List<ItemSlot> Slots => slots;
-
-    public ItemBase UseItem(int itemIndex, Anigma selectedAnigma)
+    private void Awake()
     {
-        var item = slots[itemIndex].Item;
+        allSlots = new List<List<ItemSlot>> { itemsSlots, recoverySlots, ringSlots, memorySlots};
+    }
+
+    public static List<string> ItemCategories { get; set; } = new List<string>() 
+    { 
+        "Items", "Recovery", "Rings", "Memories"
+    };
+
+    public List<ItemSlot> GetSlotsByCategory(int categoryIndex)
+    {
+        return allSlots[categoryIndex];
+    }
+
+    public ItemBase UseItem(int itemIndex, Anigma selectedAnigma, int selectedCategory)
+    {
+        var currSlot = GetSlotsByCategory(selectedCategory);
+
+        var item = currSlot[itemIndex].Item;
         bool itemUsed = item.Use(selectedAnigma);
 
         if (itemUsed)
         {
-            RemoveItem(item);
+            RemoveItem(item, selectedCategory);
             return item;
         }
 
         return null;
     }
 
-    public void RemoveItem(ItemBase item)
+    public void RemoveItem(ItemBase item, int selectedCategory)
     {
-        var itemSlot = slots.First(slot => slot.Item == item);
+        var currSlot = GetSlotsByCategory(selectedCategory);
+
+        var itemSlot = currSlot.First(slot => slot.Item == item);
         itemSlot.Count--;
 
         if (itemSlot.Count <= 0)
         {
-            slots.Remove(itemSlot);
+            currSlot.Remove(itemSlot);
         }
 
         OnUpdated?.Invoke();

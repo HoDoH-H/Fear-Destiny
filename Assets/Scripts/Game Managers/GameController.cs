@@ -322,4 +322,14 @@ public class GameController : MonoBehaviour
             state = GameState.FreeRoam;
         }
     }
+
+    public int RotateSelection(int index, int max)
+    {
+        if (index < 0)
+            return index + max + 1;
+        else if (index > max)
+            return index - max - 1;
+
+        return index;
+    }
 }

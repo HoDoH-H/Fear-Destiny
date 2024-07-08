@@ -34,38 +34,22 @@ public class MenuController : MonoBehaviour
     public void HandleUpdate()
     {
         int prevSelection = selectedItem;
-        if (Input.GetKeyDown(GlobalSettings.Instance.DownKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.DownKeys[1]))
-        {
-            if (selectedItem < menuItems.Count)
-            {
-                selectedItem++;
-            }
-            else
-            {
-                selectedItem = 0;
-            }
-        }
-        else if (Input.GetKeyDown(GlobalSettings.Instance.UpKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.UpKeys[1]))
-        {
-            if (selectedItem > 0)
-            {
-                selectedItem--;
-            }
-            else
-            {
-                selectedItem = menuItems.Count;
-            }
-        }
+        if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Down))
+            selectedItem++;
+        else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Up))
+            selectedItem--;
+
+        selectedItem = GameController.Instance.RotateSelection(selectedItem, menuItems.Count - 1);
 
         if (prevSelection != selectedItem)
             UpdateItemSelection();
 
-        if (Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[1]))
+        if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Enter))
         {
             OnMenuSelected?.Invoke(selectedItem);
             CloseMenu();
         }
-        else if (Input.GetKeyDown(GlobalSettings.Instance.BackKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.BackKeys[1]))
+        else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Back))
         {
             OnBack?.Invoke();
             CloseMenu();

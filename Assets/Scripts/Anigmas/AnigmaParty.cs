@@ -18,7 +18,7 @@ public class AnigmaParty : MonoBehaviour
         } 
     }
 
-    private void Start()
+    private void Awake()
     {
         foreach (var anigma in anigmas)
         {

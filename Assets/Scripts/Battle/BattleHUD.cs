@@ -26,11 +26,7 @@ public class BattleHUD : MonoBehaviour
 
     public void SetData(Anigma anigma)
     {
-        if (_anigma != null)
-        {
-            _anigma.OnStatusChanged -= SetStatusText;
-            _anigma.OnHPChanged -= UpdateHP;
-        }
+        ClearData();
 
         _anigma = anigma;
 
@@ -114,5 +110,14 @@ public class BattleHUD : MonoBehaviour
     public IEnumerator WaitForHPUpdate()
     {
         yield return new WaitUntil(() => hpBar.IsUpdating == false);
+    }
+
+    public void ClearData()
+    {
+        if (_anigma != null)
+        {
+            _anigma.OnStatusChanged -= SetStatusText;
+            _anigma.OnHPChanged -= UpdateHP;
+        }
     }
 }

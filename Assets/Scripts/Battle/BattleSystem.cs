@@ -125,6 +125,8 @@ public class BattleSystem : MonoBehaviour
     {
         state = BattleState.BattleOver;
         playerParty.Anigmas.ForEach(p => p.OnBattleOver());
+        playerUnit.Hud.ClearData();
+        opponentUnit.Hud.ClearData();
         OnBattleOver(isWon);
 
         if (!isWon)
@@ -773,7 +775,7 @@ public class BattleSystem : MonoBehaviour
 
     void HandleActionSelection()
     {
-        if (Input.GetKeyDown(GlobalSettings.Instance.RightKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.RightKeys[1]))
+        if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Right))
         {
             if (currentAction == 0 || currentAction == 2)
             {
@@ -784,7 +786,7 @@ public class BattleSystem : MonoBehaviour
                 --currentAction;
             }
         }
-        else if (Input.GetKeyDown(GlobalSettings.Instance.LeftKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.LeftKeys[1]))
+        else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Left))
         {
             if (currentAction == 1 || currentAction == 3)
             {
@@ -795,7 +797,7 @@ public class BattleSystem : MonoBehaviour
                 ++currentAction;
             }
         }
-        else if (Input.GetKeyDown(GlobalSettings.Instance.UpKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.UpKeys[1]))
+        else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Up))
         {
             if (currentAction == 2 || currentAction == 3)
             {
@@ -806,7 +808,7 @@ public class BattleSystem : MonoBehaviour
                 currentAction = currentAction + 2;
             }
         }
-        else if (Input.GetKeyDown(GlobalSettings.Instance.DownKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.DownKeys[1]))
+        else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Down))
         {
             if (currentAction == 0 || currentAction == 1)
             {
@@ -820,7 +822,7 @@ public class BattleSystem : MonoBehaviour
 
         dialogBox.UpdateActionSelection(currentAction);
 
-        if (Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[1]))
+        if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Enter))
         {
             if (currentAction == 0)
             {
@@ -903,12 +905,12 @@ public class BattleSystem : MonoBehaviour
 
     void HandleAboutToUse()
     {
-        if (Input.GetKeyDown(GlobalSettings.Instance.UpKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.UpKeys[1]) || Input.GetKeyDown(GlobalSettings.Instance.DownKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.DownKeys[1]))
+        if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Up) || GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Down))
             aboutToUseChoice = !aboutToUseChoice;
 
         dialogBox.UpdateChoiceBox(aboutToUseChoice);
 
-        if (Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[1]))
+        if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Enter))
         {
             dialogBox.EnableChoiceBox(false);
             if (aboutToUseChoice)
@@ -922,7 +924,7 @@ public class BattleSystem : MonoBehaviour
                 StartCoroutine(SendNextTrainerAnigma());
             }
         }
-        else if (Input.GetKeyDown(GlobalSettings.Instance.BackKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.BackKeys[1]))
+        else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Back))
         {
             // no
             dialogBox.EnableChoiceBox(false);
@@ -937,13 +939,13 @@ public class BattleSystem : MonoBehaviour
             currentMove = 0;
         }
 
-        if (Input.GetKeyDown(GlobalSettings.Instance.BackKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.BackKeys[1]))
+        if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Back))
         {
             //Get back to action selection
             ActionSelection();
         }
 
-        if (Input.GetKeyDown(GlobalSettings.Instance.RightKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.RightKeys[1]))
+        if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Right))
         {
             if (currentMove == 0 && playerUnit.Anigma.Moves.Count > 1 || currentMove == 2 && playerUnit.Anigma.Moves.Count > 3)
             {
@@ -959,7 +961,7 @@ public class BattleSystem : MonoBehaviour
                     --currentMove;
             }
         }
-        else if (Input.GetKeyDown(GlobalSettings.Instance.LeftKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.LeftKeys[1]))
+        else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Left))
         {
             if (currentMove == 1 || currentMove == 3)
             {
@@ -973,7 +975,7 @@ public class BattleSystem : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyDown(GlobalSettings.Instance.UpKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.UpKeys[1]))
+        else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Up))
         {
             if (currentMove == 2 || currentMove == 3)
             {
@@ -987,7 +989,7 @@ public class BattleSystem : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyDown(GlobalSettings.Instance.DownKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.DownKeys[1]))
+        else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Down))
         {
             if (currentMove == 0 && playerUnit.Anigma.Moves.Count > 2 || currentMove == 1 && playerUnit.Anigma.Moves.Count > 3)
             {
@@ -1006,7 +1008,7 @@ public class BattleSystem : MonoBehaviour
 
         dialogBox.UpdateMoveSelection(currentMove, playerUnit.Anigma.Moves[currentMove]);
 
-        if(Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[1]))
+        if(GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Enter))
         {
             var move = playerUnit.Anigma.Moves[currentMove];
             if (move.UP <= 0) return;

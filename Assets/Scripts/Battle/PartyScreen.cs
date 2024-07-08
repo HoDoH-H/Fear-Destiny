@@ -77,7 +77,7 @@ public class PartyScreen : MonoBehaviour
     {
         var prevSelection = selection;
 
-        if (Input.GetKeyDown(GlobalSettings.Instance.RightKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.RightKeys[1]))
+        if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Right))
         {
             if (selection == 0 && anigmas.Count > 1 || selection == 2 && anigmas.Count > 3 || selection == 4 && anigmas.Count > 5)
             {
@@ -93,7 +93,7 @@ public class PartyScreen : MonoBehaviour
                     --selection;
             }
         }
-        else if (Input.GetKeyDown(GlobalSettings.Instance.LeftKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.LeftKeys[1]))
+        else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Left))
         {
             if (selection == 1 || selection == 3 || selection == 5)
             {
@@ -107,7 +107,7 @@ public class PartyScreen : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyDown(GlobalSettings.Instance.UpKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.UpKeys[1]))
+        else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Up))
         {
             if (selection > 1)
             {
@@ -125,7 +125,7 @@ public class PartyScreen : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyDown(GlobalSettings.Instance.DownKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.DownKeys[1]))
+        else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Down))
         {
             if (selection + 2 < anigmas.Count)
             {
@@ -147,11 +147,11 @@ public class PartyScreen : MonoBehaviour
         if (selection != prevSelection)
             UpdateMemberSelection(selection);
 
-        if (Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[1]))
+        if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Enter))
         {
             onSelected?.Invoke();
         }
-        else if (Input.GetKeyDown(GlobalSettings.Instance.BackKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.BackKeys[1]))
+        else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Back))
         {
             onBack?.Invoke();
         }

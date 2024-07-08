@@ -67,7 +67,7 @@ public class DialogManager : MonoBehaviour
         yield return TypeDialog(text);
 
         if (waitForInput)
-            yield return new WaitUntil(() => Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[0]) || Input.GetKeyDown(GlobalSettings.Instance.EnterKeys[1]));
+            yield return new WaitUntil(() => GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Enter));
 
         dialogBox.SetActive(false);
         IsShowing = false;

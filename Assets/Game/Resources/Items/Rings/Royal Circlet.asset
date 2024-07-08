@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c35b84409661be479f263829d3456ed, type: 3}
+  m_Name: Royal Circlet
+  m_EditorClassIdentifier: 
+  name: Royal Circlet
+  description: An exquisite ring embedded with rare gems, signifying the highest
+    level of craftsmanship and success in obtaining rare and powerful companions.
+  icon: {fileID: 1832551286752540064, guid: d7598d708a65c714789d8c7c52d06ff2, type: 3}
+  poisonForHumans: 0
+  poisonForAnigmas: 0
