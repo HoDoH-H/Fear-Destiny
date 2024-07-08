@@ -127,6 +127,13 @@ public class InventoryUI : MonoBehaviour
         if (usedItem != null)
         {
             yield return DialogManager.Instance.ShowDialogText($"You used {usedItem.Name}");
+            if (usedItem.IsPoisonousForAnigmas)
+            {
+                partyScreen.SelectedMember.DecreaseHP(partyScreen.SelectedMember.MaxHp / 3);
+                partyScreen.SelectedMember.SetStatus(ConditionID.psn);
+                var message = partyScreen.SelectedMember.StatusChanges.Dequeue();
+                yield return DialogManager.Instance.ShowDialogText(message);
+            }
             onItemUsed?.Invoke();
         }
         else
@@ -162,6 +169,8 @@ public class InventoryUI : MonoBehaviour
                 slotUIList[i].Name.color = GlobalSettings.Instance.BaseInvColor;
             }
         }
+
+        selectedItem = Mathf.Clamp(selectedItem, 0, inventory.Slots.Count - 1);
 
         var item = inventory.Slots[selectedItem].Item;
         itemIcon.sprite = item.Icon;

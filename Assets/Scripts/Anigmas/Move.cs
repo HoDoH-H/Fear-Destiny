@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Move
@@ -27,6 +28,11 @@ public class Move
         };
 
         return saveData;
+    }
+
+    public void IncreaseUP(int amount)
+    {
+        UP = Mathf.Clamp(UP + amount, 0, Base.UP);
     }
 }
 

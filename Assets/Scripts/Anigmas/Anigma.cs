@@ -51,7 +51,10 @@ public class Anigma
             }
         }
 
-        Exp = Base.GetExpForLevel(Level);
+        if (level > 1)
+            Exp = Base.GetExpForLevel(Level);
+        else
+            Exp = 0;
 
         CalculateStats();
         HP = MaxHp;

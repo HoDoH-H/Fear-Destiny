@@ -72,7 +72,7 @@ public class AnigmaBase : ScriptableObject
         }
         else if (growthRate == GrowthRate.MediumSlow)
         {
-            return 6 / 5 * Mathf.FloorToInt(Mathf.Pow(level, 3)) - 15 * Mathf.FloorToInt(Mathf.Pow(level, 2)) + 100 * level - 140;
+            return Mathf.FloorToInt(6f / 5f * Mathf.FloorToInt(Mathf.Pow(level, 3)) - (15 * Mathf.FloorToInt(Mathf.Pow(level, 2))) + (100 * level) - 140);
         }
         else if (growthRate == GrowthRate.Slow)
         {

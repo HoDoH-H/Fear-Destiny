@@ -159,6 +159,7 @@ public class BattleSystem : MonoBehaviour
     void MoveSelection()
     {
         state = BattleState.MoveSelection;
+        dialogBox.SetDialog("");
         dialogBox.EnableActionSelector(false);
         dialogBox.EnableDialogText(false);
         dialogBox.EnableMoveSelector(true);
@@ -403,7 +404,7 @@ public class BattleSystem : MonoBehaviour
             int opponentLevel = faintedUnit.Anigma.Level;
             float trainerBonus = (isTrainerBattle) ? 1.5f : 1;
 
-            int expGain = Mathf.FloorToInt((expYield * opponentLevel * trainerBonus) / 7);
+            int expGain = Mathf.FloorToInt((expYield * opponentLevel) / 7 * trainerBonus);
             playerUnit.Anigma.Exp += expGain;
             yield return dialogBox.TypeDialog($"{playerUnit.Anigma.Base.Name} gained {expGain} exp.");
             yield return playerUnit.Hud.SetExpSmooth();
