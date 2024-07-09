@@ -18,3 +18,5 @@ MonoBehaviour:
   icon: {fileID: -733483157197117102, guid: d7598d708a65c714789d8c7c52d06ff2, type: 3}
   poisonForHumans: 0
   poisonForAnigmas: 0
+  catchRateModifier: 1.5
+  alwaysCatch: 0

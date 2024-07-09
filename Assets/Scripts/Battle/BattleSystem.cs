@@ -573,10 +573,24 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.RunningTurn;
     }
 
-    IEnumerator TriggerRing()
+    IEnumerator OnItemUsed(ItemBase usedItem)
+    {
+        state = BattleState.Busy;
+        inventoryUI.gameObject.SetActive(false);
+
+        if (usedItem is RingItem)
+        {
+            yield return TriggerRing((RingItem)usedItem);
+        }
+
+        StartCoroutine(RunTurns(BattleAction.UseItem));
+    }
+
+    IEnumerator TriggerRing(RingItem ringItem)
     {
         state = BattleState.Busy;
         dialogBox.EnableBigDialogBox(true);
+        dialogBox.EnableActionSelector(false);
 
         if (isTrainerBattle)
         {
@@ -585,19 +599,20 @@ public class BattleSystem : MonoBehaviour
             yield break;
         }
 
-        yield return dialogBox.TypeDialog($"{player.Name} triggered a Ring!");
+        yield return dialogBox.TypeDialog($"{player.Name} triggered a {ringItem.Name}!");
 
         var ringObj = Instantiate(ringSprite, playerUnit.transform.position - new Vector3(2, 0), Quaternion.identity);
         var ring = ringObj.GetComponent<SpriteRenderer>();
+        ring.sprite = ringItem.Icon;
 
         // Animations
         yield return ring.transform.DOJump(opponentUnit.transform.position + new Vector3(0, 2.5f), 2, 1, 1f).WaitForCompletion();
         yield return opponentUnit.PlayCaptureAnimation();
         yield return ring.transform.DOMoveY(opponentUnit.transform.position.y - 0.5f, 1f).WaitForCompletion();
 
-        int shakeCount = TryToCatchAnigma(opponentUnit.Anigma);
+        int shakeCount = TryToCatchAnigma(opponentUnit.Anigma, ringItem);
 
-        for (int i = 0; i < Mathf.Min(shakeCount, 3); i++)
+        for (int i = 0; i < Mathf.Min(shakeCount, 4); i++)
         {
             var sequence = DOTween.Sequence();
             int selectedAnim = UnityEngine.Random.Range(0, ringAnimVectors.Count);
@@ -645,11 +660,11 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    int TryToCatchAnigma(Anigma anigma)
+    int TryToCatchAnigma(Anigma anigma, RingItem ringUsed)
     {
-        float a = (3 * anigma.MaxHp - 2 * anigma.HP) * anigma.Base.CatchRate * ConditionDB.GetStatusBonus(anigma.Status) / (3 * anigma.MaxHp);
+        float a = (3 * anigma.MaxHp - 2 * anigma.HP) * anigma.Base.CatchRate * ringUsed.CatchRateModifier * ConditionDB.GetStatusBonus(anigma.Status) / (3 * anigma.MaxHp);
 
-        if (a >= 255)
+        if (a >= 255 || ringUsed.AlwaysCatch)
             return 5;
 
         float b = 1048560 / Mathf.Sqrt(Mathf.Sqrt(16711680 / a));
@@ -737,11 +752,9 @@ public class BattleSystem : MonoBehaviour
                 state = BattleState.ActionSelection;
             };
 
-            Action onItemUsed = () => 
+            Action<ItemBase> onItemUsed = (ItemBase usedItem) => 
             {
-                state = BattleState.Busy;
-                inventoryUI.gameObject.SetActive(false);
-                StartCoroutine(RunTurns(BattleAction.UseItem));
+                StartCoroutine(OnItemUsed(usedItem));
             };
 
             inventoryUI.HandleUpdate(onBack, onItemUsed);

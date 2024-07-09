@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+public enum ItemCategory { Items, Recovery, Rings, Memories}
 public class Inventory : MonoBehaviour
 {
     [SerializeField] List<ItemSlot> itemsSlots;
@@ -20,8 +21,8 @@ public class Inventory : MonoBehaviour
     }
 
     public static List<string> ItemCategories { get; set; } = new List<string>() 
-    { 
-        "Items", "Recovery", "Rings", "Memories"
+    {
+        ItemCategory.Items.ToString(), ItemCategory.Recovery.ToString(), ItemCategory.Rings.ToString(), ItemCategory.Memories.ToString()
     };
 
     public List<ItemSlot> GetSlotsByCategory(int categoryIndex)

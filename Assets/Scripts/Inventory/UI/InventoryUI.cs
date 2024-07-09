@@ -23,7 +23,7 @@ public class InventoryUI : MonoBehaviour
 
     [SerializeField] PartyScreen partyScreen;
 
-    Action onItemUsed;
+    Action<ItemBase> onItemUsed;
 
     int selectedItem = 0;
     int selectedCategory = 0;
@@ -69,7 +69,7 @@ public class InventoryUI : MonoBehaviour
         UpdateItemSelection();
     }
 
-    public void HandleUpdate(Action onBack, Action onItemUsed=null)
+    public void HandleUpdate(Action onBack, Action<ItemBase> onItemUsed=null)
     {
         this.onItemUsed = onItemUsed;
 
@@ -100,7 +100,7 @@ public class InventoryUI : MonoBehaviour
                 UpdateItemSelection();
 
             if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Enter))
-                OpenPartyScreen();
+                ItemSelected();
             else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Back))
                 onBack?.Invoke();
         }
@@ -120,6 +120,19 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
+    void ItemSelected()
+    {
+        // Check if item is ring
+        if (selectedCategory == ((int)ItemCategory.Rings))
+        {
+            StartCoroutine(UseItem());
+        }
+        else
+        {
+            OpenPartyScreen();
+        }
+    }
+
     IEnumerator UseItem()
     {
         state = InventoryUIState.Busy;
@@ -128,7 +141,10 @@ public class InventoryUI : MonoBehaviour
 
         if (usedItem != null)
         {
-            yield return DialogManager.Instance.ShowDialogText($"You used {usedItem.Name}");
+            // If the item is a ring don't show the dialog in inventory
+            if (!(usedItem is RingItem))
+                yield return DialogManager.Instance.ShowDialogText($"You used {usedItem.Name}");
+
             if (usedItem.IsPoisonousForAnigmas)
             {
                 partyScreen.SelectedMember.DecreaseHP(partyScreen.SelectedMember.MaxHp / 3);
@@ -136,7 +152,7 @@ public class InventoryUI : MonoBehaviour
                 var message = partyScreen.SelectedMember.StatusChanges.Dequeue();
                 yield return DialogManager.Instance.ShowDialogText(message);
             }
-            onItemUsed?.Invoke();
+            onItemUsed?.Invoke(usedItem);
         }
         else
         {

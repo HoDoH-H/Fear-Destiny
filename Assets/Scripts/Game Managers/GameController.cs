@@ -332,4 +332,6 @@ public class GameController : MonoBehaviour
 
         return index;
     }
+
+    public GameState State => state;
 }
