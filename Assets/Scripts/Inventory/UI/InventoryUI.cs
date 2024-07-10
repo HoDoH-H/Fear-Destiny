@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum InventoryUIState { ItemSelection, PartySelection, Busy}
+public enum InventoryUIState { ItemSelection, PartySelection, MoveToForget, Busy}
 
 public class InventoryUI : MonoBehaviour
 {
@@ -22,11 +23,15 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] Image downArrow;
 
     [SerializeField] PartyScreen partyScreen;
+    [SerializeField] MoveSelectionUI moveSelectionUI;
 
     Action<ItemBase> onItemUsed;
 
     int selectedItem = 0;
     int selectedCategory = 0;
+
+    MoveBase moveToLearn;
+
     InventoryUIState state;
 
     const int itemsInViewport = 8;
@@ -118,6 +123,15 @@ public class InventoryUI : MonoBehaviour
 
             partyScreen.HandleUpdate(onSelected, onBackPartyScreen);
         }
+        else if (state == InventoryUIState.MoveToForget)
+        {
+            Action<int> onMoveSelected = (int moveIndex) =>
+            {
+                StartCoroutine(OnMoveToForgetSelected(moveIndex));
+            };
+
+            moveSelectionUI.HandleMoveSelection(onMoveSelected);
+        }
     }
 
     void ItemSelected()
@@ -137,15 +151,17 @@ public class InventoryUI : MonoBehaviour
     {
         state = InventoryUIState.Busy;
 
+        yield return HandleMemoryItems();
+
         var usedItem = inventory.UseItem(selectedItem, partyScreen.SelectedMember, selectedCategory);
 
         if (usedItem != null)
         {
             // If the item is a ring don't show the dialog in inventory
-            if (!(usedItem is RingItem))
+            if (!(usedItem is RingItem || usedItem is MemoryItem))
                 yield return DialogManager.Instance.ShowDialogText($"You used {usedItem.Name}");
 
-            if (usedItem.IsPoisonousForAnigmas)
+            if (usedItem.IsPoisonousForAnigmas && !(usedItem is MemoryItem))
             {
                 partyScreen.SelectedMember.DecreaseHP(partyScreen.SelectedMember.MaxHp / 3);
                 partyScreen.SelectedMember.SetStatus(ConditionID.psn);
@@ -160,6 +176,39 @@ public class InventoryUI : MonoBehaviour
         }
 
         ClosePartyScreen();
+    }
+
+    IEnumerator HandleMemoryItems()
+    {
+        var memoryItem = inventory.GetItem(selectedItem, selectedCategory) as MemoryItem;
+        if (memoryItem == null)
+            yield break;
+
+        var anigma = partyScreen.SelectedMember;
+        if (anigma.Moves.Count < AnigmaBase.MaxNumOfMoves)
+        {
+            anigma.LearnMove(memoryItem.Move);
+            yield return DialogManager.Instance.ShowDialogText($"{anigma.Base.Name} learned {memoryItem.Move.Name}");
+        }
+        else
+        {
+            yield return DialogManager.Instance.ShowDialogText($"{anigma.Base.Name} is attempting to acquire {memoryItem.Move.Name}");
+            yield return DialogManager.Instance.ShowDialogText($"But an Anigma cannot learn more than {AnigmaBase.MaxNumOfMoves} moves!");
+
+            yield return ChooseMoveToForget(anigma, memoryItem.Move);
+            yield return new WaitUntil(() => state != InventoryUIState.MoveToForget);
+        }
+    }
+
+    IEnumerator ChooseMoveToForget(Anigma anigma, MoveBase newMove)
+    {
+        state = InventoryUIState.Busy;
+        yield return DialogManager.Instance.ShowDialogText($"Do you want that {anigma.Base.Name} forget a move to learn this new one?", true, false);
+        moveSelectionUI.gameObject.SetActive(true);
+        moveSelectionUI.SetMoveData(anigma.Moves.Select(x => x.Base).ToList(), newMove);
+        moveToLearn = newMove;
+
+        state = InventoryUIState.MoveToForget;
     }
 
     void UpdateItemSelection()
@@ -235,5 +284,33 @@ public class InventoryUI : MonoBehaviour
     {
         state = InventoryUIState.ItemSelection;
         partyScreen.gameObject.SetActive(false);
+    }
+
+    IEnumerator OnMoveToForgetSelected(int moveIndex)
+    {
+        state = InventoryUIState.Busy;
+
+        DialogManager.Instance.CloseDialog();
+
+        var anigma = partyScreen.SelectedMember;
+
+        moveSelectionUI.gameObject.SetActive(false);
+        if (moveIndex == AnigmaBase.MaxNumOfMoves)
+        {
+            // Don't learn the new move
+            yield return DialogManager.Instance.ShowDialogText($"{anigma.Base.Name} did not acquired {moveToLearn.Name}");
+        }
+        else
+        {
+            // Forget the selected move and learn the new one
+            var selectedMove = anigma.Moves[moveIndex].Base;
+
+            anigma.Moves[moveIndex] = new Move(moveToLearn);
+            yield return DialogManager.Instance.ShowDialogText($"{anigma.Base.Name} forgot {selectedMove.Name} and successfully acquired {moveToLearn.Name}");
+        }
+
+        moveToLearn = null;
+        state = InventoryUIState.PartySelection;
+        ClosePartyScreen();
     }
 }

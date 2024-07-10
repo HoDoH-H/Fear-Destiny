@@ -60,7 +60,7 @@ public class DialogManager : MonoBehaviour
         }
     }
 
-    public IEnumerator ShowDialogText(string text, bool waitForInput=true)
+    public IEnumerator ShowDialogText(string text, bool waitForInput=true, bool autoClose=true)
     {
         IsShowing = true;
         dialogBox.SetActive(true);
@@ -69,6 +69,14 @@ public class DialogManager : MonoBehaviour
         if (waitForInput)
             yield return new WaitUntil(() => GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Enter));
 
+        if (autoClose)
+        {
+            CloseDialog();
+        }
+    }
+
+    public void CloseDialog()
+    {
         dialogBox.SetActive(false);
         IsShowing = false;
     }

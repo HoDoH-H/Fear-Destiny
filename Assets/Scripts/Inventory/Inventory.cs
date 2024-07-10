@@ -30,18 +30,24 @@ public class Inventory : MonoBehaviour
         return allSlots[categoryIndex];
     }
 
+    public ItemBase GetItem(int itemIndex, int categoryIndex)
+    {
+        var currSlot = GetSlotsByCategory(categoryIndex);
+        return currSlot[itemIndex].Item;
+    }
+
     public ItemBase UseItem(int itemIndex, Anigma selectedAnigma, int selectedCategory)
     {
-        var currSlot = GetSlotsByCategory(selectedCategory);
-
-        var item = currSlot[itemIndex].Item;
+        var item = GetItem(itemIndex, selectedCategory);
         bool itemUsed = item.Use(selectedAnigma);
 
-        if (itemUsed)
+        if (itemUsed && selectedCategory != (int)ItemCategory.Memories)
         {
             RemoveItem(item, selectedCategory);
             return item;
         }
+        else if (itemUsed && selectedCategory == (int)ItemCategory.Memories)
+            return item;
 
         return null;
     }

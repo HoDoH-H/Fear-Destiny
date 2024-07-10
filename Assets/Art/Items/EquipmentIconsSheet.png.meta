@@ -7959,7 +7959,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EquipmentIconsSheet_299
+      name: Basic Memory
       rect:
         serializedVersion: 2
         x: 608
@@ -10193,6 +10193,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Ancient Ring: 1435284982013674707
+      Basic Memory: 7299334668826086773
       Commoner's Ring: 2751585202930314029
       EquipmentIconsSheet_0: -964271838865839139
       EquipmentIconsSheet_1: -740633779066064975
@@ -10411,7 +10412,6 @@ TextureImporter:
       EquipmentIconsSheet_296: -1723609072972885489
       EquipmentIconsSheet_297: 2870389259480315698
       EquipmentIconsSheet_298: -5366865099703150984
-      EquipmentIconsSheet_299: 7299334668826086773
       EquipmentIconsSheet_3: -866562712864809082
       EquipmentIconsSheet_30: 5398032157324226589
       EquipmentIconsSheet_300: -3386125435943039934

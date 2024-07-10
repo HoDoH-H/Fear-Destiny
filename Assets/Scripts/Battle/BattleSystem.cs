@@ -273,7 +273,14 @@ public class BattleSystem : MonoBehaviour
         if (!canRunMove)
         {
             yield return ShowStatusChanges(sourceUnit.Anigma);
+            if (sourceUnit.Anigma.VolatileStatus.Name == "Confusion")
+            {
+                sourceUnit.PlayAttackAnimation();
+                yield return new WaitForSeconds(0.1f);
+                sourceUnit.Anigma.DecreaseHP(sourceUnit.Anigma.MaxHp / 8);
+            }
             yield return targetUnit.Hud.WaitForHPUpdate();
+
             if (sourceUnit.Anigma.HP <= 0)
             {
                 yield return dialogBox.TypeDialog($"{sourceUnit.Anigma.Base.Name} fainted.");
@@ -423,7 +430,7 @@ public class BattleSystem : MonoBehaviour
                 {
                     if (playerUnit.Anigma.Moves.Count < AnigmaBase.MaxNumOfMoves)
                     {
-                        playerUnit.Anigma.LearnMove(newMove);
+                        playerUnit.Anigma.LearnMove(newMove.Base);
                         yield return dialogBox.TypeDialog($"{playerUnit.Anigma.Base.Name} learned {newMove.Base.Name}!");
                         dialogBox.SetMoveNames(playerUnit.Anigma.Moves);
                     }

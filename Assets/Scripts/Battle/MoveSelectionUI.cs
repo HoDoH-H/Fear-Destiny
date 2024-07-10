@@ -143,14 +143,20 @@ public class MoveSelectionUI : MonoBehaviour
         if (currState == ForgetMoveState.MoveSelection)
         {
             dialogSelectionPanel.SetActive(false);
-            yield return dialogBox.TypeDialog($"Choose a move you want to forget...");
+            if (GameController.Instance.State == GameState.Battle)
+                yield return dialogBox.TypeDialog($"Choose a move you want to forget...");
+            else
+                yield return DialogManager.Instance.ShowDialogText($"Choose a move you want to forget...", true, false);
             moveSelectionPanel.SetActive(true);
         }
         else if (currState == ForgetMoveState.Choice)
         {
             dialogSelectionPanel.SetActive(false);
             moveSelectionPanel.SetActive(false);
-            yield return dialogBox.TypeDialog($"Do you want to forget a move?");
+            if (GameController.Instance.State == GameState.Battle)
+                yield return dialogBox.TypeDialog($"Do you want to forget a move?");
+            else
+                yield return DialogManager.Instance.ShowDialogText($"Do you want to forget a move?", true, false);
             dialogSelectionPanel.SetActive(true);
         }
         canSelect = true;

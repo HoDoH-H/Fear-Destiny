@@ -136,7 +136,6 @@ public class ConditionDB
                         return true;
 
                     anigma.StatusChanges.Enqueue($"{anigma.Base.Name} hurt itself in its confusion");
-                    anigma.DecreaseHP(anigma.MaxHp / 8);
                     return false;
                 }
             }

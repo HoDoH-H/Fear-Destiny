@@ -20,6 +20,16 @@ public class ItemSlotUI : MonoBehaviour
     public void SetData(ItemSlot itemSlot)
     {
         nameText.text = itemSlot.Item.Name;
-        countText.text = $"X {itemSlot.Count}";
+        if (!(itemSlot.Item is MemoryItem))
+        {
+            countText.enabled = true;
+            countText.text = $"X {itemSlot.Count}";
+        }
+        else
+        {
+            if (itemSlot.Count != 1)
+                itemSlot.Count = 1;
+            countText.enabled = false;
+        }
     }
 }

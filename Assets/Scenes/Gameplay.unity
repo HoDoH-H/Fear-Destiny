@@ -1512,8 +1512,20 @@ PrefabInstance:
       value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 9076694762294813209, guid: 929706b31e2c12345b10812a5031dff1, type: 3}
+      propertyPath: memorySlots.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9076694762294813209, guid: 929706b31e2c12345b10812a5031dff1, type: 3}
       propertyPath: recoverySlots.Array.size
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 9076694762294813209, guid: 929706b31e2c12345b10812a5031dff1, type: 3}
+      propertyPath: memorySlots.Array.data[0].item
+      value: 
+      objectReference: {fileID: 11400000, guid: 6f22ed1f3be030a49b80575588461b3e, type: 2}
+    - target: {fileID: 9076694762294813209, guid: 929706b31e2c12345b10812a5031dff1, type: 3}
+      propertyPath: memorySlots.Array.data[0].count
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9076694762294813209, guid: 929706b31e2c12345b10812a5031dff1, type: 3}
       propertyPath: recoverySlots.Array.data[0].item
