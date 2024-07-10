@@ -39,5 +39,25 @@ public class GlobalSettings : MonoBehaviour
         return false;
     }
 
+    public bool IsKeyPressed(KeyList keyType)
+    {
+        foreach (var key in keyTypes[((int)keyType)])
+        {
+            if (Input.GetKey(key))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public int BoolToInt(bool value)
+    {
+        if (value)
+            return 1;
+        return 0;
+    }
+
     public enum KeyList { Enter, Back, Up, Down, Left, Right }
 }

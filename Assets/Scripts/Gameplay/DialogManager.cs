@@ -33,9 +33,8 @@ public class DialogManager : MonoBehaviour
 
     public void HandleUpdate()
     {
-        if (InputEvents.Instance.interact_Pressed)
+        if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Enter))
         {
-            InputEvents.Instance.interact_Pressed = false;
             if (isTyping)
             {
                 isTyping = false;

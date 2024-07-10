@@ -36,11 +36,17 @@ public class PlayerController : MonoBehaviour, ISavable
         move.Disable();
     }
 
+    int GetKey(GlobalSettings.KeyList key)
+    {
+        return GlobalSettings.Instance.BoolToInt(GlobalSettings.Instance.IsKeyPressed(key));
+    }
+
     public void HandleUpdate()
     {
         if (!character.IsMoving && CanMove)
         {
-            input = move.ReadValue<Vector2>();
+            //input = move.ReadValue<Vector2>();
+            input = new Vector2(GetKey(GlobalSettings.KeyList.Right) - GetKey(GlobalSettings.KeyList.Left), GetKey(GlobalSettings.KeyList.Up) - GetKey(GlobalSettings.KeyList.Down));
 
             if (input.x != 0) { input.y = 0; input.x = input.normalized.x; } 
 
@@ -53,13 +59,12 @@ public class PlayerController : MonoBehaviour, ISavable
 
         character.HandleUpdate();
 
-        if (InputEvents.Instance.interact_Pressed)
+        if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Enter))
             Interact();
     }
 
     private void Interact()
     {
-        InputEvents.Instance.interact_Pressed = false;
         var facingDir = new Vector3(character.Animator.MoveX, character.Animator.MoveY);
         var interactPos = transform.position + facingDir;
 
