@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19eb9e44e15ed79449c499326ac688c9, type: 3}
-  m_Name: Aqua Spray
+  m_Name: AM01 - Timelost Shears
   m_EditorClassIdentifier: 
-  name: Aqua Spray
-  description: Make your companion remember Aqua Spray.
+  name: AM01
+  description: Make your companion remember Timelost Shears.
   icon: {fileID: 7299334668826086773, guid: d7598d708a65c714789d8c7c52d06ff2, type: 3}
   poisonForHumans: 0
   poisonForAnigmas: 0
-  move: {fileID: 11400000, guid: ad4775db801dc9e439221dfcfa9cb803, type: 2}
+  move: {fileID: 11400000, guid: bd8806ff5a356c347acb56a52e65ad3f, type: 2}
+  isAncientMemory: 1

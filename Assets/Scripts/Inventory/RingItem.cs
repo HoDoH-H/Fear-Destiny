@@ -9,11 +9,10 @@ public class RingItem : ItemBase
 
     public override bool Use(Anigma anigma)
     {
-        if (GameController.Instance.State == GameState.Battle)
-            return true;
-
-        return false;
+        return true;
     }
+
+    public override bool CanUseOutsideBattle => false;
 
     public float CatchRateModifier => catchRateModifier;
     public bool AlwaysCatch => alwaysCatch;

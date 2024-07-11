@@ -156,4 +156,22 @@ public class PartyScreen : MonoBehaviour
             onBack?.Invoke();
         }
     }
+
+    public void ShowIfMemoryUsable(MemoryItem memory)
+    {
+        for (int i = 0; i < anigmas.Count; i++)
+        {
+            string message = memory.CanBeTaught(anigmas[i]) ? "Compatible!" : "Not Compatible!";
+            message = anigmas[i].HasMove(memory.Move) ? "Already Carved!" : message;
+            memberSlots[i].SetMessage(message);
+        }
+    }
+
+    public void ClearMembersSlotsMessage()
+    {
+        for (int i = 0; i < anigmas.Count; i++)
+        {
+            memberSlots[i].SetMessage("");
+        }
+    }
 }

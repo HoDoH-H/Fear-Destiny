@@ -41,13 +41,13 @@ public class Inventory : MonoBehaviour
         var item = GetItem(itemIndex, selectedCategory);
         bool itemUsed = item.Use(selectedAnigma);
 
-        if (itemUsed && selectedCategory != (int)ItemCategory.Memories)
+        if (itemUsed)
         {
-            RemoveItem(item, selectedCategory);
+            if (!item.IsReusable)
+                RemoveItem(item, selectedCategory);
+
             return item;
         }
-        else if (itemUsed && selectedCategory == (int)ItemCategory.Memories)
-            return item;
 
         return null;
     }

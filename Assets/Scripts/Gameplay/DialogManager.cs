@@ -27,6 +27,7 @@ public class DialogManager : MonoBehaviour
     }
 
     Dialog dialog;
+    string currentLineText;
     Action OnDialogFinished;
 
     int currentLine = 0;
@@ -38,7 +39,7 @@ public class DialogManager : MonoBehaviour
             if (isTyping)
             {
                 isTyping = false;
-                ShowLineNoDelay(dialog.Lines[currentLine]);
+                ShowLineNoDelay(currentLineText);
             }
             else
             {
@@ -63,7 +64,11 @@ public class DialogManager : MonoBehaviour
     {
         IsShowing = true;
         dialogBox.SetActive(true);
+        currentLineText = text;
+        dialog = new Dialog();
         yield return TypeDialog(text);
+
+        yield return new WaitForEndOfFrame();
 
         if (waitForInput)
             yield return new WaitUntil(() => GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Enter));
@@ -96,6 +101,8 @@ public class DialogManager : MonoBehaviour
 
     public IEnumerator TypeDialog(string line)
     {
+        yield return new WaitForEndOfFrame();
+        currentLineText = line;
         isTyping = true;
         dialogText.text = "";
         foreach (var letter in line)

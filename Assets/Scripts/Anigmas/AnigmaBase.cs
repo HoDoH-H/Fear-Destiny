@@ -57,6 +57,7 @@ public class AnigmaBase : ScriptableObject
     [Space]
     [Header("Learnable Moves")]
     [SerializeField] List<LearnableMove> learnableMoves;
+    [SerializeField] List<MoveBase> learnableByItems;
 
     public static int MaxNumOfMoves { get; set; } = 4;
 
@@ -115,31 +116,32 @@ public class AnigmaBase : ScriptableObject
     }
 
     //Properties
-    public string Name { get { return name; } }
-    public string Description { get { return description; } }
-    public Sprite FrontSprite { get { return frontSprite; } }
-    public Sprite BackSprite { get { return backSprite; } }
-    public AnigmaType Type1 { get { return type1; } }
-    public AnigmaType Type2 { get { return type2; } }
-    public int MaxHp { get { return maxHp; } }
-    public int Attack { get { return attack; } }
-    public int Defense { get { return defense; } }
-    public int SpAttack { get { return spAttack; } }
-    public int SpDefense { get { return spDefense; } }
-    public int Speed { get { return speed; } }
-    public int IMaxHp { get { return iMaxHp; } }
-    public int IAttack { get { return iAttack; } }
-    public int IDefense { get { return iDefense; } }
-    public int ISpAttack { get { return iSpAttack; } }
-    public int ISpDefense { get { return iSpDefense; } }
-    public int ISpeed { get { return iSpeed; } }
-    public int EMaxHp { get { return eMaxHp; } }
-    public int EAttack { get { return eAttack; } }
-    public int EDefense { get { return eDefense; } }
-    public int ESpAttack { get { return eSpAttack; } }
-    public int ESpDefense { get { return eSpDefense; } }
-    public int ESpeed { get { return eSpeed; } }
-    public List<LearnableMove> LearnableMoves{get{ return learnableMoves; } }
+    public string Name => name;
+    public string Description => description;
+    public Sprite FrontSprite => frontSprite;
+    public Sprite BackSprite => backSprite;
+    public AnigmaType Type1 => type1;
+    public AnigmaType Type2 => type2;
+    public int MaxHp => maxHp;
+    public int Attack => attack;
+    public int Defense => defense;
+    public int SpAttack => spAttack;
+    public int SpDefense => spDefense;
+    public int Speed => speed;
+    public int IMaxHp => iMaxHp;
+    public int IAttack => iAttack;
+    public int IDefense => iDefense;
+    public int ISpAttack => iSpAttack;
+    public int ISpDefense => iSpDefense;
+    public int ISpeed => iSpeed;
+    public int EMaxHp => eMaxHp;
+    public int EAttack => eAttack;
+    public int EDefense => eDefense;
+    public int ESpAttack => eSpAttack;
+    public int ESpDefense => eSpDefense;
+    public int ESpeed => eSpeed;
+    public List<LearnableMove> LearnableMoves => learnableMoves;
+    public List<MoveBase> LearnableByItems => learnableByItems;
     public int CatchRate => catchRate;
     public int ExpYield => expYield;
     public GrowthRate GrowthRate => growthRate;
@@ -151,8 +153,8 @@ public class LearnableMove
     [SerializeField] MoveBase moveBase;
     [SerializeField] int level;
 
-    public MoveBase Base { get { return moveBase; } }
-    public int Level { get { return level; } }
+    public MoveBase Base => moveBase;
+    public int Level => level;
 }
 
 public enum AnigmaType

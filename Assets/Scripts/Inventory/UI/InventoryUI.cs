@@ -105,7 +105,7 @@ public class InventoryUI : MonoBehaviour
                 UpdateItemSelection();
 
             if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Enter))
-                ItemSelected();
+                StartCoroutine(ItemSelected());
             else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Back))
                 onBack?.Invoke();
         }
@@ -134,8 +134,33 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    void ItemSelected()
+    IEnumerator ItemSelected()
     {
+        state = InventoryUIState.Busy;
+
+        var item = inventory.GetItem(selectedItem, selectedCategory);
+
+        if (GameController.Instance.State == GameState.Battle)
+        {
+            // In Battle
+            if (!item.CanUseInBattle)
+            {
+                yield return DialogManager.Instance.ShowDialogText($"This item cannot be used in battle.");
+                state = InventoryUIState.ItemSelection;
+                yield break;
+            }
+        }
+        else
+        {
+            // Outside Battle
+            if (!item.CanUseOutsideBattle)
+            {
+                yield return DialogManager.Instance.ShowDialogText($"This item cannot be used outside battle.");
+                state = InventoryUIState.ItemSelection;
+                yield break;
+            }
+        }
+
         // Check if item is ring
         if (selectedCategory == ((int)ItemCategory.Rings))
         {
@@ -144,6 +169,9 @@ public class InventoryUI : MonoBehaviour
         else
         {
             OpenPartyScreen();
+
+            if (item is MemoryItem)
+                partyScreen.ShowIfMemoryUsable(item as  MemoryItem);
         }
     }
 
@@ -158,7 +186,7 @@ public class InventoryUI : MonoBehaviour
         if (usedItem != null)
         {
             // If the item is a ring don't show the dialog in inventory
-            if (!(usedItem is RingItem || usedItem is MemoryItem))
+            if (usedItem is RecoveryItem)
                 yield return DialogManager.Instance.ShowDialogText($"You used {usedItem.Name}");
 
             if (usedItem.IsPoisonousForAnigmas && !(usedItem is MemoryItem))
@@ -172,7 +200,8 @@ public class InventoryUI : MonoBehaviour
         }
         else
         {
-            yield return DialogManager.Instance.ShowDialogText($"It won't have any effect!");
+            if (usedItem is RecoveryItem)
+                yield return DialogManager.Instance.ShowDialogText($"It won't have any effect!");
         }
 
         ClosePartyScreen();
@@ -185,6 +214,19 @@ public class InventoryUI : MonoBehaviour
             yield break;
 
         var anigma = partyScreen.SelectedMember;
+
+        if (anigma.HasMove(memoryItem.Move))
+        {
+            yield return DialogManager.Instance.ShowDialogText($"{memoryItem.Name} has already been carved into its memories.");
+            yield break;
+        }
+
+        if (!memoryItem.CanBeTaught(anigma))
+        {
+            yield return DialogManager.Instance.ShowDialogText($"{memoryItem.Name} isn't compatible with {anigma.Base.Name}");
+            yield break;
+        }
+
         if (anigma.Moves.Count < AnigmaBase.MaxNumOfMoves)
         {
             anigma.LearnMove(memoryItem.Move);
@@ -283,6 +325,7 @@ public class InventoryUI : MonoBehaviour
     void ClosePartyScreen()
     {
         state = InventoryUIState.ItemSelection;
+        partyScreen.ClearMembersSlotsMessage();
         partyScreen.gameObject.SetActive(false);
     }
 

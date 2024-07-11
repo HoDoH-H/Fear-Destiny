@@ -7,6 +7,8 @@ public class PartyMemberUI : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] TextMeshProUGUI levelText;
+    [SerializeField] TextMeshProUGUI HPText;
+    [SerializeField] TextMeshProUGUI MessageText;
     [SerializeField] HpBar hpBar;
 
     Anigma _anigma;
@@ -15,6 +17,7 @@ public class PartyMemberUI : MonoBehaviour
     {
         _anigma = anigma;
         UpdateData();
+        SetMessage("");
 
         _anigma.OnHPChanged += UpdateData;
     }
@@ -23,6 +26,7 @@ public class PartyMemberUI : MonoBehaviour
     {
         nameText.text = _anigma.Base.Name;
         levelText.text = "Lv." + _anigma.Level;
+        HPText.text = $"{_anigma.HP} / {_anigma.MaxHp}";
         hpBar.SetHp((float)_anigma.HP / _anigma.MaxHp);
     }
 
@@ -36,5 +40,19 @@ public class PartyMemberUI : MonoBehaviour
         {
             nameText.color = GlobalSettings.Instance.BaseInvColor;
         }
+    }
+
+    public void SetMessage(string message)
+    {
+        if (message == "")
+        {
+            levelText.gameObject.GetComponent<RectTransform>().localPosition = new Vector3(levelText.gameObject.transform.localPosition.x, -27.5f, 0);
+        }
+        else
+        {
+            levelText.gameObject.GetComponent<RectTransform>().localPosition = new Vector3(levelText.gameObject.transform.localPosition.x, -2.5f, 0);
+        }
+
+        MessageText.text = message;
     }
 }
