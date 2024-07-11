@@ -19283,7 +19283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5899984359257341033, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: 'dialog.lines.Array.data[1]'
-      value: Prepare to get your asses kicked!
+      value: Prepare to get your ass kicked!
       objectReference: {fileID: 0}
     - target: {fileID: 5899984359257341033, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: dialogAfterBattle.lines.Array.size
@@ -33735,7 +33735,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5899984359257341033, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: 'dialog.lines.Array.data[1]'
-      value: Prepare to get your asses kicked!
+      value: Prepare to get your ass kicked!
       objectReference: {fileID: 0}
     - target: {fileID: 5899984359257341033, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: dialogAfterBattle.lines.Array.size
@@ -35490,7 +35490,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5899984359257341033, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: 'dialog.lines.Array.data[1]'
-      value: Prepare to get your asses kicked!
+      value: Prepare to get your ass kicked!
       objectReference: {fileID: 0}
     - target: {fileID: 5899984359257341033, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: dialogAfterBattle.lines.Array.size
@@ -36179,6 +36179,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 791908030}
     - target: {fileID: 5899984359257341033, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5899984359257341033, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: exclamation
       value: 
       objectReference: {fileID: 791908031}
@@ -36188,7 +36192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5899984359257341033, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: 'dialog.lines.Array.data[1]'
-      value: Prepare to get your asses kicked!
+      value: Prepare to get your ass kicked!
       objectReference: {fileID: 0}
     - target: {fileID: 5899984359257341033, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: dialogAfterBattle.lines.Array.size

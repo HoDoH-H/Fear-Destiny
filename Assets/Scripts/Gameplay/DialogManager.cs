@@ -25,12 +25,7 @@ public class DialogManager : MonoBehaviour
     {
         Instance = this;
     }
-
-    Dialog dialog;
     string currentLineText;
-    Action OnDialogFinished;
-
-    int currentLine = 0;
 
     public void HandleUpdate()
     {
@@ -41,22 +36,6 @@ public class DialogManager : MonoBehaviour
                 isTyping = false;
                 ShowLineNoDelay(currentLineText);
             }
-            else
-            {
-                ++currentLine;
-                if (currentLine < dialog.Lines.Count)
-                {
-                    StartCoroutine(TypeDialog(dialog.Lines[currentLine]));
-                }
-                else
-                {
-                    currentLine = 0;
-                    IsShowing = false;
-                    dialogBox.SetActive(false);
-                    OnDialogFinished?.Invoke();
-                    OnCloseDialog?.Invoke();
-                }
-            }
         }
     }
 
@@ -65,7 +44,6 @@ public class DialogManager : MonoBehaviour
         IsShowing = true;
         dialogBox.SetActive(true);
         currentLineText = text;
-        dialog = new Dialog();
         yield return TypeDialog(text);
 
         yield return new WaitForEndOfFrame();
@@ -85,25 +63,32 @@ public class DialogManager : MonoBehaviour
         IsShowing = false;
     }
 
-    public IEnumerator ShowDialog(Dialog dialog, Action OnFinished=null)
+    public IEnumerator ShowDialog(Dialog dialog)
     {
         yield return new WaitForEndOfFrame();
 
         OnShowDialog?.Invoke();
-
         IsShowing = true;
-        this.dialog = dialog;
-        OnDialogFinished = OnFinished;
-
         dialogBox.SetActive(true);
-        StartCoroutine(TypeDialog(dialog.Lines[0]));
+
+        foreach (var line in dialog.Lines)
+        {
+            yield return TypeDialog(line);
+            yield return new WaitUntil(() => GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Enter));
+        }
+
+        dialogBox.SetActive(false);
+        IsShowing = false;
+        OnCloseDialog?.Invoke();
     }
 
     public IEnumerator TypeDialog(string line)
     {
         yield return new WaitForEndOfFrame();
         currentLineText = line;
+
         isTyping = true;
+
         dialogText.text = "";
         foreach (var letter in line)
         {
@@ -111,6 +96,7 @@ public class DialogManager : MonoBehaviour
             dialogText.text += letter;
             yield return new WaitForSeconds(1f / letterPerSecond);
         }
+
         isTyping = false;
     }
 

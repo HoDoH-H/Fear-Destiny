@@ -242,7 +242,7 @@ MonoBehaviour:
   dialog:
     lines:
     - You picked the wrong day to cross us!
-    - Prepare to get your asses kicked!
+    - Prepare to get your ass kicked!
   dialogAfterBattle:
     lines:
     - "Curse you... this isn\u2019t the end!"
@@ -354,7 +354,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1000
   m_Sprite: {fileID: -469899705, guid: 0b9ac7b2a215fb34989b96db73339ab3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
