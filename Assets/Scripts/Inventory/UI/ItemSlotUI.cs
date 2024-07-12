@@ -19,6 +19,7 @@ public class ItemSlotUI : MonoBehaviour
 
     public void SetData(ItemSlot itemSlot)
     {
+        rectTransform = GetComponent<RectTransform>();
         nameText.text = itemSlot.Item.Name;
         if (!(itemSlot.Item.IsReusable))
         {

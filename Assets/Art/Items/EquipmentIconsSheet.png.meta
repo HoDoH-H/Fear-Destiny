@@ -7717,7 +7717,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EquipmentIconsSheet_288
+      name: PickUp
       rect:
         serializedVersion: 2
         x: 256
@@ -10401,7 +10401,6 @@ TextureImporter:
       EquipmentIconsSheet_285: 3109258176034861213
       EquipmentIconsSheet_286: 615341903098674592
       EquipmentIconsSheet_287: -4131403716714766439
-      EquipmentIconsSheet_288: 2303789674561371629
       EquipmentIconsSheet_289: 7507656694042727446
       EquipmentIconsSheet_29: 1678604993808971942
       EquipmentIconsSheet_290: -2571055000787800175
@@ -10591,6 +10590,7 @@ TextureImporter:
       EquipmentIconsSheet_99: 5280536144309355405
       Knight's Band: 95820814739484766
       Noble's Ring: -733483157197117102
+      PickUp: 2303789674561371629
       Royal Circlet: 1832551286752540064
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
