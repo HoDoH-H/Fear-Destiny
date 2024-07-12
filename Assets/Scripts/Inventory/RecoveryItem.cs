@@ -24,6 +24,13 @@ public class RecoveryItem : ItemBase
     [SerializeField] bool boostedRevive;
     [SerializeField] bool maxRevive;
 
+    [Header("Is poisonous for")]
+    [SerializeField] bool poisonForHumans;
+    [SerializeField] bool poisonForAnigmas;
+
+    public bool IsPoisonousForAnigmas => poisonForAnigmas;
+    public bool IsPoisonousForHumans => poisonForHumans;
+
     public override bool Use(Anigma anigma)
     {
         // Revive
