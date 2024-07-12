@@ -18,7 +18,7 @@ public class PickUp : MonoBehaviour, Interactable
             GetComponent<SpriteRenderer>().enabled = false;
             GetComponent<BoxCollider2D>().enabled = false;
 
-            yield return DialogManager.Instance.ShowDialogText($"Player found {item.Name}");
+            yield return DialogManager.Instance.ShowDialogText($"{initiator.GetComponent<PlayerController>().Name} found {item.Name}");
         }
     }
 }

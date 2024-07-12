@@ -15,26 +15,12 @@ public class PlayerController : MonoBehaviour, ISavable
     public bool CanMove = true;
     private Character character;
 
-    private InputSystem_Actions playerControls;
-    private InputAction move;
+    
     public Vector2 direction;
 
     private void Awake()
     {
         character = GetComponent<Character>();
-        playerControls = new InputSystem_Actions();
-    }
-
-    private void OnEnable()
-    {
-        move = playerControls.Player.Move;
-        move.Enable();
-    }
-
-    private void OnDisable()
-    {
-        move = playerControls.Player.Move;
-        move.Disable();
     }
 
     int GetKey(GlobalSettings.KeyList key)
