@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a608eeda330b9ef4e80d4e6fd8f09500, type: 3}
+  m_Name: Player
+  m_EditorClassIdentifier: 
+  isPlayer: 1
+  isHuman: 0
+  isAnigma: 0
+  name: You
+  description: 
+  frontSprite: {fileID: 0}
+  backSprite: {fileID: 21300000, guid: 6f95e801fe4bad743a33540629d0b902, type: 3}
+  maxHp: 75
+  maxMp: 50
+  attack: 65
+  defense: 65
+  spAttack: 65
+  spDefense: 65
+  speed: 65
+  expYield: 0
+  catchRate: 255
+  growthRate: 4
+  type1: 1
+  type2: 20
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: 7c98ab2dffb01d04194537f10d97a5a9, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 2df1c211aa299754992b8b887dbd1ef9, type: 2}
+    level: 4
+  - moveBase: {fileID: 11400000, guid: 2171044207da8084da429be846ccca44, type: 2}
+    level: 6
+  - moveBase: {fileID: 11400000, guid: 0d11fe53449732544a1d246c7e17cb18, type: 2}
+    level: 9
+  learnableByItems: []
+  eMaxHp: 0
+  eAttack: 0
+  eDefense: 0
+  eSpAttack: 0
+  eSpDefense: 0
+  eSpeed: 0
+  iMaxHp: 0
+  iAttack: 0
+  iDefense: 0
+  iSpAttack: 0
+  iSpDefense: 0
+  iSpeed: 0

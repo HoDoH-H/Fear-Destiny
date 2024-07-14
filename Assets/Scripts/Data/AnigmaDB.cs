@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class AnigmaDB
 {
-    static Dictionary<string, AnigmaBase> anigmas;
+    static Dictionary<string, BattlerBase> anigmas;
 
     public static void Init()
     {
-        anigmas = new Dictionary<string, AnigmaBase>();
+        anigmas = new Dictionary<string, BattlerBase>();
 
-        var anigmaArray = Resources.LoadAll<AnigmaBase>("");
+        var anigmaArray = Resources.LoadAll<BattlerBase>("");
         foreach (var anigma in anigmaArray)
         {
             if (anigmas.ContainsKey(anigma.name))
@@ -21,7 +21,7 @@ public class AnigmaDB
         }
     }
 
-    public static AnigmaBase GetAnigmaByName( string name)
+    public static BattlerBase GetAnigmaByName( string name)
     {
         if ( !anigmas.ContainsKey(name))
         {

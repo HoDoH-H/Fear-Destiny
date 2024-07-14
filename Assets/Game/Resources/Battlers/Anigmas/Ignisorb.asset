@@ -9,40 +9,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd91ca33a0282d543a9ee093c6d2c2a5, type: 3}
+  m_Script: {fileID: 11500000, guid: a608eeda330b9ef4e80d4e6fd8f09500, type: 3}
   m_Name: Ignisorb
   m_EditorClassIdentifier: 
+  isPlayer: 0
+  isHuman: 0
+  isAnigma: 1
   name: Ignisorb
-  description: "Ignisorb is a small yet formidable Pok\xE9mon known for its fiery
-    crown and rugged, rock-like body. It constantly radiates intense heat from the
-    flames atop its head, making it a challenging Pok\xE9mon to approach. Despite
-    its small size, Emberock has a feisty personality and can unleash powerful bursts
-    of fire when threatened."
+  description: 
   frontSprite: {fileID: -7063285090536975615, guid: d7cbb1907e45d9d4babfba53a52d1ea1, type: 3}
   backSprite: {fileID: -7063285090536975615, guid: bec9b18b65e3ff74887a13836dead441, type: 3}
-  type1: 3
-  type2: 0
   maxHp: 47
+  maxMp: 0
   attack: 53
   defense: 60
   spAttack: 42
   spDefense: 50
   speed: 45
+  expYield: 62
   catchRate: 255
-  expYield: 71
   growthRate: 1
-  iMaxHp: 0
-  iAttack: 0
-  iDefense: 0
-  iSpAttack: 0
-  iSpDefense: 0
-  iSpeed: 0
-  eMaxHp: 0
-  eAttack: 0
-  eDefense: 0
-  eSpAttack: 0
-  eSpDefense: 0
-  eSpeed: 0
+  type1: 3
+  type2: 0
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: 7c98ab2dffb01d04194537f10d97a5a9, type: 2}
     level: 1
@@ -52,3 +40,16 @@ MonoBehaviour:
     level: 7
   - moveBase: {fileID: 11400000, guid: 2df1c211aa299754992b8b887dbd1ef9, type: 2}
     level: 10
+  learnableByItems: []
+  eMaxHp: 0
+  eAttack: 0
+  eDefense: 0
+  eSpAttack: 0
+  eSpDefense: 0
+  eSpeed: 0
+  iMaxHp: 0
+  iAttack: 0
+  iDefense: 0
+  iSpAttack: 0
+  iSpDefense: 0
+  iSpeed: 0

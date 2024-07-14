@@ -9,36 +9,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd91ca33a0282d543a9ee093c6d2c2a5, type: 3}
+  m_Script: {fileID: 11500000, guid: a608eeda330b9ef4e80d4e6fd8f09500, type: 3}
   m_Name: Sneepy
   m_EditorClassIdentifier: 
+  isPlayer: 0
+  isHuman: 0
+  isAnigma: 1
   name: Sneepy
   description: 
   frontSprite: {fileID: -447772436433274016, guid: 4bf1f164f6c793e418009210948a4247, type: 3}
   backSprite: {fileID: -447772436433274016, guid: 83216242747105648afa4b00c8bc3a0c, type: 3}
-  type1: 2
-  type2: 0
   maxHp: 42
+  maxMp: 0
   attack: 52
   defense: 51
   spAttack: 46
   spDefense: 48
   speed: 57
-  catchRate: 255
   expYield: 64
+  catchRate: 255
   growthRate: 1
-  iMaxHp: 0
-  iAttack: 0
-  iDefense: 0
-  iSpAttack: 0
-  iSpDefense: 0
-  iSpeed: 0
-  eMaxHp: 0
-  eAttack: 0
-  eDefense: 0
-  eSpAttack: 0
-  eSpDefense: 0
-  eSpeed: 0
+  type1: 2
+  type2: 0
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: 7c98ab2dffb01d04194537f10d97a5a9, type: 2}
     level: 1
@@ -48,5 +40,18 @@ MonoBehaviour:
     level: 8
   - moveBase: {fileID: 11400000, guid: 7f9153e716fe11b45b135697cab1d498, type: 2}
     level: 11
-  - moveBase: {fileID: 11400000, guid: 500aae8912c9a8045b89ef7bd4ec369a, type: 2}
+  - moveBase: {fileID: 11400000, guid: c122ab5bbf5be7549bf4afe95c9e684d, type: 2}
     level: 15
+  learnableByItems: []
+  eMaxHp: 0
+  eAttack: 0
+  eDefense: 0
+  eSpAttack: 0
+  eSpDefense: 0
+  eSpeed: 0
+  iMaxHp: 0
+  iAttack: 0
+  iDefense: 0
+  iSpAttack: 0
+  iSpDefense: 0
+  iSpeed: 0

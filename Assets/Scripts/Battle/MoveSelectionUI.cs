@@ -94,7 +94,7 @@ public class MoveSelectionUI : MonoBehaviour
                 {
                     wantToChange = true;
                     currState = ForgetMoveState.Choice;
-                    onSelected?.Invoke(AnigmaBase.MaxNumOfMoves);
+                    onSelected?.Invoke(BattlerBase.MaxNumOfMoves);
                 }
             }
         }
@@ -116,7 +116,7 @@ public class MoveSelectionUI : MonoBehaviour
                 {
                     wantToChange = true;
                     currState = ForgetMoveState.Choice;
-                    onSelected?.Invoke(AnigmaBase.MaxNumOfMoves);
+                    onSelected?.Invoke(BattlerBase.MaxNumOfMoves);
                 }
             }
         }
@@ -124,7 +124,7 @@ public class MoveSelectionUI : MonoBehaviour
 
     public void UpdateMoveSelection(int selection)
     {
-        for (int i = 0; i < AnigmaBase.MaxNumOfMoves; i++)
+        for (int i = 0; i < BattlerBase.MaxNumOfMoves; i++)
         {
             if (i == selection)
             {

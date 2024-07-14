@@ -9,36 +9,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd91ca33a0282d543a9ee093c6d2c2a5, type: 3}
+  m_Script: {fileID: 11500000, guid: a608eeda330b9ef4e80d4e6fd8f09500, type: 3}
   m_Name: Rhinplink
   m_EditorClassIdentifier: 
+  isPlayer: 0
+  isHuman: 0
+  isAnigma: 1
   name: Rhinplink
   description: 
   frontSprite: {fileID: -200992529105813746, guid: d0d86e7b7bc0fd84da79c0f55252bd42, type: 3}
   backSprite: {fileID: -200992529105813746, guid: 0e2c7092d54645540b862cf3a0c0c89e, type: 3}
-  type1: 2
-  type2: 0
   maxHp: 47
+  maxMp: 0
   attack: 63
   defense: 48
   spAttack: 49
   spDefense: 62
   speed: 52
-  catchRate: 255
   expYield: 64
+  catchRate: 255
   growthRate: 3
-  iMaxHp: 0
-  iAttack: 0
-  iDefense: 0
-  iSpAttack: 0
-  iSpDefense: 0
-  iSpeed: 0
-  eMaxHp: 0
-  eAttack: 0
-  eDefense: 0
-  eSpAttack: 0
-  eSpDefense: 0
-  eSpeed: 0
+  type1: 2
+  type2: 0
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: 7c98ab2dffb01d04194537f10d97a5a9, type: 2}
     level: 1
@@ -48,3 +40,16 @@ MonoBehaviour:
     level: 7
   - moveBase: {fileID: 11400000, guid: 0361cdf10ad24fb4b98f1feb648d01e7, type: 2}
     level: 9
+  learnableByItems: []
+  eMaxHp: 0
+  eAttack: 0
+  eDefense: 0
+  eSpAttack: 0
+  eSpDefense: 0
+  eSpeed: 0
+  iMaxHp: 0
+  iAttack: 0
+  iDefense: 0
+  iSpAttack: 0
+  iSpDefense: 0
+  iSpeed: 0

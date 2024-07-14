@@ -48,4 +48,9 @@ public class AnigmaParty : MonoBehaviour
     {
         return FindObjectOfType<PlayerController>().GetComponent<AnigmaParty>();
     }
+
+    public static BattlerBase GetPlayerBase()
+    {
+        return FindObjectOfType<PlayerController>().Unit;
+    }
 }

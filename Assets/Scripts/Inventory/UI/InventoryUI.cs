@@ -187,14 +187,17 @@ public class InventoryUI : MonoBehaviour
         {
             // If the item is a ring don't show the dialog in inventory
             if (usedItem is RecoveryItem)
-                yield return DialogManager.Instance.ShowDialogText($"You used {usedItem.Name}");
-
-            if (usedItem.IsPoisonousForAnigmas && !(usedItem is MemoryItem))
             {
-                partyScreen.SelectedMember.DecreaseHP(partyScreen.SelectedMember.MaxHp / 3);
-                partyScreen.SelectedMember.SetStatus(ConditionID.psn);
-                var message = partyScreen.SelectedMember.StatusChanges.Dequeue();
-                yield return DialogManager.Instance.ShowDialogText(message);
+                yield return DialogManager.Instance.ShowDialogText($"You used {usedItem.Name}");
+                var recItem = usedItem as RecoveryItem;
+
+                if (recItem.IsPoisonousForAnigmas)
+                {
+                    partyScreen.SelectedMember.DecreaseHP(partyScreen.SelectedMember.MaxHp / 3);
+                    partyScreen.SelectedMember.SetStatus(ConditionID.psn);
+                    var message = partyScreen.SelectedMember.StatusChanges.Dequeue();
+                    yield return DialogManager.Instance.ShowDialogText(message);
+                }
             }
             onItemUsed?.Invoke(usedItem);
         }
@@ -227,7 +230,7 @@ public class InventoryUI : MonoBehaviour
             yield break;
         }
 
-        if (anigma.Moves.Count < AnigmaBase.MaxNumOfMoves)
+        if (anigma.Moves.Count < BattlerBase.MaxNumOfMoves)
         {
             anigma.LearnMove(memoryItem.Move);
             yield return DialogManager.Instance.ShowDialogText($"{anigma.Base.Name} learned {memoryItem.Move.Name}");
@@ -235,7 +238,7 @@ public class InventoryUI : MonoBehaviour
         else
         {
             yield return DialogManager.Instance.ShowDialogText($"{anigma.Base.Name} is attempting to acquire {memoryItem.Move.Name}");
-            yield return DialogManager.Instance.ShowDialogText($"But an Anigma cannot learn more than {AnigmaBase.MaxNumOfMoves} moves!");
+            yield return DialogManager.Instance.ShowDialogText($"But an Anigma cannot learn more than {BattlerBase.MaxNumOfMoves} moves!");
 
             yield return ChooseMoveToForget(anigma, memoryItem.Move);
             yield return new WaitUntil(() => state != InventoryUIState.MoveToForget);
@@ -338,7 +341,7 @@ public class InventoryUI : MonoBehaviour
         var anigma = partyScreen.SelectedMember;
 
         moveSelectionUI.gameObject.SetActive(false);
-        if (moveIndex == AnigmaBase.MaxNumOfMoves)
+        if (moveIndex == BattlerBase.MaxNumOfMoves)
         {
             // Don't learn the new move
             yield return DialogManager.Instance.ShowDialogText($"{anigma.Base.Name} did not acquired {moveToLearn.Name}");

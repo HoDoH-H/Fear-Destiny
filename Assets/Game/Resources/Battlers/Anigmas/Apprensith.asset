@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd91ca33a0282d543a9ee093c6d2c2a5, type: 3}
+  m_Script: {fileID: 11500000, guid: a608eeda330b9ef4e80d4e6fd8f09500, type: 3}
   m_Name: Apprensith
   m_EditorClassIdentifier: 
+  isPlayer: 0
+  isHuman: 0
+  isAnigma: 1
   name: Apprensith
   description: "Apprensith is a mystical Pok\xE9mon that thrives in dense, enchanted
     forests. Its green body and pink, witch-like hat blend perfectly with its surroundings,
@@ -22,29 +25,18 @@ MonoBehaviour:
     to protect itself and its habitat."
   frontSprite: {fileID: 8611254305700795036, guid: 92c8494c39eb20a41978d5c7f3912ecd, type: 3}
   backSprite: {fileID: 8611254305700795036, guid: 5056bb8e0203ac548872b516426907b9, type: 3}
-  type1: 2
-  type2: 20
   maxHp: 55
+  maxMp: 0
   attack: 58
   defense: 53
   spAttack: 72
   spDefense: 75
   speed: 57
-  catchRate: 255
   expYield: 91
+  catchRate: 255
   growthRate: 3
-  iMaxHp: 0
-  iAttack: 0
-  iDefense: 0
-  iSpAttack: 0
-  iSpDefense: 0
-  iSpeed: 0
-  eMaxHp: 0
-  eAttack: 0
-  eDefense: 0
-  eSpAttack: 0
-  eSpDefense: 0
-  eSpeed: 0
+  type1: 2
+  type2: 20
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: 7c98ab2dffb01d04194537f10d97a5a9, type: 2}
     level: 1
@@ -56,3 +48,15 @@ MonoBehaviour:
     level: 10
   learnableByItems:
   - {fileID: 11400000, guid: bd8806ff5a356c347acb56a52e65ad3f, type: 2}
+  eMaxHp: 0
+  eAttack: 0
+  eDefense: 0
+  eSpAttack: 0
+  eSpDefense: 0
+  eSpeed: 0
+  iMaxHp: 0
+  iAttack: 0
+  iDefense: 0
+  iSpAttack: 0
+  iSpDefense: 0
+  iSpeed: 0

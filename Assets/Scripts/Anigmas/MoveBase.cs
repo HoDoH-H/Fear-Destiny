@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Move", menuName = "Anigma/Create new move")]
+[CreateAssetMenu(fileName = "Move", menuName = "Battler/Create new move")]
 public class MoveBase : ScriptableObject
 {
     [Header("Informations")]
