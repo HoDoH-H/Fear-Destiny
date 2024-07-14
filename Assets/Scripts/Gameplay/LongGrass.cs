@@ -4,6 +4,8 @@ using UnityEngine.Windows;
 
 public class LongGrass : MonoBehaviour, IPlayerTriggerable
 {
+    public bool TriggerRepeatedly => true;
+
     public void OnPlayerTriggered(PlayerController player)
     {
         if (UnityEngine.Random.Range(1, 101) <= 10)

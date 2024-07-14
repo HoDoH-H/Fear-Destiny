@@ -2541,7 +2541,6 @@ GameObject:
   - component: {fileID: 2837267493356421015}
   - component: {fileID: 3650494268725687183}
   - component: {fileID: 7279833570777077823}
-  - component: {fileID: 88628268543424339}
   - component: {fileID: 1413474958587935184}
   - component: {fileID: 4365915691995344381}
   - component: {fileID: 4857343588546205030}
@@ -2602,38 +2601,6 @@ MonoBehaviour:
   dialogBox: {fileID: 71676640099596712}
   dialogText: {fileID: 4395666117583082421}
   letterPerSecond: 45
---- !u!114 &88628268543424339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4884264302514238588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7de1662a0c63294aa2765411a106a97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interact_Pressed: 0
-  escape_Pressed: 0
-  interact:
-    m_Name: Interact
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: d40c9b51-168e-447c-b278-85bf7d866c78
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  escape:
-    m_Name: Escape
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: a4c78da6-bded-4bbb-ae7a-3d83946812ce
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
 --- !u!114 &1413474958587935184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2664,6 +2631,9 @@ MonoBehaviour:
   portalLayer:
     serializedVersion: 2
     m_Bits: 1024
+  triggerLayer:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!114 &4365915691995344381
 MonoBehaviour:
   m_ObjectHideFlags: 0

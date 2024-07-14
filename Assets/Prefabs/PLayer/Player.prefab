@@ -319,7 +319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56c9fd845829965499522166edb3c1f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: HoDoH
+  name: You
   sprite: {fileID: 21300000, guid: 6f95e801fe4bad743a33540629d0b902, type: 3}
   input: {x: 0, y: 0}
   CanMove: 1
@@ -412,4 +412,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b384db8be6525f478c8c81af269232a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slots: []
+  itemsSlots: []
+  recoverySlots: []
+  ringSlots:
+  - item: {fileID: 0}
+    count: 5
+  memorySlots: []

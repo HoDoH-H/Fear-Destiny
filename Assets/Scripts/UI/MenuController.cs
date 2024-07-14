@@ -24,11 +24,17 @@ public class MenuController : MonoBehaviour
     {
         menu.SetActive(true);
         UpdateItemSelection();
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void CloseMenu()
     {
         menu.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void HandleUpdate()

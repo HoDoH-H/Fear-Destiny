@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour
 
     public static GameController Instance;
 
-    string saveFileName = "1b3nzj7TLYXwj1Ml5Jw56jWxXV3UIwC81D8qhVNA40unU6NlBi";
+    string saveFileName = "1b3nzj7TLYXwj1Ml5Jw56gWxXV3UIwC81D8qhVNA40unU6NlBi";
 
     public string SaveFileName => saveFileName;
 
@@ -42,6 +42,7 @@ public class GameController : MonoBehaviour
         ConditionDB.Init();
         AnigmaDB.Init();
         MoveDB.Init();
+        ItemDB.Init();
     }
 
     private void Start()
@@ -59,7 +60,7 @@ public class GameController : MonoBehaviour
             state = GameState.Dialog;
         };
 
-        DialogManager.Instance.OnCloseDialog += () =>
+        DialogManager.Instance.OnDialogFinished += () =>
         {
             if (state == GameState.Dialog)
             {

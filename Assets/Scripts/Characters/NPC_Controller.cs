@@ -8,7 +8,7 @@ public class NPC_Controller : MonoBehaviour, Interactable
     [SerializeField] List<Vector2> movementPattern;
     [SerializeField] float timeBetweenPattern;
 
-    NPCState state;
+    [SerializeField]NPCState state;
     float idleTimer = 0f;
     int currentPattern = 0;
 

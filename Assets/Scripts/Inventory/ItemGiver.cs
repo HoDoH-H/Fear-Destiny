@@ -1,11 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
-public class ItemGiver : MonoBehaviour
+public class ItemGiver : MonoBehaviour, ISavable
 {
     [SerializeField] ItemBase item;
     [SerializeField] int count = 1;
     [SerializeField] Dialog dialog;
+    [SerializeField] bool isReusable = false;
 
     bool used = false;
 
@@ -15,7 +16,7 @@ public class ItemGiver : MonoBehaviour
 
         player.GetComponent<Inventory>().AddItem(item, count);
 
-        used = true;
+        used = !isReusable;
 
         string dialogText = $"{player.Name} received {item.Name}";
         if (count > 1)
@@ -29,5 +30,15 @@ public class ItemGiver : MonoBehaviour
     public bool CanBeGiven()
     {
         return item != null && count > 0 && !used;
+    }
+
+    public object CaptureState()
+    {
+        return used;
+    }
+
+    public void RestoreState(object state)
+    {
+        used = (bool)state;
     }
 }

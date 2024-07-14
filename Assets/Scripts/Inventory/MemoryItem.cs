@@ -6,7 +6,7 @@ public class MemoryItem : ItemBase
     [SerializeField] MoveBase move;
     [SerializeField] bool isAncientMemory;
 
-    public override string Name => base.Name + $": {move.Name}";
+    public override string Name => base.Name + $" - {move.Name}";
 
     public MoveBase Move => move;
 

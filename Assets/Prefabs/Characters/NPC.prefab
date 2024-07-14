@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3884362842140472707}
   - component: {fileID: 5090175092650990790}
   - component: {fileID: 1659481199647972828}
+  - component: {fileID: 7400421605601788630}
   m_Layer: 7
   m_Name: NPC
   m_TagString: Untagged
@@ -167,10 +168,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 6b97b4b9239bccd45b8b72ebe706db1f, type: 2}
+  count: 1
   dialog:
     lines:
     - You're going into a journey?
     - Here... Take this with you!
+--- !u!114 &7400421605601788630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405454348788865464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4881f89f8b930e34489bbb86116ccd4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueId: 
 --- !u!1 &6279826085351994759
 GameObject:
   m_ObjectHideFlags: 0

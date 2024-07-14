@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 public enum ItemCategory { Items, Recovery, Rings, Memories}
-public class Inventory : MonoBehaviour
+public class Inventory : MonoBehaviour, ISavable
 {
     [SerializeField] List<ItemSlot> itemsSlots;
     [SerializeField] List<ItemSlot> recoverySlots;
@@ -62,6 +62,7 @@ public class Inventory : MonoBehaviour
         if (itemSlot != null)
         {
             itemSlot.Count += count;
+            itemSlot.Count = Mathf.Clamp(itemSlot.Count, 0, 999);
         }
         else
         {
@@ -104,6 +105,33 @@ public class Inventory : MonoBehaviour
     {
         return FindObjectOfType<PlayerController>().GetComponent<Inventory>();
     }
+
+    public object CaptureState()
+    {
+        var saveData = new InventorySaveData() 
+        { 
+            items = itemsSlots.Select(i => i.GetSaveData()).ToList(),
+            recoveries = recoverySlots.Select(i => i.GetSaveData()).ToList(),
+            rings = ringSlots.Select(i => i.GetSaveData()).ToList(),
+            memories = memorySlots.Select(i => i.GetSaveData()).ToList(),
+        };
+
+        return saveData;
+    }
+
+    public void RestoreState(object state)
+    {
+        var saveData = state as InventorySaveData;
+
+        itemsSlots = saveData.items.Select(i => new ItemSlot(i)).ToList();
+        recoverySlots = saveData.recoveries.Select(i => new ItemSlot(i)).ToList();
+        ringSlots = saveData.rings.Select(i => new ItemSlot(i)).ToList();
+        memorySlots = saveData.memories.Select(i => new ItemSlot(i)).ToList();
+
+        allSlots = new List<List<ItemSlot>> { itemsSlots, recoverySlots, ringSlots, memorySlots };
+
+        OnUpdated?.Invoke();
+    }
 }
 
 [Serializable]
@@ -111,6 +139,28 @@ public class ItemSlot
 {
     [SerializeField] ItemBase item;
     [SerializeField] int count;
+
+    public ItemSlot()
+    {
+
+    }
+
+    public ItemSlot(ItemSaveData saveData)
+    {
+        item = ItemDB.GetItemByName(saveData.name);
+        count = saveData.count;
+    }
+
+    public ItemSaveData GetSaveData()
+    {
+        var saveData = new ItemSaveData()
+        {
+            name = item.Name,
+            count = count
+        };
+
+        return saveData;
+    }
 
     public ItemBase Item
     {
@@ -122,4 +172,20 @@ public class ItemSlot
         get { return count; }
         set { count = value; }
     }
+}
+
+[Serializable]
+public class ItemSaveData
+{
+    public string name;
+    public int count;
+}
+
+[Serializable]
+public class InventorySaveData
+{
+    public List<ItemSaveData> items;
+    public List<ItemSaveData> recoveries;
+    public List<ItemSaveData> rings;
+    public List<ItemSaveData> memories;
 }

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PickUp : MonoBehaviour, Interactable
+public class PickUp : MonoBehaviour, Interactable, ISavable
 {
     [SerializeField] ItemBase item;
 
@@ -20,5 +20,17 @@ public class PickUp : MonoBehaviour, Interactable
 
             yield return DialogManager.Instance.ShowDialogText($"{initiator.GetComponent<PlayerController>().Name} found {item.Name}");
         }
+    }
+
+    public object CaptureState()
+    {
+        return Used;
+    }
+
+    public void RestoreState(object state)
+    {
+        Used = (bool)state;
+        GetComponent<SpriteRenderer>().enabled = !Used;
+        GetComponent<BoxCollider2D>().enabled = !Used;
     }
 }
