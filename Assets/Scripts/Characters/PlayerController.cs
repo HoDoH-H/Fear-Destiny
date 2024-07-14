@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,6 +22,10 @@ public class PlayerController : MonoBehaviour, ISavable
     private void Awake()
     {
         character = GetComponent<Character>();
+        unit.name = name;
+        string playerBasePath = AssetDatabase.GetAssetPath(unit);
+        AssetDatabase.RenameAsset(playerBasePath, unit.Name);
+        AssetDatabase.SaveAssets();
     }
 
     int GetKey(GlobalSettings.KeyList key)

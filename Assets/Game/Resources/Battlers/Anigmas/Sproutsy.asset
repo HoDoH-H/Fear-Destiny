@@ -9,36 +9,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd91ca33a0282d543a9ee093c6d2c2a5, type: 3}
+  m_Script: {fileID: 11500000, guid: a608eeda330b9ef4e80d4e6fd8f09500, type: 3}
   m_Name: Sproutsy
   m_EditorClassIdentifier: 
+  isPlayer: 0
+  isHuman: 0
+  isAnigma: 1
   name: Sproutsy
   description: 
   frontSprite: {fileID: 6610000093956039366, guid: 749b6645fddad5b4cb77488781d098e7, type: 3}
-  backSprite: {fileID: 6610000093956039366, guid: 8e75e14989ac40946843101162875e9e, type: 3}
-  type1: 2
-  type2: 0
+  backSprite: {fileID: 6610000093956039366, guid: 749b6645fddad5b4cb77488781d098e7, type: 3}
   maxHp: 46
+  maxMp: 0
   attack: 45
   defense: 52
   spAttack: 57
   spDefense: 56
-  speed: 49
+  speed: 59
+  expYield: 58
   catchRate: 255
-  expYield: 67
   growthRate: 1
-  iMaxHp: 0
-  iAttack: 0
-  iDefense: 0
-  iSpAttack: 0
-  iSpDefense: 0
-  iSpeed: 0
-  eMaxHp: 0
-  eAttack: 0
-  eDefense: 0
-  eSpAttack: 0
-  eSpDefense: 0
-  eSpeed: 0
+  type1: 2
+  type2: 0
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: 419ae0b7721087a439288ef195777522, type: 2}
     level: 1
@@ -52,5 +44,16 @@ MonoBehaviour:
     level: 11
   - moveBase: {fileID: 11400000, guid: 15905705b549cd74988a53f196846f5f, type: 2}
     level: 14
-  learnableByItems:
-  - {fileID: 11400000, guid: bd8806ff5a356c347acb56a52e65ad3f, type: 2}
+  learnableByItems: []
+  eMaxHp: 0
+  eAttack: 0
+  eDefense: 0
+  eSpAttack: 0
+  eSpDefense: 0
+  eSpeed: 0
+  iMaxHp: 0
+  iAttack: 0
+  iDefense: 0
+  iSpAttack: 0
+  iSpDefense: 0
+  iSpeed: 0

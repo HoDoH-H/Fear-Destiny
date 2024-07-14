@@ -307,9 +307,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2414900108047148908, guid: 929706b31e2c12345b10812a5031dff1, type: 3}
+      propertyPath: unit
+      value: 
+      objectReference: {fileID: 11400000, guid: 61c27ead88da79c45a49be06c549cfe0, type: 2}
     - target: {fileID: 3650494268725687183, guid: 929706b31e2c12345b10812a5031dff1, type: 3}
       propertyPath: debug
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5200423128699668124, guid: 929706b31e2c12345b10812a5031dff1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -352,9 +356,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7744735054241104017, guid: 929706b31e2c12345b10812a5031dff1, type: 3}
+      propertyPath: anigmas.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7744735054241104017, guid: 929706b31e2c12345b10812a5031dff1, type: 3}
       propertyPath: anigmas.Array.data[0]._base
       value: 
-      objectReference: {fileID: 11400000, guid: 82a836a8794118a478235ff31f6aea83, type: 2}
+      objectReference: {fileID: 11400000, guid: 61c27ead88da79c45a49be06c549cfe0, type: 2}
+    - target: {fileID: 7744735054241104017, guid: 929706b31e2c12345b10812a5031dff1, type: 3}
+      propertyPath: anigmas.Array.data[0].level
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7888253740233175173, guid: 929706b31e2c12345b10812a5031dff1, type: 3}
       propertyPath: m_Name
       value: EssentialObjects
