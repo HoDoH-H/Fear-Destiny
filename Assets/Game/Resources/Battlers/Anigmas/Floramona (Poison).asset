@@ -9,36 +9,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd91ca33a0282d543a9ee093c6d2c2a5, type: 3}
-  m_Name: Floramona (Electric)
+  m_Script: {fileID: 11500000, guid: a608eeda330b9ef4e80d4e6fd8f09500, type: 3}
+  m_Name: Floramona (Poison)
   m_EditorClassIdentifier: 
+  isPlayer: 0
+  isHuman: 0
+  isAnigma: 1
   name: Floramona
   description: 
-  frontSprite: {fileID: 2240952188110837364, guid: 1d9dd743a3ee8d14597ecd6b75671cb7, type: 3}
-  backSprite: {fileID: 2240952188110837364, guid: 4fa1dce927f5d024c9e4356ce5ace7db, type: 3}
-  type1: 5
-  type2: 19
+  frontSprite: {fileID: -8519887813763383287, guid: 2304374b5db7676418433a100a00db9d, type: 3}
+  backSprite: {fileID: -8519887813763383287, guid: 9f0bd168d557a564e87cc4b03e25d083, type: 3}
   maxHp: 65
+  maxMp: 0
   attack: 76
   defense: 85
   spAttack: 105
   spDefense: 100
   speed: 72
-  catchRate: 255
   expYield: 153
+  catchRate: 255
   growthRate: 2
-  iMaxHp: 0
-  iAttack: 0
-  iDefense: 0
-  iSpAttack: 0
-  iSpDefense: 0
-  iSpeed: 0
-  eMaxHp: 0
-  eAttack: 0
-  eDefense: 0
-  eSpAttack: 0
-  eSpDefense: 0
-  eSpeed: 0
+  type1: 8
+  type2: 19
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: 419ae0b7721087a439288ef195777522, type: 2}
     level: 1
@@ -46,5 +38,18 @@ MonoBehaviour:
     level: 1
   - moveBase: {fileID: 11400000, guid: 2018e8e287fe7864d8761fa69d294e73, type: 2}
     level: 5
-  - moveBase: {fileID: 11400000, guid: 32272d73fa203394e93606ea1d970396, type: 2}
+  - moveBase: {fileID: 11400000, guid: 0361cdf10ad24fb4b98f1feb648d01e7, type: 2}
     level: 8
+  learnableByItems: []
+  eMaxHp: 0
+  eAttack: 0
+  eDefense: 0
+  eSpAttack: 0
+  eSpDefense: 0
+  eSpeed: 0
+  iMaxHp: 0
+  iAttack: 0
+  iDefense: 0
+  iSpAttack: 0
+  iSpDefense: 0
+  iSpeed: 0

@@ -19328,7 +19328,7 @@ PrefabInstance:
     - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: anigmas.Array.data[0]._base
       value: 
-      objectReference: {fileID: 11400000, guid: e138122cbe09a18428496ad988056555, type: 2}
+      objectReference: {fileID: 11400000, guid: 35fa88a9a816bca439fb87eb82a262e9, type: 2}
     - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: anigmas.Array.data[0].level
       value: 8
@@ -33788,7 +33788,7 @@ PrefabInstance:
     - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: anigmas.Array.data[1]._base
       value: 
-      objectReference: {fileID: 11400000, guid: e138122cbe09a18428496ad988056555, type: 2}
+      objectReference: {fileID: 11400000, guid: 35fa88a9a816bca439fb87eb82a262e9, type: 2}
     - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: anigmas.Array.data[1].level
       value: 6
@@ -36183,7 +36183,7 @@ PrefabInstance:
     - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: anigmas.Array.data[1]._base
       value: 
-      objectReference: {fileID: 11400000, guid: 192c4c11db194ae4dad233f564416972, type: 2}
+      objectReference: {fileID: 11400000, guid: 35fa88a9a816bca439fb87eb82a262e9, type: 2}
     - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: anigmas.Array.data[1].level
       value: 5
@@ -36877,10 +36877,10 @@ PrefabInstance:
     - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: anigmas.Array.data[0]._base
       value: 
-      objectReference: {fileID: 11400000, guid: b19b9b0d466145044bc60d1e5da958ab, type: 2}
+      objectReference: {fileID: 11400000, guid: 35fa88a9a816bca439fb87eb82a262e9, type: 2}
     - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: anigmas.Array.data[0].level
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7295033316093661849, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: defaultDirection

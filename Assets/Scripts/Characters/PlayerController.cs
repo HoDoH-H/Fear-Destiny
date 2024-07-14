@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour, ISavable
 {
     [SerializeField] string name;
-    [SerializeField] Sprite sprite;
+    [SerializeField] BattlerBase unit;
 
     public Vector2 input;
     public bool CanMove = true;
@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour, ISavable
     }
 
     public string Name { get => name; }
-    public Sprite Sprite { get => sprite; }
+    public BattlerBase Unit => unit;
     public Character Character => character;
 }
 

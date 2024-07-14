@@ -16,10 +16,10 @@ MonoBehaviour:
   description: The user sends out a wave of ethereal energy that can boost its own
     power.
   type: 20
-  power: 0
-  accuracy: 0
+  power: 65
+  accuracy: 100
   alwaysHits: 0
-  up: 0
+  up: 15
   priority: 0
   style: 1
   effects:

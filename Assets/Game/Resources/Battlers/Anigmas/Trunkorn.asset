@@ -9,36 +9,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd91ca33a0282d543a9ee093c6d2c2a5, type: 3}
-  m_Name: Rhintain
+  m_Script: {fileID: 11500000, guid: a608eeda330b9ef4e80d4e6fd8f09500, type: 3}
+  m_Name: Trunkorn
   m_EditorClassIdentifier: 
-  name: Rhintain
+  isPlayer: 0
+  isHuman: 0
+  isAnigma: 1
+  name: Trunkorn
   description: 
-  frontSprite: {fileID: 8908011270087828027, guid: 9cf75cceb6e606e4abd1c9f2bfbe7141, type: 3}
-  backSprite: {fileID: 8908011270087828027, guid: 9b2ec801cc26f4545a1c826316bcd94b, type: 3}
+  frontSprite: {fileID: -7349110149113480487, guid: 881588c207b7723489b4d4a8ffaefa05, type: 3}
+  backSprite: {fileID: -7349110149113480487, guid: f7bcc5e0eb8546c4f894144fbe387466, type: 3}
+  maxHp: 61
+  maxMp: 0
+  attack: 78
+  defense: 60
+  spAttack: 62
+  spDefense: 81
+  speed: 62
+  expYield: 140
+  catchRate: 255
+  growthRate: 3
   type1: 2
   type2: 13
-  maxHp: 85
-  attack: 99
-  defense: 82
-  spAttack: 85
-  spDefense: 100
-  speed: 75
-  catchRate: 255
-  expYield: 241
-  growthRate: 3
-  iMaxHp: 0
-  iAttack: 0
-  iDefense: 0
-  iSpAttack: 0
-  iSpDefense: 0
-  iSpeed: 0
-  eMaxHp: 0
-  eAttack: 0
-  eDefense: 0
-  eSpAttack: 0
-  eSpDefense: 0
-  eSpeed: 0
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: 7c98ab2dffb01d04194537f10d97a5a9, type: 2}
     level: 1
@@ -54,3 +46,18 @@ MonoBehaviour:
     level: 15
   - moveBase: {fileID: 11400000, guid: c122ab5bbf5be7549bf4afe95c9e684d, type: 2}
     level: 18
+  - moveBase: {fileID: 11400000, guid: 53a02731480a7c443908b49aa18cee53, type: 2}
+    level: 21
+  learnableByItems: []
+  eMaxHp: 0
+  eAttack: 0
+  eDefense: 0
+  eSpAttack: 0
+  eSpDefense: 0
+  eSpeed: 0
+  iMaxHp: 0
+  iAttack: 0
+  iDefense: 0
+  iSpAttack: 0
+  iSpDefense: 0
+  iSpeed: 0

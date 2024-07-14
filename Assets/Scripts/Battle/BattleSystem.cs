@@ -92,7 +92,7 @@ public class BattleSystem : MonoBehaviour
 
             playerImage.gameObject.SetActive(true);
             trainerImage.gameObject.SetActive(true);
-            playerImage.sprite = player.Sprite;
+            playerImage.sprite = player.Unit.BackSprite;
             trainerImage.sprite = trainer.Sprite;
 
             yield return dialogBox.TypeDialog($"{trainer.Name} wants to battle!");
@@ -428,7 +428,7 @@ public class BattleSystem : MonoBehaviour
                 var newMove = playerUnit.Anigma.GetLearnableMoveAtCurrLevel();
                 if (newMove != null)
                 {
-                    if (playerUnit.Anigma.Moves.Count < AnigmaBase.MaxNumOfMoves)
+                    if (playerUnit.Anigma.Moves.Count < BattlerBase.MaxNumOfMoves)
                     {
                         playerUnit.Anigma.LearnMove(newMove.Base);
                         yield return dialogBox.TypeDialog($"{playerUnit.Anigma.Base.Name} learned {newMove.Base.Name}!");
@@ -438,7 +438,7 @@ public class BattleSystem : MonoBehaviour
                     {
                         // Need to forget a move to learn a new one
                         yield return dialogBox.TypeDialog($"{playerUnit.Anigma.Base.Name} is attempting to acquire {newMove.Base.Name}...");
-                        yield return dialogBox.TypeDialog($"But an Anigma cannot learn more than {AnigmaBase.MaxNumOfMoves} moves!");
+                        yield return dialogBox.TypeDialog($"But an Anigma cannot learn more than {BattlerBase.MaxNumOfMoves} moves!");
                         yield return ChooseMoveToForget(playerUnit.Anigma, newMove.Base);
                         yield return new WaitUntil(() => state != BattleState.MoveToForget);
                         yield return new WaitForSeconds(2f);
@@ -771,7 +771,7 @@ public class BattleSystem : MonoBehaviour
             Action<int> onMoveSelected = (moveIndex) =>
             {
                 moveSelectionUI.gameObject.SetActive(false);
-                if (moveIndex == AnigmaBase.MaxNumOfMoves)
+                if (moveIndex == BattlerBase.MaxNumOfMoves)
                 {
                     // Don't learn the new move
                     StartCoroutine(dialogBox.TypeDialog($"{playerUnit.Anigma.Base.Name} did not acquired {moveToLearn.Name}"));

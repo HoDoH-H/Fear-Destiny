@@ -6,17 +6,17 @@ using UnityEngine;
 [System.Serializable]
 public class Anigma
 {
-    [SerializeField] AnigmaBase _base;
+    [SerializeField] BattlerBase _base;
     [SerializeField] int level;
 
-    public Anigma(AnigmaBase aBase, int alevel)
+    public Anigma(BattlerBase aBase, int alevel)
     {
         _base = aBase;
         level = alevel;
         Init();
     }
 
-    public AnigmaBase Base { get { return _base; } }
+    public BattlerBase Base { get { return _base; } }
     public int Level { get { return level; } }
 
     public int Exp { get; set; }
@@ -45,7 +45,7 @@ public class Anigma
                 Moves.Add(new Move(move.Base));
             }
 
-            if (Moves.Count >= AnigmaBase.MaxNumOfMoves)
+            if (Moves.Count >= BattlerBase.MaxNumOfMoves)
             {
                 break;
             }
@@ -103,13 +103,13 @@ public class Anigma
     void CalculateStats()
     {
         Stats = new Dictionary<Stat, int>();
-        Stats.Add(Stat.Attack, Mathf.FloorToInt((2 * Base.Attack + Base.IAttack + (Base.EAttack / 4) * Level) / 100) + 5);
-        Stats.Add(Stat.Defense, Mathf.FloorToInt((2 * Base.Defense + Base.IDefense + (Base.EDefense / 4) * Level) / 100) + 5);
-        Stats.Add(Stat.SpAttack, Mathf.FloorToInt((2 * Base.SpAttack + Base.ISpAttack + (Base.ESpAttack / 4) * Level) / 100) + 5);
-        Stats.Add(Stat.SpDefense, Mathf.FloorToInt((2 * Base.SpDefense + Base.ISpDefense + (Base.ESpDefense / 4) * Level) / 100) + 5);
-        Stats.Add(Stat.Speed, Mathf.FloorToInt((2 * Base.Speed + Base.ISpeed + (Base.ESpeed / 4) * Level) / 100) + 5);
+        Stats.Add(Stat.Attack, Mathf.FloorToInt((2 * Base.Attack + Base.IAttack + (Base.EAttack / 4f)) * Level / 100f) + 5);
+        Stats.Add(Stat.Defense, Mathf.FloorToInt((2 * Base.Defense + Base.IDefense + (Base.EDefense / 4f)) * Level / 100f) + 5);
+        Stats.Add(Stat.SpAttack, Mathf.FloorToInt((2 * Base.SpAttack + Base.ISpAttack + (Base.ESpAttack / 4f)) * Level / 100f) + 5);
+        Stats.Add(Stat.SpDefense, Mathf.FloorToInt((2 * Base.SpDefense + Base.ISpDefense + (Base.ESpDefense / 4f)) * Level / 100f) + 5);
+        Stats.Add(Stat.Speed, Mathf.FloorToInt((2 * Base.Speed + Base.ISpeed + (Base.ESpeed / 4f)) * Level / 100f) + 5);
 
-        MaxHp = Mathf.FloorToInt((2 * Base.MaxHp + Base.IMaxHp + (Base.EMaxHp / 4) * Level) / 100) + Level + 10;
+        MaxHp = Mathf.FloorToInt((2 * Base.MaxHp + Base.IMaxHp + (Base.EMaxHp / 4f)) * Level / 100f) + Level + 10;
     }
 
 
@@ -140,7 +140,7 @@ public class Anigma
         {
             statVal = Mathf.FloorToInt(statVal * boostValues[boost]);
         }
-        else
+        else if (boost < 0)
         {
             statVal = Mathf.FloorToInt(statVal / boostValues[Mathf.Abs(boost)]);
         }
@@ -200,7 +200,7 @@ public class Anigma
 
     public void LearnMove(MoveBase moveToLearn)
     {
-        if (Moves.Count > AnigmaBase.MaxNumOfMoves)
+        if (Moves.Count > BattlerBase.MaxNumOfMoves)
             return;
 
         Moves.Add(new Move(moveToLearn));

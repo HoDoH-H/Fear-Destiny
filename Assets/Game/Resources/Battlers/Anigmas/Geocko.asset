@@ -9,41 +9,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd91ca33a0282d543a9ee093c6d2c2a5, type: 3}
+  m_Script: {fileID: 11500000, guid: a608eeda330b9ef4e80d4e6fd8f09500, type: 3}
   m_Name: Geocko
   m_EditorClassIdentifier: 
+  isPlayer: 0
+  isHuman: 0
+  isAnigma: 1
   name: Geocko
-  description: "Geocko is a small, reptilian Pok\xE9mon known for its rocky tail
-    and tough, stone-like skin. Its body is primarily a dull gray-blue, allowing
-    it to blend in with rocky environments. Geocko's tail is composed of solid rock,
-    which it uses both for defense and to deliver powerful attacks against its foes.
-    Despite its tough exterior, Geocko is quick and nimble, often darting between
-    rocks to avoid larger predators."
+  description: 
   frontSprite: {fileID: 1459963507865974130, guid: 3e97c12fa567aa643bed66c33ce1e30e, type: 3}
   backSprite: {fileID: 1459963507865974130, guid: be4e93d49f915db41a85466e97c4e67f, type: 3}
-  type1: 13
-  type2: 0
   maxHp: 55
+  maxMp: 0
   attack: 75
   defense: 70
   spAttack: 35
   spDefense: 50
   speed: 60
-  catchRate: 255
   expYield: 67
+  catchRate: 255
   growthRate: 2
-  iMaxHp: 0
-  iAttack: 0
-  iDefense: 0
-  iSpAttack: 0
-  iSpDefense: 0
-  iSpeed: 0
-  eMaxHp: 0
-  eAttack: 0
-  eDefense: 0
-  eSpAttack: 0
-  eSpDefense: 0
-  eSpeed: 0
+  type1: 13
+  type2: 0
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: 7c98ab2dffb01d04194537f10d97a5a9, type: 2}
     level: 1
@@ -53,3 +40,16 @@ MonoBehaviour:
     level: 8
   - moveBase: {fileID: 11400000, guid: c122ab5bbf5be7549bf4afe95c9e684d, type: 2}
     level: 10
+  learnableByItems: []
+  eMaxHp: 0
+  eAttack: 0
+  eDefense: 0
+  eSpAttack: 0
+  eSpDefense: 0
+  eSpeed: 0
+  iMaxHp: 0
+  iAttack: 0
+  iDefense: 0
+  iSpAttack: 0
+  iSpDefense: 0
+  iSpeed: 0

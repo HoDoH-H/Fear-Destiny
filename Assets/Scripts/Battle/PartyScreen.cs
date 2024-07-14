@@ -50,7 +50,7 @@ public class PartyScreen : MonoBehaviour
 
         UpdateMemberSelection(selection);
 
-        messageText.text = "Choose a Anigma.";
+        messageText.text = "Choose an Anigma.";
     }
 
     public void UpdateMemberSelection(int selectedMember)

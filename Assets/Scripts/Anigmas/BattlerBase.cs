@@ -1,11 +1,15 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "Anigma", menuName = "Anigma/Create new anigma")]
-public class AnigmaBase : ScriptableObject
+[CreateAssetMenu(fileName = "Battler", menuName = "Battler/Create new battler")]
+public class BattlerBase : ScriptableObject
 {
     [Header("Informations")]
+    [SerializeField] bool isPlayer;
+    [SerializeField] bool isHuman;
+    [SerializeField] bool isAnigma;
     [SerializeField] string name;
 
     [TextArea]
@@ -17,32 +21,28 @@ public class AnigmaBase : ScriptableObject
     [SerializeField] Sprite backSprite;
 
     [Space]
-    [Header("Types")]
-    [SerializeField] AnigmaType type1;
-    [SerializeField] AnigmaType type2;
-
-    [Space]
     [Header("Base Stats")]
     //Base Stats
     [SerializeField] int maxHp;
+    [SerializeField] int maxMp;
     [SerializeField] int attack;
     [SerializeField] int defense;
     [SerializeField] int spAttack;
     [SerializeField] int spDefense;
     [SerializeField] int speed;
-    [SerializeField] int catchRate = 255;
     [SerializeField] int expYield;
+    [SerializeField] int catchRate = 255;
     [SerializeField] GrowthRate growthRate = GrowthRate.MediumFast;
 
     [Space]
-    [Header("Inherited Power")]
-    //IP (Inherited Power)
-    [SerializeField] int iMaxHp;
-    [SerializeField] int iAttack;
-    [SerializeField] int iDefense;
-    [SerializeField] int iSpAttack;
-    [SerializeField] int iSpDefense;
-    [SerializeField] int iSpeed;
+    [Header("Types")]
+    [SerializeField] AnigmaType type1;
+    [SerializeField] AnigmaType type2;
+
+    [Space]
+    [Header("Learnable Moves")]
+    [SerializeField] List<LearnableMove> learnableMoves;
+    [SerializeField] List<MoveBase> learnableByItems;
 
     [Space]
     [Header("Experience Power")]
@@ -55,11 +55,14 @@ public class AnigmaBase : ScriptableObject
     [SerializeField] int eSpeed;
 
     [Space]
-    [Header("Learnable Moves")]
-    [SerializeField] List<LearnableMove> learnableMoves;
-    [SerializeField] List<MoveBase> learnableByItems;
-
-    public static int MaxNumOfMoves { get; set; } = 4;
+    [Header("Inherited Power")]
+    //IP (Inherited Power)
+    [SerializeField] int iMaxHp;
+    [SerializeField] int iAttack;
+    [SerializeField] int iDefense;
+    [SerializeField] int iSpAttack;
+    [SerializeField] int iSpDefense;
+    [SerializeField] int iSpeed;
 
     public int GetExpForLevel(int level)
     {
@@ -116,24 +119,19 @@ public class AnigmaBase : ScriptableObject
     }
 
     //Properties
+    public bool IsPlayer => isPlayer;
+    public bool IsHuman => isHuman;
+    public bool IsAnigma => isAnigma;
     public string Name => name;
     public string Description => description;
     public Sprite FrontSprite => frontSprite;
     public Sprite BackSprite => backSprite;
-    public AnigmaType Type1 => type1;
-    public AnigmaType Type2 => type2;
     public int MaxHp => maxHp;
     public int Attack => attack;
     public int Defense => defense;
     public int SpAttack => spAttack;
     public int SpDefense => spDefense;
     public int Speed => speed;
-    public int IMaxHp => iMaxHp;
-    public int IAttack => iAttack;
-    public int IDefense => iDefense;
-    public int ISpAttack => iSpAttack;
-    public int ISpDefense => iSpDefense;
-    public int ISpeed => iSpeed;
     public int EMaxHp => eMaxHp;
     public int EAttack => eAttack;
     public int EDefense => eDefense;
@@ -142,9 +140,17 @@ public class AnigmaBase : ScriptableObject
     public int ESpeed => eSpeed;
     public List<LearnableMove> LearnableMoves => learnableMoves;
     public List<MoveBase> LearnableByItems => learnableByItems;
-    public int CatchRate => catchRate;
     public int ExpYield => expYield;
-    public GrowthRate GrowthRate => growthRate;
+    public AnigmaType Type1 => type1;
+    public AnigmaType Type2 => type2;
+    public int IMaxHp => iMaxHp;
+    public int IAttack => iAttack;
+    public int IDefense => iDefense;
+    public int ISpAttack => iSpAttack;
+    public int ISpDefense => iSpDefense;
+    public int ISpeed => iSpeed;
+    public int CatchRate => catchRate;
+    public static int MaxNumOfMoves { get; set; } = 4;
 }
 
 [System.Serializable]

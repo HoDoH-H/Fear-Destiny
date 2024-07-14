@@ -1728,7 +1728,7 @@ PrefabInstance:
     - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: anigmas.Array.data[0]._base
       value: 
-      objectReference: {fileID: 11400000, guid: 192c4c11db194ae4dad233f564416972, type: 2}
+      objectReference: {fileID: 11400000, guid: 35fa88a9a816bca439fb87eb82a262e9, type: 2}
     - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: anigmas.Array.data[0].level
       value: 15
@@ -35871,7 +35871,7 @@ PrefabInstance:
     - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: anigmas.Array.data[1]._base
       value: 
-      objectReference: {fileID: 11400000, guid: f03d4edc248bdc144917c29d7a7b377a, type: 2}
+      objectReference: {fileID: 11400000, guid: 35fa88a9a816bca439fb87eb82a262e9, type: 2}
     - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: anigmas.Array.data[1].level
       value: 10
@@ -42686,7 +42686,7 @@ PrefabInstance:
     - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: anigmas.Array.data[0]._base
       value: 
-      objectReference: {fileID: 11400000, guid: b5572a7fb68a134428775e74d534e918, type: 2}
+      objectReference: {fileID: 11400000, guid: 35fa88a9a816bca439fb87eb82a262e9, type: 2}
     - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: anigmas.Array.data[0].level
       value: 18
@@ -42771,7 +42771,7 @@ PrefabInstance:
     - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: anigmas.Array.data[1]._base
       value: 
-      objectReference: {fileID: 11400000, guid: d2c4ebaa2fa41844f9a68fda47184a1a, type: 2}
+      objectReference: {fileID: 11400000, guid: 35fa88a9a816bca439fb87eb82a262e9, type: 2}
     - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: anigmas.Array.data[1].level
       value: 18
