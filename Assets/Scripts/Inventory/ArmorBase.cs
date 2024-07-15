@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 
-public class ArmorBase : MonoBehaviour
+[Serializable]
+public class ArmorBase
 {
     ArmorType type;
 

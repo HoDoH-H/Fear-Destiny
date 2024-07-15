@@ -362,9 +362,17 @@ PrefabInstance:
     - target: {fileID: 7744735054241104017, guid: 929706b31e2c12345b10812a5031dff1, type: 3}
       propertyPath: anigmas.Array.data[0]._base
       value: 
-      objectReference: {fileID: 11400000, guid: 61c27ead88da79c45a49be06c549cfe0, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7744735054241104017, guid: 929706b31e2c12345b10812a5031dff1, type: 3}
       propertyPath: anigmas.Array.data[0].level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7744735054241104017, guid: 929706b31e2c12345b10812a5031dff1, type: 3}
+      propertyPath: anigmas.Array.data[1]._base
+      value: 
+      objectReference: {fileID: 11400000, guid: b5572a7fb68a134428775e74d534e918, type: 2}
+    - target: {fileID: 7744735054241104017, guid: 929706b31e2c12345b10812a5031dff1, type: 3}
+      propertyPath: anigmas.Array.data[1].level
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7888253740233175173, guid: 929706b31e2c12345b10812a5031dff1, type: 3}
