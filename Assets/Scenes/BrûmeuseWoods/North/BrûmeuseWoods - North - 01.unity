@@ -36834,38 +36834,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Trainer
       objectReference: {fileID: 0}
-    - target: {fileID: 5899984359257341033, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
-      propertyPath: fov
-      value: 
-      objectReference: {fileID: 791908030}
-    - target: {fileID: 5899984359257341033, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5899984359257341033, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
-      propertyPath: exclamation
-      value: 
-      objectReference: {fileID: 791908031}
-    - target: {fileID: 5899984359257341033, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
-      propertyPath: 'dialog.lines.Array.data[0]'
-      value: You picked the wrong day to cross us!
-      objectReference: {fileID: 0}
-    - target: {fileID: 5899984359257341033, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
-      propertyPath: 'dialog.lines.Array.data[1]'
-      value: Prepare to get your ass kicked!
-      objectReference: {fileID: 0}
-    - target: {fileID: 5899984359257341033, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
-      propertyPath: dialogAfterBattle.lines.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5899984359257341033, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
-      propertyPath: 'dialogAfterBattle.lines.Array.data[0]'
-      value: "Curse you... this isn\u2019t the end!"
-      objectReference: {fileID: 0}
-    - target: {fileID: 5899984359257341033, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
-      propertyPath: 'dialogAfterBattle.lines.Array.data[1]'
-      value: "Next time, you won\u2019t be so lucky!"
-      objectReference: {fileID: 0}
     - target: {fileID: 7049796714860433381, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: uniqueId
       value: 0505176f-e276-482a-8177-4676117286db
@@ -36891,16 +36859,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
---- !u!1 &791908030 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 279122827930800007, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
-  m_PrefabInstance: {fileID: 791908029}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &791908031 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4111140380813501504, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
-  m_PrefabInstance: {fileID: 791908029}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1003621748
 GameObject:
   m_ObjectHideFlags: 0

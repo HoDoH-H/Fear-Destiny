@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7df726de80699e241bbd02f144a44e93, type: 3}
+  m_Name: DeadAnigma
+  m_EditorClassIdentifier: 
+  name: Dead Companion
+  description: 
+  startDialog:
+    lines:
+    - I-It's been two days...
+    - Two days, I keep walking with his corpse
+    - Desesperatly trying to find a way...
+    - To revive my dead companion...
+  inProgressDialog:
+    lines:
+    - May gods bring me something to help me...
+    - And help my friend...
+  completedDialog:
+    lines:
+    - Really! You really give me this precious object for free!
+    - I don't know what to say! Thank you so much!
+    - My dear friend.... I'll finally get you back...
+    - I owe you a big one! Please take this!
+  requireItem: {fileID: 11400000, guid: 9cb34067bb9512c468dcd183795ec50f, type: 2}
+  rewardItem: {fileID: 11400000, guid: 6f22ed1f3be030a49b80575588461b3e, type: 2}

@@ -42,6 +42,8 @@ public class BattleSystem : MonoBehaviour
     int escapeAttemps;
     MoveBase moveToLearn;
 
+    BattleUnit firstToMove;
+
     List<Vector3> ringAnimVectors = new List<Vector3>() { new Vector3(0f, 0.10f), new Vector3(0.10f, 0.10f), new Vector3(0.10f, 0f), new Vector3(0.10f, -0.10f), new Vector3(0f, -0.10f), new Vector3(-0.10f, -0.10f), new Vector3(-0.10f, 0f), new Vector3(-0.10f, 0.10f) };
 
     // Region Start - Start battle
@@ -215,6 +217,8 @@ public class BattleSystem : MonoBehaviour
 
             var secondAnigma = secondUnit.Anigma;
 
+            firstToMove = firstUnit;
+
             // First turn
             yield return RunMove(firstUnit, secondUnit, firstUnit.Anigma.CurrentMove);
             yield return RunAfterTurn(firstUnit);
@@ -273,7 +277,7 @@ public class BattleSystem : MonoBehaviour
         if (!canRunMove)
         {
             yield return ShowStatusChanges(sourceUnit.Anigma);
-            if (sourceUnit.Anigma.VolatileStatus.Name == "Confusion")
+            if (sourceUnit.Anigma.VolatileStatus?.Name == "Confusion")
             {
                 sourceUnit.PlayAttackAnimation();
                 yield return new WaitForSeconds(0.1f);
@@ -513,6 +517,11 @@ public class BattleSystem : MonoBehaviour
         // Volatile Status Condition
         if (effect.VolatileStatus != ConditionID.None)
         {
+            if (effect.VolatileStatus == ConditionID.flinch && firstToMove.Anigma != source)
+            {
+                yield break;
+            }
+
             target.SetVolatileStatus(effect.VolatileStatus);
         }
 

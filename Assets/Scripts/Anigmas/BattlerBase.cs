@@ -118,6 +118,11 @@ public class BattlerBase : ScriptableObject
         }
     }
 
+    public void ChangeName(string value)
+    {
+        name = value;
+    }
+
     //Properties
     public bool IsPlayer => isPlayer;
     public bool IsHuman => isHuman;

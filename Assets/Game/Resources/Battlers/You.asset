@@ -15,7 +15,7 @@ MonoBehaviour:
   isPlayer: 1
   isHuman: 0
   isAnigma: 0
-  name: You
+  battlerName: 
   description: 
   frontSprite: {fileID: 0}
   backSprite: {fileID: 21300000, guid: 6f95e801fe4bad743a33540629d0b902, type: 3}

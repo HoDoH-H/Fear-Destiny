@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dccf5963061645e498d3988b68edfbfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: CoolMan
+  name: Black Hood Assassin
   sprite: {fileID: 21300000, guid: 8943fd0da8fa7844a825eb1c582b409c, type: 3}
   dialog:
     lines:

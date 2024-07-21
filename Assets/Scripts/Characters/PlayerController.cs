@@ -22,10 +22,12 @@ public class PlayerController : MonoBehaviour, ISavable
     private void Awake()
     {
         character = GetComponent<Character>();
-        unit.name = name;
+
         string playerBasePath = AssetDatabase.GetAssetPath(unit);
-        AssetDatabase.RenameAsset(playerBasePath, unit.Name);
+        AssetDatabase.RenameAsset(playerBasePath, name);
         AssetDatabase.SaveAssets();
+
+        unit.ChangeName(name);
     }
 
     int GetKey(GlobalSettings.KeyList key)

@@ -139,6 +139,19 @@ public class ConditionDB
                     return false;
                 }
             }
+        },
+        {
+            ConditionID.flinch,
+            new Condition()
+            {
+                Name = "Flinch",
+                StartMessage = "Flinched",
+                OnBeforeMove = (Anigma anigma) =>
+                {
+                    anigma.CureVolatileStatus();
+                    return false;
+                }
+            }
         }
     };
 
