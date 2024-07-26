@@ -12,17 +12,14 @@ EditorBuildSettings:
     path: "Assets/Scenes/Br\xFBmeuseWoods/Speranza Town.unity"
     guid: 599a1b5b1c4552a449977d60d75f5b02
   - enabled: 1
-    path: "Assets/Scenes/Br\xFBmeuseWoods/North/Br\xFBmeuseWoods - North - 01.unity"
-    guid: ae1d05bbbabb7574ba6da3715f18547e
-  - enabled: 1
-    path: "Assets/Scenes/Br\xFBmeuseWoods/Br\xFBmeuseWoods - East.unity"
-    guid: 47ff63403c88bf24882b14196c523510
-  - enabled: 1
     path: "Assets/Scenes/Br\xFBmeuseWoods/Br\xFBmeuseWoods - NorthEast.unity"
     guid: 302aade4ebc1d9b40993204b86acba0e
   - enabled: 1
     path: "Assets/Scenes/Br\xFBmeuseWoods/Speranza Town/Rustic Anvil.unity"
     guid: 3132ddbdc26021f4eb89e197343f233f
+  - enabled: 1
+    path: "Assets/Scenes/Br\xFBmeuseWoods/North/Br\xFBmeuseWoods - North - 01.unity"
+    guid: ae1d05bbbabb7574ba6da3715f18547e
   - enabled: 1
     path: "Assets/Scenes/Br\xFBmeuseWoods/North/Br\xFBmeuseWoods - North - 02.unity"
     guid: 5ed488d7cd98866428af757e1dd4f708
@@ -35,6 +32,54 @@ EditorBuildSettings:
   - enabled: 1
     path: "Assets/Scenes/Br\xFBmeuseWoods/Speranza Town/Arcane Bazaar.unity"
     guid: 7b24c1f2933bccf4994c297ce86ea43d
+  - enabled: 1
+    path: "Assets/Scenes/Br\xFBmeuseWoods/East/Br\xFBmeuseWoods - East - 01.unity"
+    guid: 99726907ff7ebe048b3d2ca9bce28482
+  - enabled: 1
+    path: "Assets/Scenes/Br\xFBmeuseWoods/East/Br\xFBmeuseWoods - East - 02.unity"
+    guid: a44cf44d7f697e84eb567f9feeccbaa7
+  - enabled: 1
+    path: "Assets/Scenes/Br\xFBmeuseWoods/East/Br\xFBmeuseWoods - East - 03.unity"
+    guid: 851d674fd4696de4c94b2789247c895c
+  - enabled: 1
+    path: "Assets/Scenes/Br\xFBmeuseWoods/East/Br\xFBmeuseWoods - East - 04.unity"
+    guid: 3c1aae3ee6967884ab2992fdbe58de91
+  - enabled: 1
+    path: "Assets/Scenes/Br\xFBmeuseWoods/East/Br\xFBmeuseWoods - East - 05.unity"
+    guid: 6e1429153cc16b14fa84de7e544c4612
+  - enabled: 1
+    path: "Assets/Scenes/Br\xFBmeuseWoods/East/Br\xFBmeuseWoods - East - 06.unity"
+    guid: 2b2f8b54e5e4f7f4193f7c08493bedb1
+  - enabled: 1
+    path: "Assets/Scenes/Br\xFBmeuseWoods/East/Br\xFBmeuseWoods - East - 07.unity"
+    guid: 06ae96cb584e78340b672bd8cf8b08df
+  - enabled: 1
+    path: "Assets/Scenes/Br\xFBmeuseWoods/East/Br\xFBmeuseWoods - East - 08.unity"
+    guid: 19c312cfadb08b04bb40fd40e7017aed
+  - enabled: 1
+    path: "Assets/Scenes/Br\xFBmeuseWoods/East/Br\xFBmeuseWoods - East - 09.unity"
+    guid: 4410109ad6fbd444e85948c6da371475
+  - enabled: 1
+    path: "Assets/Scenes/Br\xFBmeuseWoods/East/Br\xFBmeuseWoods - East - 10.unity"
+    guid: dea0a908b82012f4e889f4ad4ad674f9
+  - enabled: 1
+    path: "Assets/Scenes/Br\xFBmeuseWoods/East/Br\xFBmeuseWoods - East - 11.unity"
+    guid: 7bf75b3e1d15f9a4c92dcf0dee49bc76
+  - enabled: 1
+    path: "Assets/Scenes/Br\xFBmeuseWoods/East/Br\xFBmeuseWoods - East - 12.unity"
+    guid: 4453f5bbdd2a82d4a857942860f1198b
+  - enabled: 1
+    path: "Assets/Scenes/Br\xFBmeuseWoods/East/Br\xFBmeuseWoods - East - 13.unity"
+    guid: 918668db35dd2fc4d998a632d4c02f8d
+  - enabled: 1
+    path: "Assets/Scenes/Br\xFBmeuseWoods/East/Br\xFBmeuseWoods - East - 14.unity"
+    guid: 51808b47a595fd54b81a35ca1e5dc017
+  - enabled: 1
+    path: "Assets/Scenes/Br\xFBmeuseWoods/East/Br\xFBmeuseWoods - East - 15.unity"
+    guid: 8b88b63058bd9f948ac649444edf1bcd
+  - enabled: 1
+    path: "Assets/Scenes/Br\xFBmeuseWoods/East/Br\xFBmeuseWoods - East - 16.unity"
+    guid: 47ff63403c88bf24882b14196c523510
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: de03236a6d3a9e44385eec4cc2812601, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}

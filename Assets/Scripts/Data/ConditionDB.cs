@@ -22,7 +22,7 @@ public class ConditionDB
             {
                 Name = "Poison",
                 StartMessage = "has been poisoned!",
-                OnAfterTurn = (Anigma anigma) =>
+                OnAfterTurn = (Battler anigma) =>
                 {
                     anigma.DecreaseHP(anigma.MaxHp / 8);
                     anigma.StatusChanges.Enqueue($"{anigma.Base.Name} is hurt by poison");
@@ -35,7 +35,7 @@ public class ConditionDB
             {
                 Name = "Burn",
                 StartMessage = "has been burned!",
-                OnAfterTurn = (Anigma anigma) =>
+                OnAfterTurn = (Battler anigma) =>
                 {
                     anigma.DecreaseHP(anigma.MaxHp / 16);
                     anigma.StatusChanges.Enqueue($"{anigma.Base.Name} is hurt by its burn");
@@ -48,7 +48,7 @@ public class ConditionDB
             {
                 Name = "Paralyze",
                 StartMessage = "has been paralyzed!",
-                OnBeforeMove = (Anigma anigma) =>
+                OnBeforeMove = (Battler anigma) =>
                 {
                     if (Random.Range(1, 5) == 1)
                     {
@@ -66,7 +66,7 @@ public class ConditionDB
             {
                 Name = "Freeze",
                 StartMessage = "has been frozen!",
-                OnBeforeMove = (Anigma anigma) =>
+                OnBeforeMove = (Battler anigma) =>
                 {
                     if (Random.Range(1, 5) == 1)
                     {
@@ -85,12 +85,12 @@ public class ConditionDB
             {
                 Name = "Sleep",
                 StartMessage = "has fallen asleep!",
-                OnStart = (Anigma anigma) =>
+                OnStart = (Battler anigma) =>
                 {
                     // Sleep for 1-3 turns
                     anigma.StatusTime = Random.Range(1, 4);
                 },
-                OnBeforeMove = (Anigma anigma) =>
+                OnBeforeMove = (Battler anigma) =>
                 {
                     if (anigma.StatusTime <= 0)
                     {
@@ -114,12 +114,12 @@ public class ConditionDB
             {
                 Name = "Confusion",
                 StartMessage = "has been confused!",
-                OnStart = (Anigma anigma) =>
+                OnStart = (Battler anigma) =>
                 {
                     // confuse for 1-4 turns
                     anigma.VolatileStatusTime = Random.Range(1, 5);
                 },
-                OnBeforeMove = (Anigma anigma) =>
+                OnBeforeMove = (Battler anigma) =>
                 {
                     if (anigma.VolatileStatusTime <= 0)
                     {
@@ -146,7 +146,7 @@ public class ConditionDB
             {
                 Name = "Flinch",
                 StartMessage = "Flinched",
-                OnBeforeMove = (Anigma anigma) =>
+                OnBeforeMove = (Battler anigma) =>
                 {
                     anigma.CureVolatileStatus();
                     return false;

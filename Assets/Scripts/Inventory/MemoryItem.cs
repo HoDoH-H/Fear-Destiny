@@ -12,13 +12,13 @@ public class MemoryItem : ItemBase
 
     public override bool IsReusable => true;
 
-    public override bool Use(Anigma anigma)
+    public override bool Use(Battler anigma)
     {
         // Learning move is handled from InventoryUI, If it was learned then return true
         return anigma.HasMove(move);
     }
 
-    public bool CanBeTaught(Anigma anigma)
+    public bool CanBeTaught(Battler anigma)
     {
         return anigma.Base.LearnableByItems.Contains(move);
     }

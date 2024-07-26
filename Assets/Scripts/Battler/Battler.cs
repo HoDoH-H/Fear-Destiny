@@ -4,12 +4,12 @@ using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
-public class Anigma
+public class Battler
 {
     [SerializeField] BattlerBase _base;
     [SerializeField] int level;
 
-    public Anigma(BattlerBase aBase, int alevel)
+    public Battler(BattlerBase aBase, int alevel)
     {
         _base = aBase;
         level = alevel;
@@ -65,9 +65,9 @@ public class Anigma
         VolatileStatus = null;
     }
 
-    public AnigmaSaveData GetSaveData()
+    public BattlerSaveData GetSaveData()
     {
-        var saveData = new AnigmaSaveData()
+        var saveData = new BattlerSaveData()
         {
             name = Base.Name,
             hp = HP,
@@ -80,9 +80,9 @@ public class Anigma
         return saveData;
     }
 
-    public Anigma(AnigmaSaveData saveData)
+    public Battler(BattlerSaveData saveData)
     {
-        _base = AnigmaDB.GetAnigmaByName(saveData.name);
+        _base = BattlerDB.GetBattlerByName(saveData.name);
         HP = saveData.hp;
         level = saveData.level;
         Exp = saveData.exp;
@@ -247,7 +247,7 @@ public class Anigma
         ResetStatBoost();
     }
 
-    public DamageDetails TakeDamage(Move move, Anigma attacker)
+    public DamageDetails TakeDamage(Move move, Battler attacker)
     {
         float critical = 1f;
         if (UnityEngine.Random.value * 100f <= 6.25f && move.Base.Power > 0)
@@ -368,7 +368,7 @@ public class DamageDetails
 }
 
 [Serializable]
-public class AnigmaSaveData
+public class BattlerSaveData
 {
     public string name;
     public int hp;

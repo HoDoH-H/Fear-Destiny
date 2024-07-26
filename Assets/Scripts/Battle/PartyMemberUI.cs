@@ -11,9 +11,9 @@ public class PartyMemberUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI MessageText;
     [SerializeField] HpBar hpBar;
 
-    Anigma _anigma;
+    Battler _anigma;
 
-    public void Init(Anigma anigma)
+    public void Init(Battler anigma)
     {
         _anigma = anigma;
         UpdateData();

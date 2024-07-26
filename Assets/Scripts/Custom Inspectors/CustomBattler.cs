@@ -1,7 +1,7 @@
 using System.Xml.Linq;
 using UnityEditor;
 
-[CustomEditor(typeof(Anigma))]
+[CustomEditor(typeof(Battler))]
 [CanEditMultipleObjects]
 public class CustomBattler : Editor
 {

@@ -7,7 +7,7 @@ public class RingItem : ItemBase
     [SerializeField] float catchRateModifier = 1;
     [SerializeField] bool alwaysCatch = false;
 
-    public override bool Use(Anigma anigma)
+    public override bool Use(Battler anigma)
     {
         return true;
     }

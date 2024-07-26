@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7df726de80699e241bbd02f144a44e93, type: 3}
+  m_Name: Meet Alice
+  m_EditorClassIdentifier: 
+  name: Meet Alice
+  description: Go meet Alice, The Huntress of Shadows
+  startDialog:
+    lines: []
+  inProgressDialog:
+    lines: []
+  completedDialog:
+    lines: []
+  requireItem: {fileID: 0}
+  rewardItem: {fileID: 0}

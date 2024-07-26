@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class MapArea : MonoBehaviour
 {
-    [SerializeField] List<Anigma> wildAnigmas;
+    [SerializeField] List<Battler> wildAnigmas;
 
-    public Anigma GetRandomWildAnigma()
+    public Battler GetRandomWildAnigma()
     {
         var wildAnigma =  wildAnigmas[Random.Range(0, wildAnigmas.Count)];
         wildAnigma.Init();

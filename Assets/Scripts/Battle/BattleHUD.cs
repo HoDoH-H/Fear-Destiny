@@ -21,10 +21,10 @@ public class BattleHUD : MonoBehaviour
     [SerializeField] Color parColor;
     [SerializeField] Color frzColor;
 
-    Anigma _anigma;
+    Battler _anigma;
     Dictionary<ConditionID, Color> statusColors;
 
-    public void SetData(Anigma anigma)
+    public void SetData(Battler anigma)
     {
         ClearData();
 

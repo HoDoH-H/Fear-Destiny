@@ -31,9 +31,9 @@ public class BattleSystem : MonoBehaviour
     int currentMove;
     bool aboutToUseChoice = true;
 
-    AnigmaParty playerParty;
-    AnigmaParty trainerParty;
-    Anigma wildAnigma;
+    BattlerParty playerParty;
+    BattlerParty trainerParty;
+    Battler wildAnigma;
 
     bool isTrainerBattle = false;
     PlayerController player;
@@ -48,7 +48,7 @@ public class BattleSystem : MonoBehaviour
 
     // Region Start - Start battle
 
-    public void StartBattle(AnigmaParty playerParty, Anigma wildAnigma)
+    public void StartBattle(BattlerParty playerParty, Battler wildAnigma)
     {
         isTrainerBattle=false;
         this.playerParty = playerParty;
@@ -57,7 +57,7 @@ public class BattleSystem : MonoBehaviour
         StartCoroutine(SetupBattle());
     }
 
-    public void StartTrainerBattle(AnigmaParty playerParty, AnigmaParty trainerParty)
+    public void StartTrainerBattle(BattlerParty playerParty, BattlerParty trainerParty)
     {
         this.playerParty = playerParty;
         this.trainerParty = trainerParty;
@@ -79,7 +79,7 @@ public class BattleSystem : MonoBehaviour
         if (!isTrainerBattle)
         {
             // Wild Anigma Battle
-            playerUnit.Setup(playerParty.GetHealthyAnigma());
+            playerUnit.Setup(playerParty.GetHealthyBattler());
             opponentUnit.Setup(wildAnigma);
 
             dialogBox.SetMoveNames(playerUnit.Anigma.Moves);
@@ -102,14 +102,14 @@ public class BattleSystem : MonoBehaviour
             // Send out first anigma of the trainer
             trainerImage.gameObject.SetActive(false);
             opponentUnit.gameObject.SetActive(true);
-            var opponentAnigma = trainerParty.GetHealthyAnigma();
+            var opponentAnigma = trainerParty.GetHealthyBattler();
             opponentUnit.Setup(opponentAnigma);
             yield return dialogBox.TypeDialog($"{trainer.Name} send out {opponentAnigma.Base.Name}!");
 
             // Send out first anigma of the player
             playerImage.gameObject.SetActive(false);
             playerUnit.gameObject.SetActive(true);
-            var playerAnigma = playerParty.GetHealthyAnigma();
+            var playerAnigma = playerParty.GetHealthyBattler();
             playerUnit.Setup(playerAnigma);
             yield return dialogBox.TypeDialog($"{playerAnigma.Base.Name} go!");
             dialogBox.SetMoveNames(playerUnit.Anigma.Moves);
@@ -126,7 +126,7 @@ public class BattleSystem : MonoBehaviour
     void BattleOver(bool isWon)
     {
         state = BattleState.BattleOver;
-        playerParty.Anigmas.ForEach(p => p.OnBattleOver());
+        playerParty.Battlers.ForEach(p => p.OnBattleOver());
         playerUnit.Hud.ClearData();
         opponentUnit.Hud.ClearData();
         OnBattleOver(isWon);
@@ -169,7 +169,7 @@ public class BattleSystem : MonoBehaviour
         dialogBox.EnableMoveSelector(true);
     }
 
-    IEnumerator ChooseMoveToForget(Anigma anigma, MoveBase newMove)
+    IEnumerator ChooseMoveToForget(Battler anigma, MoveBase newMove)
     {
         state = BattleState.Busy;
         yield return dialogBox.TypeDialog($"Do you want that {anigma.Base.Name} forget a move to learn this new one?");
@@ -180,7 +180,7 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.MoveToForget;
     }
 
-    IEnumerator AboutToUse(Anigma newAnigma)
+    IEnumerator AboutToUse(Battler newAnigma)
     {
         state = BattleState.Busy;
         yield return dialogBox.TypeDialog($"{trainer.Name} is about to send another anigma. Do you want to change yours?");
@@ -361,7 +361,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    bool CheckIfMoveHits(Move move, Anigma source, Anigma target)
+    bool CheckIfMoveHits(Move move, Battler source, Battler target)
     {
         if (move.Base.AlwaysHits)
             return true;
@@ -394,7 +394,7 @@ public class BattleSystem : MonoBehaviour
         return UnityEngine.Random.Range(1, 101) <= moveAccuracy;
     }
 
-    IEnumerator ShowStatusChanges(Anigma anigma)
+    IEnumerator ShowStatusChanges(Battler anigma)
     {
         while(anigma.StatusChanges.Count > 0)
         {
@@ -461,7 +461,7 @@ public class BattleSystem : MonoBehaviour
     {
         if (faintedUnit.IsPlayerUnit)
         {
-            var nextAnigma = playerParty.GetHealthyAnigma();
+            var nextAnigma = playerParty.GetHealthyBattler();
             if (nextAnigma != null)
             {
 
@@ -480,7 +480,7 @@ public class BattleSystem : MonoBehaviour
             }
             else
             {
-                var nextAnigma = trainerParty.GetHealthyAnigma();
+                var nextAnigma = trainerParty.GetHealthyBattler();
                 if (nextAnigma != null)
                 {
                     StartCoroutine(AboutToUse(nextAnigma));
@@ -493,7 +493,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    IEnumerator RunMoveEffect(MoveEffects effect, Anigma source, Anigma target, MoveTarget moveTarget)
+    IEnumerator RunMoveEffect(MoveEffects effect, Battler source, Battler target, MoveTarget moveTarget)
     {
         // Stat Boosting
         if (effect.Boosts != null)
@@ -529,7 +529,7 @@ public class BattleSystem : MonoBehaviour
         yield return ShowStatusChanges(target);
     }
 
-    IEnumerator ShowDamageDetail(DamageDetails damageDetails, Anigma anigma)
+    IEnumerator ShowDamageDetail(DamageDetails damageDetails, Battler anigma)
     {
         if (damageDetails.Critical > 1f)
         {
@@ -558,7 +558,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    IEnumerator SwitchAnigma(Anigma newAnigma, bool isTrainerAboutToUse=false)
+    IEnumerator SwitchAnigma(Battler newAnigma, bool isTrainerAboutToUse=false)
     {
         if (playerUnit.Anigma.HP > 0)
         {
@@ -582,7 +582,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator SendNextTrainerAnigma()
     {
         state = BattleState.Busy;
-        var nextAnigma = trainerParty.GetHealthyAnigma();
+        var nextAnigma = trainerParty.GetHealthyBattler();
         opponentUnit.Setup(nextAnigma);
         yield return dialogBox.TypeDialog($"{trainer.Name} send out {nextAnigma.Base.Name}!");
 
@@ -645,7 +645,7 @@ public class BattleSystem : MonoBehaviour
             yield return dialogBox.TypeDialog($"{opponentUnit.Anigma.Base.Name} was caught!");
             yield return ring.DOFade(0f, 1.5f).WaitForCompletion();
 
-            playerParty.AddAnigma(opponentUnit.Anigma);
+            playerParty.AddBattler(opponentUnit.Anigma);
             yield return dialogBox.TypeDialog($"{opponentUnit.Anigma.Base.Name} has been added to your party.");
 
             Destroy(ring);
@@ -676,7 +676,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    int TryToCatchAnigma(Anigma anigma, RingItem ringUsed)
+    int TryToCatchAnigma(Battler anigma, RingItem ringUsed)
     {
         float a = (3 * anigma.MaxHp - 2 * anigma.HP) * anigma.Base.CatchRate * ringUsed.CatchRateModifier * ConditionDB.GetStatusBonus(anigma.Status) / (3 * anigma.MaxHp);
 

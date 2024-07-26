@@ -42,7 +42,7 @@ public class GameController : MonoBehaviour
         Cursor.visible = false;
 
         ConditionDB.Init();
-        AnigmaDB.Init();
+        BattlerDB.Init();
         MoveDB.Init();
         ItemDB.Init();
     }
@@ -107,10 +107,10 @@ public class GameController : MonoBehaviour
             battleSystem.gameObject.SetActive(true);
             playerCamera.gameObject.SetActive(false);
 
-            var playerParty = playerController.GetComponent<AnigmaParty>();
+            var playerParty = playerController.GetComponent<BattlerParty>();
             var wildAnigma = CurrentScene.GetComponent<MapArea>().GetRandomWildAnigma();
 
-            var wildAnigmaCopy = new Anigma(wildAnigma.Base, wildAnigma.Level);
+            var wildAnigmaCopy = new Battler(wildAnigma.Base, wildAnigma.Level);
 
             battleSystem.StartBattle(playerParty, wildAnigmaCopy);
         }
@@ -164,10 +164,10 @@ public class GameController : MonoBehaviour
         battleSystem.gameObject.SetActive(true);
         playerCamera.gameObject.SetActive(false);
 
-        var playerParty = playerController.GetComponent<AnigmaParty>();
+        var playerParty = playerController.GetComponent<BattlerParty>();
         var wildAnigma = CurrentScene.GetComponent<MapArea>().GetRandomWildAnigma();
 
-        var wildAnigmaCopy = new Anigma(wildAnigma.Base, wildAnigma.Level);
+        var wildAnigmaCopy = new Battler(wildAnigma.Base, wildAnigma.Level);
 
         battleSystem.StartBattle(playerParty, wildAnigmaCopy);
     }
@@ -181,8 +181,8 @@ public class GameController : MonoBehaviour
         playerCamera.gameObject.SetActive(false);
 
         this.trainer = trainer;
-        var playerParty = playerController.GetComponent<AnigmaParty>();
-        var trainerParty = trainer.GetComponent<AnigmaParty>();
+        var playerParty = playerController.GetComponent<BattlerParty>();
+        var trainerParty = trainer.GetComponent<BattlerParty>();
 
         battleSystem.StartTrainerBattle(playerParty, trainerParty);
     }

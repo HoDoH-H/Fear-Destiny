@@ -9,12 +9,12 @@ public class PartyScreen : MonoBehaviour
     [SerializeField] TextMeshProUGUI messageText;
 
     PartyMemberUI[] memberSlots;
-    List<Anigma> anigmas;
-    AnigmaParty party;
+    List<Battler> anigmas;
+    BattlerParty party;
 
     int selection = 0;
 
-    public Anigma SelectedMember => anigmas[selection];
+    public Battler SelectedMember => anigmas[selection];
 
     /// <summary>
     /// Party screen can be called from different states like ActionSelection, RunningTurn, AboutToUse
@@ -25,7 +25,7 @@ public class PartyScreen : MonoBehaviour
     {
         memberSlots = GetComponentsInChildren<PartyMemberUI>(true);
 
-        party = AnigmaParty.GetPlayerParty();
+        party = BattlerParty.GetPlayerParty();
         SetPartyData();
 
         party.OnUpdated += SetPartyData;
@@ -33,7 +33,7 @@ public class PartyScreen : MonoBehaviour
 
     public void SetPartyData()
     {
-        anigmas = party.Anigmas;
+        anigmas = party.Battlers;
 
         for (int i = 0; i < memberSlots.Length; i++)
         {

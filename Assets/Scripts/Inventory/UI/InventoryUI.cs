@@ -245,7 +245,7 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    IEnumerator ChooseMoveToForget(Anigma anigma, MoveBase newMove)
+    IEnumerator ChooseMoveToForget(Battler anigma, MoveBase newMove)
     {
         state = InventoryUIState.Busy;
         yield return DialogManager.Instance.ShowDialogText($"Do you want that {anigma.Base.Name} forget a move to learn this new one?", true, false);

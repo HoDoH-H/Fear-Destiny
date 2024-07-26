@@ -12,7 +12,7 @@ public class BattleUnit : MonoBehaviour
 
     public bool IsPlayerUnit { get { return isPlayerUnit; } }
 
-    public Anigma Anigma { get; set; }
+    public Battler Anigma { get; set; }
 
     Image image;
     Color originalColor;
@@ -25,7 +25,7 @@ public class BattleUnit : MonoBehaviour
         originalColor = image.color;
     }
 
-    public void Setup(Anigma anigma)
+    public void Setup(Battler anigma)
     {
         Anigma = anigma;
         if (isPlayerUnit && Anigma.Base.BackSprite != null)

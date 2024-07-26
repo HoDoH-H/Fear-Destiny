@@ -36,7 +36,7 @@ public class Inventory : MonoBehaviour, ISavable
         return currSlot[itemIndex].Item;
     }
 
-    public ItemBase UseItem(int itemIndex, Anigma selectedAnigma, int selectedCategory)
+    public ItemBase UseItem(int itemIndex, Battler selectedAnigma, int selectedCategory)
     {
         var item = GetItem(itemIndex, selectedCategory);
         bool itemUsed = item.Use(selectedAnigma);

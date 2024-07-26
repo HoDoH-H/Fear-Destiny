@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnigmaDB
+public class BattlerDB
 {
     static Dictionary<string, BattlerBase> anigmas;
 
@@ -21,7 +21,7 @@ public class AnigmaDB
         }
     }
 
-    public static BattlerBase GetAnigmaByName( string name)
+    public static BattlerBase GetBattlerByName( string name)
     {
         if ( !anigmas.ContainsKey(name))
         {

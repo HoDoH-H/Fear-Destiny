@@ -8,7 +8,7 @@ public class Condition
     public string Description { get; set; }
     public string StartMessage { get; set; }
 
-    public Action<Anigma> OnStart { get; set; }
-    public Func<Anigma, bool> OnBeforeMove { get; set; }
-    public Action<Anigma> OnAfterTurn {  get; set; }
+    public Action<Battler> OnStart { get; set; }
+    public Func<Battler, bool> OnBeforeMove { get; set; }
+    public Action<Battler> OnAfterTurn {  get; set; }
 }

@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour, ISavable
         {
             position = new float[] { transform.position.x, transform.position.y },
             direction = new float[] { direction.x, direction.y },
-            anigmas = GetComponent<AnigmaParty>().Anigmas.Select(a => a.GetSaveData()).ToList(),
+            anigmas = GetComponent<BattlerParty>().Battlers.Select(a => a.GetSaveData()).ToList(),
         };
 
         return saveData;
@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour, ISavable
         character.LookTowards(transform.position + new Vector3(direction.x, direction.y));
 
         // Restore Player's Party
-        GetComponent<AnigmaParty>().Anigmas =  saveData.anigmas.Select(a => new Anigma(a)).ToList();
+        GetComponent<BattlerParty>().Battlers =  saveData.anigmas.Select(a => new Battler(a)).ToList();
     }
 
     public string Name { get => name; }
@@ -131,5 +131,5 @@ public class PlayerSaveData
 {
     public float[] position;
     public float[] direction;
-    public List<AnigmaSaveData> anigmas;
+    public List<BattlerSaveData> anigmas;
 }

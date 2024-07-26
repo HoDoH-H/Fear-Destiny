@@ -31,7 +31,7 @@ public class RecoveryItem : ItemBase
     public bool IsPoisonousForAnigmas => poisonForAnigmas;
     public bool IsPoisonousForHumans => poisonForHumans;
 
-    public override bool Use(Anigma anigma)
+    public override bool Use(Battler anigma)
     {
         // Revive
         if (revive || boostedRevive || maxRevive) 
