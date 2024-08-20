@@ -9,6 +9,7 @@ public class TrainerController : MonoBehaviour, Interactable, ISavable
     [SerializeField] Dialog dialogAfterBattle;
     [SerializeField] GameObject exclamation;
     [SerializeField] GameObject fov;
+    [SerializeField] bool seriousFight;
 
     // State
     bool battleLost = false;
@@ -69,6 +70,9 @@ public class TrainerController : MonoBehaviour, Interactable, ISavable
     {
         battleLost = true;
         fov.gameObject.SetActive(false);
+
+        if (seriousFight)
+            this.gameObject.SetActive(false);
     }
 
     public void SetFovRotation(FacingDirection dir)
@@ -100,6 +104,9 @@ public class TrainerController : MonoBehaviour, Interactable, ISavable
         battleLost = (bool) state;
 
         fov.gameObject.SetActive(!battleLost);
+
+        if (seriousFight)
+            this.gameObject.SetActive(!battleLost);
     }
 
     public string Name { get => name; }

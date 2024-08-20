@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
+  m_Name: Details - Flowers_Grass
+  m_EditorClassIdentifier: 
+  m_DefaultSprite: {fileID: -1744567133, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+  m_DefaultGameObject: {fileID: 0}
+  m_DefaultColliderType: 2
+  m_TilingRules:
+  - m_Id: 0
+    m_Sprites:
+    - {fileID: -1744567133, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: 1695716664, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: -1898707546, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: -971697495, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: -1847471555, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: 1967962471, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: 1237177100, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: -1927889827, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: 1471580786, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: -36714502, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: 1127338849, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: 1758404706, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: 492991950, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: -1895369542, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: 1303642121, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: 863708406, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: -1458009404, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: 2042736113, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: 726247425, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: -1636104535, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: 1080543394, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: -1054717943, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: -1637166668, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: -730652161, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: -1667181936, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: -5783768, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: -1400669336, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: -1347679174, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: 1678388470, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: -8720064, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: -840626233, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: 1785877132, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: 1903037233, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: -1236376647, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: -826089518, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    - {fileID: -1363783265, guid: c6980c68a9db42e4eb1b6279e7716a3b, type: 3}
+    m_GameObject: {fileID: 0}
+    m_MinAnimationSpeed: 1
+    m_MaxAnimationSpeed: 1
+    m_PerlinScale: 0.5
+    m_Output: 1
+    m_ColliderType: 1
+    m_RandomTransform: 2
+    m_Neighbors: 
+    m_NeighborPositions:
+    - {x: -1, y: 1, z: 0}
+    - {x: 0, y: 1, z: 0}
+    - {x: 1, y: 1, z: 0}
+    - {x: -1, y: 0, z: 0}
+    - {x: 1, y: 0, z: 0}
+    - {x: -1, y: -1, z: 0}
+    - {x: 0, y: -1, z: 0}
+    - {x: 1, y: -1, z: 0}
+    m_RuleTransform: 0

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5090175092650990790}
   - component: {fileID: 1659481199647972828}
   - component: {fileID: 7400421605601788630}
+  - component: {fileID: 8218396369873403430}
   m_Layer: 7
   m_Name: NPC
   m_TagString: Untagged
@@ -101,6 +102,8 @@ MonoBehaviour:
     - Hi, do you know what's better than Nutella on bread?
     - A...
     - A Nutellatine!
+  questToStart: {fileID: 0}
+  questToComplete: {fileID: 0}
   movementPattern:
   - {x: -2, y: 0}
   - {x: 0, y: -2}
@@ -173,6 +176,7 @@ MonoBehaviour:
     lines:
     - You're going into a journey?
     - Here... Take this with you!
+  isReusable: 0
 --- !u!114 &7400421605601788630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,6 +190,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uniqueId: 
+--- !u!114 &8218396369873403430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405454348788865464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d767630cdb9164cb658d99e152c4d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  battlerToGive:
+    _base: {fileID: 0}
+    level: 0
+  dialog:
+    lines: []
+  isReusable: 0
 --- !u!1 &6279826085351994759
 GameObject:
   m_ObjectHideFlags: 0

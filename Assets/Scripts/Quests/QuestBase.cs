@@ -23,3 +23,5 @@ public class QuestBase : ScriptableObject
     public ItemBase RequireItem => requireItem;
     public ItemBase RewardItem => rewardItem;
 }
+
+public enum RequiredBattleStatus { None, Won, Lost}

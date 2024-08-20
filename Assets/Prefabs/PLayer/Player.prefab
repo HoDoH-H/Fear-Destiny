@@ -208,8 +208,9 @@ GameObject:
   - component: {fileID: 5776576929951179875}
   - component: {fileID: 2544539846631835566}
   - component: {fileID: 6999738144179313841}
-  - component: {fileID: 3201746106409035397}
+  - component: {fileID: 4356975832774019192}
   - component: {fileID: 5090950668378785515}
+  - component: {fileID: 3201746106409035397}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -282,7 +283,7 @@ BoxCollider2D:
   m_EdgeRadius: 0
 --- !u!50 &3408040286919553078
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -293,8 +294,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0
+  m_LinearDamping: 0
+  m_AngularDamping: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -320,7 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: You
-  sprite: {fileID: 21300000, guid: 6f95e801fe4bad743a33540629d0b902, type: 3}
+  unit: {fileID: 0}
   input: {x: 0, y: 0}
   CanMove: 1
   direction: {x: 0, y: 0}
@@ -336,9 +337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa2b4416602eefd429d2e089d233ea77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anigmas:
-  - _base: {fileID: 11400000, guid: 82a836a8794118a478235ff31f6aea83, type: 2}
-    level: 5
+  battlers: []
 --- !u!114 &2544539846631835566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,7 +386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 6
   animator: {fileID: 2544539846631835566}
---- !u!114 &3201746106409035397
+--- !u!114 &4356975832774019192
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -396,10 +395,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6416772818868538930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4881f89f8b930e34489bbb86116ccd4d, type: 3}
+  m_Script: {fileID: 11500000, guid: 998355d246efe7c41ac6960f01222ebf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uniqueId: 
 --- !u!114 &5090950668378785515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,3 +416,16 @@ MonoBehaviour:
   - item: {fileID: 0}
     count: 5
   memorySlots: []
+--- !u!114 &3201746106409035397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6416772818868538930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4881f89f8b930e34489bbb86116ccd4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueId: 

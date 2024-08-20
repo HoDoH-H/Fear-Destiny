@@ -28,7 +28,7 @@ public class GameController : MonoBehaviour
 
     public static GameController Instance;
 
-    string saveFileName = "1b3nzj7TLYXwj1Ml5Jw56gWxXV3UIwC81D8qhVNA40unU6NlBi";
+    string saveFileName = "1b3nzj7TLYXwj1Ml5Jw56gWxXV3UIiC81D8qhVNA40unU6NlBi";
 
     public string SaveFileName => saveFileName;
 
@@ -45,6 +45,7 @@ public class GameController : MonoBehaviour
         BattlerDB.Init();
         MoveDB.Init();
         ItemDB.Init();
+        QuestDB.Init();
     }
 
     private void Start()

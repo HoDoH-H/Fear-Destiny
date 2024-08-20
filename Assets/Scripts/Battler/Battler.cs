@@ -69,7 +69,7 @@ public class Battler
     {
         var saveData = new BattlerSaveData()
         {
-            name = Base.Name,
+            name = Base.name,
             hp = HP,
             level = Level,
             exp = Exp,
@@ -82,7 +82,7 @@ public class Battler
 
     public Battler(BattlerSaveData saveData)
     {
-        _base = BattlerDB.GetBattlerByName(saveData.name);
+        _base = BattlerDB.GetObjectByName(saveData.name);
         HP = saveData.hp;
         level = saveData.level;
         Exp = saveData.exp;
