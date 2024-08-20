@@ -1,15 +1,12 @@
-using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour, ISavable
 {
-    [SerializeField] string name;
+    [SerializeField] string _name;
     [SerializeField] BattlerBase unit;
 
     public Vector2 input;
@@ -23,11 +20,7 @@ public class PlayerController : MonoBehaviour, ISavable
     {
         character = GetComponent<Character>();
 
-        string playerBasePath = AssetDatabase.GetAssetPath(unit);
-        AssetDatabase.RenameAsset(playerBasePath, name);
-        AssetDatabase.SaveAssets();
-
-        unit.ChangeName(name);
+        unit.ChangeName(_name);
     }
 
     int GetKey(GlobalSettings.KeyList key)
@@ -121,7 +114,7 @@ public class PlayerController : MonoBehaviour, ISavable
         GetComponent<BattlerParty>().Battlers =  saveData.anigmas.Select(a => new Battler(a)).ToList();
     }
 
-    public string Name { get => name; }
+    public string Name { get => _name; }
     public BattlerBase Unit => unit;
     public Character Character => character;
 }
