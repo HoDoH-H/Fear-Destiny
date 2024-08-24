@@ -49,6 +49,9 @@ MonoBehaviour:
   - moveBase: {fileID: 11400000, guid: 53a02731480a7c443908b49aa18cee53, type: 2}
     level: 21
   learnableByItems: []
+  metamorphoses:
+  - metamorphosesInto: {fileID: 11400000, guid: e46085b8b0bcade45abddb72156b3300, type: 2}
+    requiredLevel: 38
   eMaxHp: 0
   eAttack: 0
   eDefense: 0

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using System.Collections;
 
 public class BattlerParty : MonoBehaviour
 {
@@ -41,6 +42,20 @@ public class BattlerParty : MonoBehaviour
         else
         {
             // TODO - Add to the pc one that's implemented
+        }
+    }
+
+    public IEnumerator CheckForMetamorphosis()
+    {
+        foreach (var battler in battlers)
+        {
+            var metamorphosis = battler.CheckForMetamorphosis();
+            if (metamorphosis != null)
+            {
+                yield return DialogManager.Instance.ShowDialogText($"{battler.Base.Name} transformed into {metamorphosis.MetamorphosesInto.Name}!");
+                battler.Metamorph(metamorphosis);
+                OnUpdated?.Invoke();
+            }
         }
     }
 

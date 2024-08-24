@@ -206,6 +206,9 @@ public class GameController : MonoBehaviour
         battleSystem.gameObject.SetActive(false);
         playerCamera.gameObject.SetActive(true);
         StartCoroutine(EndBattleTransition(true));
+
+        var playerParty = playerController.GetComponent<BattlerParty>();
+        StartCoroutine(playerParty.CheckForMetamorphosis());
     }
 
     IEnumerator EndBattleTransition(bool isMainToBattle)

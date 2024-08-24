@@ -211,6 +211,17 @@ public class Battler
         return Moves.Count(m => m.Base == moveToCheck) > 0;
     }
 
+    public Metamorphosis CheckForMetamorphosis()
+    {
+        return Base.Metamorphoses.FirstOrDefault(e => e.RequiredLevel == level);
+    }
+
+    public void Metamorph(Metamorphosis metamorphosis)
+    {
+        _base = metamorphosis.MetamorphosesInto;
+        CalculateStats();
+    }
+
     public int Attack
     {
         get { return GetStat(Stat.Attack); }
