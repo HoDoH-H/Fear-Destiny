@@ -19,6 +19,9 @@ public class MoveBase : ScriptableObject
     [SerializeField] bool alwaysHits;
     [SerializeField] int up;
     [SerializeField] int priority;
+    [SerializeField] bool highCriticalHitRate;
+    [SerializeField] bool doubleIfHalfOpponentHp;
+    [SerializeField] bool scaleOnHp;
     [SerializeField] AttackCategory style;
     [SerializeField] MoveEffects effects;
     [SerializeField] List<SecondaryEffects> secondaryEffects;
@@ -30,6 +33,9 @@ public class MoveBase : ScriptableObject
     public int Power { get { return power; } }
     public int Accuracy { get { return accuracy; } }
     public bool AlwaysHits { get { return alwaysHits; } }
+    public bool HighCriticalHitRate { get { return highCriticalHitRate; } }
+    public bool DoubleIfHalfOpponentHp { get { return doubleIfHalfOpponentHp; } }
+    public bool ScaleOnHp { get { return scaleOnHp; } }
     public int UP { get {  return up; } }
     public int Priority { get { return priority; } }
     public AttackCategory Category { get { return style; } }

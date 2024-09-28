@@ -15,7 +15,7 @@ MonoBehaviour:
   isPlayer: 1
   isHuman: 0
   isAnigma: 0
-  battlerName: 
+  name: You
   description: 
   frontSprite: {fileID: 0}
   backSprite: {fileID: 21300000, guid: 6f95e801fe4bad743a33540629d0b902, type: 3}
@@ -32,15 +32,12 @@ MonoBehaviour:
   type1: 1
   type2: 20
   learnableMoves:
-  - moveBase: {fileID: 11400000, guid: 7c98ab2dffb01d04194537f10d97a5a9, type: 2}
+  - moveBase: {fileID: 11400000, guid: 0c4ce543ff3da864fbea9e91a761eb12, type: 2}
     level: 1
-  - moveBase: {fileID: 11400000, guid: 2df1c211aa299754992b8b887dbd1ef9, type: 2}
-    level: 4
-  - moveBase: {fileID: 11400000, guid: 2171044207da8084da429be846ccca44, type: 2}
-    level: 6
-  - moveBase: {fileID: 11400000, guid: 0d11fe53449732544a1d246c7e17cb18, type: 2}
-    level: 9
+  - moveBase: {fileID: 11400000, guid: 19d5b079a9a22d246ab085ebd412b039, type: 2}
+    level: 3
   learnableByItems: []
+  metamorphoses: []
   eMaxHp: 0
   eAttack: 0
   eDefense: 0

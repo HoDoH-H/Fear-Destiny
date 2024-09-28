@@ -32,19 +32,10 @@ MonoBehaviour:
   type1: 12
   type2: 0
   learnableMoves:
-  - moveBase: {fileID: 11400000, guid: 7c98ab2dffb01d04194537f10d97a5a9, type: 2}
+  - moveBase: {fileID: 11400000, guid: 0c4ce543ff3da864fbea9e91a761eb12, type: 2}
     level: 1
-  - moveBase: {fileID: 11400000, guid: 419ae0b7721087a439288ef195777522, type: 2}
-    level: 5
-  - moveBase: {fileID: 11400000, guid: 756989a87e7520c43ba3d43aa2425fed, type: 2}
-    level: 8
-  - moveBase: {fileID: 11400000, guid: 1a224b76132c0884280f855cbe8b200f, type: 2}
-    level: 12
-  - moveBase: {fileID: 11400000, guid: 2e77a13526c27614b90c8908dc135b26, type: 2}
-    level: 12
-  - moveBase: {fileID: 11400000, guid: aa6dd53a711b38748be2a3454f0ded37, type: 2}
-    level: 16
   learnableByItems: []
+  metamorphoses: []
   eMaxHp: 0
   eAttack: 0
   eDefense: 0

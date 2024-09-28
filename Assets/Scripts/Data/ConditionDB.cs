@@ -22,7 +22,7 @@ public class ConditionDB
             {
                 Name = "Poison",
                 StartMessage = "has been poisoned!",
-                OnAfterTurn = (Battler anigma) =>
+                OnAfterTurn = (Battler anigma, int damageDealt) =>
                 {
                     anigma.DecreaseHP(anigma.MaxHp / 8);
                     anigma.StatusChanges.Enqueue($"{anigma.Base.Name} is hurt by poison");
@@ -35,7 +35,7 @@ public class ConditionDB
             {
                 Name = "Burn",
                 StartMessage = "has been burned!",
-                OnAfterTurn = (Battler anigma) =>
+                OnAfterTurn = (Battler anigma, int damageDealt) =>
                 {
                     anigma.DecreaseHP(anigma.MaxHp / 16);
                     anigma.StatusChanges.Enqueue($"{anigma.Base.Name} is hurt by its burn");
@@ -129,13 +129,13 @@ public class ConditionDB
                     }
                     anigma.VolatileStatusTime--;
 
-                    anigma.StatusChanges.Enqueue($"{anigma.Base.Name} is confused");
+                    anigma.StatusChanges.Enqueue($"{anigma.Base.Name} is confused.");
 
                     //50% chance to do a move
                     if (Random.Range(1, 3) == 1)
                         return true;
 
-                    anigma.StatusChanges.Enqueue($"{anigma.Base.Name} hurt itself in its confusion");
+                    anigma.StatusChanges.Enqueue($"{anigma.Base.Name} hurt itself in its confusion.");
                     return false;
                 }
             }
@@ -145,10 +145,62 @@ public class ConditionDB
             new Condition()
             {
                 Name = "Flinch",
-                StartMessage = "Flinched",
+                StartMessage = "flinched!",
                 OnBeforeMove = (Battler anigma) =>
                 {
                     anigma.CureVolatileStatus();
+                    return false;
+                }
+            }
+        },
+        {
+            ConditionID.recoil,
+            new Condition()
+            {
+                Name = "Recoil",
+                StartMessage = "hurt itself while striking.",
+                OnAfterTurn = (Battler anigma, int damageDealt) =>
+                {
+                    anigma.DecreaseHP(damageDealt / 3);
+                    anigma.CureVolatileStatus();
+                }
+            }
+        },
+        {
+            ConditionID.recoverHp,
+            new Condition()
+            {
+                Name = "Recover HP",
+                StartMessage = "is recovering its HPs.",
+                OnAfterTurn = (Battler anigma, int damageDealt) =>
+                {
+                    anigma.IncreaseHP(damageDealt / 2);
+                    anigma.CureVolatileStatus();
+                }
+            }
+        },
+        {
+            ConditionID.recover,
+            new Condition()
+            {
+                Name = "Recover",
+                StartMessage = "is exhausted.",
+                OnStart = (Battler anigma) =>
+                {
+                    // confuse for 1-4 turns
+                    anigma.VolatileStatusTime = Random.Range(1, 3);
+                },
+                OnBeforeMove = (Battler anigma) =>
+                {
+                    if (anigma.VolatileStatusTime <= 0)
+                    {
+                        anigma.CureVolatileStatus();
+                        anigma.StatusChanges.Enqueue($"{anigma.Base.Name} recovered enough!");
+                        return true;
+                    }
+                    anigma.VolatileStatusTime--;
+
+                    anigma.StatusChanges.Enqueue($"{anigma.Base.Name} is recovering.");
                     return false;
                 }
             }
@@ -179,6 +231,9 @@ public enum ConditionID
     bpsn,
     flinch,
     confusion,
+    recoil,
+    recoverHp,
+    recover,
     infatuation,
     leechSeed,
     bleed,

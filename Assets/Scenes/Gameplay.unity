@@ -638,12 +638,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7744735054241104017, guid: 929706b31e2c12345b10812a5031dff1, type: 3}
       propertyPath: battlers.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7744735054241104017, guid: 929706b31e2c12345b10812a5031dff1, type: 3}
       propertyPath: battlers.Array.data[0]._base
       value: 
-      objectReference: {fileID: 11400000, guid: b19b9b0d466145044bc60d1e5da958ab, type: 2}
+      objectReference: {fileID: 11400000, guid: 61c27ead88da79c45a49be06c549cfe0, type: 2}
     - target: {fileID: 7744735054241104017, guid: 929706b31e2c12345b10812a5031dff1, type: 3}
       propertyPath: battlers.Array.data[0].level
       value: 3

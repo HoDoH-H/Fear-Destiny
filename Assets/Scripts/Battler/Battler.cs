@@ -29,8 +29,9 @@ public class Battler
     public Condition VolatileStatus { get; set; }
     public int VolatileStatusTime { get; set; }
     public int StatusTime { get; set; }
-    public event System.Action OnStatusChanged;
-    public event System.Action OnHPChanged;
+
+    public event Action OnStatusChanged;
+    public event Action OnHPChanged;
 
     public Queue<string> StatusChanges { get; private set; }
 
@@ -154,30 +155,31 @@ public class Battler
         {
             var stat = statBoost.stat;
             var boost = statBoost.boost;
-
-            StatBoosts[stat] = Mathf.Clamp(StatBoosts[stat] + boost, -6, 6);
-
-            if (boost > 0)
-            {
-                if (boost > 1)
-                {
-                    StatusChanges.Enqueue($"{Base.Name}'s {stat} tremendously rose!");
-                }
-                else
-                {
-                    StatusChanges.Enqueue($"{Base.Name}'s {stat} rose!");
-                }
-                
-            }
+            Debug.Log("Test");
+            if (StatBoosts[stat] == 6 && boost > 0)
+                StatusChanges.Enqueue($"{Base.Name}'s {stat} cannot rise more!");
+            else if (StatBoosts[stat] == -6 && boost < 0)
+                StatusChanges.Enqueue($"{Base.Name}'s {stat} cannot fall more!");
             else
             {
-                if (boost < -1)
+                StatBoosts[stat] = Mathf.Clamp(StatBoosts[stat] + boost, -6, 6);
+                if (boost > 0)
                 {
-                    StatusChanges.Enqueue($"{Base.Name}'s {stat} tremendously fell!");
+                    if (boost > 2)
+                        StatusChanges.Enqueue($"{Base.Name}'s {stat} tremendously rose!");
+                    else if (boost > 1)
+                        StatusChanges.Enqueue($"{Base.Name}'s {stat} sharply rose!");
+                    else
+                        StatusChanges.Enqueue($"{Base.Name}'s {stat} rose!");
                 }
                 else
                 {
-                    StatusChanges.Enqueue($"{Base.Name}'s {stat} fell!");
+                    if (boost < -2)
+                        StatusChanges.Enqueue($"{Base.Name}'s {stat} tremendously fell!");
+                    if (boost < -1)
+                        StatusChanges.Enqueue($"{Base.Name}'s {stat} sharply fell!");
+                    else
+                        StatusChanges.Enqueue($"{Base.Name}'s {stat} fell!");
                 }
             }
         }
@@ -261,7 +263,8 @@ public class Battler
     public DamageDetails TakeDamage(Move move, Battler attacker)
     {
         float critical = 1f;
-        if (UnityEngine.Random.value * 100f <= 6.25f && move.Base.Power > 0)
+        float criticalHitRate = move.Base.HighCriticalHitRate ? 6.25f * 6f : 6.25f;
+        if (UnityEngine.Random.value * 100f <= criticalHitRate && move.Base.Power > 0)
         {
             critical = 2f;
         }
@@ -275,16 +278,19 @@ public class Battler
             Fainted = false,
         };
 
-        float attack = 0;
-        float defense = 0;
+        float attack = (move.Base.Category == AttackCategory.Physical) ? attacker.Attack : attacker.SpAttack;
+        float defense = (move.Base.Category == AttackCategory.Physical) ? Defense : SpDefense;
 
-        attack = (move.Base.Category == AttackCategory.Physical) ? attacker.SpAttack : attacker.Attack;
-        defense = (move.Base.Category == AttackCategory.Physical) ? SpDefense : Defense;
+        float powerMultiplier = move.Base.DoubleIfHalfOpponentHp ? 2f : 1f;
+        if (move.Base.ScaleOnHp)
+            powerMultiplier = powerMultiplier * attacker.HP / attacker.MaxHp;
 
         float modifiers = UnityEngine.Random.Range(0.85f, 1f) * type * critical;
         float a = (2 * attacker.Level + 10) / 250f;
-        float d = a * move.Base.Power * (attack / defense) + 2;
+        float d = a * (move.Base.Power * powerMultiplier) * (attack / defense) + 2;
         int damage = Mathf.FloorToInt(d * modifiers);
+
+        damageDetails.DamageDealt = damage;
 
         DecreaseHP(damage);
 
@@ -362,10 +368,10 @@ public class Battler
         return canPerformMove;
     }
 
-    public void OnAfterTurn()
+    public void OnAfterTurn(int damageDealt)
     {
-        Status?.OnAfterTurn?.Invoke(this);
-        VolatileStatus?.OnAfterTurn?.Invoke(this);
+        Status?.OnAfterTurn?.Invoke(this, damageDealt);
+        VolatileStatus?.OnAfterTurn?.Invoke(this, damageDealt);
     }
 }
 
@@ -376,6 +382,8 @@ public class DamageDetails
     public float Critical { get; set; }
 
     public float TypeEffectiveness { get; set; }
+
+    public int DamageDealt { get; set; }
 }
 
 [Serializable]

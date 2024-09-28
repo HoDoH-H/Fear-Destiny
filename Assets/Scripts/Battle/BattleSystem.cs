@@ -46,6 +46,8 @@ public class BattleSystem : MonoBehaviour
 
     List<Vector3> ringAnimVectors = new List<Vector3>() { new Vector3(0f, 0.10f), new Vector3(0.10f, 0.10f), new Vector3(0.10f, 0f), new Vector3(0.10f, -0.10f), new Vector3(0f, -0.10f), new Vector3(-0.10f, -0.10f), new Vector3(-0.10f, 0f), new Vector3(-0.10f, 0.10f) };
 
+    DamageDetails lastDamageDetails = new DamageDetails();
+
     // Region Start - Start battle
 
     public void StartBattle(BattlerParty playerParty, Battler wildAnigma)
@@ -221,14 +223,14 @@ public class BattleSystem : MonoBehaviour
 
             // First turn
             yield return RunMove(firstUnit, secondUnit, firstUnit.Anigma.CurrentMove);
-            yield return RunAfterTurn(firstUnit);
+            yield return RunAfterTurn(firstUnit, lastDamageDetails);
             if (state == BattleState.BattleOver) yield break;
 
             if (secondAnigma.HP > 0)
             {
                 // Second turn
                 yield return RunMove(secondUnit, firstUnit, secondUnit.Anigma.CurrentMove);
-                yield return RunAfterTurn(secondUnit);
+                yield return RunAfterTurn(secondUnit, lastDamageDetails);
                 if (state == BattleState.BattleOver) yield break;
             }
         }
@@ -260,7 +262,7 @@ public class BattleSystem : MonoBehaviour
             // Opponent Turn
             var opponentMove = opponentUnit.Anigma.GetRandomMove();
             yield return RunMove( opponentUnit, playerUnit,opponentMove);
-            yield return RunAfterTurn(opponentUnit);
+            yield return RunAfterTurn(opponentUnit, lastDamageDetails);
             if (state == BattleState.BattleOver) yield break;
         }
 
@@ -305,7 +307,6 @@ public class BattleSystem : MonoBehaviour
 
         if (CheckIfMoveHits(move, sourceUnit.Anigma, targetUnit.Anigma))
         {
-
             yield return new WaitForSeconds(0.5f);
             targetUnit.PlayHitAnimation();
 
@@ -315,9 +316,9 @@ public class BattleSystem : MonoBehaviour
             }
             else
             {
-                var damageDetails = targetUnit.Anigma.TakeDamage(move, sourceUnit.Anigma);
+                lastDamageDetails = targetUnit.Anigma.TakeDamage(move, sourceUnit.Anigma);
                 yield return targetUnit.Hud.WaitForHPUpdate();
-                yield return ShowDamageDetail(damageDetails, targetUnit.Anigma);
+                yield return ShowDamageDetail(lastDamageDetails, targetUnit.Anigma);
             }
 
             if (move.Base.Secondaries != null && move.Base.Secondaries.Count > 0 && targetUnit.Anigma.HP > 0)
@@ -344,13 +345,13 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    IEnumerator RunAfterTurn(BattleUnit sourceUnit)
+    IEnumerator RunAfterTurn(BattleUnit sourceUnit, DamageDetails damageDetails)
     {
         if (state == BattleState.BattleOver) yield break;
         yield return new WaitUntil(() => state == BattleState.RunningTurn);
 
-        // Statuses like burn or poison will hurt the anigma after the turn
-        sourceUnit.Anigma.OnAfterTurn();
+        // Statuses like burn, poison or recoil will hurt the anigma after the turn
+        sourceUnit.Anigma.OnAfterTurn(damageDetails.DamageDealt);
         yield return ShowStatusChanges(sourceUnit.Anigma);
         yield return sourceUnit.Hud.WaitForHPUpdate();
 
@@ -511,7 +512,14 @@ public class BattleSystem : MonoBehaviour
         // Status Condition
         if (effect.Status != ConditionID.None)
         {
-            target.SetStatus(effect.Status);
+            if (moveTarget == MoveTarget.Self)
+            {
+                source.SetStatus(effect.Status);
+            }
+            else
+            {
+                target.SetStatus(effect.Status);
+            }
         }
 
         // Volatile Status Condition
@@ -522,7 +530,14 @@ public class BattleSystem : MonoBehaviour
                 yield break;
             }
 
-            target.SetVolatileStatus(effect.VolatileStatus);
+            if (moveTarget == MoveTarget.Self)
+            {
+                source.SetVolatileStatus(effect.VolatileStatus);
+            }
+            else
+            {
+                target.SetVolatileStatus(effect.VolatileStatus);
+            }
         }
 
         yield return ShowStatusChanges(source);
