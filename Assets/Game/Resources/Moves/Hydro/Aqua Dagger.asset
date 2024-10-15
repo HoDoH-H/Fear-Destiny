@@ -10,21 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a2e12288949c3a4d885f65e3948438f, type: 3}
-  m_Name: Aqua Dagger (N)
+  m_Name: Aqua Dagger
   m_EditorClassIdentifier: 
-  name: 
+  name: Aqua Dagger
   description: Water Shuriken
-  type: 0
-  power: 0
-  accuracy: 0
+  type: 4
+  power: 15
+  accuracy: 100
   alwaysHits: 0
-  up: 0
+  up: 20
   priority: 0
   highCriticalHitRate: 0
+  doubleIfHalfOpponentHp: 0
+  scaleOnHp: 0
   style: 0
   effects:
     boosts: []
     status: 0
     volatileStatus: 0
+    weather: 0
   secondaryEffects: []
   target: 0
+  hitRange: {x: 2, y: 5}

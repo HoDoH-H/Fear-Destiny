@@ -1,5 +1,3 @@
-using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,22 +24,42 @@ public class MoveBase : ScriptableObject
     [SerializeField] MoveEffects effects;
     [SerializeField] List<SecondaryEffects> secondaryEffects;
     [SerializeField] MoveTarget target;
+    [SerializeField] Vector2Int hitRange = new Vector2Int(1, 1);
 
-    public string Name {  get { return name; } }
-    public string Description { get { return description; } }
-    public AnigmaType Type { get {  return type; } }
-    public int Power { get { return power; } }
-    public int Accuracy { get { return accuracy; } }
-    public bool AlwaysHits { get { return alwaysHits; } }
-    public bool HighCriticalHitRate { get { return highCriticalHitRate; } }
-    public bool DoubleIfHalfOpponentHp { get { return doubleIfHalfOpponentHp; } }
-    public bool ScaleOnHp { get { return scaleOnHp; } }
-    public int UP { get {  return up; } }
-    public int Priority { get { return priority; } }
-    public AttackCategory Category { get { return style; } }
-    public MoveEffects Effects { get {  return effects; } }
-    public List<SecondaryEffects> Secondaries { get { return secondaryEffects; } }
-    public MoveTarget Target { get { return target; } }
+    public string Name => name;
+    public string Description => description;
+    public AnigmaType Type => type;
+    public int Power => power;
+    public int Accuracy => accuracy;
+    public bool AlwaysHits => alwaysHits;
+    public bool HighCriticalHitRate => highCriticalHitRate;
+    public bool DoubleIfHalfOpponentHp => doubleIfHalfOpponentHp;
+    public bool ScaleOnHp => scaleOnHp;
+    public int UP => up;
+    public int Priority => priority;
+    public AttackCategory Category => style;
+    public MoveEffects Effects => effects;
+    public List<SecondaryEffects> Secondaries => secondaryEffects;
+    public MoveTarget Target => target;
+    public Vector2Int HitRange {  get { return hitRange; } set { hitRange = value; } }
+
+    public int GetHitTimes()
+    {
+        if (hitRange == Vector2Int.zero)
+            return 1;
+
+        int hitCount = 1;
+        if (hitRange.y == 0)
+        {
+            hitCount = hitRange.x;
+        }
+        else
+        {
+            hitCount = Random.Range(hitRange.x, hitRange.y + 1);
+        }
+
+        return hitCount;
+    }
 }
 
 [System.Serializable]
@@ -50,10 +68,12 @@ public class MoveEffects
     [SerializeField] List<StatBoost> boosts;
     [SerializeField] ConditionID status;
     [SerializeField] ConditionID volatileStatus;
+    [SerializeField] ConditionID weather;
 
-    public List<StatBoost> Boosts { get { return boosts; } }
-    public ConditionID Status { get { return status; } }
-    public ConditionID VolatileStatus { get { return volatileStatus; } }
+    public List<StatBoost> Boosts => boosts;
+    public ConditionID Status => status;
+    public ConditionID VolatileStatus => volatileStatus;
+    public ConditionID Weather => weather;
 }
 
 [System.Serializable]
@@ -62,8 +82,8 @@ public class SecondaryEffects : MoveEffects
     [SerializeField] int chance;
     [SerializeField] MoveTarget target;
 
-    public int Chance { get { return chance; } }
-    public MoveTarget Target { get { return target; } }
+    public int Chance => chance;
+    public MoveTarget Target => target;
 }
 
 [System.Serializable]

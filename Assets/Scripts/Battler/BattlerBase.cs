@@ -45,8 +45,8 @@ public class BattlerBase : ScriptableObject
     [SerializeField] List<MoveBase> learnableByItems;
 
     [Space]
-    [Header("Metamorphosis")]
-    [SerializeField] List<Metamorphosis> metamorphoses;
+    [Header("Morlenis")]
+    [SerializeField] List<Morlen> morleniss;
 
     [Space]
     [Header("Experience Power")]
@@ -149,7 +149,7 @@ public class BattlerBase : ScriptableObject
     public int ESpeed => eSpeed;
     public List<LearnableMove> LearnableMoves => learnableMoves;
     public List<MoveBase> LearnableByItems => learnableByItems;
-    public List<Metamorphosis> Metamorphoses => metamorphoses;
+    public List<Morlen> Morleniss => morleniss;
     public int ExpYield => expYield;
     public AnigmaType Type1 => type1;
     public AnigmaType Type2 => type2;
@@ -174,13 +174,15 @@ public class LearnableMove
 }
 
 [System.Serializable]
-public class Metamorphosis
+public class Morlen
 {
-    [SerializeField] BattlerBase metamorphosesInto;
+    [SerializeField] BattlerBase morlenInto;
     [SerializeField] int requiredLevel;
+    [SerializeField] MorlenisItem requiredItem;
 
-    public BattlerBase MetamorphosesInto => metamorphosesInto;
+    public BattlerBase MorlenInto => morlenInto;
     public int RequiredLevel => requiredLevel;
+    public MorlenisItem RequiredItem => requiredItem;
 }
 
 public enum AnigmaType

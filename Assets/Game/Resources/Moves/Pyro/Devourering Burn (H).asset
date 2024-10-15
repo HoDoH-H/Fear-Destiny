@@ -28,10 +28,13 @@ MonoBehaviour:
     boosts: []
     status: 0
     volatileStatus: 0
+    weather: 0
   secondaryEffects:
   - boosts: []
     status: 2
     volatileStatus: 0
+    weather: 0
     chance: 100
     target: 1
   target: 0
+  hitRange: {x: 1, y: 0}

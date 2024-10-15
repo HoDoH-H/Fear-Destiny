@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,6 +11,7 @@ public class DialogManager : MonoBehaviour
     [SerializeField] GameObject dialogBox;
     [SerializeField] TextMeshProUGUI dialogText;
     [SerializeField] int letterPerSecond;
+    [SerializeField] ChoiceBox choiceBox;
 
     public event Action OnShowDialog;
     public event Action OnDialogFinished;
@@ -65,7 +67,8 @@ public class DialogManager : MonoBehaviour
         IsShowing = false;
     }
 
-    public IEnumerator ShowDialog(Dialog dialog)
+    public IEnumerator ShowDialog(Dialog dialog, List<string> choices = null, 
+        Action<int> onChoiceSelected=null)
     {
         yield return new WaitForEndOfFrame();
 
@@ -77,6 +80,11 @@ public class DialogManager : MonoBehaviour
         {
             yield return TypeDialog(line);
             yield return new WaitUntil(() => GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Enter));
+        }
+
+        if (choices != null && choices.Count > 1)
+        {
+            yield return choiceBox.ShowChoices(choices, onChoiceSelected);
         }
 
         dialogBox.SetActive(false);

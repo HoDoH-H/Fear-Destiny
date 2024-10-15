@@ -161,7 +161,7 @@ public class ConditionDB
                 StartMessage = "hurt itself while striking.",
                 OnAfterTurn = (Battler anigma, int damageDealt) =>
                 {
-                    anigma.DecreaseHP(damageDealt / 3);
+                    anigma.DecreaseHP(Mathf.CeilToInt(damageDealt / 3));
                     anigma.CureVolatileStatus();
                 }
             }
@@ -174,7 +174,7 @@ public class ConditionDB
                 StartMessage = "is recovering its HPs.",
                 OnAfterTurn = (Battler anigma, int damageDealt) =>
                 {
-                    anigma.IncreaseHP(damageDealt / 2);
+                    anigma.IncreaseHP(Mathf.CeilToInt(damageDealt / 2) <= 0 ? 1 : Mathf.CeilToInt(damageDealt / 2));
                     anigma.CureVolatileStatus();
                 }
             }
@@ -187,7 +187,7 @@ public class ConditionDB
                 StartMessage = "is exhausted.",
                 OnStart = (Battler anigma) =>
                 {
-                    // confuse for 1-4 turns
+                    // recover for 1-2 turns
                     anigma.VolatileStatusTime = Random.Range(1, 3);
                 },
                 OnBeforeMove = (Battler anigma) =>
@@ -202,6 +202,71 @@ public class ConditionDB
 
                     anigma.StatusChanges.Enqueue($"{anigma.Base.Name} is recovering.");
                     return false;
+                }
+            }
+        },
+
+        // Weather Conditions
+        {
+            ConditionID.sunny,
+            new Condition()
+            {
+                Name = "Harsh Sunlight",
+                StartMessage = "The weather has changed to Harsh Sunlight.",
+                EffectMessage = "The sunlight is harsh.",
+                OnDamageModify = (Battler source, Battler target, Move move) =>
+                {
+                    if (move.Base.Type == AnigmaType.Luminis)
+                        return 1.5f;
+                    else if (move.Base.Type == AnigmaType.Umbra)
+                        return 0.5f;
+
+                    return 1f;
+                }
+            }
+        },
+        {
+            ConditionID.rain,
+            new Condition()
+            {
+                Name = "Heavy Rain",
+                StartMessage = "It started raining heavily.",
+                EffectMessage = "It's raining heavily.",
+                OnDamageModify = (Battler source, Battler target, Move move) =>
+                {
+                    if (move.Base.Type == AnigmaType.Hydro)
+                        return 1.5f;
+                    else if (move.Base.Type == AnigmaType.Pyro)
+                        return 0.5f;
+
+                    return 1f;
+                }
+            }
+        },
+        {
+            ConditionID.sandstorm,
+            new Condition()
+            {
+                Name = "Sandstorm",
+                StartMessage = "A sandstorm is raging.",
+                EffectMessage = "The sandstorm rages.",
+                OnDamageModify = (Battler source, Battler target, Move move) =>
+                {
+                    if (move.Base.Type == AnigmaType.Hydro)
+                        return 0.5f;
+
+                    return 1f;
+                },
+
+                OnWeather = (Battler battler) =>
+                {
+                    if (battler.Base.Type1 == AnigmaType.Ferrum || battler.Base.Type1 == AnigmaType.Terran || battler.Base.Type1 == AnigmaType.Crag)
+                        return;
+                    else if (battler.Base.Type2 == AnigmaType.Ferrum || battler.Base.Type2 == AnigmaType.Terran || battler.Base.Type2 == AnigmaType.Crag)
+                        return;
+
+                    battler.DecreaseHP(Mathf.CeilToInt((float)battler.MaxHp / 16f));
+                    battler.StatusChanges.Enqueue($"{battler.Base.Name} has been buffeted by sandstorm.");
                 }
             }
         }
@@ -223,20 +288,7 @@ public class ConditionDB
 public enum ConditionID
 {
     None,
-    psn,
-    brn,
-    slp,
-    par,
-    frz,
-    bpsn,
-    flinch,
-    confusion,
-    recoil,
-    recoverHp,
-    recover,
-    infatuation,
-    leechSeed,
-    bleed,
-    deaf,
-    blnd
+    psn, brn, slp, par, frz, bpsn, deaf, blnd,
+    flinch, confusion, recoil, recoverHp, recover, bleed,
+    sunny, rain, sandstorm
 }

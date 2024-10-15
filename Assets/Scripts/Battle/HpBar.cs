@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class HpBar : MonoBehaviour
@@ -12,7 +13,7 @@ public class HpBar : MonoBehaviour
         health.transform.localScale = new Vector3(hpNormalized, 1f);
     }
 
-    public IEnumerator SetHpSmoothly(float newHp)
+    public IEnumerator SetHpSmoothly(float newHp, TextMeshProUGUI hpText, Battler battler)
     {
         IsUpdating = true;
 
@@ -26,6 +27,8 @@ public class HpBar : MonoBehaviour
             {
                 curHp -= changeAmt * Time.deltaTime;
                 health.transform.localScale = new Vector3(curHp, 1f);
+                if (hpText != null)
+                    hpText.text = Mathf.CeilToInt(battler.HP - curHp) + "/" + battler.MaxHp;
                 yield return null;
             }
         }
@@ -37,6 +40,8 @@ public class HpBar : MonoBehaviour
             {
                 curHp += changeAmt * Time.deltaTime;
                 health.transform.localScale = new Vector3(curHp, 1f);
+                if (hpText != null)
+                    hpText.text = Mathf.FloorToInt(battler.HP - curHp) + "/" + battler.MaxHp;
                 yield return null;
             }
         }

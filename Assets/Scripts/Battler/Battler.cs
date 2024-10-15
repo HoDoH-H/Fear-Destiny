@@ -110,7 +110,10 @@ public class Battler
         Stats.Add(Stat.SpDefense, Mathf.FloorToInt((2 * Base.SpDefense + Base.ISpDefense + (Base.ESpDefense / 4f)) * Level / 100f) + 5);
         Stats.Add(Stat.Speed, Mathf.FloorToInt((2 * Base.Speed + Base.ISpeed + (Base.ESpeed / 4f)) * Level / 100f) + 5);
 
+        var oldMaxHp = MaxHp;
         MaxHp = Mathf.FloorToInt((2 * Base.MaxHp + Base.IMaxHp + (Base.EMaxHp / 4f)) * Level / 100f) + Level + 10;
+        if (oldMaxHp != 0)
+            HP += MaxHp - oldMaxHp;
     }
 
 
@@ -190,6 +193,7 @@ public class Battler
         if (Exp > Base.GetExpForLevel(level + 1))
         {
             ++level;
+            CalculateStats();
             return true;
         }
         return false;
@@ -213,14 +217,19 @@ public class Battler
         return Moves.Count(m => m.Base == moveToCheck) > 0;
     }
 
-    public Metamorphosis CheckForMetamorphosis()
+    public Morlen CheckForMorlenis()
     {
-        return Base.Metamorphoses.FirstOrDefault(e => e.RequiredLevel == level);
+        return Base.Morleniss.FirstOrDefault(e => e.RequiredLevel <= level && e.RequiredItem == null);
     }
 
-    public void Metamorph(Metamorphosis metamorphosis)
+    public Morlen CheckForMorlenis(ItemBase item)
     {
-        _base = metamorphosis.MetamorphosesInto;
+        return Base.Morleniss.FirstOrDefault(e => e.RequiredItem == item && e.RequiredLevel <= level);
+    }
+
+    public void Morlen(Morlen morlenis)
+    {
+        _base = morlenis.MorlenInto;
         CalculateStats();
     }
 
@@ -260,7 +269,7 @@ public class Battler
         ResetStatBoost();
     }
 
-    public DamageDetails TakeDamage(Move move, Battler attacker)
+    public DamageDetails TakeDamage(Move move, Battler attacker, Condition weather)
     {
         float critical = 1f;
         float criticalHitRate = move.Base.HighCriticalHitRate ? 6.25f * 6f : 6.25f;
@@ -270,6 +279,8 @@ public class Battler
         }
 
         float type = TypeChart.GetEffectiveness(move.Base.Type, this.Base.Type1) * TypeChart.GetEffectiveness(move.Base.Type, this.Base.Type2);
+
+        float weatherMod = weather?.OnDamageModify?.Invoke(this, attacker, move) ?? 1f;
 
         var damageDetails = new DamageDetails
         {
@@ -285,10 +296,12 @@ public class Battler
         if (move.Base.ScaleOnHp)
             powerMultiplier = powerMultiplier * attacker.HP / attacker.MaxHp;
 
-        float modifiers = UnityEngine.Random.Range(0.85f, 1f) * type * critical;
+        float modifiers = UnityEngine.Random.Range(0.85f, 1f) * type * critical * weatherMod;
         float a = (2 * attacker.Level + 10) / 250f;
         float d = a * (move.Base.Power * powerMultiplier) * (attack / defense) + 2;
         int damage = Mathf.FloorToInt(d * modifiers);
+        if(damage <= 0)
+            damage = 1;
 
         damageDetails.DamageDealt = damage;
 
@@ -372,6 +385,18 @@ public class Battler
     {
         Status?.OnAfterTurn?.Invoke(this, damageDealt);
         VolatileStatus?.OnAfterTurn?.Invoke(this, damageDealt);
+    }
+
+    public void Heal()
+    {
+        HP = MaxHp;
+        foreach (var move in Moves)
+        {
+            move.UP = move.Base.UP;
+        }
+        Status = null;
+
+        OnHPChanged?.Invoke();
     }
 }
 

@@ -20,10 +20,15 @@ MonoBehaviour:
   alwaysHits: 0
   up: 0
   priority: 0
+  highCriticalHitRate: 0
+  doubleIfHalfOpponentHp: 0
+  scaleOnHp: 0
   style: 0
   effects:
     boosts: []
     status: 0
     volatileStatus: 0
+    weather: 0
   secondaryEffects: []
   target: 0
+  hitRange: {x: 1, y: 0}

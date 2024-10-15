@@ -7,7 +7,6 @@ public enum ItemCategory { Items, Recovery, Rings, Memories}
 public class Inventory : MonoBehaviour, ISavable
 {
     [SerializeField] List<ItemSlot> itemsSlots;
-    [SerializeField] List<ItemSlot> recoverySlots;
     [SerializeField] List<ItemSlot> ringSlots;
     [SerializeField] List<ItemSlot> memorySlots;
 
@@ -17,7 +16,7 @@ public class Inventory : MonoBehaviour, ISavable
 
     private void Awake()
     {
-        allSlots = new List<List<ItemSlot>> { itemsSlots, recoverySlots, ringSlots, memorySlots};
+        allSlots = new List<List<ItemSlot>> { itemsSlots, ringSlots, memorySlots};
     }
 
     public static List<string> ItemCategories { get; set; } = new List<string>() 
@@ -102,8 +101,8 @@ public class Inventory : MonoBehaviour, ISavable
 
     ItemCategory GetCategoryFromItem(ItemBase item)
     {
-        if (item is RecoveryItem)
-            return ItemCategory.Recovery;
+        if (item is RecoveryItem || item is MorlenisItem)
+            return ItemCategory.Items;
         else if (item is RingItem)
             return ItemCategory.Rings;
         else
@@ -120,7 +119,6 @@ public class Inventory : MonoBehaviour, ISavable
         var saveData = new InventorySaveData() 
         { 
             items = itemsSlots.Select(i => i.GetSaveData()).ToList(),
-            recoveries = recoverySlots.Select(i => i.GetSaveData()).ToList(),
             rings = ringSlots.Select(i => i.GetSaveData()).ToList(),
             memories = memorySlots.Select(i => i.GetSaveData()).ToList(),
         };
@@ -133,11 +131,10 @@ public class Inventory : MonoBehaviour, ISavable
         var saveData = state as InventorySaveData;
 
         itemsSlots = saveData.items.Select(i => new ItemSlot(i)).ToList();
-        recoverySlots = saveData.recoveries.Select(i => new ItemSlot(i)).ToList();
         ringSlots = saveData.rings.Select(i => new ItemSlot(i)).ToList();
         memorySlots = saveData.memories.Select(i => new ItemSlot(i)).ToList();
 
-        allSlots = new List<List<ItemSlot>> { itemsSlots, recoverySlots, ringSlots, memorySlots };
+        allSlots = new List<List<ItemSlot>> { itemsSlots, ringSlots, memorySlots };
 
         OnUpdated?.Invoke();
     }

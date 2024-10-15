@@ -19,6 +19,7 @@ public class CustomMoveBase : Editor
     SerializedProperty Effects;
     SerializedProperty SecondaryEffects;
     SerializedProperty Target;
+    SerializedProperty HitRange;
 
     private void OnEnable()
     {
@@ -37,6 +38,7 @@ public class CustomMoveBase : Editor
         Effects = serializedObject.FindProperty("effects");
         SecondaryEffects = serializedObject.FindProperty("secondaryEffects");
         Target = serializedObject.FindProperty("target");
+        HitRange = serializedObject.FindProperty("hitRange");
     }
 
     public override void OnInspectorGUI()
@@ -61,6 +63,11 @@ public class CustomMoveBase : Editor
             EditorGUILayout.PropertyField(Accuracy);
         EditorGUILayout.PropertyField(Up);
         EditorGUILayout.PropertyField(Priority);
+        if (myScript.Category != AttackCategory.Status)
+        {
+            EditorGUILayout.PropertyField(HitRange);
+            myScript.HitRange.Set(1, 0);
+        }
         EditorGUILayout.PropertyField(Target);
         if (myScript.Category == AttackCategory.Status)
             EditorGUILayout.PropertyField(Effects);

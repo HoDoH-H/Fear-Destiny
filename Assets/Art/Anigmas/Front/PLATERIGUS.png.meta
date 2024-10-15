@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PLATERIGUS_0: 4261277772918787427
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

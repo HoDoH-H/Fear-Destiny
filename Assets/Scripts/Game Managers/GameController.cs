@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public enum GameState { FreeRoam, Battle, Dialog, Menu, PartyScreen, Bag, Cutscene, Paused}
+public enum GameState { FreeRoam, Battle, Dialog, Menu, PartyScreen, Bag, Cutscene, Paused, Morlenis}
 
 public class GameController : MonoBehaviour
 {
@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour
 
     GameState state;
     GameState prevState;
+    GameState stateBeforeMorlenis;
 
     public PlayerController Player => playerController;
 
@@ -76,6 +77,17 @@ public class GameController : MonoBehaviour
             state = GameState.FreeRoam;
         };
         menuController.OnMenuSelected += OnMenuSelected;
+
+        MorlenisManager.Instance.OnMorlenisStart += () => 
+        {
+            stateBeforeMorlenis = state;
+            state = GameState.Morlenis;
+        };
+        MorlenisManager.Instance.OnMorlenisCompleted += () =>  
+        {
+            partyScreen.SetPartyData();
+            state = stateBeforeMorlenis; 
+        };
 
         if (!debug)
             SavingSystem.i.Load(saveFileName);
@@ -202,13 +214,15 @@ public class GameController : MonoBehaviour
             trainer = null;
         }
 
+        partyScreen.SetPartyData();
+
         state = GameState.FreeRoam;
         battleSystem.gameObject.SetActive(false);
         playerCamera.gameObject.SetActive(true);
         StartCoroutine(EndBattleTransition(true));
 
         var playerParty = playerController.GetComponent<BattlerParty>();
-        StartCoroutine(playerParty.CheckForMetamorphosis());
+        StartCoroutine(playerParty.CheckForMorlen());
     }
 
     IEnumerator EndBattleTransition(bool isMainToBattle)

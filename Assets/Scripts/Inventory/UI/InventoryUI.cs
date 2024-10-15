@@ -92,7 +92,7 @@ public class InventoryUI : MonoBehaviour
             else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Left))
                 selectedCategory--;
 
-            selectedCategory = GameController.Instance.RotateSelection(selectedCategory, Inventory.ItemCategories.Count - 1);
+            selectedCategory = GameController.Instance.RotateSelection(selectedCategory, Inventory.ItemCategories.Count - 2);
             selectedItem = GameController.Instance.RotateSelection(selectedItem, inventory.GetSlotsByCategory(selectedCategory).Count - 1);
 
             if (prevCat != selectedCategory)
@@ -181,6 +181,24 @@ public class InventoryUI : MonoBehaviour
 
         yield return HandleMemoryItems();
 
+        var item = inventory.GetItem(selectedItem, selectedCategory);
+        var anigma = partyScreen.SelectedMember;
+
+        // Handle Morlenis items
+        if (item is MorlenisItem && GameController.Instance.State != GameState.Battle)
+        {
+            var morlenis = anigma.CheckForMorlenis(item);
+            if (morlenis != null)
+            {
+                yield return MorlenisManager.Instance.Morlenis(anigma, morlenis);
+            }
+            else
+            {
+                ClosePartyScreen();
+                yield break;
+            }
+        }
+
         var usedItem = inventory.UseItem(selectedItem, partyScreen.SelectedMember, selectedCategory);
 
         if (usedItem != null)
@@ -203,7 +221,7 @@ public class InventoryUI : MonoBehaviour
         }
         else
         {
-            if (selectedCategory == (int)ItemCategory.Recovery)
+            if (selectedCategory == (int)ItemCategory.Items)
                 yield return DialogManager.Instance.ShowDialogText($"It won't have any effect!");
         }
 

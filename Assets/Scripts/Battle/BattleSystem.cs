@@ -12,6 +12,9 @@ public enum BattleAction { Move, SwitchAnigma, UseItem, Run}
 
 public class BattleSystem : MonoBehaviour
 {
+    #region Variables
+    // All needed variables
+
     [SerializeField] BattleUnit playerUnit;
     [SerializeField] BattleUnit opponentUnit;
     [SerializeField] BattleDialogBox dialogBox;
@@ -35,6 +38,8 @@ public class BattleSystem : MonoBehaviour
     BattlerParty trainerParty;
     Battler wildAnigma;
 
+    public Field Field { get; private set; }
+
     bool isTrainerBattle = false;
     PlayerController player;
     TrainerController trainer;
@@ -48,7 +53,10 @@ public class BattleSystem : MonoBehaviour
 
     DamageDetails lastDamageDetails = new DamageDetails();
 
-    // Region Start - Start battle
+    #endregion Variables
+
+    #region Start Battle
+    // Pack of functions used to start a battle (preparing anigmas, etc)
 
     public void StartBattle(BattlerParty playerParty, Battler wildAnigma)
     {
@@ -117,13 +125,20 @@ public class BattleSystem : MonoBehaviour
             dialogBox.SetMoveNames(playerUnit.Anigma.Moves);
         }
 
+        Field = new Field();
+
+        // Use to set a default weather.
+        //Field.SetWeather(ConditionID.sandstorm);
+        //yield return dialogBox.TypeDialog(Field.Weather.StartMessage);
+
         partyScreen.Init();
         ActionSelection();
     }
 
-    // Region End - Start battle
+    #endregion Start Battle
 
-    // Region Start - UI Managers
+    #region UI Managers
+    // Pack of function used by UIs (Update menus, health bar, etc)
 
     void BattleOver(bool isWon)
     {
@@ -191,9 +206,10 @@ public class BattleSystem : MonoBehaviour
         dialogBox.EnableChoiceBox(true);
     }
 
-    // Region End - UI Managers
+    #endregion UI Managers
 
-    // Region Start - Battle
+    # region Battle
+    // Pack of function used to make the battle logics (Turns, Use moves, Take damage, etc)
 
     IEnumerator RunTurns(BattleAction playerAction)
     {
@@ -266,6 +282,59 @@ public class BattleSystem : MonoBehaviour
             if (state == BattleState.BattleOver) yield break;
         }
 
+        // If there's a field weather
+        if (Field.Weather != null)
+        {
+            yield return dialogBox.TypeDialog(Field.Weather.EffectMessage);
+
+            // For player unit
+            var beforeWeatherHp = playerUnit.Anigma.HP;
+            Field.Weather.OnWeather?.Invoke(playerUnit.Anigma);
+            if (beforeWeatherHp != playerUnit.Anigma.HP) playerUnit.PlayHitAnimation();
+
+            yield return ShowStatusChanges(playerUnit.Anigma);
+            if (playerUnit.Anigma.HP <= 0)
+            {
+                yield return dialogBox.TypeDialog($"{playerUnit.Anigma.Base.Name} fainted.");
+                playerUnit.PlayFaintAnimation();
+
+                yield return new WaitForSeconds(1.5f);
+
+                CheckForBattleOver(playerUnit);
+                yield break;
+            }
+
+
+
+            // For opponent unit
+            beforeWeatherHp = opponentUnit.Anigma.HP;
+            Field.Weather.OnWeather?.Invoke(opponentUnit.Anigma);
+            if (beforeWeatherHp != opponentUnit.Anigma.HP) opponentUnit.PlayHitAnimation();
+
+            yield return ShowStatusChanges(opponentUnit.Anigma);
+            if (opponentUnit.Anigma.HP <= 0)
+            {
+                yield return dialogBox.TypeDialog($"{opponentUnit.Anigma.Base.Name} fainted.");
+                opponentUnit.PlayFaintAnimation();
+
+                yield return new WaitForSeconds(1.5f);
+
+                CheckForBattleOver(opponentUnit);
+                yield break;
+            }
+
+            if (Field.WeatherDuration != null)
+            {
+                Field.WeatherDuration--;
+                if (Field.WeatherDuration <= 0)
+                {
+                    Field.Weather = null;
+                    Field.WeatherDuration = null;
+                    yield return dialogBox.TypeDialog("The weather has turned back to normal.");
+                }
+            }
+        }
+
         if (state != BattleState.BattleOver)
         {
             ActionSelection();
@@ -303,35 +372,55 @@ public class BattleSystem : MonoBehaviour
         move.UP--;
         yield return dialogBox.TypeDialog($"{sourceUnit.Anigma.Base.Name} used {move.Base.Name}.");
 
-        sourceUnit.PlayAttackAnimation();
 
         if (CheckIfMoveHits(move, sourceUnit.Anigma, targetUnit.Anigma))
         {
-            yield return new WaitForSeconds(0.5f);
-            targetUnit.PlayHitAnimation();
+            var hitTime = move.Base.GetHitTimes();
 
-            if (move.Base.Category == AttackCategory.Status)
-            {
-                yield return RunMoveEffect(move.Base.Effects, sourceUnit.Anigma, targetUnit.Anigma, move.Base.Target);
-            }
-            else
-            {
-                lastDamageDetails = targetUnit.Anigma.TakeDamage(move, sourceUnit.Anigma);
-                yield return targetUnit.Hud.WaitForHPUpdate();
-                yield return ShowDamageDetail(lastDamageDetails, targetUnit.Anigma);
-            }
+            float typeEffectiveness = 1f;
+            int hit = 1;
 
-            if (move.Base.Secondaries != null && move.Base.Secondaries.Count > 0 && targetUnit.Anigma.HP > 0)
+            for (int i = 1; i <= hitTime; i++)
             {
-                foreach (var secondary in move.Base.Secondaries)
+                sourceUnit.PlayAttackAnimation();
+                yield return new WaitForSeconds(0.5f);
+                targetUnit.PlayHitAnimation();
+
+                if (move.Base.Category == AttackCategory.Status)
                 {
-                    var rnd = UnityEngine.Random.Range(1, 101);
-                    if (rnd <= secondary.Chance)
+                    yield return RunMoveEffect(move.Base.Effects, sourceUnit.Anigma, targetUnit.Anigma, move.Base.Target);
+                }
+                else
+                {
+                    lastDamageDetails = targetUnit.Anigma.TakeDamage(move, sourceUnit.Anigma, Field.Weather);
+                    yield return targetUnit.Hud.WaitForHPUpdate();
+                    yield return ShowDamageDetail(lastDamageDetails);
+                    typeEffectiveness = lastDamageDetails.TypeEffectiveness;
+                }
+
+                if (move.Base.Secondaries != null && move.Base.Secondaries.Count > 0 && targetUnit.Anigma.HP > 0)
+                {
+                    foreach (var secondary in move.Base.Secondaries)
                     {
-                        yield return RunMoveEffect(secondary, sourceUnit.Anigma, targetUnit.Anigma, secondary.Target);
+                        var rnd = UnityEngine.Random.Range(1, 101);
+                        if (rnd <= secondary.Chance)
+                        {
+                            yield return RunMoveEffect(secondary, sourceUnit.Anigma, targetUnit.Anigma, secondary.Target);
+                        }
                     }
                 }
+
+                hit = i;
+                if (targetUnit.Anigma.HP <= 0)
+                {
+                    break;
+                }
             }
+
+            yield return ShowTypeEffectiveness(typeEffectiveness, targetUnit.Anigma);
+
+            if (hitTime > 1)
+                yield return dialogBox.TypeDialog($"Hit {hit} times!");
 
             if (targetUnit.Anigma.HP <= 0)
             {
@@ -340,7 +429,8 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-            yield return new WaitForSeconds(0.35f);
+            sourceUnit.PlayAttackAnimation();
+            yield return new WaitForSeconds(0.5f);
             yield return dialogBox.TypeDialog($"{sourceUnit.Anigma.Base.Name}'s attack missed...");
         }
     }
@@ -540,36 +630,47 @@ public class BattleSystem : MonoBehaviour
             }
         }
 
+        // Weather Condition
+        if (effect.Weather != ConditionID.None)
+        {
+            Field.SetWeather(effect.Weather);
+            Field.WeatherDuration = 5;
+            yield return dialogBox.TypeDialog(Field.Weather.StartMessage);
+        }
+
         yield return ShowStatusChanges(source);
         yield return ShowStatusChanges(target);
     }
 
-    IEnumerator ShowDamageDetail(DamageDetails damageDetails, Battler anigma)
+    IEnumerator ShowDamageDetail(DamageDetails damageDetails)
     {
         if (damageDetails.Critical > 1f)
         {
             yield return dialogBox.TypeDialog("A critical hit!");
         }
+    }
 
-        if (damageDetails.TypeEffectiveness > 2f)
+    IEnumerator ShowTypeEffectiveness(float effectiveness, Battler battler)
+    {
+        if (effectiveness > 2f)
         {
             yield return dialogBox.TypeDialog("It's tremendously effective!");
         }
-        else if (damageDetails.TypeEffectiveness > 1f)
+        else if (effectiveness > 1f)
         {
             yield return dialogBox.TypeDialog("It's super effective!");
         }
-        else if (damageDetails.TypeEffectiveness < 1f)
+        else if (effectiveness < 1f)
         {
             yield return dialogBox.TypeDialog("It's not very effective!");
         }
-        else if (damageDetails.TypeEffectiveness < 0.5f)
+        else if (effectiveness < 0.5f)
         {
             yield return dialogBox.TypeDialog("It's really uneffective!");
         }
-        else if (damageDetails.TypeEffectiveness == 0)
+        else if (effectiveness == 0)
         {
-            yield return dialogBox.TypeDialog($"It doesn't affect {anigma.Base.Name}!");
+            yield return dialogBox.TypeDialog($"It doesn't affect {battler.Base.Name}!");
         }
     }
 
@@ -753,9 +854,10 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    // Region End - Battle
+    #endregion Battle
 
-    // Region Start - Battle States Handlers
+    #region Battle States Handlers
+    // Pack of function that redirect user's inputs to certain UIs (Action selection, move selection, bag, etc)
 
     public void HandleUpdate()
     {
@@ -1064,5 +1166,5 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    // Region End - Battle States Handlers
+    #endregion Battle States Handlers
 }

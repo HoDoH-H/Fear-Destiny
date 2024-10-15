@@ -45,16 +45,14 @@ public class BattlerParty : MonoBehaviour
         }
     }
 
-    public IEnumerator CheckForMetamorphosis()
+    public IEnumerator CheckForMorlen()
     {
         foreach (var battler in battlers)
         {
-            var metamorphosis = battler.CheckForMetamorphosis();
-            if (metamorphosis != null)
+            var morlen = battler.CheckForMorlenis();
+            if (morlen != null)
             {
-                yield return DialogManager.Instance.ShowDialogText($"{battler.Base.Name} transformed into {metamorphosis.MetamorphosesInto.Name}!");
-                battler.Metamorph(metamorphosis);
-                OnUpdated?.Invoke();
+                yield return MorlenisManager.Instance.Morlenis(battler, morlen);
             }
         }
     }
@@ -62,5 +60,10 @@ public class BattlerParty : MonoBehaviour
     public static BattlerParty GetPlayerParty()
     {
         return FindObjectOfType<PlayerController>().GetComponent<BattlerParty>();
+    }
+
+    public void PartyUpdated()
+    {
+        OnUpdated?.Invoke();
     }
 }

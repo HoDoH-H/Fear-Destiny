@@ -11,6 +11,7 @@ public class BattleHUD : MonoBehaviour
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] TextMeshProUGUI levelText;
     [SerializeField] TextMeshProUGUI statusText;
+    [SerializeField] TextMeshProUGUI hpText;
     [SerializeField] HpBar hpBar; 
     [SerializeField] GameObject expBar;
 
@@ -32,6 +33,8 @@ public class BattleHUD : MonoBehaviour
 
         nameText.text = anigma.Base.Name;
         SetLevel();
+        if(hpText != null )
+            hpText.text = anigma.HP + "/" + anigma.MaxHp;
         hpBar.SetHp((float)anigma.HP / anigma.MaxHp);
         SetExp();
 
@@ -104,7 +107,10 @@ public class BattleHUD : MonoBehaviour
 
     public IEnumerator UpdateHPAsync()
     {
-        yield return hpBar.SetHpSmoothly((float)_anigma.HP / _anigma.MaxHp);
+        yield return hpBar.SetHpSmoothly((float)_anigma.HP / _anigma.MaxHp, hpText, _anigma);
+        yield return WaitForHPUpdate();
+        if (hpText != null)
+            hpText.text = _anigma.HP + "/" + _anigma.MaxHp;
     }
 
     public IEnumerator WaitForHPUpdate()

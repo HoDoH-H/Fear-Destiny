@@ -37,7 +37,7 @@ public class CustomBattlerBase : Editor
     SerializedProperty ISpAttack;
     SerializedProperty ISpDefense;
     SerializedProperty ISpeed;
-    SerializedProperty Metamorphoses;
+    SerializedProperty Morleniss;
 
     private void OnEnable()
     {
@@ -74,7 +74,7 @@ public class CustomBattlerBase : Editor
         ISpAttack = serializedObject.FindProperty("iSpAttack");
         ISpDefense = serializedObject.FindProperty("iSpDefense");
         ISpeed = serializedObject.FindProperty("iSpeed");
-        Metamorphoses = serializedObject.FindProperty("metamorphoses");
+        Morleniss = serializedObject.FindProperty("morleniss");
     }
 
     public override void OnInspectorGUI()
@@ -119,7 +119,7 @@ public class CustomBattlerBase : Editor
         EditorGUILayout.PropertyField(LearnableMoves);
         EditorGUILayout.PropertyField(LearnableByItems);
         if (myScript.IsPlayer || myScript.IsAnigma)
-            EditorGUILayout.PropertyField(Metamorphoses);
+            EditorGUILayout.PropertyField(Morleniss);
         EditorGUILayout.PropertyField(EMaxHp);
         EditorGUILayout.PropertyField(EAttack);
         EditorGUILayout.PropertyField(EDefense);

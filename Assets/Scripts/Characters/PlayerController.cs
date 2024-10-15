@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour, ISavable
     public bool CanMove = true;
     private Character character;
 
-    
+
     public Vector2 direction;
 
     private void Awake()
@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour, ISavable
         character = GetComponent<Character>();
 
         unit.ChangeName(_name);
+
+        direction.x = 0f;
+        direction.y = -1f;
     }
 
     int GetKey(GlobalSettings.KeyList key)

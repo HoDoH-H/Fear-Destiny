@@ -85,7 +85,7 @@ public class BattleDialogBox : MonoBehaviour
             }
             else
             {
-                actionTexts[i].color = Color.black;
+                actionTexts[i].color = GlobalSettings.Instance.BaseInvColor;
             }
         }
     }
@@ -95,11 +95,11 @@ public class BattleDialogBox : MonoBehaviour
         if (yesSelected)
         {
             yesText.color = GlobalSettings.Instance.HighlightedColor;
-            noText.color = Color.black;
+            noText.color = GlobalSettings.Instance.BaseInvColor;
         }
         else
         {
-            yesText.color = Color.black;
+            yesText.color = GlobalSettings.Instance.BaseInvColor;
             noText.color = GlobalSettings.Instance.HighlightedColor;
         }
     }
@@ -114,7 +114,7 @@ public class BattleDialogBox : MonoBehaviour
             }
             else
             {
-                moveTexts[i].color = Color.black;
+                moveTexts[i].color = GlobalSettings.Instance.BaseInvColor;
             }
         }
 
