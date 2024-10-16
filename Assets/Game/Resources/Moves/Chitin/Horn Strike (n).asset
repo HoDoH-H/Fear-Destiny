@@ -12,23 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2e12288949c3a4d885f65e3948438f, type: 3}
   m_Name: Horn Strike (n)
   m_EditorClassIdentifier: 
-  name: 
+  name: Horn Strike
   description: Megahorn
   type: 12
-  power: 0
-  accuracy: 0
+  power: 90
+  accuracy: 100
   alwaysHits: 0
-  up: 0
+  up: 15
   priority: 0
   highCriticalHitRate: 0
   doubleIfHalfOpponentHp: 0
   scaleOnHp: 0
-  style: 0
+  style: 1
   effects:
     boosts: []
     status: 0
     volatileStatus: 0
     weather: 0
-  secondaryEffects: []
+  secondaryEffects:
+  - boosts:
+    - stat: 6
+      boost: -1
+    status: 0
+    volatileStatus: 0
+    weather: 0
+    chance: 10
+    target: 0
   target: 0
   hitRange: {x: 1, y: 0}

@@ -12,23 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2e12288949c3a4d885f65e3948438f, type: 3}
   m_Name: Parasite Lust (n)
   m_EditorClassIdentifier: 
-  name: 
+  name: Parasite Lust
   description: Leech Life
   type: 12
-  power: 0
-  accuracy: 0
+  power: 70
+  accuracy: 100
   alwaysHits: 0
-  up: 0
+  up: 15
   priority: 0
   highCriticalHitRate: 0
   doubleIfHalfOpponentHp: 0
   scaleOnHp: 0
-  style: 0
+  style: 1
   effects:
     boosts: []
     status: 0
     volatileStatus: 0
     weather: 0
-  secondaryEffects: []
+  secondaryEffects:
+  - boosts: []
+    status: 0
+    volatileStatus: 12
+    weather: 0
+    chance: 90
+    target: 0
   target: 0
   hitRange: {x: 1, y: 0}

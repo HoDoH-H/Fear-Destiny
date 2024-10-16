@@ -12,23 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2e12288949c3a4d885f65e3948438f, type: 3}
   m_Name: Guard Call (n)
   m_EditorClassIdentifier: 
-  name: 
+  name: Guard Call
   description: Defend Order
   type: 12
   power: 0
   accuracy: 0
-  alwaysHits: 0
-  up: 0
+  alwaysHits: 1
+  up: 20
   priority: 0
   highCriticalHitRate: 0
   doubleIfHalfOpponentHp: 0
   scaleOnHp: 0
-  style: 0
+  style: 2
   effects:
-    boosts: []
+    boosts:
+    - stat: 1
+      boost: 1
+    - stat: 3
+      boost: 1
     status: 0
     volatileStatus: 0
     weather: 0
   secondaryEffects: []
-  target: 0
+  target: 1
   hitRange: {x: 1, y: 0}
