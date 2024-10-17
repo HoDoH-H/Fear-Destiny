@@ -10,27 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a2e12288949c3a4d885f65e3948438f, type: 3}
-  m_Name: Sticky Silk (n)
+  m_Name: Horn Strike
   m_EditorClassIdentifier: 
-  name: Sticky Silk
-  description: String Shot
+  name: Horn Strike
+  description: Megahorn
   type: 12
-  power: 0
-  accuracy: 100
+  power: 125
+  accuracy: 85
   alwaysHits: 0
-  up: 30
+  up: 10
   priority: 0
   highCriticalHitRate: 0
   doubleIfHalfOpponentHp: 0
   scaleOnHp: 0
-  style: 2
+  style: 1
   effects:
-    boosts:
-    - stat: 4
+    boosts: []
+    status: 0
+    volatileStatus: 0
+    weather: 0
+  secondaryEffects:
+  - boosts:
+    - stat: 6
       boost: -1
     status: 0
     volatileStatus: 0
     weather: 0
-  secondaryEffects: []
+    chance: 10
+    target: 0
   target: 0
   hitRange: {x: 1, y: 0}

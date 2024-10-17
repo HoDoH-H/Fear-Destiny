@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a2e12288949c3a4d885f65e3948438f, type: 3}
-  m_Name: Guard Call (n)
+  m_Name: Sticky Silk
   m_EditorClassIdentifier: 
-  name: Guard Call
-  description: Defend Order
+  name: Sticky Silk
+  description: String Shot
   type: 12
   power: 0
-  accuracy: 0
-  alwaysHits: 1
-  up: 20
+  accuracy: 100
+  alwaysHits: 0
+  up: 30
   priority: 0
   highCriticalHitRate: 0
   doubleIfHalfOpponentHp: 0
@@ -26,13 +26,11 @@ MonoBehaviour:
   style: 2
   effects:
     boosts:
-    - stat: 1
-      boost: 1
-    - stat: 3
-      boost: 1
+    - stat: 4
+      boost: -2
     status: 0
     volatileStatus: 0
     weather: 0
   secondaryEffects: []
-  target: 1
+  target: 0
   hitRange: {x: 1, y: 0}

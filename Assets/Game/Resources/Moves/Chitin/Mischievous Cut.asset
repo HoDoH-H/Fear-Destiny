@@ -10,33 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a2e12288949c3a4d885f65e3948438f, type: 3}
-  m_Name: Horn Strike (n)
+  m_Name: Mischievous Cut
   m_EditorClassIdentifier: 
-  name: Horn Strike
-  description: Megahorn
+  name: Mischievous Cut
+  description: Fury Cut
   type: 12
-  power: 90
+  power: 40
   accuracy: 100
   alwaysHits: 0
-  up: 15
+  up: 20
   priority: 0
   highCriticalHitRate: 0
   doubleIfHalfOpponentHp: 0
   scaleOnHp: 0
-  style: 1
+  style: 0
   effects:
     boosts: []
     status: 0
     volatileStatus: 0
     weather: 0
   secondaryEffects:
-  - boosts:
-    - stat: 6
-      boost: -1
+  - boosts: []
     status: 0
-    volatileStatus: 0
+    volatileStatus: 9
     weather: 0
-    chance: 10
+    chance: 5
     target: 0
   target: 0
-  hitRange: {x: 1, y: 0}
+  hitRange: {x: 1, y: 5}

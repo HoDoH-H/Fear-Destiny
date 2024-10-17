@@ -10,31 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a2e12288949c3a4d885f65e3948438f, type: 3}
-  m_Name: Parasite Lust (n)
+  m_Name: Queen's Call
   m_EditorClassIdentifier: 
-  name: Parasite Lust
-  description: Leech Life
+  name: Queen's Call
+  description: Heal Order
   type: 12
-  power: 70
-  accuracy: 100
-  alwaysHits: 0
-  up: 15
+  power: 0
+  accuracy: 0
+  alwaysHits: 1
+  up: 0
   priority: 0
   highCriticalHitRate: 0
   doubleIfHalfOpponentHp: 0
   scaleOnHp: 0
-  style: 1
+  style: 2
   effects:
     boosts: []
     status: 0
-    volatileStatus: 0
+    volatileStatus: 18
     weather: 0
-  secondaryEffects:
-  - boosts: []
-    status: 0
-    volatileStatus: 12
-    weather: 0
-    chance: 90
-    target: 0
-  target: 0
+  secondaryEffects: []
+  target: 1
   hitRange: {x: 1, y: 0}

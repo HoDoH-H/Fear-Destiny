@@ -180,6 +180,19 @@ public class ConditionDB
             }
         },
         {
+            ConditionID.recoverHpMax,
+            new Condition()
+            {
+                Name = "Recover HP Max",
+                StartMessage = "is recovering its HPs.",
+                OnAfterTurn = (Battler anigma, int damageDealt) =>
+                {
+                    anigma.IncreaseHP(anigma.MaxHp / 2);
+                    anigma.CureVolatileStatus();
+                }
+            }
+        },
+        {
             ConditionID.recover,
             new Condition()
             {
@@ -288,7 +301,22 @@ public class ConditionDB
 public enum ConditionID
 {
     None,
-    psn, brn, slp, par, frz, bpsn, deaf, blnd,
-    flinch, confusion, recoil, recoverHp, recover, bleed,
-    sunny, rain, sandstorm
+    psn,
+    brn,
+    slp,
+    par,
+    frz,
+    bpsn,
+    deaf,
+    blnd,
+    flinch,
+    confusion,
+    recoil,
+    recoverHp,
+    recover,
+    bleed,
+    sunny,
+    rain,
+    sandstorm,
+    recoverHpMax
 }
