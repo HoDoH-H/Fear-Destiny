@@ -16,6 +16,8 @@ MonoBehaviour:
   description: A bottle with a black bubbly brew liquid. It doesn't seem poisonous
     but you feel more aware everytime you touch it.
   icon: {fileID: 773162141185731741, guid: 9e3dc4fea12e8c043ba48973736b41f4, type: 3}
+  isSellable: 1
+  price: 1000
   hpAmount: 0
   restoreMaxHP: 0
   upAmount: 0
@@ -27,5 +29,5 @@ MonoBehaviour:
   revive: 0
   boostedRevive: 0
   maxRevive: 0
-  humans: 0
-  anigmas: 0
+  poisonForHumans: 0
+  poisonForAnigmas: 0

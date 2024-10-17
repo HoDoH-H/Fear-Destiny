@@ -140,6 +140,13 @@ public class InventoryUI : MonoBehaviour
 
         var item = inventory.GetItem(selectedItem, selectedCategory);
 
+        if (GameController.Instance.State == GameState.Shop)
+        {
+            onItemUsed.Invoke(item);
+            state = InventoryUIState.ItemSelection;
+            yield break;
+        }
+
         if (GameController.Instance.State == GameState.Battle)
         {
             // In Battle
@@ -288,6 +295,8 @@ public class InventoryUI : MonoBehaviour
             itemIcon.gameObject.SetActive(true);
             description.gameObject.SetActive(true);
         }
+
+        selectedItem = GameController.Instance.RotateSelection(selectedItem, slotUIList.Count - 1);
 
         for (int i = 0; i < slotUIList.Count; i++)
         {

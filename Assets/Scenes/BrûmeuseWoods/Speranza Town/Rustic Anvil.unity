@@ -42,7 +42,8 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -236,6 +237,71 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa7a054946b95c444aa116980f28293d, type: 3}
+--- !u!1001 &1964959687595152340
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1005148220442265021, guid: c7e12d072f3fa7c4c92564fa5e0fe1cb, type: 3}
+      propertyPath: dialog.lines.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005148220442265021, guid: c7e12d072f3fa7c4c92564fa5e0fe1cb, type: 3}
+      propertyPath: movementPattern.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1402763302554404413, guid: c7e12d072f3fa7c4c92564fa5e0fe1cb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -48.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1402763302554404413, guid: c7e12d072f3fa7c4c92564fa5e0fe1cb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 1402763302554404413, guid: c7e12d072f3fa7c4c92564fa5e0fe1cb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1402763302554404413, guid: c7e12d072f3fa7c4c92564fa5e0fe1cb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1402763302554404413, guid: c7e12d072f3fa7c4c92564fa5e0fe1cb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1402763302554404413, guid: c7e12d072f3fa7c4c92564fa5e0fe1cb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1402763302554404413, guid: c7e12d072f3fa7c4c92564fa5e0fe1cb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1402763302554404413, guid: c7e12d072f3fa7c4c92564fa5e0fe1cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1402763302554404413, guid: c7e12d072f3fa7c4c92564fa5e0fe1cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1402763302554404413, guid: c7e12d072f3fa7c4c92564fa5e0fe1cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3285398916228704428, guid: c7e12d072f3fa7c4c92564fa5e0fe1cb, type: 3}
+      propertyPath: m_Name
+      value: NPC - Merchant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c7e12d072f3fa7c4c92564fa5e0fe1cb, type: 3}
 --- !u!1001 &4652913635169474869
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16240,3 +16306,4 @@ SceneRoots:
   - {fileID: 4652913635169474869}
   - {fileID: 319294445}
   - {fileID: 1419484102}
+  - {fileID: 1964959687595152340}

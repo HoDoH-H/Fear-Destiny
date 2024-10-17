@@ -16,3 +16,5 @@ MonoBehaviour:
   description: An ethereal flame contained in a semi liquid state. It is told that
     some pyro type anigmas are attracted to it.
   icon: {fileID: -215664898694585508, guid: f1954c7ae2676fa42a6f95011f3c1676, type: 3}
+  isSellable: 0
+  price: 4000

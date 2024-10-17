@@ -9,8 +9,8 @@ public class Healer : MonoBehaviour
         int selectedChoice = 0;
 
         yield return DialogManager.Instance.ShowDialog(dialog,
-            new List<string>() { "Accept the offer.", "Refuse Politely." },
-            (choiceIndex) => selectedChoice = choiceIndex);
+            choices: new List<string>() { "Accept the offer.", "Refuse Politely." },
+            onChoiceSelected: (choiceIndex) => selectedChoice = choiceIndex);
 
         if (selectedChoice == 1)
         {

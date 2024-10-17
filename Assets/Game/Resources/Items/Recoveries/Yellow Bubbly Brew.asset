@@ -16,6 +16,8 @@ MonoBehaviour:
   description: A bottle with a yellow bubbly brew liquid. It doesn't seem poisonous
     but you get goosebumps everytime you touch it.
   icon: {fileID: -8745760842992347484, guid: c2af6ab96c7b77e488b0b5a195d9d694, type: 3}
+  isSellable: 1
+  price: 1000
   hpAmount: 0
   restoreMaxHP: 0
   upAmount: 0
@@ -27,5 +29,5 @@ MonoBehaviour:
   revive: 0
   boostedRevive: 0
   maxRevive: 0
-  humans: 0
-  anigmas: 0
+  poisonForHumans: 0
+  poisonForAnigmas: 0

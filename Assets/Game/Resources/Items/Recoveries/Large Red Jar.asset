@@ -16,6 +16,8 @@ MonoBehaviour:
   description: Housed in an ornate crystal vial, this amber liquid exudes a faint,
     mesmerizing glow. The Quality doesn't seem ordinary...
   icon: {fileID: -3193967367893684651, guid: 832a4051a3647a54c8d472c4bc42ad71, type: 3}
+  isSellable: 1
+  price: 2200
   hpAmount: 0
   restoreMaxHP: 1
   upAmount: 0
@@ -27,5 +29,5 @@ MonoBehaviour:
   revive: 0
   boostedRevive: 0
   maxRevive: 0
-  humans: 0
-  anigmas: 0
+  poisonForHumans: 0
+  poisonForAnigmas: 0

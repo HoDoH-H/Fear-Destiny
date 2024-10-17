@@ -18,6 +18,8 @@ MonoBehaviour:
     Its essence carries a faint, melodious hum, reminiscent of a distant, ethereal
     song.
   icon: {fileID: -360276262095990378, guid: f463a411d9af22e449f68320dd9d34f4, type: 3}
+  isSellable: 1
+  price: 15000
   hpAmount: 0
   restoreMaxHP: 0
   upAmount: 0
@@ -29,5 +31,5 @@ MonoBehaviour:
   revive: 0
   boostedRevive: 0
   maxRevive: 1
-  humans: 0
-  anigmas: 0
+  poisonForHumans: 0
+  poisonForAnigmas: 0

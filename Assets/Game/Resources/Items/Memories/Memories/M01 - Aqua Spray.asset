@@ -15,7 +15,7 @@ MonoBehaviour:
   name: M01
   description: Make your companion remember Aqua Spray.
   icon: {fileID: 2870389259480315698, guid: d7598d708a65c714789d8c7c52d06ff2, type: 3}
-  poisonForHumans: 0
-  poisonForAnigmas: 0
-  move: {fileID: 11400000, guid: ad4775db801dc9e439221dfcfa9cb803, type: 2}
+  isSellable: 0
+  price: 8000
+  move: {fileID: 11400000, guid: 153b0ff8ad6dbf04b94df63fb44836da, type: 2}
   isAncientMemory: 0

@@ -16,6 +16,8 @@ MonoBehaviour:
   description: This small vial contains a blue liquid. Sorcerers usually use them
     to use their powers.
   icon: {fileID: 2261182648131670998, guid: 43d8dbc2e21245445b3b5996e51c331c, type: 3}
+  isSellable: 1
+  price: 300
   hpAmount: 0
   restoreMaxHP: 0
   upAmount: 0

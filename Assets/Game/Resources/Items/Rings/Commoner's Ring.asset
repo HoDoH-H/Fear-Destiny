@@ -16,5 +16,7 @@ MonoBehaviour:
   description: A simple band that offers reliable utility, aiding its wearer in gathering
     loyal companions.
   icon: {fileID: 2751585202930314029, guid: d7598d708a65c714789d8c7c52d06ff2, type: 3}
-  poisonForHumans: 0
-  poisonForAnigmas: 0
+  isSellable: 1
+  price: 500
+  catchRateModifier: 1
+  alwaysCatch: 0

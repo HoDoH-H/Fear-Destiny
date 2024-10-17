@@ -17,6 +17,8 @@ MonoBehaviour:
     like firelight within its elegantly crafted bottle. Its essence carries a faint,
     melodious hum, reminiscent of a distant, ethereal song.
   icon: {fileID: -6186231880139380768, guid: 7f6e6addfb9eb3d4088ea9c1d5947044, type: 3}
+  isSellable: 1
+  price: 2000
   hpAmount: 0
   restoreMaxHP: 0
   upAmount: 0
@@ -28,5 +30,5 @@ MonoBehaviour:
   revive: 0
   boostedRevive: 1
   maxRevive: 0
-  humans: 0
-  anigmas: 0
+  poisonForHumans: 0
+  poisonForAnigmas: 0

@@ -17,6 +17,8 @@ MonoBehaviour:
     mesmerizing glow. The liquid's extraordinary quality whispers of ancient secrets
     and unparalleled craftsmanship.
   icon: {fileID: -3973429000732579732, guid: 80d864adccc3db449b2ba9c4c7c2cab1, type: 3}
+  isSellable: 1
+  price: 25000
   hpAmount: 0
   restoreMaxHP: 1
   upAmount: 0
@@ -28,5 +30,5 @@ MonoBehaviour:
   revive: 0
   boostedRevive: 0
   maxRevive: 0
-  humans: 0
-  anigmas: 0
+  poisonForHumans: 0
+  poisonForAnigmas: 0

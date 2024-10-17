@@ -15,6 +15,8 @@ MonoBehaviour:
   name: Poor Phoenix Flame
   description: This iridescent potion shimmers with colors that dance like firelight.
   icon: {fileID: 534960623560536297, guid: a412469e316233a4cb90c18def7af000, type: 3}
+  isSellable: 1
+  price: 600
   hpAmount: 0
   restoreMaxHP: 0
   upAmount: 0
@@ -26,5 +28,5 @@ MonoBehaviour:
   revive: 1
   boostedRevive: 0
   maxRevive: 0
-  humans: 0
-  anigmas: 0
+  poisonForHumans: 0
+  poisonForAnigmas: 0

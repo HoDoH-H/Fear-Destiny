@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public class NPC_Controller : MonoBehaviour, Interactable, ISavable
@@ -22,6 +23,7 @@ public class NPC_Controller : MonoBehaviour, Interactable, ISavable
     ItemGiver itemGiver;
     BattlerGiver battlerGiver;
     Healer healer;
+    Merchant merchant;
 
     private void Awake()
     {
@@ -29,6 +31,7 @@ public class NPC_Controller : MonoBehaviour, Interactable, ISavable
         itemGiver = GetComponent<ItemGiver>();
         battlerGiver = GetComponent<BattlerGiver>();
         healer = GetComponent<Healer>();
+        merchant = GetComponent<Merchant>();
     }
 
     public IEnumerator Interact(Transform initiator)
@@ -85,6 +88,10 @@ public class NPC_Controller : MonoBehaviour, Interactable, ISavable
             else if (healer != null)
             {
                 yield return healer.Heal(initiator, dialog);
+            }
+            else if(merchant != null)
+            {
+                yield return merchant.Trade();
             }
             else
             {

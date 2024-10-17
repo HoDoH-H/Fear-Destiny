@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public enum GameState { FreeRoam, Battle, Dialog, Menu, PartyScreen, Bag, Cutscene, Paused, Morlenis}
+public enum GameState { FreeRoam, Battle, Dialog, Menu, PartyScreen, Bag, Cutscene, Paused, Morlenis, Shop}
 
 public class GameController : MonoBehaviour
 {
@@ -88,6 +88,9 @@ public class GameController : MonoBehaviour
             partyScreen.SetPartyData();
             state = stateBeforeMorlenis; 
         };
+
+        ShopController.Instance.OnStart += () => state = GameState.Shop;
+        ShopController.Instance.OnFinish += () => state = GameState.FreeRoam;
 
         if (!debug)
             SavingSystem.i.Load(saveFileName);
@@ -304,6 +307,10 @@ public class GameController : MonoBehaviour
             };
 
             inventoryUI.HandleUpdate(onBack);
+        }
+        else if (state == GameState.Shop)
+        {
+            ShopController.Instance.HandleUpdate();
         }
     }
 

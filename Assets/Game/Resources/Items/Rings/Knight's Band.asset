@@ -16,7 +16,7 @@ MonoBehaviour:
   description: Forged with strength and precision, this ring is ideal for those with
     a keen eye for finding and securing steadfast partners.
   icon: {fileID: 95820814739484766, guid: d7598d708a65c714789d8c7c52d06ff2, type: 3}
-  poisonForHumans: 0
-  poisonForAnigmas: 0
+  isSellable: 1
+  price: 1600
   catchRateModifier: 2
   alwaysCatch: 0

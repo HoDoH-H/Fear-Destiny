@@ -18,7 +18,7 @@ MonoBehaviour:
     light. Whispers of its creation speak of ancient rituals and the blessings of
     mythical beings.
   icon: {fileID: 1435284982013674707, guid: d7598d708a65c714789d8c7c52d06ff2, type: 3}
-  poisonForHumans: 0
-  poisonForAnigmas: 0
+  isSellable: 1
+  price: 45000
   catchRateModifier: 1
   alwaysCatch: 1

@@ -16,6 +16,8 @@ MonoBehaviour:
   description: This small shimmering vial contains a glowing liquid that radiates
     a brown aura. It smells stink but Anigmas seem to like it.
   icon: {fileID: -3052544058454716176, guid: 496d6d39b9a8798429139987b6f222d4, type: 3}
+  isSellable: 1
+  price: 600
   hpAmount: 0
   restoreMaxHP: 0
   upAmount: 5
@@ -27,5 +29,5 @@ MonoBehaviour:
   revive: 0
   boostedRevive: 0
   maxRevive: 0
-  humans: 1
-  anigmas: 0
+  poisonForHumans: 0
+  poisonForAnigmas: 0

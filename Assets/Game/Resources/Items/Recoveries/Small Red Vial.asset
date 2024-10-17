@@ -16,6 +16,8 @@ MonoBehaviour:
   description: This small shimmering vial contains a glowing, amber liquid that radiates
     a warm, soothing aura.
   icon: {fileID: -2445133492249524872, guid: c6d0e52e2a28d6d49807f04ddfb38a61, type: 3}
+  isSellable: 1
+  price: 200
   hpAmount: 25
   restoreMaxHP: 0
   upAmount: 0
@@ -25,6 +27,7 @@ MonoBehaviour:
   status: 0
   recoverAllStatus: 0
   revive: 0
+  boostedRevive: 0
   maxRevive: 0
-  humans: 0
-  anigmas: 0
+  poisonForHumans: 0
+  poisonForAnigmas: 0

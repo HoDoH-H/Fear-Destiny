@@ -15,7 +15,7 @@ MonoBehaviour:
   name: AM01
   description: Make your companion remember Timelost Shears.
   icon: {fileID: 7299334668826086773, guid: d7598d708a65c714789d8c7c52d06ff2, type: 3}
-  poisonForHumans: 0
-  poisonForAnigmas: 0
+  isSellable: 0
+  price: 10000
   move: {fileID: 11400000, guid: bd8806ff5a356c347acb56a52e65ad3f, type: 2}
   isAncientMemory: 1

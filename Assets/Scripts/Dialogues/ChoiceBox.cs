@@ -2,6 +2,7 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ChoiceBox : MonoBehaviour
@@ -42,12 +43,12 @@ public class ChoiceBox : MonoBehaviour
             choiceTexts.Add(choiceTextObj);
         }
 
-        // TODO - Open Animation
+        // Open Animation
         yield return OpenTabAnim();
 
         yield return new WaitUntil(() => choiceSelected == true);
 
-        // TODO - Close Animation
+        // Close Animation
         StartCoroutine(CloseTabAnim());
 
         onChoiceSelected?.Invoke(currentChoice);
@@ -59,6 +60,10 @@ public class ChoiceBox : MonoBehaviour
 
     private void Update()
     {
+        if (isAnimating)
+            return;
+
+
         if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Down) && !isAnimating)
             currentChoice++;
         else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Up) && !isAnimating)
@@ -78,9 +83,19 @@ public class ChoiceBox : MonoBehaviour
     IEnumerator OpenTabAnim()
     {
         isAnimating = true;
+        currentChoice = 0;
+        for (int i = 0; i < choiceTexts.Count; i++)
+        {
+            choiceTexts[i].SetSelected(false);
+        }
         var t = GetComponent<RectTransform>();
         transform.localPosition = new Vector3(originalPosition.x + t.rect.width * 1.25f, originalPosition.y);
         yield return transform.DOLocalMoveX(originalPosition.x, 0.3f).WaitForCompletion();
+        yield return new WaitForSeconds(0.2f);
+        for (int i = 0; i < choiceTexts.Count; i++)
+        {
+            choiceTexts[i].SetSelected(i == currentChoice);
+        }
         isAnimating = false;
     }
 

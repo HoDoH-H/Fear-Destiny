@@ -16,3 +16,5 @@ MonoBehaviour:
   description: An essense directly extracted from Arlenis. Some weirdos say that
     this can be used to grow plants faster.
   icon: {fileID: -4902245710394564183, guid: 3453cb72308d5fb4fa587a773897c014, type: 3}
+  isSellable: 0
+  price: 4000
