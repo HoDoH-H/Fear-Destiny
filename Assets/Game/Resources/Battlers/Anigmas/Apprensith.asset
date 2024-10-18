@@ -40,7 +40,7 @@ MonoBehaviour:
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: 9c059d2cd341ab54e97e7cf7abc746c5, type: 2}
     level: 0
-  - moveBase: {fileID: 11400000, guid: 1bb62208745abe642a55dc0496d18aa6, type: 2}
+  - moveBase: {fileID: 11400000, guid: 1c91a5d4a9a0d1044932f0815b4d9a35, type: 2}
     level: 0
   learnableByItems: []
   morleniss:
