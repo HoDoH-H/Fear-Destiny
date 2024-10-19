@@ -9,6 +9,7 @@ public enum ShopState { Menu, Buying, Selling, Busy }
 public class ShopController : MonoBehaviour
 {
     [SerializeField] InventoryUI inventoryUI;
+    [SerializeField] WalletUI walletUI;
 
     public event Action OnStart;
     public event Action OnFinish;
@@ -88,6 +89,8 @@ public class ShopController : MonoBehaviour
             yield break;
         }
 
+        yield return walletUI.Show();
+
         float sellingPrice = Mathf.Round(item.Price / 2);
 
         int selectedChoice = 0;
@@ -101,10 +104,12 @@ public class ShopController : MonoBehaviour
         {
             // Sell
             inventory.RemoveItem(item);
-            // TODO - Add item price into player's wallet
-
+            // Add item price into player's wallet
+            Wallet.Instance.AddMoney(sellingPrice);
             yield return DialogManager.Instance.ShowDialogText($"You sold {item.Name} and received {sellingPrice} lumis.");
         }
+
+        yield return walletUI.Hide();
 
         state = ShopState.Selling;
     }

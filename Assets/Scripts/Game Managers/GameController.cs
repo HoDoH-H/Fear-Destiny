@@ -261,7 +261,7 @@ public class GameController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 state = GameState.Menu;
-                menuController.OpenMenu();
+                StartCoroutine(menuController.OpenMenu(true));
             }
         }
         else if (state == GameState.Battle)
@@ -286,7 +286,7 @@ public class GameController : MonoBehaviour
             Action onBack = () =>
             {
                 partyScreen.gameObject.SetActive(false);
-                menuController.OpenMenu();
+                StartCoroutine(menuController.OpenMenu());
                 state = GameState.Menu;
             };
 
@@ -302,7 +302,7 @@ public class GameController : MonoBehaviour
             Action onBack = () =>
             {
                 inventoryUI.gameObject.SetActive(false);
-                menuController.OpenMenu();
+                StartCoroutine(menuController.OpenMenu());
                 state = GameState.Menu;
             };
 
