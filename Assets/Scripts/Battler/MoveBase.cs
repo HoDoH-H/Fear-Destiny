@@ -65,11 +65,15 @@ public class MoveBase : ScriptableObject
 [System.Serializable]
 public class MoveEffects
 {
+    [SerializeField] bool doRandomStatBoost;
+    [SerializeField] int boostValue;
     [SerializeField] List<StatBoost> boosts;
     [SerializeField] ConditionID status;
     [SerializeField] ConditionID volatileStatus;
     [SerializeField] ConditionID weather;
 
+    public bool DoRandomStatBoost => doRandomStatBoost;
+    public int BoostValue => boostValue;
     public List<StatBoost> Boosts => boosts;
     public ConditionID Status => status;
     public ConditionID VolatileStatus => volatileStatus;

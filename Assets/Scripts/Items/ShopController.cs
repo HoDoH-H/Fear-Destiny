@@ -48,7 +48,9 @@ public class ShopController : MonoBehaviour
 
         if (selectedChoice == 0)
         {
-            // Buy
+            // TODO - Buy (Get rid of what's under before doing business)
+            OnFinish?.Invoke();
+            yield break;
         }
         else if (selectedChoice == 1)
         {

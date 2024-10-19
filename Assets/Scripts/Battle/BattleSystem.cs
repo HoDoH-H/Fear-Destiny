@@ -587,7 +587,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator RunMoveEffect(MoveEffects effect, Battler source, Battler target, MoveTarget moveTarget)
     {
         // Stat Boosting
-        if (effect.Boosts != null)
+        if (effect.Boosts?.Count != 0)
         {
             if (moveTarget == MoveTarget.Self)
             {
@@ -596,6 +596,19 @@ public class BattleSystem : MonoBehaviour
             else
             {
                 target.ApplyBoosts(effect.Boosts);
+            }
+        }
+        else if (effect.DoRandomStatBoost)
+        {
+            var n = UnityEngine.Random.Range(0, 7);
+            var boost = new List<StatBoost>() { new() { stat = (Stat)n, boost = effect.BoostValue } };
+            if (moveTarget == MoveTarget.Self)
+            {
+                source.ApplyBoosts(boost);
+            }
+            else
+            {
+                target.ApplyBoosts(boost);
             }
         }
 
