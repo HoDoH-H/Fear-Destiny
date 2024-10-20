@@ -42,13 +42,20 @@ public class DialogManager : MonoBehaviour
     }
 
     public IEnumerator ShowDialogText(string text, bool waitForInput=true, bool autoClose=true, List<string> choices = null,
-        Action<int> onChoiceSelected = null)
+        Action<int> onChoiceSelected = null, bool showTextNoDelay = false)
     {
         OnShowDialog?.Invoke();
+
         IsShowing = true;
         dialogBox.SetActive(true);
-        currentLineText = text;
-        yield return TypeDialog(text);
+
+        if (showTextNoDelay )
+            ShowLineNoDelay(text);
+        else
+        {
+            currentLineText = text;
+            yield return TypeDialog(text);
+        }
 
         yield return new WaitForEndOfFrame();
 

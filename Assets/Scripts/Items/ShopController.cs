@@ -10,6 +10,7 @@ public class ShopController : MonoBehaviour
 {
     [SerializeField] InventoryUI inventoryUI;
     [SerializeField] WalletUI walletUI;
+    [SerializeField] CountSelectorUI countSelectorUI;
 
     public event Action OnStart;
     public event Action OnFinish;
@@ -36,7 +37,7 @@ public class ShopController : MonoBehaviour
         yield return StartMenuState();
     }
 
-    IEnumerator StartMenuState()
+    IEnumerator StartMenuState(bool instant = false)
     {
         state = ShopState.Menu;
         int selectedChoice = 0;
@@ -44,7 +45,7 @@ public class ShopController : MonoBehaviour
         yield return DialogManager.Instance.ShowDialogText("How may I serve you?", 
             waitForInput: false, 
             choices: new List<string>() { "Buy", "Sell", "Leave" }, 
-            onChoiceSelected: choiceIndex => selectedChoice = choiceIndex);
+            onChoiceSelected: choiceIndex => selectedChoice = choiceIndex, showTextNoDelay: instant);
 
         if (selectedChoice == 0)
         {
@@ -58,7 +59,7 @@ public class ShopController : MonoBehaviour
             state = ShopState.Selling;
             inventoryUI.gameObject.SetActive(true);
         }
-        else if (selectedChoice == 2)
+        else if (selectedChoice == 2 || selectedChoice == -1)
         {
             // Quit
             OnFinish?.Invoke();
@@ -77,7 +78,7 @@ public class ShopController : MonoBehaviour
     void OnBackFromSelling()
     {
         inventoryUI.gameObject.SetActive(false);
-        StartCoroutine(StartMenuState());
+        StartCoroutine(StartMenuState(instant:true));
     }
 
     IEnumerator SellItem(ItemBase item)
@@ -94,21 +95,50 @@ public class ShopController : MonoBehaviour
         yield return walletUI.Show();
 
         float sellingPrice = Mathf.Round(item.Price / 2);
+        var countToSell = 1;
+
+        var itemCount = inventory.GetItemCount(item);
+        if (itemCount > 1)
+        {
+            yield return DialogManager.Instance.ShowDialogText($"How many {item.Name}s do you want to sell?", waitForInput:false, autoClose:false);
+
+            yield return countSelectorUI.ShowSelector(itemCount, sellingPrice, (selectedCount) => countToSell = selectedCount);
+
+            DialogManager.Instance.CloseDialog();
+
+            if (countToSell == 0)
+            {
+                yield return walletUI.Hide();
+                state = ShopState.Selling;
+                yield break;
+            }
+        }
+
+        sellingPrice *= countToSell;
 
         int selectedChoice = 0;
 
-        yield return DialogManager.Instance.ShowDialogText("Do you really want to sell this item?", 
-            waitForInput: false, 
-            choices: new List<string>() { "Confirm", "Back" }, 
-            onChoiceSelected: choiceIndex => selectedChoice = choiceIndex);
+        if(countToSell == 1)
+            yield return DialogManager.Instance.ShowDialogText($"Do you really want to sell this {item.Name}?", 
+                waitForInput: false, 
+                choices: new List<string>() { "Confirm", "Back" }, 
+                onChoiceSelected: choiceIndex => selectedChoice = choiceIndex);
+        else if (countToSell > 1)
+            yield return DialogManager.Instance.ShowDialogText($"Do you really want to sell {countToSell} {item.Name}s?",
+                waitForInput: false,
+                choices: new List<string>() { "Confirm", "Back" },
+                onChoiceSelected: choiceIndex => selectedChoice = choiceIndex);
 
         if (selectedChoice == 0)
         {
             // Sell
-            inventory.RemoveItem(item);
+            inventory.RemoveItem(item, countToSell);
             // Add item price into player's wallet
             Wallet.Instance.AddMoney(sellingPrice);
-            yield return DialogManager.Instance.ShowDialogText($"You sold {item.Name} and received {sellingPrice} lumis.");
+            if (countToSell == 1)
+                yield return DialogManager.Instance.ShowDialogText($"You sold this {item.Name} and received {sellingPrice} lumis.");
+            else if (countToSell > 1)
+                yield return DialogManager.Instance.ShowDialogText($"You sold {countToSell} {item.Name}s and received {sellingPrice} lumis.");
         }
 
         yield return walletUI.Hide();

@@ -78,6 +78,11 @@ public class ChoiceBox : MonoBehaviour
 
         if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Enter))
             choiceSelected = true;
+        else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Back))
+        {
+            currentChoice = -1;
+            choiceSelected = true;
+        }
     }
 
     IEnumerator OpenTabAnim()
