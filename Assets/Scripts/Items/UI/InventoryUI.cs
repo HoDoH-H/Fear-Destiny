@@ -92,7 +92,7 @@ public class InventoryUI : MonoBehaviour
             else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Left))
                 selectedCategory--;
 
-            selectedCategory = GameController.Instance.RotateSelection(selectedCategory, Inventory.ItemCategories.Count - 2);
+            selectedCategory = GameController.Instance.RotateSelection(selectedCategory, Inventory.ItemCategories.Count - 1);
             selectedItem = GameController.Instance.RotateSelection(selectedItem, inventory.GetSlotsByCategory(selectedCategory).Count - 1);
 
             if (prevCat != selectedCategory)
@@ -309,8 +309,6 @@ public class InventoryUI : MonoBehaviour
                 slotUIList[i].Name.color = GlobalSettings.Instance.BaseInvColor;
             }
         }
-
-        selectedItem = Mathf.Clamp(selectedItem, 0, slots.Count - 1);
 
         var item = slots[selectedItem].Item;
         itemIcon.sprite = item.Icon;

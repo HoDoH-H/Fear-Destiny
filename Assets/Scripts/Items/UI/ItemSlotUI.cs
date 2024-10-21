@@ -21,7 +21,7 @@ public class ItemSlotUI : MonoBehaviour
     {
         rectTransform = GetComponent<RectTransform>();
         nameText.text = itemSlot.Item.Name;
-        if (!(itemSlot.Item.IsReusable))
+        if (!itemSlot.Item.IsReusable)
         {
             countText.enabled = true;
             countText.text = $"X {itemSlot.Count}";
@@ -32,5 +32,12 @@ public class ItemSlotUI : MonoBehaviour
                 itemSlot.Count = 1;
             countText.enabled = false;
         }
+    }
+
+    public void SetDataForShop(ItemBase item)
+    {
+        rectTransform = GetComponent<RectTransform>();
+        nameText.text = item.Name;
+        countText.text = $"$ {item.Price}";
     }
 }

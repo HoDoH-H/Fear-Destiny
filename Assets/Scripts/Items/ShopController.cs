@@ -11,9 +11,12 @@ public class ShopController : MonoBehaviour
     [SerializeField] InventoryUI inventoryUI;
     [SerializeField] WalletUI walletUI;
     [SerializeField] CountSelectorUI countSelectorUI;
+    [SerializeField] ShopUI shopUI;
 
     public event Action OnStart;
     public event Action OnFinish;
+
+    Merchant merchant;
 
     public static ShopController Instance { get; private set; }
 
@@ -34,6 +37,7 @@ public class ShopController : MonoBehaviour
     public IEnumerator StartTrading(Merchant merchant)
     {
         OnStart?.Invoke();
+        this.merchant = merchant;
         yield return StartMenuState();
     }
 
@@ -49,9 +53,10 @@ public class ShopController : MonoBehaviour
 
         if (selectedChoice == 0)
         {
-            // TODO - Buy (Get rid of what's under before doing business)
-            OnFinish?.Invoke();
-            yield break;
+            // Buy
+            state = ShopState.Buying;
+            StartCoroutine(walletUI.Show());
+            StartCoroutine(shopUI.Show(merchant.AvailableItems));
         }
         else if (selectedChoice == 1)
         {
@@ -72,6 +77,10 @@ public class ShopController : MonoBehaviour
         if (state == ShopState.Selling)
         {
             inventoryUI.HandleUpdate(OnBackFromSelling, (selectedItem) => { StartCoroutine(SellItem(selectedItem)); });
+        }
+        else if (state == ShopState.Buying)
+        {
+            shopUI.HandleUpdate();
         }
     }
 
