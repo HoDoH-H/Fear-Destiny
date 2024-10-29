@@ -16,13 +16,13 @@ MonoBehaviour:
   isHuman: 0
   isAnigma: 1
   name: Apprensith
-  description: "Apprensith is a mystical Pok\xE9mon that thrives in dense, enchanted
-    forests. Its green body and pink, witch-like hat blend perfectly with its surroundings,
-    making it a master of camouflage. This Pok\xE9mon is known for its peaceful demeanor
+  description: Apprensith is a mystical Anigma that thrives in dense, enchanted forests.
+    Its green body and pink, witch-like hat blend perfectly with its surroundings,
+    making it a master of camouflage. This Anigma is known for its peaceful demeanor
     and deep connection to both the natural world and the spirit realm. Apprensith
     is often seen resting among flowers, where it draws energy from the earth and
     communicates with wandering spirits. When threatened, it can summon ghostly vines
-    to protect itself and its habitat."
+    to protect itself and its habitat.
   frontSprite: {fileID: 8611254305700795036, guid: 92c8494c39eb20a41978d5c7f3912ecd, type: 3}
   backSprite: {fileID: 8611254305700795036, guid: 5056bb8e0203ac548872b516426907b9, type: 3}
   maxHp: 55
@@ -40,7 +40,7 @@ MonoBehaviour:
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: 9c059d2cd341ab54e97e7cf7abc746c5, type: 2}
     level: 0
-  - moveBase: {fileID: 11400000, guid: 1c91a5d4a9a0d1044932f0815b4d9a35, type: 2}
+  - moveBase: {fileID: 11400000, guid: 153b0ff8ad6dbf04b94df63fb44836da, type: 2}
     level: 0
   learnableByItems: []
   morleniss:

@@ -158,10 +158,9 @@ public class Battler
         {
             var stat = statBoost.stat;
             var boost = statBoost.boost;
-            Debug.Log("Test");
-            if (StatBoosts[stat] == 6 && boost > 0)
+            if (StatBoosts[stat] >= 6 && boost > 0)
                 StatusChanges.Enqueue($"{Base.Name}'s {stat} cannot rise more!");
-            else if (StatBoosts[stat] == -6 && boost < 0)
+            else if (StatBoosts[stat] <= -6 && boost < 0)
                 StatusChanges.Enqueue($"{Base.Name}'s {stat} cannot fall more!");
             else
             {

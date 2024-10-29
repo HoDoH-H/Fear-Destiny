@@ -161,7 +161,7 @@ public class ConditionDB
                 StartMessage = "hurt itself while striking.",
                 OnAfterTurn = (Battler anigma, int damageDealt) =>
                 {
-                    anigma.DecreaseHP(Mathf.CeilToInt(damageDealt / 3));
+                    anigma.DecreaseHP(Mathf.CeilToInt(damageDealt / 3) <= 1 ? 1 : Mathf.CeilToInt(damageDealt / 3));
                     anigma.CureVolatileStatus();
                 }
             }
@@ -187,7 +187,7 @@ public class ConditionDB
                 StartMessage = "is recovering its HPs.",
                 OnAfterTurn = (Battler anigma, int damageDealt) =>
                 {
-                    anigma.IncreaseHP(anigma.MaxHp / 2);
+                    anigma.IncreaseHP(Mathf.CeilToInt(anigma.MaxHp / 2));
                     anigma.CureVolatileStatus();
                 }
             }
