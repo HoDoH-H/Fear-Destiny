@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -21,6 +22,8 @@ public class ShopUI : MonoBehaviour
     [SerializeField] Image downArrow;
 
     List<ItemBase> availableItems;
+    Action<ItemBase> onItemSelected;
+    Action onBack;
 
     List<ItemSlotUI> slotUIList;
 
@@ -51,31 +54,67 @@ public class ShopUI : MonoBehaviour
         itemIconObj.transform.localPosition = new Vector3(itemIconOriginalPosition.x - t.rect.width * 2f, itemIconOriginalPosition.y);
     }
 
-    public IEnumerator Show(List<ItemBase> availableItems)
+    public IEnumerator Show(List<ItemBase> availableItems, Action<ItemBase> onItemSelected, Action onBack)
     {
         this.availableItems = availableItems;
+        this.onItemSelected = onItemSelected;
+        this.onBack = onBack;
 
         isAnimating = true;
         gameObject.SetActive(true);
         UpdateItemList();
 
-        // TODO - Item list anim
+        #region Show Animation
+
+
+        // Item list anim
         var t = itemListBg.GetComponent<RectTransform>();
         itemListBg.transform.localPosition = new Vector3(itemListOriginalPosition.x + t.rect.width * 1.25f, itemListOriginalPosition.y);
         yield return itemListBg.transform.DOLocalMoveX(itemListOriginalPosition.x, 0.3f);
         yield return new WaitForSeconds(0.1f);
 
-        // TODO - Item desc anim
+        // Item desc anim
         t = itemDesc.GetComponent<RectTransform>();
         itemDesc.transform.localPosition = new Vector3(itemDescOriginalPosition.x - t.rect.width * 1.25f, itemDescOriginalPosition.y);
         yield return itemDesc.transform.DOLocalMoveX(itemDescOriginalPosition.x, 0.3f);
 
-        // TODO - Item icon anim
+        // Item icon anim
         t = itemIconObj.GetComponent<RectTransform>();
         itemIconObj.transform.localPosition = new Vector3(itemIconOriginalPosition.x - t.rect.width * 1.25f, itemIconOriginalPosition.y);
         yield return itemIconObj.transform.DOLocalMoveX(itemIconOriginalPosition.x, 0.3f).WaitForCompletion();
         yield return new WaitForSeconds(0.1f);
 
+
+        #endregion Show Animation
+
+        isAnimating = false;
+    }
+
+    public IEnumerator Hide()
+    {
+        isAnimating = true;
+
+        #region Hide Animation
+
+
+        // Item list anim
+        var t = itemListBg.GetComponent<RectTransform>();
+        yield return itemListBg.transform.DOLocalMoveX(itemListOriginalPosition.x + t.rect.width * 1.25f, 0.3f);
+        yield return new WaitForSeconds(0.1f);
+
+        // Item desc anim
+        t = itemDesc.GetComponent<RectTransform>();
+        yield return itemDesc.transform.DOLocalMoveX(itemDescOriginalPosition.x - t.rect.width * 1.25f, 0.3f);
+
+        // Item icon anim
+        t = itemIconObj.GetComponent<RectTransform>();
+        yield return itemIconObj.transform.DOLocalMoveX(itemIconOriginalPosition.x - t.rect.width * 1.25f, 0.3f).WaitForCompletion();
+        yield return new WaitForSeconds(0.1f);
+
+
+        #endregion Hide Animation
+
+        gameObject.SetActive(false);
         isAnimating = false;
     }
 
@@ -96,6 +135,11 @@ public class ShopUI : MonoBehaviour
             {
                 UpdateItemSelection();
             }
+
+            if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Enter))
+                onItemSelected?.Invoke(availableItems[selectedItem]);
+            else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Back))
+                onBack?.Invoke();
         }
     }
 

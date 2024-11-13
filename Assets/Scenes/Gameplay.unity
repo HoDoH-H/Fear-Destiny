@@ -1569,6 +1569,14 @@ PrefabInstance:
       propertyPath: shopUI
       value: 
       objectReference: {fileID: 216759163}
+    - target: {fileID: 3892406020678239726, guid: 929706b31e2c12345b10812a5031dff1, type: 3}
+      propertyPath: cameraOffset.x
+      value: 2.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892406020678239726, guid: 929706b31e2c12345b10812a5031dff1, type: 3}
+      propertyPath: cameraOffset.y
+      value: -0.65
+      objectReference: {fileID: 0}
     - target: {fileID: 3900345105402241877, guid: 929706b31e2c12345b10812a5031dff1, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

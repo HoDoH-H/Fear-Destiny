@@ -24,18 +24,27 @@ public class WalletUI : MonoBehaviour
         Wallet.Instance.OnMoneyChanged += SetMoneyText;
     }
 
-    public IEnumerator Show()
+    public IEnumerator Show(bool withAnim = true)
     {
-        isAnimating = true;
+        if (withAnim) 
+        {
+            isAnimating = true;
 
-        gameObject.SetActive(true);
-        SetMoneyText();
+            gameObject.SetActive(true);
+            SetMoneyText();
 
-        var t = GetComponent<RectTransform>();
-        transform.localPosition = new Vector3(originalPosition.x, originalPosition.y + t.rect.height * 1.25f);
-        yield return transform.DOLocalMoveY(originalPosition.y, 0.3f).WaitForCompletion();
+            var t = GetComponent<RectTransform>();
+            transform.localPosition = new Vector3(originalPosition.x, originalPosition.y + t.rect.height * 1.25f);
+            yield return transform.DOLocalMoveY(originalPosition.y, 0.3f).WaitForCompletion();
 
-        isAnimating = false;
+            isAnimating = false;
+        }
+        else 
+        {
+            gameObject.SetActive(true);
+            SetMoneyText();
+            transform.localPosition = new Vector3(originalPosition.x, originalPosition.y);
+        }
     }
 
     public IEnumerator Hide()

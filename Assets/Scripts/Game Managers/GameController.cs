@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -364,6 +365,29 @@ public class GameController : MonoBehaviour
             return index - max - 1;
 
         return index;
+    }
+
+    public IEnumerator MoveCamera(Vector2 moveOffset, bool needFade = false, bool waitForCompletion = false)
+    {
+        if (needFade)
+        {
+            yield return Fader.Instance.FadeIn(0.25f);
+
+            playerCamera.transform.localPosition += new Vector3(moveOffset.x, moveOffset.y, -10);
+
+            if (waitForCompletion)
+                yield return Fader.Instance.FadeOut(0.25f);
+            else
+                StartCoroutine(Fader.Instance.FadeOut(0.25f));
+        }
+        else
+        {
+            Vector3 newPos = new Vector3(playerCamera.transform.localPosition.x + moveOffset.x, playerCamera.transform.localPosition.y + moveOffset.y, -10);
+            if (waitForCompletion)
+                playerCamera.transform.DOLocalMove(newPos, 0.3f).WaitForCompletion();
+            else
+                playerCamera.transform.DOLocalMove(newPos, 0.3f);
+        }
     }
 
     public GameState State => state;

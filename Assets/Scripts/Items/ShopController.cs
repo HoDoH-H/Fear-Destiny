@@ -8,6 +8,7 @@ public enum ShopState { Menu, Buying, Selling, Busy }
 
 public class ShopController : MonoBehaviour
 {
+    [SerializeField] Vector2 cameraOffset;
     [SerializeField] InventoryUI inventoryUI;
     [SerializeField] WalletUI walletUI;
     [SerializeField] CountSelectorUI countSelectorUI;
@@ -54,9 +55,10 @@ public class ShopController : MonoBehaviour
         if (selectedChoice == 0)
         {
             // Buy
-            state = ShopState.Buying;
+            StartCoroutine(GameController.Instance.MoveCamera(cameraOffset));
             StartCoroutine(walletUI.Show());
-            StartCoroutine(shopUI.Show(merchant.AvailableItems));
+            yield return shopUI.Show(merchant.AvailableItems, (item) => StartCoroutine(BuyItem(item)), () => StartCoroutine(OnBackFromBuying()));
+            state = ShopState.Buying;
         }
         else if (selectedChoice == 1)
         {
@@ -126,7 +128,6 @@ public class ShopController : MonoBehaviour
         sellingPrice *= countToSell;
 
         int selectedChoice = 0;
-
         if(countToSell == 1)
             yield return DialogManager.Instance.ShowDialogText($"Do you really want to sell this {item.Name}?", 
                 waitForInput: false, 
@@ -153,5 +154,63 @@ public class ShopController : MonoBehaviour
         yield return walletUI.Hide();
 
         state = ShopState.Selling;
+    }
+
+    IEnumerator BuyItem(ItemBase item)
+    {
+        state = ShopState.Busy;
+
+        if (!Wallet.Instance.HasMoney(item.Price))
+        {
+            yield return DialogManager.Instance.ShowDialogText($"You don't have enough money for that!");
+            state = ShopState.Buying;
+            yield break;
+        }
+
+        yield return DialogManager.Instance.ShowDialogText($"How many {item.Name}s do you want to buy?", waitForInput: false, autoClose: false);
+
+        int countToBuy = 1;
+        yield return countSelectorUI.ShowSelector(100, item.Price, (selectedCount) => countToBuy = selectedCount);
+
+        DialogManager.Instance.CloseDialog();
+
+        float totalPrice = item.Price * countToBuy;
+
+        if (Wallet.Instance.HasMoney(totalPrice))
+        {
+            int selectedChoice = 0;
+            if (countToBuy == 1)
+                yield return DialogManager.Instance.ShowDialogText($"Do you really want to buy this {item.Name} for {totalPrice} lumis?",
+                    waitForInput: false,
+                    choices: new List<string>() { "Buy", "Cancel" },
+                    onChoiceSelected: choiceIndex => selectedChoice = choiceIndex);
+            else if (countToBuy > 1)
+                yield return DialogManager.Instance.ShowDialogText($"Do you really want to buy {countToBuy} {item.Name}s for {totalPrice} lumis?",
+                    waitForInput: false,
+                    choices: new List<string>() { "Buy", "Cancel" },
+                    onChoiceSelected: choiceIndex => selectedChoice = choiceIndex);
+
+            if (selectedChoice == 0)
+            {
+                // User confirmed the purchase
+                inventory.AddItem(item, countToBuy);
+                Wallet.Instance.TakeMoney(totalPrice);
+                yield return DialogManager.Instance.ShowDialogText($"Thank you for your purchase!");
+            }
+        }
+        else
+        {
+            yield return DialogManager.Instance.ShowDialogText($"You don't have enough money for that!");
+        }
+
+        state = ShopState.Buying;
+    }
+
+    IEnumerator OnBackFromBuying()
+    {
+        StartCoroutine(GameController.Instance.MoveCamera(-cameraOffset));
+        StartCoroutine(shopUI.Hide());
+        yield return walletUI.Hide();
+        yield return StartMenuState();
     }
 }
