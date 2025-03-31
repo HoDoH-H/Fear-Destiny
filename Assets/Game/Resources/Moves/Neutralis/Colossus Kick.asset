@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a2e12288949c3a4d885f65e3948438f, type: 3}
-  m_Name: Bounty Finder (N)
+  m_Name: Colossus Kick
   m_EditorClassIdentifier: 
-  name: 
-  description: Pay day
-  type: 0
-  power: 0
-  accuracy: 0
+  name: Colossal Kick
+  description: Mega Kick
+  type: 1
+  power: 120
+  accuracy: 75
   alwaysHits: 0
-  up: 0
+  up: 5
   priority: 0
   highCriticalHitRate: 0
   doubleIfHalfOpponentHp: 0

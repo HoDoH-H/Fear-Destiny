@@ -304,7 +304,7 @@ public class Battler
 
         damageDetails.DamageDealt = damage;
 
-        DecreaseHP(damage);
+        DecreaseHP(damage * (move.Base.InstaKill ? 999999999 : 1));
 
         return damageDetails;
     }

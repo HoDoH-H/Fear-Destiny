@@ -15,6 +15,7 @@ public class CustomMoveBase : Editor
     SerializedProperty HighCriticalHitRate;
     SerializedProperty DoubleIfHalfOpponentHp;
     SerializedProperty ScaleOnHp;
+    SerializedProperty InstaKill;
     SerializedProperty Style;
     SerializedProperty Effects;
     SerializedProperty SecondaryEffects;
@@ -34,6 +35,7 @@ public class CustomMoveBase : Editor
         HighCriticalHitRate = serializedObject.FindProperty("highCriticalHitRate");
         DoubleIfHalfOpponentHp = serializedObject.FindProperty("doubleIfHalfOpponentHp");
         ScaleOnHp = serializedObject.FindProperty("scaleOnHp");
+        InstaKill = serializedObject.FindProperty("instaKill");
         Style = serializedObject.FindProperty("style");
         Effects = serializedObject.FindProperty("effects");
         SecondaryEffects = serializedObject.FindProperty("secondaryEffects");
@@ -51,14 +53,18 @@ public class CustomMoveBase : Editor
         EditorGUILayout.PropertyField(Type);
         EditorGUILayout.PropertyField(Style);
         if (myScript.Category != AttackCategory.Status)
-            EditorGUILayout.PropertyField(Power);
-        if (myScript.Category != AttackCategory.Status)
         {
-            EditorGUILayout.PropertyField(HighCriticalHitRate);
-            EditorGUILayout.PropertyField(DoubleIfHalfOpponentHp);
-            EditorGUILayout.PropertyField(ScaleOnHp);
+            EditorGUILayout.PropertyField(InstaKill);
+            if (!myScript.InstaKill)
+            {
+                EditorGUILayout.PropertyField(HighCriticalHitRate);
+                EditorGUILayout.PropertyField(DoubleIfHalfOpponentHp);
+                EditorGUILayout.PropertyField(ScaleOnHp);
+            }
         }
         EditorGUILayout.PropertyField(AlwaysHits);
+        if(myScript.Category != AttackCategory.Status && !myScript.InstaKill)
+            EditorGUILayout.PropertyField(Power);
         if (!myScript.AlwaysHits)
             EditorGUILayout.PropertyField(Accuracy);
         EditorGUILayout.PropertyField(Up);

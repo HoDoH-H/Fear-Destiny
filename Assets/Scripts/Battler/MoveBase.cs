@@ -20,6 +20,7 @@ public class MoveBase : ScriptableObject
     [SerializeField] bool highCriticalHitRate;
     [SerializeField] bool doubleIfHalfOpponentHp;
     [SerializeField] bool scaleOnHp;
+    [SerializeField] bool instaKill;
     [SerializeField] AttackCategory style;
     [SerializeField] MoveEffects effects;
     [SerializeField] List<SecondaryEffects> secondaryEffects;
@@ -35,6 +36,7 @@ public class MoveBase : ScriptableObject
     public bool HighCriticalHitRate => highCriticalHitRate;
     public bool DoubleIfHalfOpponentHp => doubleIfHalfOpponentHp;
     public bool ScaleOnHp => scaleOnHp;
+    public bool InstaKill => instaKill;
     public int UP => up;
     public int Priority => priority;
     public AttackCategory Category => style;

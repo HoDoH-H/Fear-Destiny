@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a2e12288949c3a4d885f65e3948438f, type: 3}
-  m_Name: Echoing Hit (N)
+  m_Name: Colossal Strike
   m_EditorClassIdentifier: 
-  name: 
-  description: DoubleSlap
+  name: Colossal Strike
+  description: Giga Impact
   type: 0
-  power: 0
-  accuracy: 0
+  power: 150
+  accuracy: 90
   alwaysHits: 0
-  up: 0
+  up: 5
   priority: 0
   highCriticalHitRate: 0
   doubleIfHalfOpponentHp: 0
@@ -31,6 +31,14 @@ MonoBehaviour:
     status: 0
     volatileStatus: 0
     weather: 0
-  secondaryEffects: []
+  secondaryEffects:
+  - doRandomStatBoost: 0
+    boostValue: 0
+    boosts: []
+    status: 0
+    volatileStatus: 13
+    weather: 0
+    chance: 100
+    target: 1
   target: 0
   hitRange: {x: 1, y: 1}
