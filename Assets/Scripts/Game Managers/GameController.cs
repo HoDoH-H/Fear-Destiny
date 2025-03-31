@@ -32,6 +32,16 @@ public class GameController : MonoBehaviour
 
     string saveFileName = "1b3nzj7TLYXwj1Ml5Jw56gWxXV3UIiC81D8qhVNA40unU6NlBi";
 
+    #region Events
+
+    public event Action <NPC_Controller>OnTalkStart;
+    public void TalkStart(NPC_Controller npc)
+    {
+        OnTalkStart?.Invoke(npc);
+    }
+
+    #endregion Events
+
     public string SaveFileName => saveFileName;
 
     private void Awake()

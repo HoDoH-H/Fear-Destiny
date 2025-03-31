@@ -2,8 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-[CreateAssetMenu(menuName = "Items/Create new loadout")]
-public class Loadout : ScriptableObject
+public class Loadout
 {
     [SerializeField] ArmorBase helmet;
     [SerializeField] ArmorBase torso;

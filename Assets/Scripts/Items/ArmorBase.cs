@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class ArmorBase
+public class ArmorBase : ScriptableObject
 {
     ArmorType type;
 

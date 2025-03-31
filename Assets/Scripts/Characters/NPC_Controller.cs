@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class NPC_Controller : MonoBehaviour, Interactable, ISavable
 {
+    [Header("General")]
+     public string npcName;
     [SerializeField] Dialog dialog;
 
     [Header("Quests")]
@@ -36,70 +38,77 @@ public class NPC_Controller : MonoBehaviour, Interactable, ISavable
 
     public IEnumerator Interact(Transform initiator)
     {
+
         if (state == NPCState.Idle)
         {
             state = NPCState.Dialog;
             character.LookTowards(initiator.position);
 
-            if (questToComplete != null)
-            {
-                var quest = new Quest(questToComplete);
-                yield return quest.CompleteQuest();
+            // New System
+            GameController.Instance.TalkStart(this);
 
-                questToComplete = null;
-            }
+            // Old System
+            //if (questToComplete != null)
+            //{
+            //    var quest = new Quest(questToComplete);
+            //    yield return quest.CompleteQuest();
 
-            if (itemGiver != null && itemGiver.CanBeGiven())
-            {
-                yield return itemGiver.GiveItem(initiator.GetComponent<PlayerController>());
-            }
-            else if (itemGiver != null && itemGiver.CanBeGiven())
-            {
-                yield return battlerGiver.GiveBattler(initiator.GetComponent<PlayerController>());
-            }
-            else if (questToStart != null)
-            {
-                activeQuest = new Quest(questToStart);
-                yield return activeQuest.StartQuest();
-                questToStart = null;
+            //    questToComplete = null;
+            //}
 
-                if (activeQuest.CanBeCompleted())
-                {
-                    yield return activeQuest.CompleteQuest();
-                    activeQuest = null;
-                }
-                else
-                {
-                    yield return DialogManager.Instance.ShowDialog(activeQuest.Base.InProgressDialog);
-                }
-            }
-            else if (activeQuest != null)
-            {
-                if (activeQuest.CanBeCompleted())
-                {
-                    yield return activeQuest.CompleteQuest();
-                    activeQuest = null;
-                }
-                else
-                {
-                    yield return DialogManager.Instance.ShowDialog(activeQuest.Base.InProgressDialog);
-                }
-            }
-            else if (healer != null)
-            {
-                yield return healer.Heal(initiator, dialog);
-            }
-            else if(merchant != null)
-            {
-                yield return merchant.Trade();
-            }
-            else
-            {
-                yield return DialogManager.Instance.ShowDialog(dialog);
-            }
+            //if (itemGiver != null && itemGiver.CanBeGiven())
+            //{
+            //    yield return itemGiver.GiveItem(initiator.GetComponent<PlayerController>());
+            //}
+            //else if (itemGiver != null && itemGiver.CanBeGiven())
+            //{
+            //    yield return battlerGiver.GiveBattler(initiator.GetComponent<PlayerController>());
+            //}
+            //else if (questToStart != null)
+            //{
+            //    activeQuest = new Quest(questToStart);
+            //    yield return activeQuest.StartQuest();
+            //    questToStart = null;
+
+            //    if (activeQuest.CanBeCompleted())
+            //    {
+            //        yield return activeQuest.CompleteQuest();
+            //        activeQuest = null;
+            //    }
+            //    else
+            //    {
+            //        yield return DialogManager.Instance.ShowDialog(activeQuest.Base.InProgressDialog);
+            //    }
+            //}
+            //else if (activeQuest != null)
+            //{
+            //    if (activeQuest.CanBeCompleted())
+            //    {
+            //        yield return activeQuest.CompleteQuest();
+            //        activeQuest = null;
+            //    }
+            //    else
+            //    {
+            //        yield return DialogManager.Instance.ShowDialog(activeQuest.Base.InProgressDialog);
+            //    }
+            //}
+            //else if (healer != null)
+            //{
+            //    yield return healer.Heal(initiator, dialog);
+            //}
+            //else if(merchant != null)
+            //{
+            //    yield return merchant.Trade();
+            //}
+            //else
+            //{
+            //    yield return DialogManager.Instance.ShowDialog(dialog);
+            //}
 
             idleTimer = 0f;
             state = NPCState.Idle;
+            // New System
+            yield break;
         }
     }
 

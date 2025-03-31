@@ -42,7 +42,8 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -11377,6 +11378,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b7802ac75b269a47aed654bf382b6be, type: 3}
+--- !u!1001 &750480710
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2639213346136384192, guid: b40920e4bfd3cb748814e549ce115d21, type: 3}
+      propertyPath: m_Name
+      value: TalkToBlackSmithStep
+      objectReference: {fileID: 0}
+    - target: {fileID: 7438464180037898830, guid: b40920e4bfd3cb748814e549ce115d21, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7438464180037898830, guid: b40920e4bfd3cb748814e549ce115d21, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7438464180037898830, guid: b40920e4bfd3cb748814e549ce115d21, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7438464180037898830, guid: b40920e4bfd3cb748814e549ce115d21, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7438464180037898830, guid: b40920e4bfd3cb748814e549ce115d21, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7438464180037898830, guid: b40920e4bfd3cb748814e549ce115d21, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7438464180037898830, guid: b40920e4bfd3cb748814e549ce115d21, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7438464180037898830, guid: b40920e4bfd3cb748814e549ce115d21, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7438464180037898830, guid: b40920e4bfd3cb748814e549ce115d21, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7438464180037898830, guid: b40920e4bfd3cb748814e549ce115d21, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b40920e4bfd3cb748814e549ce115d21, type: 3}
 --- !u!1 &833216377
 GameObject:
   m_ObjectHideFlags: 0
@@ -19988,6 +20046,10 @@ PrefabInstance:
       propertyPath: isReusable
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2723378729243030697, guid: 51708959429869d488216cf43b69265d, type: 3}
+      propertyPath: npcName
+      value: Jane Hanerb
+      objectReference: {fileID: 0}
     - target: {fileID: 4273915736931759913, guid: 51708959429869d488216cf43b69265d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.5
@@ -20104,3 +20166,4 @@ SceneRoots:
   - {fileID: 6661828907767054722}
   - {fileID: 2146787426}
   - {fileID: 648009723}
+  - {fileID: 750480710}
