@@ -288,23 +288,57 @@ public class Battler
             Fainted = false,
         };
 
+        if(move.Base.InstaKill)
+        {
+            damageDetails.DamageDealt = HP;
+
+            DecreaseHP(HP);
+
+            return damageDetails;
+        }
+
+        if (move.Base.MirrorPain)
+        {
+            if(attacker.HP >= HP)
+            {
+                damageDetails.DamageDealt = 0;
+                return damageDetails;
+            }
+
+            var targetHp = attacker.HP;
+            var targetDamage = HP - targetHp;
+            damageDetails.DamageDealt = targetDamage;
+
+            DecreaseHP(targetDamage);
+
+            return damageDetails;
+        }
+
+        var basePower = move.Base.Power;
         float attack = (move.Base.Category == AttackCategory.Physical) ? attacker.Attack : attacker.SpAttack;
         float defense = (move.Base.Category == AttackCategory.Physical) ? Defense : SpDefense;
 
-        float powerMultiplier = move.Base.DoubleIfHalfOpponentHp ? 2f : 1f;
-        if (move.Base.ScaleOnHp)
-            powerMultiplier = powerMultiplier * attacker.HP / attacker.MaxHp;
+        float powerMultiplier = move.Base.DoubleIfHalfOpponentHp && HP < MaxHp / 2 ? 2f : 1f;
+        powerMultiplier = move.Base.ScaleOnAttackerHp ? powerMultiplier * attacker.HP / attacker.MaxHp : powerMultiplier;
+        basePower = move.Base.ScaleOnTargetHp ? 48 * attacker.HP / attacker.MaxHp : basePower;
+        powerMultiplier = move.Base.ScaleOnBPP && (Status.Id == ConditionID.brn || Status.Id == ConditionID.psn || Status.Id == ConditionID.par) ? powerMultiplier * 2 : powerMultiplier;
 
         float modifiers = UnityEngine.Random.Range(0.85f, 1f) * type * critical * weatherMod;
         float a = (2 * attacker.Level + 10) / 250f;
-        float d = a * (move.Base.Power * powerMultiplier) * (attack / defense) + 2;
+        float d = a * (basePower * powerMultiplier) * (attack / defense) + 2;
         int damage = Mathf.FloorToInt(d * modifiers);
         if(damage <= 0)
             damage = 1;
 
+        if (move.Base.Merciful)
+        {
+            if (damage >= HP)
+                damage = HP - 1;
+        }
+
         damageDetails.DamageDealt = damage;
 
-        DecreaseHP(damage * (move.Base.InstaKill ? 999999999 : 1));
+        DecreaseHP(damage);
 
         return damageDetails;
     }

@@ -22,9 +22,16 @@ MonoBehaviour:
   priority: 0
   highCriticalHitRate: 0
   doubleIfHalfOpponentHp: 0
-  scaleOnHp: 1
+  scaleOnAttackerHp: 1
+  scaleOnTargetHp: 0
+  scaleOnBPP: 0
+  instaKill: 0
+  mirrorPain: 0
+  merciful: 0
   style: 1
   effects:
+    doRandomStatBoost: 0
+    boostValue: 0
     boosts: []
     status: 0
     volatileStatus: 0

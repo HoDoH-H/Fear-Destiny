@@ -14,8 +14,12 @@ public class CustomMoveBase : Editor
     SerializedProperty Priority;
     SerializedProperty HighCriticalHitRate;
     SerializedProperty DoubleIfHalfOpponentHp;
-    SerializedProperty ScaleOnHp;
+    SerializedProperty ScaleOnAttackerHp;
+    SerializedProperty ScaleOnTargetHp;
+    SerializedProperty ScaleOnBPP;
     SerializedProperty InstaKill;
+    SerializedProperty MirrorPain;
+    SerializedProperty Merciful;
     SerializedProperty Style;
     SerializedProperty Effects;
     SerializedProperty SecondaryEffects;
@@ -34,13 +38,17 @@ public class CustomMoveBase : Editor
         Priority = serializedObject.FindProperty("priority");
         HighCriticalHitRate = serializedObject.FindProperty("highCriticalHitRate");
         DoubleIfHalfOpponentHp = serializedObject.FindProperty("doubleIfHalfOpponentHp");
-        ScaleOnHp = serializedObject.FindProperty("scaleOnHp");
+        ScaleOnAttackerHp = serializedObject.FindProperty("scaleOnAttackerHp");
+        ScaleOnTargetHp = serializedObject.FindProperty("scaleOnTargetHp");
+        ScaleOnBPP = serializedObject.FindProperty("scaleOnBPP");
         InstaKill = serializedObject.FindProperty("instaKill");
         Style = serializedObject.FindProperty("style");
         Effects = serializedObject.FindProperty("effects");
         SecondaryEffects = serializedObject.FindProperty("secondaryEffects");
         Target = serializedObject.FindProperty("target");
         HitRange = serializedObject.FindProperty("hitRange");
+        MirrorPain = serializedObject.FindProperty("mirrorPain");
+        Merciful = serializedObject.FindProperty("merciful");
     }
 
     public override void OnInspectorGUI()
@@ -59,7 +67,9 @@ public class CustomMoveBase : Editor
             {
                 EditorGUILayout.PropertyField(HighCriticalHitRate);
                 EditorGUILayout.PropertyField(DoubleIfHalfOpponentHp);
-                EditorGUILayout.PropertyField(ScaleOnHp);
+                EditorGUILayout.PropertyField(ScaleOnAttackerHp);
+                EditorGUILayout.PropertyField(ScaleOnTargetHp);
+                EditorGUILayout.PropertyField(ScaleOnBPP);
             }
         }
         EditorGUILayout.PropertyField(AlwaysHits);
@@ -75,6 +85,8 @@ public class CustomMoveBase : Editor
             myScript.HitRange.Set(1, 0);
         }
         EditorGUILayout.PropertyField(Target);
+        EditorGUILayout.PropertyField(MirrorPain);
+        EditorGUILayout.PropertyField(Merciful);
         if (myScript.Category == AttackCategory.Status)
             EditorGUILayout.PropertyField(Effects);
         if (myScript.Category != AttackCategory.Status )

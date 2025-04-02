@@ -19,8 +19,12 @@ public class MoveBase : ScriptableObject
     [SerializeField] int priority;
     [SerializeField] bool highCriticalHitRate;
     [SerializeField] bool doubleIfHalfOpponentHp;
-    [SerializeField] bool scaleOnHp;
+    [SerializeField] bool scaleOnAttackerHp;
+    [SerializeField] bool scaleOnTargetHp;
+    [SerializeField] bool scaleOnBPP;
     [SerializeField] bool instaKill;
+    [SerializeField] bool mirrorPain;
+    [SerializeField] bool merciful;
     [SerializeField] AttackCategory style;
     [SerializeField] MoveEffects effects;
     [SerializeField] List<SecondaryEffects> secondaryEffects;
@@ -35,8 +39,12 @@ public class MoveBase : ScriptableObject
     public bool AlwaysHits => alwaysHits;
     public bool HighCriticalHitRate => highCriticalHitRate;
     public bool DoubleIfHalfOpponentHp => doubleIfHalfOpponentHp;
-    public bool ScaleOnHp => scaleOnHp;
+    public bool ScaleOnAttackerHp => scaleOnAttackerHp;
+    public bool ScaleOnTargetHp => scaleOnTargetHp;
+    public bool ScaleOnBPP => scaleOnBPP;
     public bool InstaKill => instaKill;
+    public bool MirrorPain => mirrorPain;
+    public bool Merciful => merciful;
     public int UP => up;
     public int Priority => priority;
     public AttackCategory Category => style;

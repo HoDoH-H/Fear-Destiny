@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: Starbreaker Fist (N)
   m_EditorClassIdentifier: 
   name: 
-  description: 'Comet Punch
-
-'
+  description: 
   type: 0
   power: 0
   accuracy: 0
@@ -25,6 +23,9 @@ MonoBehaviour:
   highCriticalHitRate: 0
   doubleIfHalfOpponentHp: 0
   scaleOnHp: 0
+  instaKill: 0
+  mirrorPain: 0
+  merciful: 0
   style: 0
   effects:
     doRandomStatBoost: 0
