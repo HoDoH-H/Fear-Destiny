@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class NPC_Controller : MonoBehaviour, Interactable, ISavable
@@ -13,11 +14,12 @@ public class NPC_Controller : MonoBehaviour, Interactable, ISavable
     Quest activeQuest;
 
     [Header("Movements")]
-    [SerializeField] List<Vector2> movementPattern;
+    [SerializeField] List<MovementPattern> movementPattern;
     [SerializeField] float timeBetweenPattern;
     NPCState state;
     float idleTimer = 0f;
     int currentPattern = 0;
+    int currentPatternList = 0;
 
     Character character;
     ItemGiver itemGiver;
@@ -125,7 +127,12 @@ public class NPC_Controller : MonoBehaviour, Interactable, ISavable
 
         var oldPos = transform.position;
 
-        yield return character.Move(movementPattern[currentPattern]);
+        yield return new WaitForSeconds(movementPattern[currentPatternList].patterns[currentPattern].timeBeforePattern);
+
+        if (movementPattern[currentPatternList].patterns[currentPattern].directionOnly)
+            character.LookTowards(movementPattern[currentPatternList].patterns[currentPattern].movement);
+        else
+            yield return character.Move(movementPattern[currentPatternList].patterns[currentPattern].movement);
 
         if (transform.position != oldPos)
             currentPattern = (currentPattern + 1) % movementPattern.Count;
