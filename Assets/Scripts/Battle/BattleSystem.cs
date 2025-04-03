@@ -25,6 +25,15 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] MoveSelectionUI moveSelectionUI;
     [SerializeField] InventoryUI inventoryUI;
 
+    [Header("Default Audio Clips")]
+    [SerializeField] AudioClip wildBattleMusic_default;
+    [SerializeField] AudioClip humanBattleMusic_default;
+    [SerializeField] AudioClip battleVictoryMusic_default;
+
+    public AudioClip DefaultWildMusic => wildBattleMusic_default;
+    public AudioClip DefaultHumanMusic => humanBattleMusic_default;
+    public AudioClip DefaultVictoryMusic => battleVictoryMusic_default;
+
     public event Action<bool> OnBattleOver;
 
     BattleState state;
@@ -64,6 +73,9 @@ public class BattleSystem : MonoBehaviour
         this.playerParty = playerParty;
         this.wildAnigma = wildAnigma;
         player = playerParty.GetComponent<PlayerController>();
+
+        AudioManager.Instance.PlayMusic(wildBattleMusic_default);
+
         StartCoroutine(SetupBattle());
     }
 
@@ -75,6 +87,8 @@ public class BattleSystem : MonoBehaviour
         isTrainerBattle = true;
         player = playerParty.GetComponent<PlayerController>();
         trainer = trainerParty.GetComponent<TrainerController>();
+
+        AudioManager.Instance.PlayMusic(humanBattleMusic_default);
 
         StartCoroutine(SetupBattle());
     }
@@ -503,6 +517,13 @@ public class BattleSystem : MonoBehaviour
 
         if (!faintedUnit.IsPlayerUnit)
         {
+            bool battleWon = true;
+            if (isTrainerBattle)
+                battleWon = trainerParty.GetHealthyBattler() == null;
+
+            if (battleWon)
+                AudioManager.Instance.PlayMusic(battleVictoryMusic_default, fade: true);
+
             // Exp Gain
             int expYield = faintedUnit.Anigma.Base.ExpYield;
             int opponentLevel = faintedUnit.Anigma.Level;

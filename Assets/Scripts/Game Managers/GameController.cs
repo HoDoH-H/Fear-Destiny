@@ -87,7 +87,9 @@ public class GameController : MonoBehaviour
         MorlenisManager.Instance.OnMorlenisCompleted += () =>  
         {
             partyScreen.SetPartyData();
-            state = stateBeforeMorlenis; 
+            state = stateBeforeMorlenis;
+
+            AudioManager.Instance.PlayMusic(CurrentScene.SceneMusic, fade: true);
         };
 
         ShopController.Instance.OnStart += () => state = GameState.Shop;
@@ -137,6 +139,7 @@ public class GameController : MonoBehaviour
 
     IEnumerator StartBattleWithTransition()
     {
+        AudioManager.Instance.PlayMusic(battleSystem.DefaultWildMusic);
 
         battleTransition.SetFloat("_Fade", 0);
         battleTransition.SetFloat("_Cutoff", 1);
@@ -226,7 +229,12 @@ public class GameController : MonoBehaviour
         StartCoroutine(EndBattleTransition(true));
 
         var playerParty = playerController.GetComponent<BattlerParty>();
-        StartCoroutine(playerParty.CheckForMorlen());
+        bool hasMorlenis = playerParty.CheckForMorlen();
+
+        if (hasMorlenis)
+            StartCoroutine(playerParty.RunMorlenis());
+        else
+            AudioManager.Instance.PlayMusic(CurrentScene.SceneMusic, fade: true);
     }
 
     IEnumerator EndBattleTransition(bool isMainToBattle)

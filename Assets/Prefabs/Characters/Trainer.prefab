@@ -249,6 +249,8 @@ MonoBehaviour:
     - "Next time, you won\u2019t be so lucky!"
   exclamation: {fileID: 4111140380813501504}
   fov: {fileID: 279122827930800007}
+  seriousFight: 0
+  provocClip: {fileID: 8300000, guid: 38cc076333f21aa488e2355c6a31f4e4, type: 3}
 --- !u!114 &7279109375698514570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,11 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa2b4416602eefd429d2e089d233ea77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anigmas:
-  - _base: {fileID: 11400000, guid: 4ac4c7732eabfcc4285c20fb5a11a043, type: 2}
-    level: 6
-  - _base: {fileID: 11400000, guid: 192c4c11db194ae4dad233f564416972, type: 2}
-    level: 5
+  battlers: []
 --- !u!114 &7049796714860433381
 MonoBehaviour:
   m_ObjectHideFlags: 0

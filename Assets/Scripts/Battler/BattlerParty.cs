@@ -45,7 +45,12 @@ public class BattlerParty : MonoBehaviour
         }
     }
 
-    public IEnumerator CheckForMorlen()
+    public bool CheckForMorlen()
+    {
+        return battlers.Any(b => b.CheckForMorlenis() != null);
+    }
+
+    public IEnumerator RunMorlenis()
     {
         foreach (var battler in battlers)
         {

@@ -7,6 +7,7 @@ public class MorlenisManager : MonoBehaviour
 {
     [SerializeField] GameObject morlenisUI;
     [SerializeField] Image anigmaImage;
+    [SerializeField] AudioClip morlenisMusic;
 
     public event Action OnMorlenisStart;
     public event Action OnMorlenisCompleted;
@@ -22,6 +23,9 @@ public class MorlenisManager : MonoBehaviour
     {
         OnMorlenisStart?.Invoke();
         morlenisUI.SetActive(true);
+
+        AudioManager.Instance.PlayMusic(morlenisMusic);
+
         anigmaImage.sprite = anigma.Base.FrontSprite;
         anigmaImage.SetNativeSize();
 
