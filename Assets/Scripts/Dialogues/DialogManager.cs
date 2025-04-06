@@ -45,9 +45,10 @@ public class DialogManager : MonoBehaviour
         Action<int> onChoiceSelected = null, bool showTextNoDelay = false)
     {
         OnShowDialog?.Invoke();
-
         IsShowing = true;
         dialogBox.SetActive(true);
+
+        AudioManager.Instance.PlaySFX(AudioId.UISelect);
 
         if (showTextNoDelay )
             ShowLineNoDelay(text);
@@ -91,6 +92,7 @@ public class DialogManager : MonoBehaviour
 
         foreach (var line in dialog.Lines)
         {
+            AudioManager.Instance.PlaySFX(AudioId.UISelect);
             yield return TypeDialog(line);
             yield return new WaitUntil(() => GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Enter));
         }

@@ -29,6 +29,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] AudioClip wildBattleMusic_default;
     [SerializeField] AudioClip humanBattleMusic_default;
     [SerializeField] AudioClip battleVictoryMusic_default;
+    [SerializeField] AudioClip confusionSound;
 
     public AudioClip DefaultWildMusic => wildBattleMusic_default;
     public AudioClip DefaultHumanMusic => humanBattleMusic_default;
@@ -365,6 +366,8 @@ public class BattleSystem : MonoBehaviour
             if (sourceUnit.Anigma.VolatileStatus?.Name == "Confusion")
             {
                 sourceUnit.PlayAttackAnimation();
+                AudioManager.Instance.PlaySFX(confusionSound);
+
                 yield return new WaitForSeconds(0.1f);
                 sourceUnit.Anigma.DecreaseHP(sourceUnit.Anigma.MaxHp / 8);
             }
@@ -396,7 +399,9 @@ public class BattleSystem : MonoBehaviour
 
             for (int i = 1; i <= hitTime; i++)
             {
+                AudioManager.Instance.PlaySFX(move.Base.Sound);
                 sourceUnit.PlayAttackAnimation();
+
                 yield return new WaitForSeconds(0.5f);
                 targetUnit.PlayHitAnimation();
 

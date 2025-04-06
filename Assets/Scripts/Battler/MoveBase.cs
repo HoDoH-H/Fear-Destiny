@@ -31,6 +31,8 @@ public class MoveBase : ScriptableObject
     [SerializeField] MoveTarget target;
     [SerializeField] Vector2Int hitRange = new Vector2Int(1, 1);
 
+    [SerializeField] AudioClip sound;
+
     public string Name => name;
     public string Description => description;
     public AnigmaType Type => type;
@@ -52,6 +54,8 @@ public class MoveBase : ScriptableObject
     public List<SecondaryEffects> Secondaries => secondaryEffects;
     public MoveTarget Target => target;
     public Vector2Int HitRange {  get { return hitRange; } set { hitRange = value; } }
+
+    public AudioClip Sound => sound;
 
     public int GetHitTimes()
     {

@@ -25,6 +25,7 @@ public class CustomMoveBase : Editor
     SerializedProperty SecondaryEffects;
     SerializedProperty Target;
     SerializedProperty HitRange;
+    SerializedProperty Sound;
 
     private void OnEnable()
     {
@@ -49,6 +50,7 @@ public class CustomMoveBase : Editor
         HitRange = serializedObject.FindProperty("hitRange");
         MirrorPain = serializedObject.FindProperty("mirrorPain");
         Merciful = serializedObject.FindProperty("merciful");
+        Sound = serializedObject.FindProperty("sound");
     }
 
     public override void OnInspectorGUI()
@@ -87,6 +89,11 @@ public class CustomMoveBase : Editor
         EditorGUILayout.PropertyField(Target);
         EditorGUILayout.PropertyField(MirrorPain);
         EditorGUILayout.PropertyField(Merciful);
+
+        EditorGUILayout.Space();
+        EditorGUILayout.PropertyField(Sound);
+
+        EditorGUILayout.Space();
         if (myScript.Category == AttackCategory.Status)
             EditorGUILayout.PropertyField(Effects);
         if (myScript.Category != AttackCategory.Status )
