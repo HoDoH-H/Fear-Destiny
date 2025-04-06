@@ -39,3 +39,4 @@ MonoBehaviour:
   secondaryEffects: []
   target: 0
   hitRange: {x: 1, y: 0}
+  sound: {fileID: 8300000, guid: d0f45320d790ea743804dc0e8656e1a9, type: 3}

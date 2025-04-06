@@ -49,3 +49,4 @@ MonoBehaviour:
     target: 1
   target: 0
   hitRange: {x: 1, y: 1}
+  sound: {fileID: 8300000, guid: 2ce0ed93ace5c4a488d50401fd7cf9cf, type: 3}

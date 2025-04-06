@@ -40,8 +40,8 @@ MonoBehaviour:
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: 15678900ea9ca9e42bf4390485c72238, type: 2}
     level: 1
-  - moveBase: {fileID: 0}
-    level: 4
+  - moveBase: {fileID: 11400000, guid: 7aa86d8732b5b014db5068aa19b43c12, type: 2}
+    level: 3
   - moveBase: {fileID: 11400000, guid: 153b0ff8ad6dbf04b94df63fb44836da, type: 2}
     level: 10
   - moveBase: {fileID: 11400000, guid: 153b0ff8ad6dbf04b94df63fb44836da, type: 2}
@@ -50,18 +50,6 @@ MonoBehaviour:
     level: 30
   - moveBase: {fileID: 11400000, guid: 153b0ff8ad6dbf04b94df63fb44836da, type: 2}
     level: 40
-  - moveBase: {fileID: 11400000, guid: 153b0ff8ad6dbf04b94df63fb44836da, type: 2}
-    level: 0
-  - moveBase: {fileID: 11400000, guid: 153b0ff8ad6dbf04b94df63fb44836da, type: 2}
-    level: 0
-  - moveBase: {fileID: 11400000, guid: 153b0ff8ad6dbf04b94df63fb44836da, type: 2}
-    level: 0
-  - moveBase: {fileID: 11400000, guid: 153b0ff8ad6dbf04b94df63fb44836da, type: 2}
-    level: 0
-  - moveBase: {fileID: 11400000, guid: 153b0ff8ad6dbf04b94df63fb44836da, type: 2}
-    level: 0
-  - moveBase: {fileID: 11400000, guid: 153b0ff8ad6dbf04b94df63fb44836da, type: 2}
-    level: 0
   learnableByItems: []
   morleniss:
   - morlenInto: {fileID: 11400000, guid: a64ac671940dfea4291ca34d9c30c394, type: 2}

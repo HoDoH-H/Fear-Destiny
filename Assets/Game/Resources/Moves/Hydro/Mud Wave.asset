@@ -22,15 +22,24 @@ MonoBehaviour:
   priority: 0
   highCriticalHitRate: 0
   doubleIfHalfOpponentHp: 0
-  scaleOnHp: 0
+  scaleOnAttackerHp: 0
+  scaleOnTargetHp: 0
+  scaleOnBPP: 0
+  instaKill: 0
+  mirrorPain: 0
+  merciful: 0
   style: 1
   effects:
+    doRandomStatBoost: 0
+    boostValue: 0
     boosts: []
     status: 0
     volatileStatus: 0
     weather: 0
   secondaryEffects:
-  - boosts:
+  - doRandomStatBoost: 0
+    boostValue: 0
+    boosts:
     - stat: 5
       boost: -1
     status: 0
@@ -38,7 +47,9 @@ MonoBehaviour:
     weather: 0
     chance: 30
     target: 0
-  - boosts:
+  - doRandomStatBoost: 0
+    boostValue: 0
+    boosts:
     - stat: 4
       boost: -1
     status: 0
@@ -48,3 +59,4 @@ MonoBehaviour:
     target: 0
   target: 0
   hitRange: {x: 1, y: 0}
+  sound: {fileID: 8300000, guid: 926de6c8707e9d24296e5d9ed0b7131b, type: 3}

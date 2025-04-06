@@ -22,9 +22,16 @@ MonoBehaviour:
   priority: 0
   highCriticalHitRate: 0
   doubleIfHalfOpponentHp: 0
-  scaleOnHp: 0
+  scaleOnAttackerHp: 0
+  scaleOnTargetHp: 0
+  scaleOnBPP: 0
+  instaKill: 0
+  mirrorPain: 0
+  merciful: 0
   style: 1
   effects:
+    doRandomStatBoost: 0
+    boostValue: 0
     boosts: []
     status: 0
     volatileStatus: 0
@@ -32,3 +39,4 @@ MonoBehaviour:
   secondaryEffects: []
   target: 0
   hitRange: {x: 1, y: 0}
+  sound: {fileID: 8300000, guid: 4cd48ca13ef12e549b57c49528c9e4a1, type: 3}
