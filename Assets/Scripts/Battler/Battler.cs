@@ -297,7 +297,7 @@ public class Battler
             return damageDetails;
         }
 
-        if (move.Base.MirrorPain)
+        if (move.Base.Name == "Mirror Pain")
         {
             if(attacker.HP >= HP)
             {
@@ -330,7 +330,7 @@ public class Battler
         if(damage <= 0)
             damage = 1;
 
-        if (move.Base.Merciful)
+        if (move.Base.Name == "Merciful Cut")
         {
             if (damage >= HP)
                 damage = HP - 1;

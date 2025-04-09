@@ -106,12 +106,15 @@ public class NPC_Controller : MonoBehaviour, Interactable, ISavable
     {
         if (state == NPCState.Idle)
         {
-            idleTimer += Time.deltaTime;
-            if (idleTimer > movementPattern[currentPatternList].patterns[currentPattern].timeBeforePattern)
+            if (movementPattern.Count > 0)
             {
-                idleTimer = 0f;
-                if (movementPattern[currentPatternList].patterns.Count > 0) 
-                    StartCoroutine(Walk());
+                idleTimer += Time.deltaTime;
+                if (idleTimer > movementPattern[currentPatternList].patterns[currentPattern].timeBeforePattern)
+                {
+                    idleTimer = 0f;
+                    if (movementPattern[currentPatternList].patterns.Count > 0)
+                        StartCoroutine(Walk());
+                }
             }
         }
 
