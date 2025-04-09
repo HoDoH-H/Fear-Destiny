@@ -9346,6 +9346,14 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 5c0a85aed30618346857367c34611bbf, type: 3}
   - id: 1
     clip: {fileID: 8300000, guid: 9c8fc91aee2a57b4e9ac58d8fbe817a7, type: 3}
+  - id: 5
+    clip: {fileID: 8300000, guid: f47a66b2052f1e54cb697ef12598cbb8, type: 3}
+  - id: 6
+    clip: {fileID: 8300000, guid: f47a66b2052f1e54cb697ef12598cbb8, type: 3}
+  - id: 7
+    clip: {fileID: 8300000, guid: eb1e7f058e3f84e43aff969fdddfcc46, type: 3}
+  - id: 8
+    clip: {fileID: 8300000, guid: f32a557cb1c51794180728b3c2730e16, type: 3}
   musicPlayer: {fileID: 616951525}
   sfxPlayer: {fileID: 734871027}
   fadeDuration: 0.75

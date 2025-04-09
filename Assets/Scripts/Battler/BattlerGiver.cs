@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class BattlerGiver : MonoBehaviour, ISavable
 {
@@ -15,8 +16,9 @@ public class BattlerGiver : MonoBehaviour, ISavable
 
         battlerToGive.Init();
         player.GetComponent<BattlerParty>().AddBattler(battlerToGive);
-
         used = !isReusable;
+
+        AudioManager.Instance.PlaySFX(AudioId.GreatDiscovery, true);
 
         yield return DialogManager.Instance.ShowDialogText($"{ player.Name} received { battlerToGive.Base.Name}");
     }

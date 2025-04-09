@@ -31,20 +31,25 @@ public class AudioManager : MonoBehaviour
         sfxLookup = sfxList.ToDictionary(x => x.id);
     }
 
-    public void PlaySFX(AudioClip clip)
+    public void PlaySFX(AudioClip clip, bool pauseMusic = false)
     {
         if (clip == null) return;
+
+        if (pauseMusic)
+        {
+            musicPlayer.Pause();
+            StartCoroutine(UnPauseMusic(clip.length));
+        }
 
         sfxPlayer.PlayOneShot(clip);
     }
 
-    public void PlaySFX(AudioId audioId)
+    public void PlaySFX(AudioId audioId, bool pauseMusic = false)
     {
         if (!sfxLookup.ContainsKey(audioId)) return;
 
         var audioData = sfxLookup[audioId];
-
-        sfxPlayer.PlayOneShot(audioData.clip);
+        PlaySFX(audioData.clip, pauseMusic);
     }
 
     public void PlayMusic(AudioClip clip, bool loop = true, bool fade = false)
@@ -66,9 +71,18 @@ public class AudioManager : MonoBehaviour
         if(fade)
             yield return musicPlayer.DOFade(originalMusicVolume, fadeDuration).WaitForCompletion();
     }
+
+    IEnumerator UnPauseMusic(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        musicPlayer.volume = 0;
+        musicPlayer.UnPause();
+        musicPlayer.DOFade(originalMusicVolume, fadeDuration);
+    }
 }
 
-public enum AudioId { UIHover, UISelect, Hit, Faint, ExpGain}
+public enum AudioId { UIHover, UISelect, Hit, Faint, ExpGain, ItemObtained, LevelUp, MinorDiscovery, GreatDiscovery}
 
 [Serializable]
 public class AudioData

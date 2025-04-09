@@ -18,6 +18,8 @@ public class ItemGiver : MonoBehaviour, ISavable
 
         used = !isReusable;
 
+        AudioManager.Instance.PlaySFX(item.Rarity == ItemRarity.Minor ? AudioId.MinorDiscovery : AudioId.GreatDiscovery, true);
+
         string dialogText = $"{player.Name} received {item.Name}";
         if (count > 1)
         {
