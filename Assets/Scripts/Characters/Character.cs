@@ -93,7 +93,7 @@ public class Character : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Error in LookTowards: You can't ask character to look diagonally.");
+            Debug.LogError($"Error in LookTowards: You can't ask character to look diagonally. Current Value: {targetPos}");
         }
     }
 

@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class NPC_Controller : MonoBehaviour, Interactable, ISavable
@@ -15,7 +13,6 @@ public class NPC_Controller : MonoBehaviour, Interactable, ISavable
 
     [Header("Movements")]
     [SerializeField] List<MovementPattern> movementPattern;
-    [SerializeField] float timeBetweenPattern;
     NPCState state;
     float idleTimer = 0f;
     int currentPattern = 0;
@@ -110,10 +107,10 @@ public class NPC_Controller : MonoBehaviour, Interactable, ISavable
         if (state == NPCState.Idle)
         {
             idleTimer += Time.deltaTime;
-            if (idleTimer > timeBetweenPattern)
+            if (idleTimer > movementPattern[currentPatternList].patterns[currentPattern].timeBeforePattern)
             {
                 idleTimer = 0f;
-                if (movementPattern.Count > 0) 
+                if (movementPattern[currentPatternList].patterns.Count > 0) 
                     StartCoroutine(Walk());
             }
         }
@@ -126,16 +123,28 @@ public class NPC_Controller : MonoBehaviour, Interactable, ISavable
         state = NPCState.Walking;
 
         var oldPos = transform.position;
+        var oldDir = new Vector2(character.Animator.MoveX, character.Animator.MoveY);
 
-        yield return new WaitForSeconds(movementPattern[currentPatternList].patterns[currentPattern].timeBeforePattern);
+        bool hasWalked = false;
 
         if (movementPattern[currentPatternList].patterns[currentPattern].directionOnly)
-            character.LookTowards(movementPattern[currentPatternList].patterns[currentPattern].movement);
+            character.LookTowards((Vector2)transform.position + movementPattern[currentPatternList].patterns[currentPattern].movement);
         else
+        {
             yield return character.Move(movementPattern[currentPatternList].patterns[currentPattern].movement);
+            hasWalked = true;
+        }
+            
 
-        if (transform.position != oldPos)
-            currentPattern = (currentPattern + 1) % movementPattern.Count;
+        if (transform.position != oldPos && hasWalked || oldDir != new Vector2(character.Animator.MoveX, character.Animator.MoveY) && !hasWalked)
+        {
+            currentPattern = (currentPattern + 1) % movementPattern[currentPatternList].patterns.Count;
+            if (currentPattern == 0)
+            {
+                currentPatternList = Random.Range(0, movementPattern.Count);
+            }
+        }
+            
 
         state = NPCState.Idle;
     }
