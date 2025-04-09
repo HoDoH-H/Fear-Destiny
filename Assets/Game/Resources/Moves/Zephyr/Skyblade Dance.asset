@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2e12288949c3a4d885f65e3948438f, type: 3}
+  m_Name: Skyblade Dance
+  m_EditorClassIdentifier: 
+  name: Skyblade Dance
+  description: 
+  type: 10
+  power: 60
+  accuracy: 0
+  alwaysHits: 1
+  up: 20
+  priority: 0
+  highCriticalHitRate: 0
+  doubleIfHalfOpponentHp: 0
+  scaleOnAttackerHp: 0
+  scaleOnTargetHp: 0
+  scaleOnBPP: 0
+  instaKill: 0
+  mirrorPain: 0
+  merciful: 0
+  style: 0
+  effects:
+    doRandomStatBoost: 0
+    boostValue: 0
+    boosts: []
+    status: 0
+    volatileStatus: 0
+    weather: 0
+  secondaryEffects: []
+  target: 0
+  hitRange: {x: 1, y: 1}
