@@ -45,8 +45,12 @@ public class Inventory : MonoBehaviour, ISavable
             if (!item.IsReusable)
                 RemoveItem(item);
 
+            AudioManager.Instance.PlaySFX(AudioId.ItemUse);
+
             return item;
         }
+
+        AudioManager.Instance.PlaySFX(AudioId.UIDenied);
 
         return null;
     }

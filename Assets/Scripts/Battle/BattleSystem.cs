@@ -230,6 +230,8 @@ public class BattleSystem : MonoBehaviour
     {
         state = BattleState.RunningTurn;
 
+        yield return new WaitForSeconds(0.1f);
+
         if (playerAction == BattleAction.Move)
         {
             playerUnit.Anigma.CurrentMove = playerUnit.Anigma.Moves[currentMove];
@@ -970,6 +972,8 @@ public class BattleSystem : MonoBehaviour
             {
                 --currentAction;
             }
+
+            AudioManager.Instance.PlaySFX(AudioId.UIHover);
         }
         else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Left))
         {
@@ -981,6 +985,8 @@ public class BattleSystem : MonoBehaviour
             {
                 ++currentAction;
             }
+
+            AudioManager.Instance.PlaySFX(AudioId.UIHover);
         }
         else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Up))
         {
@@ -992,6 +998,8 @@ public class BattleSystem : MonoBehaviour
             {
                 currentAction = currentAction + 2;
             }
+
+            AudioManager.Instance.PlaySFX(AudioId.UIHover);
         }
         else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Down))
         {
@@ -1003,12 +1011,15 @@ public class BattleSystem : MonoBehaviour
             {
                 currentAction = currentAction - 2;
             }
+
+            AudioManager.Instance.PlaySFX(AudioId.UIHover);
         }
 
         dialogBox.UpdateActionSelection(currentAction);
 
         if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Enter))
         {
+            AudioManager.Instance.PlaySFX(AudioId.UISelect);
             if (currentAction == 0)
             {
                 //Fight
@@ -1039,11 +1050,13 @@ public class BattleSystem : MonoBehaviour
             var selectedMember = partyScreen.SelectedMember;
             if (selectedMember.HP <= 0)
             {
+                AudioManager.Instance.PlaySFX(AudioId.UIDenied);
                 partyScreen.SetMessageText("You can't send out a fainted anigma...");
                 return;
             }
             else if (selectedMember == playerUnit.Anigma)
             {
+                AudioManager.Instance.PlaySFX(AudioId.UIDenied);
                 partyScreen.SetMessageText("You can't switch with the same anigma!");
                 return;
             }
@@ -1052,6 +1065,7 @@ public class BattleSystem : MonoBehaviour
 
             if (partyScreen.CalledFrom == BattleState.ActionSelection)
             {
+                AudioManager.Instance.PlaySFX(AudioId.UISelect);
                 StartCoroutine(RunTurns(BattleAction.SwitchAnigma));
             }
             else
@@ -1068,6 +1082,7 @@ public class BattleSystem : MonoBehaviour
         {
             if (playerUnit.Anigma.HP <= 0)
             {
+                AudioManager.Instance.PlaySFX(AudioId.UIDenied);
                 partyScreen.SetMessageText("You have to choose another anigma to continue.");
                 return;
             }
@@ -1077,10 +1092,14 @@ public class BattleSystem : MonoBehaviour
             //Get back to action selection
             if (partyScreen.CalledFrom == BattleState.AboutToUse)
             {
+                AudioManager.Instance.PlaySFX(AudioId.UIBack);
                 StartCoroutine(SendNextTrainerAnigma());
             }
             else
+            {
+                AudioManager.Instance.PlaySFX(AudioId.UIBack);
                 ActionSelection();
+            }
 
             partyScreen.CalledFrom = null;
         };
@@ -1101,17 +1120,20 @@ public class BattleSystem : MonoBehaviour
             if (aboutToUseChoice)
             {
                 // yes
+                AudioManager.Instance.PlaySFX(AudioId.UISelect);
                 OpenPartyScreen();
             }
             else
             {
                 // no
+                AudioManager.Instance.PlaySFX(AudioId.UIBack);
                 StartCoroutine(SendNextTrainerAnigma());
             }
         }
         else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Back))
         {
             // no
+            AudioManager.Instance.PlaySFX(AudioId.UIBack);
             dialogBox.EnableChoiceBox(false);
             StartCoroutine(SendNextTrainerAnigma());
         }
@@ -1127,6 +1149,7 @@ public class BattleSystem : MonoBehaviour
         if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Back))
         {
             //Get back to action selection
+            AudioManager.Instance.PlaySFX(AudioId.UIBack);
             ActionSelection();
         }
 
@@ -1145,6 +1168,7 @@ public class BattleSystem : MonoBehaviour
                 if (currentMove == 1 || currentMove == 3)
                     --currentMove;
             }
+            AudioManager.Instance.PlaySFX(AudioId.UIHover);
         }
         else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Left))
         {
@@ -1159,6 +1183,7 @@ public class BattleSystem : MonoBehaviour
                     ++currentMove;
                 }
             }
+            AudioManager.Instance.PlaySFX(AudioId.UIHover);
         }
         else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Up))
         {
@@ -1173,6 +1198,7 @@ public class BattleSystem : MonoBehaviour
                     currentMove = currentMove + 2;
                 }
             }
+            AudioManager.Instance.PlaySFX(AudioId.UIHover);
         }
         else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Down))
         {
@@ -1189,12 +1215,15 @@ public class BattleSystem : MonoBehaviour
                 if (currentMove != 0 && currentMove != 1)
                     currentMove = currentMove - 2;
             }
+            AudioManager.Instance.PlaySFX(AudioId.UIHover);
         }
 
         dialogBox.UpdateMoveSelection(currentMove, playerUnit.Anigma.Moves[currentMove]);
 
         if(GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Enter))
         {
+            AudioManager.Instance.PlaySFX(AudioId.UISelect);
+
             var move = playerUnit.Anigma.Moves[currentMove];
             if (move.UP <= 0) return;
 

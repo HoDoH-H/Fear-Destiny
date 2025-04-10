@@ -290,10 +290,12 @@ public class GameController : MonoBehaviour
             Action onSelected = () =>
             {
                 // TODO - Summary Screen
+                AudioManager.Instance.PlaySFX(AudioId.UIDenied);
             };
 
             Action onBack = () =>
             {
+                AudioManager.Instance.PlaySFX(AudioId.UIBack);
                 partyScreen.gameObject.SetActive(false);
                 StartCoroutine(menuController.OpenMenu());
                 state = GameState.Menu;
@@ -340,12 +342,16 @@ public class GameController : MonoBehaviour
     {
         if (selectedItem == 0)
         {
+            StartCoroutine(menuController.CloseMenu());
+
             // Anigmas
             partyScreen.gameObject.SetActive(true);
             state = GameState.PartyScreen;
         }
         else if (selectedItem == 1)
         {
+            StartCoroutine(menuController.CloseMenu());
+
             // Bag
             inventoryUI.gameObject.SetActive(true);
             inventoryUI.UpdateItemList();
@@ -353,12 +359,16 @@ public class GameController : MonoBehaviour
         }
         else if (selectedItem == 2)
         {
+            StartCoroutine(menuController.CloseMenu(true));
+
             // Save
             SavingSystem.i.Save(saveFileName);
             state = GameState.FreeRoam;
         }
         else if (selectedItem == 3)
         {
+            StartCoroutine(menuController.CloseMenu(true));
+
             // Load
             SavingSystem.i.Load(saveFileName);
             state = GameState.FreeRoam;

@@ -42,13 +42,14 @@ public class DialogManager : MonoBehaviour
     }
 
     public IEnumerator ShowDialogText(string text, bool waitForInput=true, bool autoClose=true, List<string> choices = null,
-        Action<int> onChoiceSelected = null, bool showTextNoDelay = false)
+        Action<int> onChoiceSelected = null, bool showTextNoDelay = false, bool needSFX = true)
     {
         OnShowDialog?.Invoke();
         IsShowing = true;
         dialogBox.SetActive(true);
 
-        AudioManager.Instance.PlaySFX(AudioId.UISelect);
+        if(needSFX)
+            AudioManager.Instance.PlaySFX(AudioId.UISelect);
 
         if (showTextNoDelay )
             ShowLineNoDelay(text);

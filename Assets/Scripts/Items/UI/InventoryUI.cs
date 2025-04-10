@@ -84,13 +84,25 @@ public class InventoryUI : MonoBehaviour
             int prevCat = selectedCategory;
 
             if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Down))
+            {
                 selectedItem++;
+                AudioManager.Instance.PlaySFX(AudioId.UIHover);
+            } 
             else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Up))
+            {
                 selectedItem--;
+                AudioManager.Instance.PlaySFX(AudioId.UIHover);
+            }
             else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Right))
+            {
                 selectedCategory++;
+                AudioManager.Instance.PlaySFX(AudioId.UIHover);
+            }
             else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Left))
+            {
                 selectedCategory--;
+                AudioManager.Instance.PlaySFX(AudioId.UIHover);
+            }
 
             selectedCategory = GameController.Instance.RotateSelection(selectedCategory, Inventory.ItemCategories.Count - 1);
             selectedItem = GameController.Instance.RotateSelection(selectedItem, inventory.GetSlotsByCategory(selectedCategory).Count - 1);
@@ -105,9 +117,14 @@ public class InventoryUI : MonoBehaviour
                 UpdateItemSelection();
 
             if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Enter))
+            {
                 StartCoroutine(ItemSelected());
+            }
             else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Back))
+            {
+                AudioManager.Instance.PlaySFX(AudioId.UIBack);
                 onBack?.Invoke();
+            }
         }
         else if (state == InventoryUIState.PartySelection)
         {
@@ -118,6 +135,7 @@ public class InventoryUI : MonoBehaviour
 
             Action onBackPartyScreen = () =>
             {
+                AudioManager.Instance.PlaySFX(AudioId.UIBack);
                 ClosePartyScreen();
             };
 
@@ -127,6 +145,7 @@ public class InventoryUI : MonoBehaviour
         {
             Action<int> onMoveSelected = (int moveIndex) =>
             {
+                AudioManager.Instance.PlaySFX(AudioId.UISelect);
                 StartCoroutine(OnMoveToForgetSelected(moveIndex));
             };
 
@@ -201,7 +220,9 @@ public class InventoryUI : MonoBehaviour
             }
             else
             {
-                ClosePartyScreen();
+                AudioManager.Instance.PlaySFX(AudioId.UIDenied);
+                state = InventoryUIState.PartySelection;
+                yield return DialogManager.Instance.ShowDialogText($"It won't have any effect!", needSFX: false);
                 yield break;
             }
         }
@@ -213,7 +234,7 @@ public class InventoryUI : MonoBehaviour
             // If the item is a ring don't show the dialog in inventory
             if (usedItem is RecoveryItem)
             {
-                yield return DialogManager.Instance.ShowDialogText($"You used {usedItem.Name}");
+                yield return DialogManager.Instance.ShowDialogText($"You used {usedItem.Name}", needSFX: false);
                 var recItem = usedItem as RecoveryItem;
 
                 if (recItem.IsPoisonousForAnigmas)
@@ -229,7 +250,7 @@ public class InventoryUI : MonoBehaviour
         else
         {
             if (selectedCategory == (int)ItemCategory.Items)
-                yield return DialogManager.Instance.ShowDialogText($"It won't have any effect!");
+                yield return DialogManager.Instance.ShowDialogText($"It won't have any effect!", needSFX: false);
         }
 
         ClosePartyScreen();

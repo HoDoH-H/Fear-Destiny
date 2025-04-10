@@ -80,9 +80,17 @@ public class AudioManager : MonoBehaviour
         musicPlayer.UnPause();
         musicPlayer.DOFade(originalMusicVolume, fadeDuration);
     }
+
+    public IEnumerator LimitMusicVolume(bool value)
+    {
+        if (value)
+            yield return musicPlayer.DOFade(originalMusicVolume / 4, fadeDuration);
+        else
+            yield return musicPlayer.DOFade(originalMusicVolume, fadeDuration);
+    }
 }
 
-public enum AudioId { UIHover, UISelect, Hit, Faint, ExpGain, ItemObtained, LevelUp, MinorDiscovery, GreatDiscovery}
+public enum AudioId { UIHover, UISelect, Hit, Faint, ExpGain, ItemUse, LevelUp, MinorDiscovery, GreatDiscovery, Pause, UnPause, UIBack, UIDenied}
 
 [Serializable]
 public class AudioData

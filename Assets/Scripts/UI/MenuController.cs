@@ -25,7 +25,6 @@ public class MenuController : MonoBehaviour
         menuItems = menu.GetComponentsInChildren<TextMeshProUGUI>().ToList();
         originalPosition = menu.transform.localPosition;
         var t = menu.GetComponent<RectTransform>();
-        //menu.transform.localPosition = new Vector3(originalPosition.x, originalPosition.y + t.rect.height * 1.25f);
         menu.transform.localPosition = new Vector3(originalPosition.x + t.rect.width * 1.25f, originalPosition.y);
     }
 
@@ -43,9 +42,9 @@ public class MenuController : MonoBehaviour
             }
 
             var t = menu.GetComponent<RectTransform>();
-            //menu.transform.localPosition = new Vector3(originalPosition.x, originalPosition.y + t.rect.height * 1.25f);
-            //yield return menu.transform.DOLocalMoveY(originalPosition.y, 0.3f).WaitForCompletion();
             menu.transform.localPosition = new Vector3(originalPosition.x + t.rect.width * 1.25f, originalPosition.y);
+            AudioManager.Instance.PlaySFX(AudioId.Pause);
+            yield return AudioManager.Instance.LimitMusicVolume(true);
             yield return menu.transform.DOLocalMoveX(originalPosition.x, 0.3f).WaitForCompletion();
             yield return new WaitForSeconds(0.2f);
         }
@@ -65,7 +64,8 @@ public class MenuController : MonoBehaviour
         if (needAnim)
         {
             var t = menu.GetComponent<RectTransform>();
-            //yield return menu.transform.DOLocalMoveY(originalPosition.y + t.rect.height * 1.25f, 0.3f).WaitForCompletion();
+            AudioManager.Instance.PlaySFX(AudioId.UnPause);
+            yield return AudioManager.Instance.LimitMusicVolume(false);
             yield return menu.transform.DOLocalMoveX(originalPosition.x + t.rect.width * 1.25f, 0.3f).WaitForCompletion();
         }
 
@@ -83,9 +83,15 @@ public class MenuController : MonoBehaviour
         {
             int prevSelection = selectedItem;
             if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Down))
+            {
                 selectedItem++;
+                AudioManager.Instance.PlaySFX(AudioId.UIHover);
+            }
             else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Up))
+            {
                 selectedItem--;
+                AudioManager.Instance.PlaySFX(AudioId.UIHover);
+            } 
 
             selectedItem = GameController.Instance.RotateSelection(selectedItem, menuItems.Count - 1);
 
@@ -94,8 +100,8 @@ public class MenuController : MonoBehaviour
 
             if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Enter))
             {
+                AudioManager.Instance.PlaySFX(AudioId.UISelect);
                 OnMenuSelected?.Invoke(selectedItem);
-                StartCoroutine(CloseMenu());
             }
             else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Back))
             {
