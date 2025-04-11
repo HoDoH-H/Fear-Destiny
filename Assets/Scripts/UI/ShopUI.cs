@@ -133,6 +133,7 @@ public class ShopUI : MonoBehaviour
 
             if (prevSelection != selectedItem)
             {
+                AudioManager.Instance.PlaySFX(AudioId.UIHover);
                 UpdateItemSelection();
             }
 

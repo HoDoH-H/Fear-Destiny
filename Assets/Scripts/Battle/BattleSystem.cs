@@ -30,6 +30,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] AudioClip humanBattleMusic_default;
     [SerializeField] AudioClip battleVictoryMusic_default;
     [SerializeField] AudioClip confusionSound;
+    [SerializeField] AudioClip escapeSound;
 
     public AudioClip DefaultWildMusic => wildBattleMusic_default;
     public AudioClip DefaultHumanMusic => humanBattleMusic_default;
@@ -1038,6 +1039,7 @@ public class BattleSystem : MonoBehaviour
             else if (currentAction == 3)
             {
                 // Run away
+                AudioManager.Instance.PlaySFX(escapeSound);
                 StartCoroutine(RunTurns(BattleAction.Run));
             }
         }

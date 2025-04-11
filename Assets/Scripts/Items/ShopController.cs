@@ -42,7 +42,7 @@ public class ShopController : MonoBehaviour
         yield return StartMenuState();
     }
 
-    IEnumerator StartMenuState(bool instant = false)
+    IEnumerator StartMenuState(bool instant = false, bool needSFX = true)
     {
         state = ShopState.Menu;
         int selectedChoice = 0;
@@ -50,11 +50,12 @@ public class ShopController : MonoBehaviour
         yield return DialogManager.Instance.ShowDialogText("How may I serve you?", 
             waitForInput: false, 
             choices: new List<string>() { "Buy", "Sell", "Leave" }, 
-            onChoiceSelected: choiceIndex => selectedChoice = choiceIndex, showTextNoDelay: instant);
+            onChoiceSelected: choiceIndex => selectedChoice = choiceIndex, showTextNoDelay: instant, needSFX: needSFX);
 
         if (selectedChoice == 0)
         {
             // Buy
+            AudioManager.Instance.PlaySFX(AudioId.UISelect);
             StartCoroutine(GameController.Instance.MoveCamera(cameraOffset));
             StartCoroutine(walletUI.Show());
             yield return shopUI.Show(merchant.AvailableItems, (item) => StartCoroutine(BuyItem(item)), () => StartCoroutine(OnBackFromBuying()));
@@ -63,12 +64,14 @@ public class ShopController : MonoBehaviour
         else if (selectedChoice == 1)
         {
             // Sell
+            AudioManager.Instance.PlaySFX(AudioId.UISelect);
             state = ShopState.Selling;
             inventoryUI.gameObject.SetActive(true);
         }
         else if (selectedChoice == 2 || selectedChoice == -1)
         {
             // Quit
+            AudioManager.Instance.PlaySFX(AudioId.UIBack);
             OnFinish?.Invoke();
             yield break;
         }
@@ -88,8 +91,9 @@ public class ShopController : MonoBehaviour
 
     void OnBackFromSelling()
     {
+        AudioManager.Instance.PlaySFX(AudioId.UIBack);
         inventoryUI.gameObject.SetActive(false);
-        StartCoroutine(StartMenuState(instant:true));
+        StartCoroutine(StartMenuState(instant:true, needSFX: false));
     }
 
     IEnumerator SellItem(ItemBase item)
@@ -145,11 +149,16 @@ public class ShopController : MonoBehaviour
             inventory.RemoveItem(item, countToSell);
             // Add item price into player's wallet
             Wallet.Instance.AddMoney(sellingPrice);
+
+            AudioManager.Instance.PlaySFX(AudioId.ShopSell);
+
             if (countToSell == 1)
                 yield return DialogManager.Instance.ShowDialogText($"You sold this {item.Name} and received {sellingPrice} lumis.");
             else if (countToSell > 1)
                 yield return DialogManager.Instance.ShowDialogText($"You sold {countToSell} {item.Name}s and received {sellingPrice} lumis.");
         }
+        else
+            AudioManager.Instance.PlaySFX(AudioId.UIBack);
 
         yield return walletUI.Hide();
 
@@ -195,11 +204,15 @@ public class ShopController : MonoBehaviour
                 // User confirmed the purchase
                 inventory.AddItem(item, countToBuy);
                 Wallet.Instance.TakeMoney(totalPrice);
+                AudioManager.Instance.PlaySFX(AudioId.ShopBuy);
                 yield return DialogManager.Instance.ShowDialogText($"Thank you for your purchase!");
             }
+            else
+                AudioManager.Instance.PlaySFX(AudioId.UIBack);
         }
         else
         {
+            AudioManager.Instance.PlaySFX(AudioId.UIDenied);
             yield return DialogManager.Instance.ShowDialogText($"You don't have enough money for that!");
         }
 
@@ -208,9 +221,10 @@ public class ShopController : MonoBehaviour
 
     IEnumerator OnBackFromBuying()
     {
+        AudioManager.Instance.PlaySFX(AudioId.UIBack);
         StartCoroutine(GameController.Instance.MoveCamera(-cameraOffset));
         StartCoroutine(shopUI.Hide());
         yield return walletUI.Hide();
-        yield return StartMenuState();
+        yield return StartMenuState(needSFX: false);
     }
 }
