@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
@@ -7,6 +8,7 @@ public class LocationPortal : MonoBehaviour, IPlayerTriggerable
 {
     [SerializeField] Transform spawnPoint;
     [SerializeField] Destination destinationPortal;
+    [SerializeField] AudioClip transitionSound;
 
     PlayerController player;
 
@@ -25,6 +27,7 @@ public class LocationPortal : MonoBehaviour, IPlayerTriggerable
 
     IEnumerator Teleport()
     {
+        AudioManager.Instance.PlaySFX(transitionSound);
         GameController.Instance.PauseGame(true);
 
         yield return fader.FadeIn(0.5f);

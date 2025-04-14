@@ -11538,6 +11538,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4384475048373829095, guid: 1b7802ac75b269a47aed654bf382b6be, type: 3}
+      propertyPath: transitionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 6865772fdc2e5af46a5834d6bb36dcf1, type: 3}
+    - target: {fileID: 4384475048373829095, guid: 1b7802ac75b269a47aed654bf382b6be, type: 3}
       propertyPath: destinationPortal
       value: 2
       objectReference: {fileID: 0}
@@ -20136,6 +20140,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1948585073714890756, guid: e7c56ff775b6e1b4d9e281e36765c169, type: 3}
+      propertyPath: transitionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 6865772fdc2e5af46a5834d6bb36dcf1, type: 3}
     - target: {fileID: 1948585073714890756, guid: e7c56ff775b6e1b4d9e281e36765c169, type: 3}
       propertyPath: destinationPortal
       value: 1

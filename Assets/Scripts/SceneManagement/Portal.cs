@@ -8,6 +8,7 @@ public class Portal : MonoBehaviour, IPlayerTriggerable
     [SerializeField] int sceneToLoad = -1;
     [SerializeField] Transform spawnPoint;
     [SerializeField] Destination destinationPortal;
+    [SerializeField] AudioClip transitionSound;
 
     PlayerController player;
 
@@ -26,6 +27,8 @@ public class Portal : MonoBehaviour, IPlayerTriggerable
 
     IEnumerator SwitchScene()
     {
+        AudioManager.Instance.PlaySFX(transitionSound);
+
         DontDestroyOnLoad(gameObject);
 
         GameController.Instance.PauseGame(true);

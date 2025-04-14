@@ -184,6 +184,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2345403862731279978, guid: aa7a054946b95c444aa116980f28293d, type: 3}
+      propertyPath: transitionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 6865772fdc2e5af46a5834d6bb36dcf1, type: 3}
     - target: {fileID: 4397061606092956998, guid: aa7a054946b95c444aa116980f28293d, type: 3}
       propertyPath: m_Size.x
       value: 2
