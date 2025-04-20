@@ -55,7 +55,7 @@ public class GameController : MonoBehaviour
         battleTransition.SetFloat("_Cutoff", 0f);
         battleTransition.SetFloat("_Fade", 1);
 
-        battleSystem.OnBattleOver += EndBattle;
+        battleSystem.OnBattleOver += EndBattlerEventRedirecter;
 
         partyScreen.Init();
 
@@ -119,10 +119,10 @@ public class GameController : MonoBehaviour
 
     public void StartBattle()
     {
+        state = GameState.Battle;
         EnablePlayerMovements(false);
         if (battleTransition == null)
         {
-            state = GameState.Battle;
             battleSystem.gameObject.SetActive(true);
             playerCamera.gameObject.SetActive(false);
 
@@ -180,7 +180,6 @@ public class GameController : MonoBehaviour
         }
         yield return new WaitForSeconds(0.5f);
 
-        state = GameState.Battle;
         battleSystem.gameObject.SetActive(true);
         playerCamera.gameObject.SetActive(false);
 
@@ -213,7 +212,12 @@ public class GameController : MonoBehaviour
         StartCoroutine(trainer.TriggerTrainerBattle(playerController));
     }
 
-    void EndBattle(bool won)
+    void EndBattlerEventRedirecter(bool won, bool needWait)
+    {
+        StartCoroutine(EndBattle(won, needWait));
+    }
+
+    IEnumerator EndBattle(bool won, bool needWait)
     {
         if (trainer != null && won)
         {
@@ -222,6 +226,9 @@ public class GameController : MonoBehaviour
         }
 
         partyScreen.SetPartyData();
+
+        if(needWait)
+            yield return new WaitUntil(() => GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Enter) || GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Back));
 
         state = GameState.FreeRoam;
         battleSystem.gameObject.SetActive(false);

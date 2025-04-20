@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Verdant Wrath
   description: Frenzy Plant
-  type: 0
+  type: 2
   power: 150
   accuracy: 90
   alwaysHits: 0
@@ -26,8 +26,6 @@ MonoBehaviour:
   scaleOnTargetHp: 0
   scaleOnBPP: 0
   instaKill: 0
-  mirrorPain: 0
-  merciful: 0
   style: 1
   effects:
     doRandomStatBoost: 0

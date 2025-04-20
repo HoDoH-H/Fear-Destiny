@@ -36,7 +36,7 @@ public class BattleSystem : MonoBehaviour
     public AudioClip DefaultHumanMusic => humanBattleMusic_default;
     public AudioClip DefaultVictoryMusic => battleVictoryMusic_default;
 
-    public event Action<bool> OnBattleOver;
+    public event Action<bool, bool> OnBattleOver;
 
     BattleState state;
 
@@ -156,13 +156,13 @@ public class BattleSystem : MonoBehaviour
     #region UI Managers
     // Pack of function used by UIs (Update menus, health bar, etc)
 
-    void BattleOver(bool isWon)
+    void BattleOver(bool isWon, bool needWait = true)
     {
         state = BattleState.BattleOver;
         playerParty.Battlers.ForEach(p => p.OnBattleOver());
         playerUnit.Hud.ClearData();
         opponentUnit.Hud.ClearData();
-        OnBattleOver(isWon);
+        OnBattleOver(isWon, needWait);
 
         if (!isWon)
         {
@@ -545,6 +545,8 @@ public class BattleSystem : MonoBehaviour
             // Check Level Up
             while (playerUnit.Anigma.CheckForLevelUp())
             {
+                AudioManager.Instance.PlaySFX(AudioId.LevelUp, true);
+
                 playerUnit.Hud.SetLevel();
                 yield return dialogBox.TypeDialog($"{playerUnit.Anigma.Base.Name} ascended to level {playerUnit.Anigma.Level}!");
 
@@ -873,7 +875,7 @@ public class BattleSystem : MonoBehaviour
         if (playerSpeed > opponentSpeed)
         {
             yield return dialogBox.TypeDialog($"You ran away safely!");
-            BattleOver(true);
+            BattleOver(true, false);
         }
         else
         {
@@ -883,7 +885,7 @@ public class BattleSystem : MonoBehaviour
             if (UnityEngine.Random.Range(0, 256) < f)
             {
                 yield return dialogBox.TypeDialog($"You ran away safely!");
-                BattleOver(true);
+                BattleOver(true, false);
             }
             else
             {
