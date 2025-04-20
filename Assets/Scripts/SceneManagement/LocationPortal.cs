@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Linq;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public class LocationPortal : MonoBehaviour, IPlayerTriggerable
 {

@@ -875,6 +875,7 @@ public class BattleSystem : MonoBehaviour
         if (playerSpeed > opponentSpeed)
         {
             yield return dialogBox.TypeDialog($"You ran away safely!");
+            AudioManager.Instance.PlaySFX(escapeSound);
             BattleOver(true, false);
         }
         else
@@ -885,6 +886,7 @@ public class BattleSystem : MonoBehaviour
             if (UnityEngine.Random.Range(0, 256) < f)
             {
                 yield return dialogBox.TypeDialog($"You ran away safely!");
+                AudioManager.Instance.PlaySFX(escapeSound);
                 BattleOver(true, false);
             }
             else
@@ -1041,7 +1043,6 @@ public class BattleSystem : MonoBehaviour
             else if (currentAction == 3)
             {
                 // Run away
-                AudioManager.Instance.PlaySFX(escapeSound);
                 StartCoroutine(RunTurns(BattleAction.Run));
             }
         }
