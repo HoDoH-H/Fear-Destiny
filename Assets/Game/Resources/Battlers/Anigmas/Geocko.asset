@@ -32,13 +32,13 @@ MonoBehaviour:
   type1: 13
   type2: 0
   learnableMoves:
-  - moveBase: {fileID: 11400000, guid: b7110dbcb68c24b48837a44a30918174, type: 2}
+  - moveBase: {fileID: 11400000, guid: 15678900ea9ca9e42bf4390485c72238, type: 2}
     level: 1
-  - moveBase: {fileID: 11400000, guid: 7046501445744fd48a80ca824c7ebe79, type: 2}
+  - moveBase: {fileID: 11400000, guid: 4f2746f9c8c712f458d81263e95f991a, type: 2}
     level: 4
-  - moveBase: {fileID: 11400000, guid: 4470c5fc36335f7489117dbc26a25640, type: 2}
+  - moveBase: {fileID: 11400000, guid: 1319b1deceadf1942a1b6753f58c7356, type: 2}
     level: 8
-  - moveBase: {fileID: 11400000, guid: 1cd540e24fe93f941ab57638220280b5, type: 2}
+  - moveBase: {fileID: 11400000, guid: 4918d89abe1816f45876b15205d4ff6a, type: 2}
     level: 10
   learnableByItems: []
   morleniss: []

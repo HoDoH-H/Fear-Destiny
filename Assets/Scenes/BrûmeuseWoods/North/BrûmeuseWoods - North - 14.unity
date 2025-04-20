@@ -42,7 +42,8 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -14330,6 +14331,10 @@ PrefabInstance:
       value: 808b7b9d-d7ae-47c4-a2ce-fa0a956f1b45
       objectReference: {fileID: 0}
     - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
+      propertyPath: battlers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: anigmas.Array.data[0]._base
       value: 
       objectReference: {fileID: 11400000, guid: e80c34f03b2cad64596bc9af2cd76147, type: 2}
@@ -14344,6 +14349,14 @@ PrefabInstance:
     - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: anigmas.Array.data[1].level
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
+      propertyPath: battlers.Array.data[0]._base
+      value: 
+      objectReference: {fileID: 11400000, guid: f03d4edc248bdc144917c29d7a7b377a, type: 2}
+    - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
+      propertyPath: battlers.Array.data[0].level
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7295033316093661849, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: defaultDirection

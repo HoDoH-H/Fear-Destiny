@@ -42,7 +42,8 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -15263,6 +15264,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
+      propertyPath: battlers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: anigmas.Array.data[0]._base
       value: 
       objectReference: {fileID: 11400000, guid: b5572a7fb68a134428775e74d534e918, type: 2}
@@ -15276,6 +15281,22 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 35fa88a9a816bca439fb87eb82a262e9, type: 2}
     - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: anigmas.Array.data[1].level
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
+      propertyPath: battlers.Array.data[0]._base
+      value: 
+      objectReference: {fileID: 11400000, guid: e138122cbe09a18428496ad988056555, type: 2}
+    - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
+      propertyPath: battlers.Array.data[0].level
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
+      propertyPath: battlers.Array.data[1]._base
+      value: 
+      objectReference: {fileID: 11400000, guid: 35fa88a9a816bca439fb87eb82a262e9, type: 2}
+    - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
+      propertyPath: battlers.Array.data[1].level
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7295033316093661849, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}

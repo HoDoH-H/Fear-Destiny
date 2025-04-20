@@ -42,14 +42,10 @@ MonoBehaviour:
     level: 1
   - moveBase: {fileID: 11400000, guid: 7aa86d8732b5b014db5068aa19b43c12, type: 2}
     level: 3
-  - moveBase: {fileID: 11400000, guid: 153b0ff8ad6dbf04b94df63fb44836da, type: 2}
+  - moveBase: {fileID: 11400000, guid: 1319b1deceadf1942a1b6753f58c7356, type: 2}
     level: 10
-  - moveBase: {fileID: 11400000, guid: 153b0ff8ad6dbf04b94df63fb44836da, type: 2}
+  - moveBase: {fileID: 11400000, guid: bd6bb8ba00c0fd944816d289fa2248f5, type: 2}
     level: 20
-  - moveBase: {fileID: 11400000, guid: 153b0ff8ad6dbf04b94df63fb44836da, type: 2}
-    level: 30
-  - moveBase: {fileID: 11400000, guid: 153b0ff8ad6dbf04b94df63fb44836da, type: 2}
-    level: 40
   learnableByItems: []
   morleniss:
   - morlenInto: {fileID: 11400000, guid: a64ac671940dfea4291ca34d9c30c394, type: 2}

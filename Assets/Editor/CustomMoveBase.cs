@@ -46,6 +46,7 @@ public class CustomMoveBase : Editor
         SecondaryEffects = serializedObject.FindProperty("secondaryEffects");
         Target = serializedObject.FindProperty("target");
         HitRange = serializedObject.FindProperty("hitRange");
+        Sound = serializedObject.FindProperty("sound");
     }
 
     public override void OnInspectorGUI()

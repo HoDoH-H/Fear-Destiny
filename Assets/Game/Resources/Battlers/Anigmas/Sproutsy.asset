@@ -32,19 +32,20 @@ MonoBehaviour:
   type1: 2
   type2: 0
   learnableMoves:
-  - moveBase: {fileID: 11400000, guid: 419ae0b7721087a439288ef195777522, type: 2}
+  - moveBase: {fileID: 11400000, guid: 15678900ea9ca9e42bf4390485c72238, type: 2}
     level: 1
-  - moveBase: {fileID: 11400000, guid: 7c98ab2dffb01d04194537f10d97a5a9, type: 2}
+  - moveBase: {fileID: 11400000, guid: 0c4ce543ff3da864fbea9e91a761eb12, type: 2}
     level: 3
-  - moveBase: {fileID: 11400000, guid: 0361cdf10ad24fb4b98f1feb648d01e7, type: 2}
+  - moveBase: {fileID: 11400000, guid: a6d0c9845b5c1cd47bb9d402b9811dfb, type: 2}
     level: 6
-  - moveBase: {fileID: 11400000, guid: 2018e8e287fe7864d8761fa69d294e73, type: 2}
+  - moveBase: {fileID: 11400000, guid: 22fc16b622be6d741a1ee9da6c24d309, type: 2}
     level: 8
-  - moveBase: {fileID: 11400000, guid: 2171044207da8084da429be846ccca44, type: 2}
+  - moveBase: {fileID: 11400000, guid: c6e8d9b221a3c2c439152ea7fa0878fa, type: 2}
     level: 11
-  - moveBase: {fileID: 11400000, guid: 15905705b549cd74988a53f196846f5f, type: 2}
+  - moveBase: {fileID: 11400000, guid: 5b5526e64eb2c5943bbc531fa354e5c2, type: 2}
     level: 14
   learnableByItems: []
+  morleniss: []
   eMaxHp: 0
   eAttack: 0
   eDefense: 0

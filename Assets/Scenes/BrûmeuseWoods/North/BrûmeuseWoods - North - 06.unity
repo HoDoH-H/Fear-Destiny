@@ -42,7 +42,8 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -1508,12 +1509,24 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
+      propertyPath: battlers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: anigmas.Array.data[0]._base
       value: 
       objectReference: {fileID: 11400000, guid: 35fa88a9a816bca439fb87eb82a262e9, type: 2}
     - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: anigmas.Array.data[0].level
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
+      propertyPath: battlers.Array.data[0]._base
+      value: 
+      objectReference: {fileID: 11400000, guid: f03d4edc248bdc144917c29d7a7b377a, type: 2}
+    - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
+      propertyPath: battlers.Array.data[0].level
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7295033316093661849, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: defaultDirection
@@ -17304,7 +17317,7 @@ Tilemap:
       - {fileID: 946342587, guid: f81c2caaa12468148a4a8e0689e5c159, type: 3}
       - {fileID: -1719017837, guid: f81c2caaa12468148a4a8e0689e5c159, type: 3}
       - {fileID: -1274065668, guid: f81c2caaa12468148a4a8e0689e5c159, type: 3}
-      m_AnimationSpeed: 6
+      m_AnimationSpeed: 6.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -29, y: 29, z: 0}
@@ -17334,7 +17347,7 @@ Tilemap:
       - {fileID: 1994627826, guid: f81c2caaa12468148a4a8e0689e5c159, type: 3}
       - {fileID: -744523026, guid: f81c2caaa12468148a4a8e0689e5c159, type: 3}
       - {fileID: 886575737, guid: f81c2caaa12468148a4a8e0689e5c159, type: 3}
-      m_AnimationSpeed: 6
+      m_AnimationSpeed: 6.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -27, y: 29, z: 0}
@@ -17409,7 +17422,7 @@ Tilemap:
       - {fileID: -307551318, guid: f81c2caaa12468148a4a8e0689e5c159, type: 3}
       - {fileID: 1007490061, guid: f81c2caaa12468148a4a8e0689e5c159, type: 3}
       - {fileID: -32560399, guid: f81c2caaa12468148a4a8e0689e5c159, type: 3}
-      m_AnimationSpeed: 6
+      m_AnimationSpeed: 6.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -30, y: 30, z: 0}
@@ -17499,7 +17512,7 @@ Tilemap:
       - {fileID: -262374571, guid: f81c2caaa12468148a4a8e0689e5c159, type: 3}
       - {fileID: -1495352355, guid: f81c2caaa12468148a4a8e0689e5c159, type: 3}
       - {fileID: 312015371, guid: f81c2caaa12468148a4a8e0689e5c159, type: 3}
-      m_AnimationSpeed: 6.0000005
+      m_AnimationSpeed: 6
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -24, y: 30, z: 0}
@@ -17574,7 +17587,7 @@ Tilemap:
       - {fileID: 2108916019, guid: f81c2caaa12468148a4a8e0689e5c159, type: 3}
       - {fileID: 2045882121, guid: f81c2caaa12468148a4a8e0689e5c159, type: 3}
       - {fileID: 1082073004, guid: f81c2caaa12468148a4a8e0689e5c159, type: 3}
-      m_AnimationSpeed: 6.0000005
+      m_AnimationSpeed: 6
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -27, y: 31, z: 0}
@@ -17724,7 +17737,7 @@ Tilemap:
       - {fileID: 2108916019, guid: f81c2caaa12468148a4a8e0689e5c159, type: 3}
       - {fileID: 2045882121, guid: f81c2caaa12468148a4a8e0689e5c159, type: 3}
       - {fileID: 1082073004, guid: f81c2caaa12468148a4a8e0689e5c159, type: 3}
-      m_AnimationSpeed: 6.0000005
+      m_AnimationSpeed: 6
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -30, y: 33, z: 0}
@@ -17754,7 +17767,7 @@ Tilemap:
       - {fileID: -262374571, guid: f81c2caaa12468148a4a8e0689e5c159, type: 3}
       - {fileID: -1495352355, guid: f81c2caaa12468148a4a8e0689e5c159, type: 3}
       - {fileID: 312015371, guid: f81c2caaa12468148a4a8e0689e5c159, type: 3}
-      m_AnimationSpeed: 6
+      m_AnimationSpeed: 6.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -28, y: 33, z: 0}
@@ -17784,7 +17797,7 @@ Tilemap:
       - {fileID: 946342587, guid: f81c2caaa12468148a4a8e0689e5c159, type: 3}
       - {fileID: -1719017837, guid: f81c2caaa12468148a4a8e0689e5c159, type: 3}
       - {fileID: -1274065668, guid: f81c2caaa12468148a4a8e0689e5c159, type: 3}
-      m_AnimationSpeed: 6
+      m_AnimationSpeed: 6.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -31, y: 34, z: 0}
@@ -19275,6 +19288,10 @@ PrefabInstance:
       value: 855954de-66de-46ed-8bca-8cd60beb34d6
       objectReference: {fileID: 0}
     - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
+      propertyPath: battlers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: anigmas.Array.data[0]._base
       value: 
       objectReference: {fileID: 11400000, guid: dd31aa296522bd349915825d3a988eb5, type: 2}
@@ -19289,6 +19306,22 @@ PrefabInstance:
     - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: anigmas.Array.data[1].level
       value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
+      propertyPath: battlers.Array.data[0]._base
+      value: 
+      objectReference: {fileID: 11400000, guid: 82a836a8794118a478235ff31f6aea83, type: 2}
+    - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
+      propertyPath: battlers.Array.data[0].level
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
+      propertyPath: battlers.Array.data[1]._base
+      value: 
+      objectReference: {fileID: 11400000, guid: f03d4edc248bdc144917c29d7a7b377a, type: 2}
+    - target: {fileID: 7279109375698514570, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
+      propertyPath: battlers.Array.data[1].level
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7295033316093661849, guid: 903312a8d59a2a048931b9a3ebeb5730, type: 3}
       propertyPath: defaultDirection
