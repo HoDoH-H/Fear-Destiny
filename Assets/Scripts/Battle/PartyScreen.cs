@@ -60,6 +60,7 @@ public class PartyScreen : MonoBehaviour
             if (i == selectedMember)
             {
                 memberSlots[i].SetSelected(true);
+                AudioManager.Instance.PlaySFX(AudioId.UIHover);
             }
             else
             {
@@ -92,8 +93,6 @@ public class PartyScreen : MonoBehaviour
                 if (selection == 1 || selection == 3 || selection == 5)
                     --selection;
             }
-
-            AudioManager.Instance.PlaySFX(AudioId.UIHover);
         }
         else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Left))
         {
@@ -108,8 +107,6 @@ public class PartyScreen : MonoBehaviour
                     ++selection;
                 }
             }
-
-            AudioManager.Instance.PlaySFX(AudioId.UIHover);
         }
         else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Up))
         {
@@ -128,8 +125,6 @@ public class PartyScreen : MonoBehaviour
                     selection = selection + 2;
                 }
             }
-
-            AudioManager.Instance.PlaySFX(AudioId.UIHover);
         }
         else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Down))
         {
@@ -148,8 +143,6 @@ public class PartyScreen : MonoBehaviour
                 else
                     selection = 1;
             }
-
-            AudioManager.Instance.PlaySFX(AudioId.UIHover);
         }
 
         if (selection != prevSelection)

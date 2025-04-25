@@ -85,12 +85,10 @@ public class MenuController : MonoBehaviour
             if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Down))
             {
                 selectedItem++;
-                AudioManager.Instance.PlaySFX(AudioId.UIHover);
             }
             else if (GlobalSettings.Instance.IsKeyDown(GlobalSettings.KeyList.Up))
             {
                 selectedItem--;
-                AudioManager.Instance.PlaySFX(AudioId.UIHover);
             } 
 
             selectedItem = GameController.Instance.RotateSelection(selectedItem, menuItems.Count - 1);
@@ -118,6 +116,7 @@ public class MenuController : MonoBehaviour
             if (i == selectedItem)
             {
                 menuItems[i].color = GlobalSettings.Instance.HighlightedColor;
+                AudioManager.Instance.PlaySFX(AudioId.UIHover);
             }
             else
             {
