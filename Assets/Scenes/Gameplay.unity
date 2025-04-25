@@ -3534,7 +3534,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 452a89d38e08f25478a5547c5503d41a, type: 3}
     - target: {fileID: 620412075972788516, guid: aef14cbe70f41e147986c1ca1c41c87e, type: 3}
       propertyPath: connectedScenes.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 620412075972788516, guid: aef14cbe70f41e147986c1ca1c41c87e, type: 3}
       propertyPath: 'connectedScenes.Array.data[0]'
@@ -3556,6 +3556,10 @@ PrefabInstance:
       propertyPath: 'connectedScenes.Array.data[4]'
       value: 
       objectReference: {fileID: 801592125}
+    - target: {fileID: 620412075972788516, guid: aef14cbe70f41e147986c1ca1c41c87e, type: 3}
+      propertyPath: 'connectedScenes.Array.data[5]'
+      value: 
+      objectReference: {fileID: 2005650194}
     - target: {fileID: 1000614120950679062, guid: aef14cbe70f41e147986c1ca1c41c87e, type: 3}
       propertyPath: wildAnigmas.Array.size
       value: 0
@@ -4817,7 +4821,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 452a89d38e08f25478a5547c5503d41a, type: 3}
     - target: {fileID: 620412075972788516, guid: aef14cbe70f41e147986c1ca1c41c87e, type: 3}
       propertyPath: connectedScenes.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 620412075972788516, guid: aef14cbe70f41e147986c1ca1c41c87e, type: 3}
       propertyPath: 'connectedScenes.Array.data[0]'
@@ -4839,6 +4843,10 @@ PrefabInstance:
       propertyPath: 'connectedScenes.Array.data[4]'
       value: 
       objectReference: {fileID: 2110242768}
+    - target: {fileID: 620412075972788516, guid: aef14cbe70f41e147986c1ca1c41c87e, type: 3}
+      propertyPath: 'connectedScenes.Array.data[5]'
+      value: 
+      objectReference: {fileID: 2005650194}
     - target: {fileID: 1000614120950679062, guid: aef14cbe70f41e147986c1ca1c41c87e, type: 3}
       propertyPath: wildAnigmas.Array.size
       value: 0
@@ -8734,11 +8742,11 @@ PrefabInstance:
     - target: {fileID: 620412075972788516, guid: aef14cbe70f41e147986c1ca1c41c87e, type: 3}
       propertyPath: 'connectedScenes.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1191320320}
     - target: {fileID: 620412075972788516, guid: aef14cbe70f41e147986c1ca1c41c87e, type: 3}
       propertyPath: 'connectedScenes.Array.data[1]'
       value: 
-      objectReference: {fileID: 1844523803}
+      objectReference: {fileID: 900536061}
     - target: {fileID: 3700373085254478744, guid: aef14cbe70f41e147986c1ca1c41c87e, type: 3}
       propertyPath: m_Name
       value: "Br\xFBmeuseWoods - NorthEast"
@@ -8804,6 +8812,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aef14cbe70f41e147986c1ca1c41c87e, type: 3}
+--- !u!114 &2005650194 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 620412075972788516, guid: aef14cbe70f41e147986c1ca1c41c87e, type: 3}
+  m_PrefabInstance: {fileID: 2005650193}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 601e5e79e35391240beb1e3151bbb546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2110242766
 PrefabInstance:
   m_ObjectHideFlags: 0
